@@ -1,0 +1,15 @@
+server {
+    listen              8000;
+
+    server_name         localhost;
+
+    charset             utf-8;
+
+    location / {
+        proxy_pass      http://unix:/run/amantha.sock;
+    }
+
+    location /static/ {
+        alias           /srv/amantha/.static/;
+    }
+}
