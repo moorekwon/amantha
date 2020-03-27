@@ -5,7 +5,7 @@
 /secrets.json
 /.idea
 /app/*.ipynb
-
+/app/config/settings/__init__.py
 
 ### Django ###
 *.log

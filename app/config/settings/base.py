@@ -13,9 +13,11 @@ import json
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 ROOT_DIR = os.path.dirname(BASE_DIR)
+print('BASE_DIR >> ', BASE_DIR)
+print('ROOT_DIR >> ', ROOT_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -33,11 +35,14 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-# SECRETS_FULL = json.load(open(os.path.join(ROOT_DIR), 'secrets.json'))
-# SECRETS = SECRETS_FULL['']
+SECRETS_FULL = json.load(open(os.path.join(ROOT_DIR, 'secrets.json')))
+SECRETS = SECRETS_FULL['base']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+print('SECRETS_FULL >> ', SECRETS_FULL)
+print('SECRETS(base) >> ', SECRETS)
+
+# AWS_ACCESS_KEY_ID = SECRETS['AWS_ACCESS_KEY_ID']
+# AWS_SECRET_ACCESS_KEY = SECRETS['AWS_SECRET_ACCESS_KEY']
 
 ALLOWED_HOSTS = []
 
@@ -90,18 +95,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'config.wsgi.application'
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
