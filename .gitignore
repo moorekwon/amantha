@@ -2,6 +2,11 @@
 # Created by https://www.gitignore.io/api/linux,macos,django,python,windows,pycharm+all,jupyternotebooks
 # Edit at https://www.gitignore.io/?templates=linux,macos,django,python,windows,pycharm+all,jupyternotebooks
 
+/secrets.json
+/.idea
+/app/*.ipynb
+/app/config/settings/__init__.py
+
 ### Django ###
 *.log
 *.pot
