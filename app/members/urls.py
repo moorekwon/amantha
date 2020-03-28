@@ -1,6 +1,8 @@
 from django.urls import path
 
-app_name = 'members'
+from members.views import AuthTokenAPIView
+
 urlpatterns = [
-    # path()
+    path('auth-token/', AuthTokenAPIView.as_view(), name='login'),
+
 ]
