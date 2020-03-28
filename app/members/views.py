@@ -1,8 +1,10 @@
 from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth.views import LogoutView
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import status
+from rest_framework import status, authentication
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
@@ -37,7 +39,7 @@ class AuthTokenAPIView(APIView):
         return Response(usernames)
 
 
-# 회원가입
+# 회원가입 (토큰 생성)
 class CreateUserAPIView(APIView):
     def post(self, request):
         serializer = CreateUserSerializer(data=request.data)
@@ -52,3 +54,13 @@ class CreateUserAPIView(APIView):
             }
             return Response(data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# 로그아웃 (토큰 삭제)
+class LogoutUserAPIView(APIView):
+    def get(self, request):
+        user = request.user
+        print('user >> ', user)
+        token = Token.objects.get(user=user)
+        token.delete()
+        return Response('로그아웃 되었습니다.')
