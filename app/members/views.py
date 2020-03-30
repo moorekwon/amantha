@@ -1,3 +1,4 @@
+import requests
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.views import LogoutView
 from django.core.exceptions import ObjectDoesNotExist
@@ -10,6 +11,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from config.settings import SECRETS
 from members.serializers import UserSerializer, CreateUserSerializer
 
 User = get_user_model()
@@ -35,8 +37,8 @@ class AuthTokenAPIView(APIView):
 
     # 유저 리스트
     def get(self, request):
-        usernames = [user.username for user in User.objects.all()]
-        return Response(usernames)
+        nicknames = [user.nickname for user in User.objects.all()]
+        return Response(nicknames)
 
 
 # 회원가입 (토큰 생성)
@@ -60,7 +62,61 @@ class CreateUserAPIView(APIView):
 class LogoutUserAPIView(APIView):
     def get(self, request):
         user = request.user
-        print('user >> ', user)
         token = Token.objects.get(user=user)
         token.delete()
         return Response('로그아웃 되었습니다.')
+
+
+# 카카오톡 로그인
+class KaKaoLoginAPIView(APIView):
+    def get(self, request):
+        app_key = SECRETS['KAKAO_APP_KEY']
+        kakao_access_code = request.GET.get('code', None)
+        url = SECRETS['KAKAO_URL']
+        headers = {
+            'Content-type': SECRETS['KAKAO_CONTENT_TYPE']
+        }
+        data = {
+            'grant_type': 'authorization_code',
+            'client_id': app_key,
+            'redirect_uri': SECRETS['KAKAO_REDIRECT_URI'],
+            'code': kakao_access_code,
+        }
+        kakao_response = requests.post(url, headers=headers, data=data)
+        return Response(f'{kakao_response.text}')
+
+    def post(self, request):
+        access_token = request.data['access_token']
+        me_url = SECRETS['KAKAO_ME_URL']
+        me_headers = {
+            'Authorization': f'Bearer {access_token}',
+            'Content-type': SECRETS['KAKAO_CONTENT_TYPE']
+        }
+        me_response = requests.get(me_url, headers=me_headers)
+        me_response_data = me_response.json()
+
+        kakao_email = me_response_data['kakao_account']['email']
+        # kakao_gender = me_response_data['kakao_account']['gender']
+        # print('kakao_gender >> ', kakao_gender)
+        print('kakao_email >> ', kakao_email)
+
+        # n_{unique_id}의 username을 갖는 새로운 User 생성
+        # 생성한 유저를 login 시킴
+        naver_username = kakao_email
+
+        if not User.objects.filter(email=kakao_email).exists():
+            user = User.objects.create_user(email=kakao_email)
+            token, _ = Token.objects.get_or_create(user=user)
+        else:
+            user = User.objects.get(email=kakao_email)
+            token, _ = Token.objects.get_or_create(user=user)
+
+        data = {
+            'user': UserSerializer(user).data,
+            'token': token.key
+        }
+        return Response(data)
+
+
+def KaKaoTemplate(request):
+    return render(request, 'kakao.html')

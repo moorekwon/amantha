@@ -1,10 +1,28 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
 
 # Create your models here.
+class UserManager(BaseUserManager):
+    def create_user(self, email, nickname=None, password=None):
+        if not email:
+            raise ValueError('email 주소가 있어야 합니다.')
+
+        user = self.model(email=self.normalize_email(email), nickname=nickname)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, nickname, password):
+        user = self.create_user(email=email, password=password, nickname=nickname)
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+
 # 유저 프로필
-class User(AbstractUser):
+class User(AbstractBaseUser, PermissionsMixin):
     GENDER = (
         ('여자', '여자'),
         ('남자', '남자'),
@@ -69,6 +87,7 @@ class User(AbstractUser):
     )
 
     email = models.EmailField(unique=True)
+    nickname = models.CharField(unique=True, null=True, max_length=60)
     gender = models.CharField(choices=GENDER, max_length=10)
     job = models.CharField(max_length=50, blank=True)
     school = models.CharField(max_length=50, blank=True)
@@ -87,8 +106,9 @@ class User(AbstractUser):
     like_users = models.ManyToManyField('self', through='SendLike', related_name='send_me_like_users',
                                         symmetrical=False)
 
+    objects = UserManager()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', ]
+    REQUIRED_FIELDS = ['nickname', 'gender', ]
 
     def profile_percentage(self):
         pass
@@ -99,48 +119,6 @@ class User(AbstractUser):
 class UserImage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     img_profile = models.ImageField(upload_to='profile_images/')
-
-
-# one-to-one 관계
-# 리본 사용
-# 첫 유저 생성 시 바로 생성되어야 함 (default 값으로)
-class UserRibbon(models.Model):
-    WHERE = (
-        ('관리자 기본 지급', '관리자 기본 지급'),
-        ('회원심사 리본 지급', '회원심사 리본 지급'),
-        ('상위 10% 이성(무료)', '상위 10% 이성(무료)'),
-        ('테마 소개 프로필 확인', '테마 소개 프로필 확인'),
-        ('아만다 픽 프로필 확인', '아만다 픽 프로필 확인'),
-    )
-
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    ribbon = models.PositiveIntegerField(default=10)
-    when = models.DateTimeField(auto_now=True)
-    where = models.CharField(choices=WHERE, max_length=60, default='관리자 기본 지급')
-
-    def add_subtract(self):
-        pass
-
-    def accumulate(self):
-        pass
-
-
-# 리본 결제
-# class PayRibbon(models.Model):
-#     pass
-
-class SendStar(models.Model):
-    user = models.ForeignKey(User, related_name='user_sendstar_set', on_delete=models.CASCADE)
-    partner = models.ForeignKey(User, related_name='partner_sendstar_set', on_delete=models.CASCADE)
-    star = models.CharField(choices=((str(x), x) for x in range(1, 6)), max_length=30)
-    created = models.DateTimeField(auto_now=True)
-
-
-class SendLike(models.Model):
-    user = models.ForeignKey(User, related_name='user_sendlike_set', on_delete=models.CASCADE)
-    partner = models.ForeignKey(User, related_name='partner_sendlike_set', on_delete=models.CASCADE)
-    like = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now=True)
 
 
 class SelectStory(models.Model):
@@ -179,4 +157,47 @@ class SelectTag(models.Model):
     relationship_style = models.CharField(choices=RELATIONSHIP_STYLE, blank=True, max_length=60)
     life_style = models.CharField(choices=LIFE_STYLE, blank=True, max_length=60)
     charm = models.CharField(choices=CHARM, blank=True, max_length=60)
+    created = models.DateTimeField(auto_now=True)
+
+
+# one-to-one 관계
+# 리본 사용
+# 첫 유저 생성 시 바로 생성되어야 함 (default 값으로)
+class UserRibbon(models.Model):
+    WHERE = (
+        ('관리자 기본 지급', '관리자 기본 지급'),
+        ('회원심사 리본 지급', '회원심사 리본 지급'),
+        ('상위 10% 이성(무료)', '상위 10% 이성(무료)'),
+        ('테마 소개 프로필 확인', '테마 소개 프로필 확인'),
+        ('아만다 픽 프로필 확인', '아만다 픽 프로필 확인'),
+    )
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    ribbon = models.PositiveIntegerField(default=10)
+    when = models.DateTimeField(auto_now=True)
+    where = models.CharField(choices=WHERE, max_length=60, default='관리자 기본 지급')
+
+    def add_subtract(self):
+        pass
+
+    def accumulate(self):
+        pass
+
+
+# 리본 결제
+# class PayRibbon(models.Model):
+#     pass
+
+
+class SendStar(models.Model):
+    user = models.ForeignKey(User, related_name='user_sendstar_set', on_delete=models.CASCADE)
+    partner = models.ForeignKey(User, related_name='partner_sendstar_set', on_delete=models.CASCADE)
+    star = models.CharField(choices=((str(x), x) for x in range(1, 6)), max_length=30)
+    created = models.DateTimeField(auto_now=True)
+
+
+class SendLike(models.Model):
+    user = models.ForeignKey(User, related_name='user_sendlike_set', on_delete=models.CASCADE)
+    partner = models.ForeignKey(User, related_name='partner_sendlike_set', on_delete=models.CASCADE)
+    like = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now=True)
