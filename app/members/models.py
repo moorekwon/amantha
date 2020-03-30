@@ -33,12 +33,13 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nickname', 'gender', ]
+    REQUIRED_FIELDS = ['gender', ]
 
     def profile_percentage(self):
         pass
 
 
+# 유저 생성 후 기입할 프로필 정보
 class UserSpecific(models.Model):
     REGION = (
         ('서울', '서울'),
@@ -125,6 +126,7 @@ class UserImage(models.Model):
     img_profile = models.ImageField(upload_to='profile_images/')
 
 
+# 스토리 등록
 class SelectStory(models.Model):
     STORY = (
         ('이상적인 첫 소개팅 장소', '이상적인 첫 소개팅 장소'),
@@ -138,6 +140,7 @@ class SelectStory(models.Model):
     created = models.DateTimeField(auto_now=True)
 
 
+# 태그 등록
 class SelectTag(models.Model):
     DATE_STYLE = (
         ('인스타감성 카페가기', '인스타감성 카페가기'),
@@ -193,6 +196,7 @@ class UserRibbon(models.Model):
 #     pass
 
 
+# 별점 주기
 class SendStar(models.Model):
     user = models.ForeignKey(User, related_name='user_sendstar_set', on_delete=models.CASCADE)
     partner = models.ForeignKey(User, related_name='partner_sendstar_set', on_delete=models.CASCADE)
@@ -200,6 +204,7 @@ class SendStar(models.Model):
     created = models.DateTimeField(auto_now=True)
 
 
+# 좋아요 주기
 class SendLike(models.Model):
     user = models.ForeignKey(User, related_name='user_sendlike_set', on_delete=models.CASCADE)
     partner = models.ForeignKey(User, related_name='partner_sendlike_set', on_delete=models.CASCADE)
