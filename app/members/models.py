@@ -27,6 +27,19 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('여자', '여자'),
         ('남자', '남자'),
     )
+
+    email = models.EmailField(unique=True)
+    gender = models.CharField(choices=GENDER, max_length=10)
+
+    objects = UserManager()
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['nickname', 'gender', ]
+
+    def profile_percentage(self):
+        pass
+
+
+class UserSpecific(models.Model):
     REGION = (
         ('서울', '서울'),
         ('경기', '경기'),
@@ -86,9 +99,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('비흡연', '비흡연'),
     )
 
-    email = models.EmailField(unique=True)
-    nickname = models.CharField(unique=True, null=True, max_length=60)
-    gender = models.CharField(choices=GENDER, max_length=10)
+    nickname = models.CharField(unique=True, max_length=60)
     job = models.CharField(max_length=50, blank=True)
     school = models.CharField(max_length=50, blank=True)
     age = models.CharField(choices=((str(x), x) for x in range(20, 50)), max_length=10, blank=True)
@@ -105,13 +116,6 @@ class User(AbstractBaseUser, PermissionsMixin):
                                         symmetrical=False)
     like_users = models.ManyToManyField('self', through='SendLike', related_name='send_me_like_users',
                                         symmetrical=False)
-
-    objects = UserManager()
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nickname', 'gender', ]
-
-    def profile_percentage(self):
-        pass
 
 
 # many-to-one 관계

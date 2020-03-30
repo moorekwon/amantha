@@ -37,8 +37,8 @@ class AuthTokenAPIView(APIView):
 
     # 유저 리스트
     def get(self, request):
-        nicknames = [user.nickname for user in User.objects.all()]
-        return Response(nicknames)
+        emails = [user.email for user in User.objects.all()]
+        return Response(emails)
 
 
 # 회원가입 (토큰 생성)
@@ -94,19 +94,16 @@ class KaKaoLoginAPIView(APIView):
         }
         me_response = requests.get(me_url, headers=me_headers)
         me_response_data = me_response.json()
+        print('me_response_data >> ', me_response_data)
 
         kakao_email = me_response_data['kakao_account']['email']
         # kakao_gender = me_response_data['kakao_account']['gender']
         # print('kakao_gender >> ', kakao_gender)
         print('kakao_email >> ', kakao_email)
 
-        # n_{unique_id}의 username을 갖는 새로운 User 생성
-        # 생성한 유저를 login 시킴
-        naver_username = kakao_email
-
         if not User.objects.filter(email=kakao_email).exists():
             user = User.objects.create_user(email=kakao_email)
-            token, _ = Token.objects.get_or_create(user=user)
+            token = Token.objects.create(user=user)
         else:
             user = User.objects.get(email=kakao_email)
             token, _ = Token.objects.get_or_create(user=user)

@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from members.models import UserImage
+from members.models import UserImage, UserSpecific
 
 User = get_user_model()
 
@@ -13,7 +13,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             'pk',
             'email',
-            'nickname',
             'gender',
         )
 
@@ -35,7 +34,6 @@ class CreateUserSerializer(serializers.ModelSerializer):
         fields = (
             'pk',
             'email',
-            'nickname',
             'gender',
             # 'images',
         )
