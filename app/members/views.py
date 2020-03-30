@@ -1,20 +1,53 @@
 import requests
 from django.contrib.auth import authenticate, get_user_model
-from django.contrib.auth.views import LogoutView
-from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import status, authentication
+from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from config.settings.dev_hj import SECRETS
-from members.serializers import UserSerializer, CreateUserSerializer
+
+from members.serializers import UserSerializer
 
 User = get_user_model()
+
+
+# 회원가입 (토큰 생성)
+class CreateUserAPIView(APIView):
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+
+        if serializer.is_valid():
+            user = serializer.save()
+            token = Token.objects.create(user=user)
+
+            data = {
+                'token': token.key,
+                'user': UserSerializer(user).data,
+            }
+            return Response(data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# 회원가입 이후 상세 프로필
+# class CreateUserProfileAPIView(APIView):
+#     def get(self, request, pk):
+#         user = User.objects.get(pk=pk)
+#         return user
+#
+#
+#     def post(self, request):
+#         serializer = UserProfileSerialzier()
+#
+#         if serializer.is_valid():
+#             user = serializer.save()
+#             data = JSONParser().parse(request)
+#             print('data >> ', data)
+#             return Response(data)
 
 
 # 로그인 (토큰 가져오거나 생성)
@@ -37,30 +70,10 @@ class AuthTokenAPIView(APIView):
 
     # 유저 리스트
     def get(self, request):
-        users = [user for user in User.objects.all()]
-        dUserSerializer(users).data
-        # emails = [user.email for user in User.objects.all()]
-        return Response(users)
+        emails = [user.email for user in User.objects.all()]
+        return Response(emails)
 
 
-# 회원가입 (토큰 생성)
-class CreateUserAPIView(APIView):
-    def post(self, request):
-        serializer = CreateUserSerializer(data=request.data)
-
-        if serializer.is_valid():
-            user = serializer.save()
-            token = Token.objects.create(user=user)
-
-            data = {
-                'token': token.key,
-                'user': UserSerializer(user).data,
-            }
-            return Response(data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# 로그아웃 (토큰 삭제)
 class LogoutUserAPIView(APIView):
     def get(self, request):
         user = request.user
@@ -69,7 +82,16 @@ class LogoutUserAPIView(APIView):
         return Response('로그아웃 되었습니다.')
 
 
+# 로그아웃 (토큰 삭제)
+
+
+def KaKaoTemplate(request):
+    return render(request, 'kakao.html')
+
+
 # 카카오톡 로그인
+
+
 class KaKaoLoginAPIView(APIView):
     def get(self, request):
         app_key = SECRETS['KAKAO_APP_KEY']
@@ -115,7 +137,3 @@ class KaKaoLoginAPIView(APIView):
             'token': token.key
         }
         return Response(data)
-
-
-def KaKaoTemplate(request):
-    return render(request, 'kakao.html')
