@@ -11,7 +11,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from config.settings import SECRETS
+from config.settings.dev_hj import SECRETS
 from members.serializers import UserSerializer, CreateUserSerializer
 
 User = get_user_model()
