@@ -37,8 +37,10 @@ class AuthTokenAPIView(APIView):
 
     # 유저 리스트
     def get(self, request):
-        emails = [user.email for user in User.objects.all()]
-        return Response(emails)
+        users = [user for user in User.objects.all()]
+        dUserSerializer(users).data
+        # emails = [user.email for user in User.objects.all()]
+        return Response(users)
 
 
 # 회원가입 (토큰 생성)

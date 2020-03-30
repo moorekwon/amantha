@@ -7,6 +7,7 @@ from members.models import UserImage, UserSpecific
 User = get_user_model()
 
 
+# 유저리스트
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
