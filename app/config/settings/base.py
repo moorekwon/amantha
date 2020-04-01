@@ -35,6 +35,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 SECRETS_FULL = json.load(open(os.path.join(ROOT_DIR, 'secrets.json')))
 SECRETS = SECRETS_FULL['base']
 

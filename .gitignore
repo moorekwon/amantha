@@ -6,6 +6,7 @@
 /.idea
 /app/*.ipynb
 /app/config/settings/__init__.py
+/app/.ipynb_checkpoints
 
 ### Django ###
 *.log

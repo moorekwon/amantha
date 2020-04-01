@@ -2,20 +2,23 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
-
 # Create your models here.
+from rest_framework.response import Response
+
+
 class UserManager(BaseUserManager):
-    def create_user(self, email, nickname=None, password=None):
+    def create_user(self, email, gender=None, password=None):
         if not email:
             raise ValueError('email 주소가 있어야 합니다.')
 
-        user = self.model(email=self.normalize_email(email), nickname=nickname)
+        user = self.model(email=self.normalize_email(email), gender=gender)
         user.set_password(password)
-        user.save(using=self._db)
+        user.save()
         return user
 
-    def create_superuser(self, email, nickname, password):
-        user = self.create_user(email=email, password=password, nickname=nickname)
+    def create_superuser(self, email, gender, password):
+        user = self.create_user(email=email, password=password, gender=gender)
+        user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
         return user
@@ -31,6 +34,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     gender = models.CharField(choices=GENDER, max_length=10)
 
+    is_staff = True
+
     objects = UserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['gender', ]
@@ -40,7 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 # 유저 생성 후 기입할 프로필 정보
-class UserSpecific(models.Model):
+class UserProfile(models.Model):
     REGION = (
         ('서울', '서울'),
         ('경기', '경기'),
@@ -100,10 +105,13 @@ class UserSpecific(models.Model):
         ('비흡연', '비흡연'),
     )
 
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     nickname = models.CharField(unique=True, max_length=60)
     job = models.CharField(max_length=50, blank=True)
+    company = models.CharField(max_length=60, blank=True)
     school = models.CharField(max_length=50, blank=True)
-    age = models.CharField(choices=((str(x), x) for x in range(20, 50)), max_length=10, blank=True)
+    # age = models.CharField(choices=((str(x), x) for x in range(20, 50)), max_length=10, blank=True)
+    birth = models.DateTimeField(blank=True, null=True)
     region = models.CharField(choices=REGION, max_length=30, blank=True)
     body_shape = models.CharField(choices=BODY_SHAPE, blank=True, max_length=50)
     introduce = models.CharField(max_length=150, blank=True)
@@ -117,6 +125,22 @@ class UserSpecific(models.Model):
                                         symmetrical=False)
     like_users = models.ManyToManyField('self', through='SendLike', related_name='send_me_like_users',
                                         symmetrical=False)
+
+    def average_star(self):
+        partners = self.user.partner_sendstar_set.all()
+        star = [int(partner.star) for partner in partners]
+        if len(star) > 0:
+            return sum(star) / len(star)
+        else:
+            return 0
+
+
+# 별점 주기
+class SendStar(models.Model):
+    user = models.ForeignKey(User, related_name='user_sendstar_set', on_delete=models.CASCADE)
+    partner = models.ForeignKey(User, related_name='partner_sendstar_set', on_delete=models.CASCADE)
+    star = models.CharField(choices=((str(x), x) for x in range(1, 6)), max_length=30)
+    created = models.DateTimeField(auto_now=True)
 
 
 # many-to-one 관계
@@ -194,14 +218,6 @@ class UserRibbon(models.Model):
 # 리본 결제
 # class PayRibbon(models.Model):
 #     pass
-
-
-# 별점 주기
-class SendStar(models.Model):
-    user = models.ForeignKey(User, related_name='user_sendstar_set', on_delete=models.CASCADE)
-    partner = models.ForeignKey(User, related_name='partner_sendstar_set', on_delete=models.CASCADE)
-    star = models.CharField(choices=((str(x), x) for x in range(1, 6)), max_length=30)
-    created = models.DateTimeField(auto_now=True)
 
 
 # 좋아요 주기

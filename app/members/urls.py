@@ -1,13 +1,15 @@
 from django.urls import path
 
-from members.views import AuthTokenAPIView, CreateUserAPIView, LogoutUserAPIView, KaKaoLoginAPIView, KaKaoTemplate
+from members.views import AuthTokenAPIView, CreateUserAPIView, LogoutUserAPIView, KaKaoLoginAPIView, KaKaoTemplate, \
+    CreateUserProfileAPIView
 
 urlpatterns = [
-    path('auth/login/', AuthTokenAPIView.as_view(), name='login'),
-    path('auth/signup/', CreateUserAPIView.as_view(), name='signup'),
-    path('auth/logout/', LogoutUserAPIView.as_view(), name='logout'),
-    path('auth/kakao/', KaKaoLoginAPIView.as_view(), name='login-kakao'),
-    # path('auth/signup/profile/', CreateUserProfileAPIView.as_view(), name='signup-profile'),
+    path('auth/token/', AuthTokenAPIView.as_view()),
+    path('auth/create/', CreateUserAPIView.as_view()),
+    path('auth/logout/', LogoutUserAPIView.as_view()),
+    path('auth/kakao/', KaKaoLoginAPIView.as_view()),
+    path('auth/profile/', CreateUserProfileAPIView.as_view()),
+    # path('auth/image/', ImageListAPIView.as_view()),
     # 테스트용 template (카카오톡 로그인 페이지)
-    path('html/kakao/', KaKaoTemplate, name='kakao-html'),
+    path('html/kakao/', KaKaoTemplate),
 ]
