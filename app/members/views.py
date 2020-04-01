@@ -1,5 +1,6 @@
 import requests
 from django.contrib.auth import authenticate, get_user_model
+from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -7,13 +8,15 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.generics import get_object_or_404
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from config.settings.dev_hj import SECRETS
-from members.models import UserProfile
+from members.models import UserProfile, UserImage
 
-from members.serializers import UserSerializer, KakaoUserSerializer, UserProfileSerializer, UserCreateSerializer
+from members.serializers import UserSerializer, KakaoUserSerializer, UserProfileSerializer, UserCreateSerializer, \
+    UserImageSerializer
 
 User = get_user_model()
 
@@ -33,20 +36,6 @@ class CreateUserAPIView(APIView):
             }
             return Response(data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# class ImageListAPIView(APIView):
-#     def post(self, request):
-#         user = request.user
-#         images = user.userimage_set.all()
-#
-#         serializer = UserImageSerializer(images, context={"request": request})
-#         print('serializer >> ', serializer)
-#         if serializer.is_valid():
-#             serializer.save(user=user)
-#
-#             return Response(serializer.data)
-#         return Response(serializer.errors)
 
 
 class CreateUserProfileAPIView(APIView):
@@ -93,7 +82,7 @@ class AuthTokenAPIView(APIView):
         if user:
             token, _ = Token.objects.get_or_create(user=user)
         else:
-            raise AuthenticationFailed()
+            raise AuthenticationFailed('존재하지 않는 email 입니다.')
 
         data = {
             'token': token.key,
@@ -127,6 +116,43 @@ class LogoutUserAPIView(APIView):
         token = Token.objects.get(user=user)
         token.delete()
         return Response('로그아웃 되었습니다.')
+
+
+class UserImageAPIView(APIView):
+    # user 프로필 이미지 갖고오기
+    def get(self, request):
+        user = request.user
+        images = UserImage.objects.filter(user=user)
+        serializer = UserImageSerializer(images, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    # user 프로필 이미지 추가하기
+    def post(self, request):
+        user = request.user
+        print('request.data >> ', request.data)
+        images = request.data.getlist('img_profile')
+        print('images >> ', images)
+
+        arr = []
+        for img_profile in images:
+            data = {
+                'img_profile': img_profile,
+            }
+            serializer = UserImageSerializer(data=data)
+            print('serializer >> ', serializer)
+
+            if serializer.is_valid():
+                serializer.save(user=user)
+                arr.append(serializer.data)
+                print('serializer.data >> ', serializer.data)
+            else:
+                return Response(serializer.errors)
+
+        data = {
+            'user': UserSerializer(user).data,
+            'img_profile': arr,
+        }
+        return Response(data, status=status.HTTP_201_CREATED)
 
 
 # 카카오톡 로그인 페이지

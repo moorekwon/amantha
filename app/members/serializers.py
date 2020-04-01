@@ -16,6 +16,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
             'password',
         )
 
+    # 회원가입 시 저장 정보
     def save(self, **kwargs):
         email = self.validated_data['email']
         gender = self.validated_data['gender']
@@ -28,6 +29,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return user
 
 
+# 유저 정보
 class UserSerializer(serializers.ModelSerializer):
     # images = UserImageSerializer(many=True)
     class Meta:
@@ -39,6 +41,19 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
 
+class UserImageSerializer(serializers.ModelSerializer):
+    # user = UserSerializer()
+
+    class Meta:
+        model = UserImage
+        fields = (
+            # 'user',
+            'pk',
+            'img_profile',
+        )
+
+
+# 카카오톡 계정 유저 정보
 class KakaoUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -55,17 +70,37 @@ class KakaoUserSerializer(serializers.ModelSerializer):
 #             'pk',
 #             'star',
 #         )
-#
-# class UserImageSerializer(serializers.ModelSerializer):
-#     image = serializers.ImageField(use_url=True)
-#
-#     class Meta:
-#         model = UserImage
-#         fields = (
-#             'pk',
-#             'img_profile',
-#         )
 
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    # story = UserStorySerializer(many=True)
+    # tag = UserTagSerializer(many=True)
+
+    class Meta:
+        model = UserProfile
+        fields = (
+            'pk',
+            'user',
+            # 'images',
+            'nickname',
+            'school',
+            'major',
+            'job',
+            'company',
+            'region',
+            'birth',
+            'tall',
+            'body_shape',
+            'personality',
+            'blood_type',
+            'smoking',
+            'drinking',
+            'introduce',
+            # 'story',
+            # 'tag',
+        )
 
 # class UserStorySerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -87,33 +122,3 @@ class KakaoUserSerializer(serializers.ModelSerializer):
 #             'life_style',
 #             'charm',
 #         )
-
-
-class UserProfileSerializer(serializers.ModelSerializer):
-    # profile_image = UserImageSerializer(many=True)
-
-    # story = UserStorySerializer(many=True)
-    # tag = UserTagSerializer(many=True)
-
-    class Meta:
-        model = UserProfile
-        fields = (
-            'pk',
-            # 'profile_image',
-            'nickname',
-            'school',
-            'major',
-            'job',
-            'company',
-            'region',
-            'birth',
-            'tall',
-            'body_shape',
-            'personality',
-            'blood_type',
-            'smoking',
-            'drinking',
-            'introduce',
-            # 'story',
-            # 'tag',
-        )
