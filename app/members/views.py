@@ -124,14 +124,17 @@ class UserImageAPIView(APIView):
         user = request.user
         images = UserImage.objects.filter(user=user)
         serializer = UserImageSerializer(images, many=True)
-        return JsonResponse(serializer.data, safe=False)
+
+        data = {
+            'user': UserSerializer(user).data,
+            'img_profile': serializer.data,
+        }
+        return JsonResponse(data, safe=False)
 
     # user 프로필 이미지 추가하기
     def post(self, request):
         user = request.user
-        print('request.data >> ', request.data)
         images = request.data.getlist('img_profile')
-        print('images >> ', images)
 
         arr = []
         for img_profile in images:
@@ -139,12 +142,10 @@ class UserImageAPIView(APIView):
                 'img_profile': img_profile,
             }
             serializer = UserImageSerializer(data=data)
-            print('serializer >> ', serializer)
 
             if serializer.is_valid():
                 serializer.save(user=user)
                 arr.append(serializer.data)
-                print('serializer.data >> ', serializer.data)
             else:
                 return Response(serializer.errors)
 
