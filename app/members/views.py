@@ -7,16 +7,14 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework.generics import get_object_or_404
-from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from config.settings.dev_hj import SECRETS
-from members.models import UserProfile, UserImage
+from members.models import UserProfile, UserImage, SelectStory
 
 from members.serializers import UserSerializer, KakaoUserSerializer, UserProfileSerializer, UserCreateSerializer, \
-    UserImageSerializer
+    UserImageSerializer, UserStorySerializer, UserTagSerializer
 
 User = get_user_model()
 
@@ -38,15 +36,31 @@ class CreateUserAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class CreateUserProfileAPIView(APIView):
-    def get_object(self, pk):
-        return get_object_or_404(User, pk=pk)
+class UserProfileAPIView(APIView):
+    def get(self, request):
+        user = request.user
+        user_profile = UserProfile.objects.get(user=user)
+        profile_serializer = UserProfileSerializer(user_profile)
 
-    # 상세프로필 생성
+        story = user.selectstory_set
+        print('story >> ', story)
+        story_serializer = UserStorySerializer(story)
+
+        tag = user.selecttag_set
+        tag_serializer = UserTagSerializer(tag)
+
+        data = {
+            'user': UserSerializer(user).data,
+            'user_profile': profile_serializer.data,
+            'user_story': story_serializer.data,
+            'user_tag': tag_serializer.data,
+        }
+        return Response(data)
+
+    # 상세프로필 생성 (처음 생성 시 딱 한번 사용)
     def post(self, request):
         user = request.user
         serializer = UserProfileSerializer(data=request.data)
-        print('request.data >> ', request.data)
 
         if serializer.is_valid():
             user_profile = serializer.save(user=user)
@@ -72,24 +86,43 @@ class CreateUserProfileAPIView(APIView):
         return Response(serializer.errors)
 
 
-class AuthTokenAPIView(APIView):
-    # 로그인(토큰 가져오거나 생성)
-    def post(self, request):
-        email = request.data['email']
-        password = request.data['password']
-        user = authenticate(email=email, password=password)
+class UserStoryAPIView(APIView):
+    # 해당 유저의 스토리 불러오기
+    def get(self, request):
+        user = request.user
+        user_story = SelectStory.objects.filter(user=user)
+        print('user_story >> ', user_story)
 
-        if user:
-            token, _ = Token.objects.get_or_create(user=user)
+        if not user_story:
+            return Response('등록된 스토리가 없습니다.')
+
         else:
-            raise AuthenticationFailed('존재하지 않는 email 입니다.')
+            serializer = UserStorySerializer(user_story)
+            print('serializer >> ', serializer.data)
 
-        data = {
-            'token': token.key,
-            'user': UserSerializer(user).data
-        }
-        return Response(data)
+            data = {
+                'story': serializer.data
+            }
+            return Response(data)
 
+    # 해당 유저의 스토리 추가
+    def post(self, request):
+        user = request.user
+        serializer = UserStorySerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save(user=user)
+
+            data = {
+                'user': UserSerializer(user).data,
+                'story': serializer.data,
+            }
+
+            return Response(data)
+        return Response(serializer.errors)
+
+
+class AuthTokenAPIView(APIView):
     # (가입된) 유저 리스트
     def get(self, request):
         users = User.objects.all()
@@ -105,6 +138,23 @@ class AuthTokenAPIView(APIView):
         data = {
             'login': UserSerializer(login, many=True).data,
             'logout': UserSerializer(logout, many=True).data,
+        }
+        return Response(data)
+
+    # 로그인(토큰 가져오거나 생성)
+    def post(self, request):
+        email = request.data['email']
+        password = request.data['password']
+        user = authenticate(email=email, password=password)
+
+        if user:
+            token, _ = Token.objects.get_or_create(user=user)
+        else:
+            raise AuthenticationFailed('존재하지 않는 email 입니다.')
+
+        data = {
+            'token': token.key,
+            'user': UserSerializer(user).data
         }
         return Response(data)
 

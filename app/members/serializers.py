@@ -72,17 +72,33 @@ class KakaoUserSerializer(serializers.ModelSerializer):
 #         )
 
 
+class UserStorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SelectStory
+        fields = (
+            'pk',
+            'story',
+            'content'
+        )
+
+
+class UserTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SelectTag
+        fields = (
+            'pk',
+            'date_style',
+            'relationship_style',
+            'life_style',
+            'charm',
+        )
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-
-    # story = UserStorySerializer(many=True)
-    # tag = UserTagSerializer(many=True)
-
     class Meta:
         model = UserProfile
         fields = (
             'pk',
-            'user',
             # 'images',
             'nickname',
             'school',
@@ -98,27 +114,4 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'smoking',
             'drinking',
             'introduce',
-            # 'story',
-            # 'tag',
         )
-
-# class UserStorySerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = SelectStory
-#         fields = (
-#             'pk',
-#             'story',
-#             'content'
-#         )
-
-
-# class UserTagSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = SelectTag
-#         fields = (
-#             'pk',
-#             'date_style',
-#             'relationship_style',
-#             'life_style',
-#             'charm',
-#         )

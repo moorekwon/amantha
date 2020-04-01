@@ -159,8 +159,8 @@ class SelectStory(models.Model):
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    story = models.CharField(choices=STORY, max_length=60)
-    content = models.CharField(max_length=60)
+    story = models.CharField(choices=STORY, max_length=60, blank=True)
+    content = models.CharField(max_length=60, blank=True)
     created = models.DateTimeField(auto_now=True)
 
 
