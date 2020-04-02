@@ -14,7 +14,7 @@ from config.settings.dev_hj import SECRETS
 from members.models import UserProfile, UserImage, SelectStory, SelectTag
 
 from members.serializers import UserSerializer, KakaoUserSerializer, UserProfileSerializer, UserCreateSerializer, \
-    UserImageSerializer, UserStorySerializer, UserTagSerializer
+    UserImageSerializer, UserStorySerializer, UserTagSerializer, UserSimpleSerializer
 
 User = get_user_model()
 
@@ -27,10 +27,11 @@ class CreateUserAPIView(APIView):
         if serializer.is_valid():
             user = serializer.save()
             token = Token.objects.create(user=user)
+            print('user.is_authenticated >>', user.is_authenticated)
 
             data = {
                 'token': token.key,
-                'user': UserSerializer(user).data,
+                'user': UserSimpleSerializer(user).data,
             }
             return Response(data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -50,8 +51,8 @@ class AuthTokenAPIView(APIView):
                 logout.append(user)
 
         data = {
-            'login': UserSerializer(login, many=True).data,
-            'logout': UserSerializer(logout, many=True).data,
+            'login': UserSimpleSerializer(login, many=True).data,
+            'logout': UserSimpleSerializer(logout, many=True).data,
         }
         return Response(data)
 
@@ -68,7 +69,7 @@ class AuthTokenAPIView(APIView):
 
         data = {
             'token': token.key,
-            'user': UserSerializer(user).data
+            'user': UserSimpleSerializer(user).data
         }
         return Response(data)
 
@@ -90,7 +91,6 @@ class UserImageAPIView(APIView):
         serializer = UserImageSerializer(images, many=True)
 
         data = {
-            'user': UserSerializer(user).data,
             'img_profile': serializer.data,
         }
         return JsonResponse(data, safe=False)
@@ -114,7 +114,6 @@ class UserImageAPIView(APIView):
                 return Response(serializer.errors)
 
         data = {
-            'user': UserSerializer(user).data,
             'img_profile': arr,
         }
         return Response(data, status=status.HTTP_201_CREATED)

@@ -103,7 +103,18 @@ class UserImageSerializer(serializers.ModelSerializer):
         )
 
 
-# 유저 정보
+# 유저의 간단한 정보
+class UserSimpleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'pk',
+            'email',
+            'gender',
+        )
+
+
+# 유저의 모든 정보
 class UserSerializer(serializers.ModelSerializer):
     user_image = UserImageSerializer(many=True, source='userimage_set')
     user_profile = UserProfileSerializer(source='userprofile')
