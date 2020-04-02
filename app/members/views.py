@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from config.settings.dev_hj import SECRETS
-from members.models import UserProfile, UserImage, SelectStory
+from members.models import UserProfile, UserImage, SelectStory, SelectTag
 
 from members.serializers import UserSerializer, KakaoUserSerializer, UserProfileSerializer, UserCreateSerializer, \
     UserImageSerializer, UserStorySerializer, UserTagSerializer
@@ -36,18 +36,56 @@ class CreateUserAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class UserStoryAPIView(APIView):
+    # 해당 유저의 스토리 불러오기
+    def get(self, request):
+        user = request.user
+        story = SelectStory.objects.filter(user=user)
+
+        if not story:
+            return Response('등록된 스토리가 없습니다.')
+
+        serializer = UserStorySerializer(story, many=True)
+
+        data = {
+            'user': UserSerializer(user).data,
+            'story': serializer.data,
+        }
+        return Response(data)
+
+    # 해당 유저의 스토리 추가
+    def post(self, request):
+        user = request.user
+        serializer = UserStorySerializer(data=request.data)
+
+        if serializer.is_valid():
+            story = serializer.save(user=user)
+
+            data = {
+                'user': UserSerializer(user).data,
+                'story': UserStorySerializer(story).data,
+            }
+            return Response(data)
+        return Response(serializer.errors)
+
+
 class UserProfileAPIView(APIView):
+    # 해당 유저의 상세프로필 정보 가져오기
     def get(self, request):
         user = request.user
         user_profile = UserProfile.objects.get(user=user)
+
+        # 에러 Response 적용 안 됨! (수정 필요)
+        if not user_profile:
+            return Response('등록된 상세프로필 정보 없습니다.')
+
         profile_serializer = UserProfileSerializer(user_profile)
 
-        story = user.selectstory_set
-        print('story >> ', story)
-        story_serializer = UserStorySerializer(story)
+        story = SelectStory.objects.filter(user=user)
+        story_serializer = UserStorySerializer(story, many=True)
 
-        tag = user.selecttag_set
-        tag_serializer = UserTagSerializer(tag)
+        tag = SelectTag.objects.filter(user=user)
+        tag_serializer = UserTagSerializer(tag, many=True)
 
         data = {
             'user': UserSerializer(user).data,
@@ -60,6 +98,7 @@ class UserProfileAPIView(APIView):
     # 상세프로필 생성 (처음 생성 시 딱 한번 사용)
     def post(self, request):
         user = request.user
+
         serializer = UserProfileSerializer(data=request.data)
 
         if serializer.is_valid():
@@ -82,42 +121,6 @@ class UserProfileAPIView(APIView):
             data = {
                 'user_profile': UserProfileSerializer(user_profile).data
             }
-            return Response(data)
-        return Response(serializer.errors)
-
-
-class UserStoryAPIView(APIView):
-    # 해당 유저의 스토리 불러오기
-    def get(self, request):
-        user = request.user
-        user_story = SelectStory.objects.filter(user=user)
-        print('user_story >> ', user_story)
-
-        if not user_story:
-            return Response('등록된 스토리가 없습니다.')
-
-        else:
-            serializer = UserStorySerializer(user_story)
-            print('serializer >> ', serializer.data)
-
-            data = {
-                'story': serializer.data
-            }
-            return Response(data)
-
-    # 해당 유저의 스토리 추가
-    def post(self, request):
-        user = request.user
-        serializer = UserStorySerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save(user=user)
-
-            data = {
-                'user': UserSerializer(user).data,
-                'story': serializer.data,
-            }
-
             return Response(data)
         return Response(serializer.errors)
 

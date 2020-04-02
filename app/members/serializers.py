@@ -72,16 +72,6 @@ class KakaoUserSerializer(serializers.ModelSerializer):
 #         )
 
 
-class UserStorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SelectStory
-        fields = (
-            'pk',
-            'story',
-            'content'
-        )
-
-
 class UserTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = SelectTag
@@ -94,7 +84,19 @@ class UserTagSerializer(serializers.ModelSerializer):
         )
 
 
+class UserStorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SelectStory
+        fields = (
+            'pk',
+            'story',
+            'content'
+        )
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
+    user_story = UserStorySerializer(source='user')
+
     class Meta:
         model = UserProfile
         fields = (
@@ -113,5 +115,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'blood_type',
             'smoking',
             'drinking',
-            'introduce',
+            'user_story',
+            # 'introduce',
         )
+
+    def validate_user_story(self, value):
+        return
