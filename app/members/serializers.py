@@ -29,18 +29,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return user
 
 
-class UserImageSerializer(serializers.ModelSerializer):
-    # user = UserSerializer()
-
-    class Meta:
-        model = UserImage
-        fields = (
-            # 'user',
-            'pk',
-            'img_profile',
-        )
-
-
 # 카카오톡 계정 유저 정보
 class KakaoUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -60,6 +48,16 @@ class KakaoUserSerializer(serializers.ModelSerializer):
 #         )
 
 
+class UserStorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SelectStory
+        fields = (
+            'pk',
+            'story',
+            'content'
+        )
+
+
 class UserTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = SelectTag
@@ -69,16 +67,6 @@ class UserTagSerializer(serializers.ModelSerializer):
             'relationship_style',
             'life_style',
             'charm',
-        )
-
-
-class UserStorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SelectStory
-        fields = (
-            'pk',
-            'story',
-            'content'
         )
 
 
@@ -102,15 +90,25 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'drinking',
         )
 
-    def validate_user_story(self, value):
-        return
+
+class UserImageSerializer(serializers.ModelSerializer):
+    # user = UserSerializer()
+
+    class Meta:
+        model = UserImage
+        fields = (
+            # 'user',
+            'pk',
+            'img_profile',
+        )
 
 
 # 유저 정보
 class UserSerializer(serializers.ModelSerializer):
-    # images = UserImageSerializer(many=True)
-    selectstory_set = UserStorySerializer(many=True)
-    userprofile = UserProfileSerializer()
+    user_image = UserImageSerializer(many=True, source='userimage_set')
+    user_profile = UserProfileSerializer(source='userprofile')
+    user_story = UserStorySerializer(many=True, source='selectstory_set')
+    user_tag = UserTagSerializer(many=True, source='selecttag_set')
 
     class Meta:
         model = User
@@ -118,6 +116,8 @@ class UserSerializer(serializers.ModelSerializer):
             'pk',
             'email',
             'gender',
-            'userprofile',
-            'selectstory_set',
+            'user_image',
+            'user_profile',
+            'user_story',
+            'user_tag',
         )

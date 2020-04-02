@@ -110,7 +110,6 @@ class UserProfile(models.Model):
     job = models.CharField(max_length=50, blank=True)
     company = models.CharField(max_length=60, blank=True)
     school = models.CharField(max_length=50, blank=True)
-    # age = models.CharField(choices=((str(x), x) for x in range(20, 50)), max_length=10, blank=True)
     birth = models.DateTimeField(blank=True, null=True)
     region = models.CharField(choices=REGION, max_length=30, blank=True)
     body_shape = models.CharField(choices=BODY_SHAPE, blank=True, max_length=50)
