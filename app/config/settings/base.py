@@ -101,7 +101,11 @@ TEMPLATES = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        # production 용
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        # develop 용
+        'rest_framework.authentication.BasicAuthentication',
     ]
 }
 

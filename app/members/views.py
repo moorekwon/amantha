@@ -79,19 +79,8 @@ class UserProfileAPIView(APIView):
         if not user_profile:
             return Response('등록된 상세프로필 정보 없습니다.')
 
-        profile_serializer = UserProfileSerializer(user_profile)
-
-        story = SelectStory.objects.filter(user=user)
-        story_serializer = UserStorySerializer(story, many=True)
-
-        tag = SelectTag.objects.filter(user=user)
-        tag_serializer = UserTagSerializer(tag, many=True)
-
         data = {
             'user': UserSerializer(user).data,
-            'user_profile': profile_serializer.data,
-            'user_story': story_serializer.data,
-            'user_tag': tag_serializer.data,
         }
         return Response(data)
 

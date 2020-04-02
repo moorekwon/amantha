@@ -29,18 +29,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return user
 
 
-# 유저 정보
-class UserSerializer(serializers.ModelSerializer):
-    # images = UserImageSerializer(many=True)
-    class Meta:
-        model = User
-        fields = (
-            'pk',
-            'email',
-            'gender',
-        )
-
-
 class UserImageSerializer(serializers.ModelSerializer):
     # user = UserSerializer()
 
@@ -95,13 +83,10 @@ class UserStorySerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    user_story = UserStorySerializer(source='user')
-
     class Meta:
         model = UserProfile
         fields = (
             'pk',
-            # 'images',
             'nickname',
             'school',
             'major',
@@ -115,9 +100,24 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'blood_type',
             'smoking',
             'drinking',
-            'user_story',
-            # 'introduce',
         )
 
     def validate_user_story(self, value):
         return
+
+
+# 유저 정보
+class UserSerializer(serializers.ModelSerializer):
+    # images = UserImageSerializer(many=True)
+    selectstory_set = UserStorySerializer(many=True)
+    userprofile = UserProfileSerializer()
+
+    class Meta:
+        model = User
+        fields = (
+            'pk',
+            'email',
+            'gender',
+            'userprofile',
+            'selectstory_set',
+        )
