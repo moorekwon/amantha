@@ -13,8 +13,8 @@ from rest_framework.views import APIView
 from config.settings.dev_hj import SECRETS
 from members.models import UserProfile, UserImage, SelectStory, SelectTag
 
-from members.serializers import UserSerializer, KakaoUserSerializer, UserProfileSerializer, UserCreateSerializer, \
-    UserImageSerializer, UserStorySerializer, UserTagSerializer, UserSimpleSerializer
+from members.serializers import KakaoUserSerializer, UserProfileSerializer, UserCreateSerializer, \
+    UserImageSerializer, UserStorySerializer, UserTagSerializer, UserInfoSerializer, UserSerializer
 
 User = get_user_model()
 
@@ -31,7 +31,7 @@ class CreateUserAPIView(APIView):
 
             data = {
                 'token': token.key,
-                'user': UserSimpleSerializer(user).data,
+                'user': UserSerializer(user).data,
             }
             return Response(data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -51,8 +51,8 @@ class AuthTokenAPIView(APIView):
                 logout.append(user)
 
         data = {
-            'login': UserSimpleSerializer(login, many=True).data,
-            'logout': UserSimpleSerializer(logout, many=True).data,
+            'login': UserSerializer(login, many=True).data,
+            'logout': UserSerializer(logout, many=True).data,
         }
         return Response(data)
 
@@ -69,7 +69,7 @@ class AuthTokenAPIView(APIView):
 
         data = {
             'token': token.key,
-            'user': UserSimpleSerializer(user).data
+            'user': UserSerializer(user).data
         }
         return Response(data)
 
@@ -123,14 +123,13 @@ class UserProfileAPIView(APIView):
     # 해당 유저의 상세프로필 정보 가져오기
     def get(self, request):
         user = request.user
-        user_profile = UserProfile.objects.get(user=user)
+        user_profile = UserProfile.objects.filter(user=user)
 
-        # 에러 Response 적용 안 됨! (수정 필요)
         if not user_profile:
             return Response('등록된 상세프로필 정보가 없습니다.')
 
         data = {
-            'user': UserSerializer(user).data,
+            'user': UserInfoSerializer(user).data,
         }
         return Response(data)
 
@@ -211,13 +210,14 @@ class UserTagAPIView(APIView):
         }
         return Response(data)
 
-    # 해당 유저의 관심태그 추가
-    def post(self, request):
+    # 관심태그 수정 (multi-check, 기존 데이터와 상관없이 request.data로 완전 수정)
+    def patch(self, request):
         user = request.user
-        serializer = UserTagSerializer(data=request.data)
+        user_tag = SelectTag.objects.get(user=user)
+        serializer = UserTagSerializer(user_tag, data=request.data, partial=True)
 
         if serializer.is_valid():
-            tag = serializer.save(user=user)
+            tag = serializer.save()
 
             data = {
                 'tag': UserTagSerializer(tag).data,

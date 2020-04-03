@@ -29,47 +29,18 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return user
 
 
-# 카카오톡 계정 유저 정보
-class KakaoUserSerializer(serializers.ModelSerializer):
+# 유저의 계정 정보
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
             'pk',
             'email',
+            'gender',
         )
 
 
-# class UserStarSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = SendStar
-#         fields = (
-#             'pk',
-#             'star',
-#         )
-
-
-class UserStorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SelectStory
-        fields = (
-            'pk',
-            'story',
-            'content'
-        )
-
-
-class UserTagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SelectTag
-        fields = (
-            'pk',
-            'date_style',
-            'relationship_style',
-            'life_style',
-            'charm',
-        )
-
-
+# UserProfile 필드정보
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
@@ -91,31 +62,52 @@ class UserProfileSerializer(serializers.ModelSerializer):
         )
 
 
+# UserImage 필드정보
 class UserImageSerializer(serializers.ModelSerializer):
-    # user = UserSerializer()
-
     class Meta:
         model = UserImage
         fields = (
-            # 'user',
             'pk',
             'img_profile',
         )
 
 
-# 유저의 간단한 정보
-class UserSimpleSerializer(serializers.ModelSerializer):
+# SelectStory 필드정보
+class UserStorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = SelectStory
         fields = (
             'pk',
-            'email',
-            'gender',
+            'story',
+            'content'
         )
 
 
-# 유저의 모든 정보
-class UserSerializer(serializers.ModelSerializer):
+# SelectTag 필드정보
+class UserTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SelectTag
+        fields = (
+            'pk',
+            'date_style',
+            'relationship_style',
+            'life_style',
+            'charm',
+        )
+
+
+# SendStar 필드정보
+# class UserStarSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = SendStar
+#         fields = (
+#             'pk',
+#             'star',
+#         )
+
+
+# 유저의 모든 정보 (조회용)
+class UserInfoSerializer(serializers.ModelSerializer):
     user_image = UserImageSerializer(many=True, source='userimage_set')
     user_profile = UserProfileSerializer(source='userprofile')
     user_story = UserStorySerializer(many=True, source='selectstory_set')
@@ -131,4 +123,14 @@ class UserSerializer(serializers.ModelSerializer):
             'user_profile',
             'user_story',
             'user_tag',
+        )
+
+
+# 카카오톡 계정 유저 정보
+class KakaoUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'pk',
+            'email',
         )

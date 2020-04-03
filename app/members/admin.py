@@ -9,6 +9,11 @@ class UserAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(UserImage)
 class UserImageAdmin(admin.ModelAdmin):
     pass

@@ -3,7 +3,8 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
 # Create your models here.
-from rest_framework.response import Response
+from multiselectfield import MultiSelectField
+from rest_framework import fields
 
 
 class UserManager(BaseUserManager):
@@ -116,7 +117,7 @@ class UserProfile(models.Model):
     introduce = models.CharField(max_length=150, blank=True)
     major = models.CharField(max_length=50, blank=True)
     tall = models.CharField(choices=((str(x), x) for x in range(140, 200)), max_length=10, blank=True)
-    personality = models.CharField(choices=PERSONALITY, blank=True, max_length=50)
+    personality = MultiSelectField(choices=PERSONALITY, blank=True)
     blood_type = models.CharField(choices=BLOOD_TYPE, max_length=30, blank=True)
     drinking = models.CharField(choices=DRINKING, max_length=60, blank=True)
     smoking = models.CharField(choices=SMOKING, max_length=60, blank=True)
@@ -183,10 +184,10 @@ class SelectTag(models.Model):
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date_style = models.CharField(choices=DATE_STYLE, blank=True, max_length=60)
-    relationship_style = models.CharField(choices=RELATIONSHIP_STYLE, blank=True, max_length=60)
-    life_style = models.CharField(choices=LIFE_STYLE, blank=True, max_length=60)
-    charm = models.CharField(choices=CHARM, blank=True, max_length=60)
+    date_style = MultiSelectField(choices=DATE_STYLE, blank=True, max_length=60)
+    relationship_style = MultiSelectField(choices=RELATIONSHIP_STYLE, blank=True, max_length=60)
+    life_style = MultiSelectField(choices=LIFE_STYLE, blank=True, max_length=60)
+    charm = MultiSelectField(choices=CHARM, blank=True, max_length=60)
     created = models.DateTimeField(auto_now=True)
 
 
