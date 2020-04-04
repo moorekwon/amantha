@@ -29,14 +29,34 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return user
 
 
-# 유저의 계정 정보
-class UserSerializer(serializers.ModelSerializer):
+# 유저의 계정 정보 (전체 유저 조회용)
+class UserAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
             'pk',
             'email',
             'gender',
+        )
+
+
+# 카카오톡 계정 유저 정보
+class KakaoUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'pk',
+            'email',
+        )
+
+
+# UserImage 필드정보
+class UserImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserImage
+        fields = (
+            'pk',
+            'user_image',
         )
 
 
@@ -68,16 +88,6 @@ class UserInfoSerializer(serializers.ModelSerializer):
         )
 
 
-# UserImage 필드정보
-class UserImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserImage
-        fields = (
-            'pk',
-            'user_image',
-        )
-
-
 # SelectStory 필드정보
 class UserStorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -102,16 +112,6 @@ class UserTagSerializer(serializers.ModelSerializer):
         )
 
 
-# SendStar 필드정보
-# class UserStarSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = SendStar
-#         fields = (
-#             'pk',
-#             'star',
-#         )
-
-
 # UserRibbon 필드정보
 class UserRibbonSerializer(serializers.ModelSerializer):
     class Meta:
@@ -124,13 +124,11 @@ class UserRibbonSerializer(serializers.ModelSerializer):
         )
 
 
-# 유저의 프로필 정보 (조회용)
+# 유저의 전체프로필 정보 (조회용)
 class UserProfileSerializer(serializers.ModelSerializer):
     user_ribbon = UserRibbonSerializer(source='userribbon.ribbon')
     user_image = UserImageSerializer(many=True, source='userimage_set')
-    print('user_image >>', user_image)
     user_info = UserInfoSerializer(source='userinfo')
-    print('user_info >>', user_info)
     user_story = UserStorySerializer(many=True, source='selectstory_set')
     user_tag = UserTagSerializer(many=True, source='selecttag_set')
 
@@ -145,14 +143,4 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'user_story',
             'user_tag',
             'user_ribbon',
-        )
-
-
-# 카카오톡 계정 유저 정보
-class KakaoUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = (
-            'pk',
-            'email',
         )

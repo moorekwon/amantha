@@ -14,7 +14,7 @@ from config.settings.dev_hj import SECRETS
 from members.models import UserInfo, UserImage, SelectStory, UserRibbon
 
 from members.serializers import KakaoUserSerializer, UserProfileSerializer, UserCreateSerializer, \
-    UserImageSerializer, UserStorySerializer, UserInfoSerializer, UserSerializer
+    UserImageSerializer, UserStorySerializer, UserInfoSerializer, UserAccountSerializer
 
 User = get_user_model()
 
@@ -32,7 +32,7 @@ class CreateUserAPIView(APIView):
 
             data = {
                 'token': token.key,
-                'user': UserSerializer(user).data,
+                'user': UserAccountSerializer(user).data,
             }
             return Response(data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -52,8 +52,8 @@ class AuthTokenAPIView(APIView):
                 logout.append(user)
 
         data = {
-            'login': UserSerializer(login, many=True).data,
-            'logout': UserSerializer(logout, many=True).data,
+            'login': UserAccountSerializer(login, many=True).data,
+            'logout': UserAccountSerializer(logout, many=True).data,
         }
         return Response(data)
 
@@ -70,7 +70,7 @@ class AuthTokenAPIView(APIView):
 
         data = {
             'token': token.key,
-            'user': UserSerializer(user).data
+            'user': UserAccountSerializer(user).data
         }
         return Response(data)
 
@@ -84,6 +84,16 @@ class LogoutUserAPIView(APIView):
         return Response('로그아웃 되었습니다.')
 
 
+# 유저의 상세프로필 전체 정보 가져오기
+class UserProfileAPIView(APIView):
+    def get(self, request):
+        user = request.user
+        data = {
+            'user_profile': UserProfileSerializer(user).data,
+        }
+        return Response(data)
+
+
 class UserImageAPIView(APIView):
     # user 프로필 이미지 갖고오기
     def get(self, request):
@@ -92,7 +102,7 @@ class UserImageAPIView(APIView):
         serializer = UserImageSerializer(images, many=True)
 
         data = {
-            'user': UserSerializer(user).data,
+            'user': UserAccountSerializer(user).data,
             'user_image': serializer.data,
         }
         return JsonResponse(data, safe=False)
@@ -105,7 +115,6 @@ class UserImageAPIView(APIView):
         arr = []
         for user_image in images:
             data = {
-                'user': UserSerializer(user).data,
                 'user_image': user_image,
             }
             serializer = UserImageSerializer(data=data)
@@ -117,13 +126,13 @@ class UserImageAPIView(APIView):
                 return Response(serializer.errors)
 
         data = {
-            'user': UserSerializer(user).data,
+            'user': UserAccountSerializer(user).data,
             'user_image': arr,
         }
         return Response(data, status=status.HTTP_201_CREATED)
 
 
-class UserProfileAPIView(APIView):
+class UserInfoAPIView(APIView):
     # 해당 유저의 상세프로필 정보 가져오기
     def get(self, request):
         user = request.user
@@ -133,7 +142,7 @@ class UserProfileAPIView(APIView):
             return Response('등록된 프로필 정보가 없습니다.')
 
         data = {
-            'user_profile': UserProfileSerializer(user).data,
+            'user_info': UserInfoSerializer(user_info[0]).data,
         }
         return Response(data)
 

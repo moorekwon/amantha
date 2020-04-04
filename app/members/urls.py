@@ -1,18 +1,29 @@
 from django.urls import path
 
 from members.views import AuthTokenAPIView, CreateUserAPIView, LogoutUserAPIView, KaKaoLoginAPIView, KaKaoTemplate, \
-    UserProfileAPIView, UserImageAPIView, UserStoryAPIView
+    UserProfileAPIView, UserImageAPIView, UserStoryAPIView, UserInfoAPIView
 
 urlpatterns = [
-    path('auth/token/', AuthTokenAPIView.as_view()),
+    # POST 유저 회원가입
     path('auth/create/', CreateUserAPIView.as_view()),
+    # POST 유저 로그인 / GET 전체 유저 조회
+    path('auth/token/', AuthTokenAPIView.as_view()),
+    # POST 유저 로그아웃
     path('auth/logout/', LogoutUserAPIView.as_view()),
+    # POST 유저 카카오톡 로그인
     path('auth/kakao/', KaKaoLoginAPIView.as_view()),
-    path('profile/', UserProfileAPIView.as_view()),
-    path('image/', UserImageAPIView.as_view()),
-    path('story/', UserStoryAPIView.as_view()),
-    path('story/<int:pk>/', UserStoryAPIView.as_view()),
-    # path('tag/', UserTagAPIView.as_view()),
+
+    # 유저의 모든 상세프로필 정보 조회
+    path('user/profile/', UserProfileAPIView.as_view()),
+    # GET,POST UserImage 정보
+    path('user/image/', UserImageAPIView.as_view()),
+    # GET, POST, PATCH UserInfo 정보
+    path('user/info/', UserInfoAPIView.as_view()),
+    # GET, POST SelectStory 정보
+    path('user/story/', UserStoryAPIView.as_view()),
+    # DELETE 유저의 story 객체 정보
+    path('user/story/<int:pk>/', UserStoryAPIView.as_view()),
+
     # 테스트용 template (카카오톡 로그인 페이지)
     path('html/kakao/', KaKaoTemplate),
 ]
