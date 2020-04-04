@@ -7,6 +7,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -203,10 +204,10 @@ class UserTagAPIView(APIView):
         if not tag:
             return Response('등록된 관심태그가 없습니다.')
 
-        serializer = UserTagSerializer(tag, many=True)
+        tag = UserTagSerializer(tag, many=True)
 
         data = {
-            'tag': serializer.data,
+            'tag': UserTagSerializer(tag).data,
         }
         return Response(data)
 
@@ -214,10 +215,13 @@ class UserTagAPIView(APIView):
     def patch(self, request):
         user = request.user
         user_tag = SelectTag.objects.get(user=user)
+
         serializer = UserTagSerializer(user_tag, data=request.data, partial=True)
+        print('serializer.data >>', serializer.is_valid())
 
         if serializer.is_valid():
             tag = serializer.save()
+            print('tag >> ', tag)
 
             data = {
                 'tag': UserTagSerializer(tag).data,

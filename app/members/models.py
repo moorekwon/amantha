@@ -3,8 +3,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
 # Create your models here.
-from multiselectfield import MultiSelectField
-from rest_framework import fields
+from rest_framework.fields import MultipleChoiceField
 
 
 class UserManager(BaseUserManager):
@@ -117,7 +116,7 @@ class UserProfile(models.Model):
     introduce = models.CharField(max_length=150, blank=True)
     major = models.CharField(max_length=50, blank=True)
     tall = models.CharField(choices=((str(x), x) for x in range(140, 200)), max_length=10, blank=True)
-    personality = MultiSelectField(choices=PERSONALITY, blank=True)
+    personality = MultipleChoiceField(choices=PERSONALITY)
     blood_type = models.CharField(choices=BLOOD_TYPE, max_length=30, blank=True)
     drinking = models.CharField(choices=DRINKING, max_length=60, blank=True)
     smoking = models.CharField(choices=SMOKING, max_length=60, blank=True)
@@ -184,12 +183,15 @@ class SelectTag(models.Model):
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date_style = MultiSelectField(choices=DATE_STYLE, blank=True, max_length=60)
-    relationship_style = MultiSelectField(choices=RELATIONSHIP_STYLE, blank=True, max_length=60)
-    life_style = MultiSelectField(choices=LIFE_STYLE, blank=True, max_length=60)
-    charm = MultiSelectField(choices=CHARM, blank=True, max_length=60)
+    date_style = MultipleChoiceField(choices=DATE_STYLE, allow_blank=True)
+    relationship_style = MultipleChoiceField(choices=RELATIONSHIP_STYLE, allow_blank=True)
+    life_style = MultipleChoiceField(choices=LIFE_STYLE, allow_blank=True)
+    charm = MultipleChoiceField(choices=CHARM, allow_blank=True)
     created = models.DateTimeField(auto_now=True)
 
+
+# 강사님 여쭐게 있습니다!
+# django-multiselectfield 써서 choices 다중으로 선택할 수 있는 필드를 넣었는데, 그걸 postman에서 리스트 형태로 값을 post/patch 하게
 
 # one-to-one 관계
 # 리본 사용
