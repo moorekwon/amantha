@@ -77,10 +77,10 @@ def server_runserver():
 if __name__ == '__main__':
     try:
         print('--- Deploy start! ---')
-        # local_build_push()
-        # server_init()
-        # server_pull_run()
-        # copy_secrets()
+        local_build_push()
+        server_init()
+        server_pull_run()
+        copy_secrets()
         server_runserver()
         print('--- Deploy completed! ---')
     except subprocess.CalledProcessError as e:
