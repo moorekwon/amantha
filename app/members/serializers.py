@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from members.models import UserImage, UserProfile, SendStar, SelectStory, SelectTag
+from members.models import UserImage, UserProfile, SelectStory
 
 User = get_user_model()
 
@@ -84,16 +84,18 @@ class UserStorySerializer(serializers.ModelSerializer):
 
 
 # SelectTag 필드정보
-class UserTagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SelectTag
-        fields = (
-            'pk',
-            'date_style',
-            'relationship_style',
-            'life_style',
-            'charm',
-        )
+# class UserTagSerializer(serializers.ModelSerializer):
+#     date_style = serializers.SerializerMethodField('get_tags_from_user')
+#
+#     class Meta:
+#         model = SelectTag
+#         fields = (
+#             'pk',
+#             'date_style',
+#             'relationship_style',
+#             'life_style',
+#             'charm',
+#         )
 
 
 # SendStar 필드정보
@@ -111,7 +113,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
     user_image = UserImageSerializer(many=True, source='userimage_set')
     user_profile = UserProfileSerializer(source='userprofile')
     user_story = UserStorySerializer(many=True, source='selectstory_set')
-    user_tag = UserTagSerializer(many=True, source='selecttag_set')
+    # user_tag = UserTagSerializer(many=True, source='selecttag_set')
 
     class Meta:
         model = User
@@ -122,7 +124,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
             'user_image',
             'user_profile',
             'user_story',
-            'user_tag',
+            # 'user_tag',
         )
 
 

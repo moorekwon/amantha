@@ -15,7 +15,7 @@ from config.settings.dev_hj import SECRETS
 from members.models import UserProfile, UserImage, SelectStory, SelectTag
 
 from members.serializers import KakaoUserSerializer, UserProfileSerializer, UserCreateSerializer, \
-    UserImageSerializer, UserStorySerializer, UserTagSerializer, UserInfoSerializer, UserSerializer
+    UserImageSerializer, UserStorySerializer, UserInfoSerializer, UserSerializer
 
 User = get_user_model()
 
@@ -195,39 +195,39 @@ class UserStoryAPIView(APIView):
         return Response(serializer.errors)
 
 
-class UserTagAPIView(APIView):
-    # 해당 유저의 관심태그 불러오기
-    def get(self, request):
-        user = request.user
-        tag = SelectTag.objects.filter(user=user)
-
-        if not tag:
-            return Response('등록된 관심태그가 없습니다.')
-
-        tag = UserTagSerializer(tag, many=True)
-
-        data = {
-            'tag': UserTagSerializer(tag).data,
-        }
-        return Response(data)
-
-    # 관심태그 수정 (multi-check, 기존 데이터와 상관없이 request.data로 완전 수정)
-    def patch(self, request):
-        user = request.user
-        user_tag = SelectTag.objects.get(user=user)
-
-        serializer = UserTagSerializer(user_tag, data=request.data, partial=True)
-        print('serializer.data >>', serializer.is_valid())
-
-        if serializer.is_valid():
-            tag = serializer.save()
-            print('tag >> ', tag)
-
-            data = {
-                'tag': UserTagSerializer(tag).data,
-            }
-            return Response(data)
-        return Response(serializer.errors)
+# class UserTagAPIView(APIView):
+#     # 해당 유저의 관심태그 불러오기
+#     def get(self, request):
+#         user = request.user
+#         tag = SelectTag.objects.filter(user=user)
+#
+#         if not tag:
+#             return Response('등록된 관심태그가 없습니다.')
+#
+#         tag = UserTagSerializer(tag, many=True)
+#
+#         data = {
+#             'tag': UserTagSerializer(tag).data,
+#         }
+#         return Response(data)
+#
+#     # 관심태그 수정 (multi-check, 기존 데이터와 상관없이 request.data로 완전 수정)
+#     def patch(self, request):
+#         user = request.user
+#         user_tag = SelectTag.objects.get(user=user)
+#
+#         serializer = UserTagSerializer(user_tag, data=request.data, partial=True)
+#         print('serializer.data >>', serializer.is_valid())
+#
+#         if serializer.is_valid():
+#             tag = serializer.save()
+#             print('tag >> ', tag)
+#
+#             data = {
+#                 'tag': UserTagSerializer(tag).data,
+#             }
+#             return Response(data)
+#         return Response(serializer.errors)
 
 
 # 카카오톡 로그인 페이지
