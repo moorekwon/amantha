@@ -7,12 +7,11 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from config.settings.dev_hj import SECRETS
-from members.models import UserProfile, UserImage, SelectStory, SelectTag
+from members.models import UserInfo, UserImage, SelectStory
 
 from members.serializers import KakaoUserSerializer, UserProfileSerializer, UserCreateSerializer, \
     UserImageSerializer, UserStorySerializer, UserInfoSerializer, UserSerializer
@@ -92,19 +91,21 @@ class UserImageAPIView(APIView):
         serializer = UserImageSerializer(images, many=True)
 
         data = {
-            'img_profile': serializer.data,
+            'user': UserSerializer(user).data,
+            'user_image': serializer.data,
         }
         return JsonResponse(data, safe=False)
 
     # user 프로필 이미지 추가하기
     def post(self, request):
         user = request.user
-        images = request.data.getlist('img_profile')
+        images = request.data.getlist('user_image')
 
         arr = []
-        for img_profile in images:
+        for user_image in images:
             data = {
-                'img_profile': img_profile,
+                'user': UserSerializer(user).data,
+                'user_image': user_image,
             }
             serializer = UserImageSerializer(data=data)
 
@@ -115,7 +116,8 @@ class UserImageAPIView(APIView):
                 return Response(serializer.errors)
 
         data = {
-            'img_profile': arr,
+            'user': UserSerializer(user).data,
+            'user_image': arr,
         }
         return Response(data, status=status.HTTP_201_CREATED)
 
@@ -124,13 +126,13 @@ class UserProfileAPIView(APIView):
     # 해당 유저의 상세프로필 정보 가져오기
     def get(self, request):
         user = request.user
-        user_profile = UserProfile.objects.filter(user=user)
+        user_info = UserInfo.objects.filter(user=user)
 
-        if not user_profile:
-            return Response('등록된 상세프로필 정보가 없습니다.')
+        if not user_info:
+            return Response('등록된 프로필 정보가 없습니다.')
 
         data = {
-            'user': UserInfoSerializer(user).data,
+            'user_profile': UserProfileSerializer(user).data,
         }
         return Response(data)
 
@@ -138,27 +140,30 @@ class UserProfileAPIView(APIView):
     def post(self, request):
         user = request.user
 
-        serializer = UserProfileSerializer(data=request.data)
+        if user.userinfo:
+            return Response('이미 등록된 프로필 정보가 있습니다.')
+
+        serializer = UserInfoSerializer(data=request.data)
 
         if serializer.is_valid():
-            user_profile = serializer.save(user=user)
+            user_info = serializer.save(user=user)
 
             data = {
-                'user_profile': UserProfileSerializer(user_profile).data,
+                'user_info': UserInfoSerializer(user_info).data,
             }
             return Response(data)
         return Response(serializer.errors)
 
     # 상세프로필 수정
     def patch(self, request):
-        user_profile = UserProfile.objects.get(user=request.user)
-        serializer = UserProfileSerializer(user_profile, data=request.data, partial=True)
+        user_info = UserInfo.objects.get(user=request.user)
+        serializer = UserInfoSerializer(user_info, data=request.data, partial=True)
 
         if serializer.is_valid():
-            user_profile = serializer.save()
+            user_info = serializer.save()
 
             data = {
-                'user_profile': UserProfileSerializer(user_profile).data
+                'user_info': UserInfoSerializer(user_info).data
             }
             return Response(data)
         return Response(serializer.errors)
@@ -193,6 +198,13 @@ class UserStoryAPIView(APIView):
             }
             return Response(data)
         return Response(serializer.errors)
+
+    # 스토리 삭제하기
+    def delete(self, request, pk):
+        user = request.user
+        story = SelectStory.objects.filter(user=user, pk=pk)
+        story.delete()
+        return Response('해당 스토리가 삭제되었습니다.')
 
 
 # class UserTagAPIView(APIView):

@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
@@ -45,7 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 # 유저 생성 후 기입할 프로필 정보
-class UserProfile(models.Model):
+class UserInfo(models.Model):
     REGION = (
         ('서울', '서울'),
         ('경기', '경기'),
@@ -116,7 +118,8 @@ class UserProfile(models.Model):
     introduce = models.CharField(max_length=150, blank=True)
     major = models.CharField(max_length=50, blank=True)
     tall = models.CharField(choices=((str(x), x) for x in range(140, 200)), max_length=10, blank=True)
-    personality = MultipleChoiceField(choices=PERSONALITY)
+    # personality = MultipleChoiceField(choices=PERSONALITY)
+    personality = models.CharField(choices=PERSONALITY, blank=True, max_length=100)
     blood_type = models.CharField(choices=BLOOD_TYPE, max_length=30, blank=True)
     drinking = models.CharField(choices=DRINKING, max_length=60, blank=True)
     smoking = models.CharField(choices=SMOKING, max_length=60, blank=True)
@@ -129,9 +132,17 @@ class UserProfile(models.Model):
         partners = self.user.partner_sendstar_set.all()
         star = [int(partner.star) for partner in partners]
         if len(star) > 0:
+            print('sum(star) / len(star) >> ', sum(star) / len(star))
             return sum(star) / len(star)
         else:
+            print(0)
             return 0
+
+    def age(self):
+        today = datetime.date.today()
+        today_year = str(today).split('-')[0]
+        birth_year = str(self.birth).split('-')[0]
+        return int(today_year) - int(birth_year) + 1
 
 
 # 별점 주기
@@ -146,7 +157,7 @@ class SendStar(models.Model):
 # 한 번에 여러 개 post 가능하도록 해야 함
 class UserImage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    img_profile = models.ImageField(upload_to='profile_images/')
+    user_image = models.ImageField(upload_to='profile_images/')
 
 
 # 스토리 등록
@@ -206,7 +217,7 @@ class UserRibbon(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    ribbon = models.PositiveIntegerField(default=10)
+    ribbon = models.PositiveIntegerField(default='10')
     when = models.DateTimeField(auto_now=True)
     where = models.CharField(choices=WHERE, max_length=60, default='관리자 기본 지급')
 

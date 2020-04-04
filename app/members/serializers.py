@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from members.models import UserImage, UserProfile, SelectStory
+from members.models import UserImage, SelectStory, UserInfo, UserRibbon, SelectTag
 
 User = get_user_model()
 
@@ -40,12 +40,16 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
 
-# UserProfile 필드정보
-class UserProfileSerializer(serializers.ModelSerializer):
+# UserInfo 필드정보
+class UserInfoSerializer(serializers.ModelSerializer):
+    age = UserInfo.age
+    average_star = UserInfo.average_star
+
     class Meta:
-        model = UserProfile
+        model = UserInfo
         fields = (
             'pk',
+            'average_star',
             'nickname',
             'school',
             'major',
@@ -53,12 +57,14 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'company',
             'region',
             'birth',
+            'age',
             'tall',
             'body_shape',
             'personality',
             'blood_type',
             'smoking',
             'drinking',
+            'introduce',
         )
 
 
@@ -68,7 +74,7 @@ class UserImageSerializer(serializers.ModelSerializer):
         model = UserImage
         fields = (
             'pk',
-            'img_profile',
+            'user_image',
         )
 
 
@@ -84,18 +90,16 @@ class UserStorySerializer(serializers.ModelSerializer):
 
 
 # SelectTag 필드정보
-# class UserTagSerializer(serializers.ModelSerializer):
-#     date_style = serializers.SerializerMethodField('get_tags_from_user')
-#
-#     class Meta:
-#         model = SelectTag
-#         fields = (
-#             'pk',
-#             'date_style',
-#             'relationship_style',
-#             'life_style',
-#             'charm',
-#         )
+class UserTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SelectTag
+        fields = (
+            'pk',
+            'date_style',
+            'relationship_style',
+            'life_style',
+            'charm',
+        )
 
 
 # SendStar 필드정보
@@ -108,12 +112,25 @@ class UserStorySerializer(serializers.ModelSerializer):
 #         )
 
 
-# 유저의 모든 정보 (조회용)
-class UserInfoSerializer(serializers.ModelSerializer):
+# UserRibbon 필드정보
+class UserRibbonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserRibbon
+        fields = (
+            'pk',
+            'ribbon',
+            'when',
+            'where',
+        )
+
+
+# 유저의 프로필 정보 (조회용)
+class UserProfileSerializer(serializers.ModelSerializer):
+    user_ribbon = UserRibbonSerializer(source='userribbon.ribbon')
     user_image = UserImageSerializer(many=True, source='userimage_set')
-    user_profile = UserProfileSerializer(source='userprofile')
+    user_info = UserInfoSerializer(source='userinfo')
     user_story = UserStorySerializer(many=True, source='selectstory_set')
-    # user_tag = UserTagSerializer(many=True, source='selecttag_set')
+    user_tag = UserTagSerializer(many=True, source='selecttag_set')
 
     class Meta:
         model = User
@@ -122,9 +139,10 @@ class UserInfoSerializer(serializers.ModelSerializer):
             'email',
             'gender',
             'user_image',
-            'user_profile',
+            'user_info',
             'user_story',
-            # 'user_tag',
+            'user_tag',
+            'user_ribbon',
         )
 
 

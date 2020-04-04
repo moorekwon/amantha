@@ -11,6 +11,7 @@ urlpatterns = [
     path('profile/', UserProfileAPIView.as_view()),
     path('image/', UserImageAPIView.as_view()),
     path('story/', UserStoryAPIView.as_view()),
+    path('story/<int:pk>/', UserStoryAPIView.as_view()),
     # path('tag/', UserTagAPIView.as_view()),
     # 테스트용 template (카카오톡 로그인 페이지)
     path('html/kakao/', KaKaoTemplate),
