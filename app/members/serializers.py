@@ -128,7 +128,9 @@ class UserRibbonSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     user_ribbon = UserRibbonSerializer(source='userribbon.ribbon')
     user_image = UserImageSerializer(many=True, source='userimage_set')
+    print('user_image >>', user_image)
     user_info = UserInfoSerializer(source='userinfo')
+    print('user_info >>', user_info)
     user_story = UserStorySerializer(many=True, source='selectstory_set')
     user_tag = UserTagSerializer(many=True, source='selecttag_set')
 

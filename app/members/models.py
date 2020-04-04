@@ -141,8 +141,10 @@ class UserInfo(models.Model):
     def age(self):
         today = datetime.date.today()
         today_year = str(today).split('-')[0]
-        birth_year = str(self.birth).split('-')[0]
-        return int(today_year) - int(birth_year) + 1
+        if self.birth:
+            birth_year = str(self.birth).split('-')[0]
+            return int(today_year) - int(birth_year) + 1
+        return None
 
 
 # 별점 주기
@@ -217,7 +219,7 @@ class UserRibbon(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    ribbon = models.PositiveIntegerField(default='10')
+    ribbon = models.PositiveIntegerField(default=10)
     when = models.DateTimeField(auto_now=True)
     where = models.CharField(choices=WHERE, max_length=60, default='관리자 기본 지급')
 

@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from config.settings.dev_hj import SECRETS
-from members.models import UserInfo, UserImage, SelectStory
+from members.models import UserInfo, UserImage, SelectStory, UserRibbon
 
 from members.serializers import KakaoUserSerializer, UserProfileSerializer, UserCreateSerializer, \
     UserImageSerializer, UserStorySerializer, UserInfoSerializer, UserSerializer
@@ -26,8 +26,9 @@ class CreateUserAPIView(APIView):
 
         if serializer.is_valid():
             user = serializer.save()
+            UserRibbon.objects.create(user=user)
+            print('user.userribbon.ribbon >> ', user.userribbon.ribbon)
             token = Token.objects.create(user=user)
-            print('user.is_authenticated >>', user.is_authenticated)
 
             data = {
                 'token': token.key,
@@ -139,8 +140,9 @@ class UserProfileAPIView(APIView):
     # (회원가입 직후 첫) 상세프로필 작성 (처음 생성 시 딱 한번 사용)
     def post(self, request):
         user = request.user
+        user_info = UserInfo.objects.filter(user=user)
 
-        if user.userinfo:
+        if user_info:
             return Response('이미 등록된 프로필 정보가 있습니다.')
 
         serializer = UserInfoSerializer(data=request.data)
