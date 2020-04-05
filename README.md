@@ -302,7 +302,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           ],
           "user_info": {
               "pk": 1,
-              "average_star": 0,
+              "average_star": 3.72,
               "nickname": "은순이",
               "school": "",
               "major": "정치외교학과",
