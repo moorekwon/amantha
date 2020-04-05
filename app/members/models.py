@@ -165,9 +165,9 @@ class UserImage(models.Model):
 # 스토리 등록
 class SelectStory(models.Model):
     STORY = (
-        ('이상적인 첫 소개팅 장소', '이상적인 첫 소개팅 장소'),
-        ('내 외모중 가장 마음에 드는 곳은', '내 외모중 가장 마음에 드는 곳은'),
-        ('남들보다 이것 하나는 자신있어요', '남들보다 이것 하나는 자신있어요'),
+        (1, '이상적인 첫 소개팅 장소'),
+        (2, '내 외모중 가장 마음에 드는 곳은'),
+        (3, '남들보다 이것 하나는 자신있어요'),
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)

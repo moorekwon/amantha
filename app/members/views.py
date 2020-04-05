@@ -126,7 +126,6 @@ class UserImageAPIView(APIView):
                 return Response(serializer.errors)
 
         data = {
-            'user': UserAccountSerializer(user).data,
             'user_image': arr,
         }
         return Response(data, status=status.HTTP_201_CREATED)
@@ -142,6 +141,7 @@ class UserInfoAPIView(APIView):
             return Response('등록된 프로필 정보가 없습니다.')
 
         data = {
+            'user': UserAccountSerializer(user).data,
             'user_info': UserInfoSerializer(user_info[0]).data,
         }
         return Response(data)
@@ -192,6 +192,7 @@ class UserStoryAPIView(APIView):
         serializer = UserStorySerializer(story, many=True)
 
         data = {
+            'user': UserAccountSerializer(user).data,
             'story': serializer.data,
         }
         return Response(data)
@@ -282,6 +283,7 @@ class KaKaoLoginAPIView(APIView):
     # 액세스 토큰 받아 가입 혹은 로그인 처리
     def post(self, request):
         access_token = request.data['access_token']
+        gender = request.data['gender']
         me_url = SECRETS['KAKAO_ME_URL']
         me_headers = {
             'Authorization': f'Bearer {access_token}',
@@ -294,10 +296,10 @@ class KaKaoLoginAPIView(APIView):
         kakao_email = me_response_data['kakao_account']['email']
 
         if not User.objects.filter(email=kakao_email).exists():
-            user = User.objects.create_user(email=kakao_email)
+            user = User.objects.create_user(email=kakao_email, gender=gender)
             token = Token.objects.create(user=user)
         else:
-            user = User.objects.get(email=kakao_email)
+            user = User.objects.get(email=kakao_email, gender=gender)
             token, _ = Token.objects.get_or_create(user=user)
 
         # 카카오톡 계정의 고유 id로 user의 username 생성
