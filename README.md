@@ -167,19 +167,19 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - URL: http://13.209.3.115:88/api/auth/logout/
 
-  - 자격 증명 **<u>(test 할 때는 1. 방법 사용 권장)</u>**
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
 
-    1. Authorization
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
 
-       Login 되어있는 user의 email과 password를 Authorization 정보에 넣음
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
        - Username: esb@esb.com
        - Password: esb
 
-    2. Headers
+    2. Token Auth **<u>(production 때 사용)</u>**
 
-       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 Header 정보에 넣음
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
 
        | KEY           | VALUE                                          |
        | ------------- | ---------------------------------------------- |
@@ -254,19 +254,19 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - URL: http://13.209.3.115:88/api/user/profile/
 
-  - 자격 증명 **<u>(test 할 때는 1. 방법 사용 권장)</u>**
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
 
-    1. Authorization
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
 
-       Login 되어있는 user의 email과 password를 Authorization 정보에 넣음
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
        - Username: esb@esb.com
        - Password: esb
 
-    2. Headers
+    2. Token Auth **<u>(production 때 사용)</u>**
 
-       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 Header 정보에 넣음
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
 
        | KEY           | VALUE                                          |
        | ------------- | ---------------------------------------------- |
@@ -348,23 +348,25 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - URL: http://13.209.3.115:88/api/user/image/
 
-  - 자격 증명 **<u>(test 할 때는 1. 방법 사용 권장)</u>**
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
 
-    1. Authorization
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
 
-       Login 되어있는 user의 email과 password를 Authorization 정보에 넣음
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
        - Username: hjk@hjk.com
        - Password: hjk
 
-    2. Headers
+    2. Token Auth **<u>(production 때 사용)</u>**
 
-       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 Header 정보에 넣음
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
 
        | KEY           | VALUE                                          |
        | ------------- | ---------------------------------------------- |
        | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - 
 
   - Body
 
@@ -414,19 +416,19 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - URL: http://13.209.3.115:88/api/user/image/
 
-  - 자격 증명 **<u>(test 할 때는 1. 방법 사용 권장)</u>**
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
 
-    1. Authorization
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
 
-       Login 되어있는 user의 email과 password를 Authorization 정보에 넣음
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
        - Username: hjk@hjk.com
        - Password: hjk
 
-    2. Headers
+    2. Token Auth **<u>(production 때 사용)</u>**
 
-       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 Header 정보에 넣음
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
 
        | KEY           | VALUE                                          |
        | ------------- | ---------------------------------------------- |
@@ -472,19 +474,19 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - URL: http://13.209.3.115:88/api/user/info/
 
-  - 자격 증명 **<u>(test 할 때는 1번 방법 사용 권장)</u>**
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
 
-    1. Authorization
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
 
-       Login 되어있는 user의 email과 password를 Authorization 정보에 넣음
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
        - Username: hjk@hjk.com
        - Password: hjk
 
-    2. Headers
+    2. Token Auth **<u>(production 때 사용)</u>**
 
-       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 Header 정보에 넣음
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
 
        | KEY           | VALUE                                          |
        | ------------- | ---------------------------------------------- |
@@ -495,7 +497,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     - 필수 정보: `nickname`
 
     - 옵션 정보: `school`, `major`, `job`, `company`, `region`, `birth`, `tall`, `body_shape`, `personality`, `blood_type`, `smoking`, `drinking`, `introduce`
-    - 고정된 value를 가진 정보
+    - 고정된 value를 가진 정보 ***(접근 변경 필요할 경우 반영하여 업데이트)***
       - 아래 정해진 값들만 넣을 수 있도록 str 형태의 값들로 이루어진 list로 고정시켜 놓았음
       - `region`: 서울, 경기, 인천, 대전, 충북, 충남, 강원, 부산, 경북, 경남, 대구, 울산, 광주, 전북, 전남, 제주
       - `body_shape`: 보통체형, 통통한, 살짝볼륨, 글래머, 마른, 슬림탄탄
@@ -564,19 +566,19 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - URL: http://13.209.3.115:88/api/user/info/
 
-  - 자격 증명 **<u>(test 할 때는 1번 방법 사용 권장)</u>**
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
 
-    1. Authorization
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
 
-       Login 되어있는 user의 email과 password를 Authorization 정보에 넣음
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
        - Username: hjk@hjk.com
        - Password: hjk
 
-    2. Headers
+    2. Token Auth **<u>(production 때 사용)</u>**
 
-       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 Header 정보에 넣음
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
 
        | KEY           | VALUE                                          |
        | ------------- | ---------------------------------------------- |
@@ -632,19 +634,19 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - URL: http://13.209.3.115:88/api/user/info/
 
-  - 자격 증명 **<u>(test 할 때는 1번 방법 사용 권장)</u>**
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
 
-    1. Authorization
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
 
-       Login 되어있는 user의 email과 password를 Authorization 정보에 넣음
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
        - Username: esb@esb.com
        - Password: esb
 
-    2. Headers
+    2. Token Auth **<u>(production 때 사용)</u>**
 
-       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 Header 정보에 넣음
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
 
        | KEY           | VALUE                                          |
        | ------------- | ---------------------------------------------- |
@@ -695,19 +697,19 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - URL: http://13.209.3.115:88/api/user/story/
 
-  - 자격 증명 **<u>(test 할 때는 1번 방법 사용 권장)</u>**
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
 
-    1. Authorization
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
 
-       Login 되어있는 user의 email과 password를 Authorization 정보에 넣음
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
        - Username: hjk@hjk.com
        - Password: hjk
 
-    2. Headers
+    2. Token Auth **<u>(production 때 사용)</u>**
 
-       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 Header 정보에 넣음
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
 
        | KEY           | VALUE                                          |
        | ------------- | ---------------------------------------------- |
@@ -753,19 +755,19 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - URL: http://13.209.3.115:88/api/user/story/1/
 
-  - 자격 증명 **<u>(test 할 때는 1번 방법 사용 권장)</u>**
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
 
-    1. Authorization
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
 
-       Login 되어있는 user의 email과 password를 Authorization 정보에 넣음
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
        - Username: hjk@hjk.com
        - Password: hjk
 
-    2. Headers
+    2. Token Auth **<u>(production 때 사용)</u>**
 
-       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 Header 정보에 넣음
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
 
        | KEY           | VALUE                                          |
        | ------------- | ---------------------------------------------- |
@@ -791,19 +793,19 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - URL: http://13.209.3.115:88/api/user/story/
 
-  - 자격 증명 **<u>(test 할 때는 1번 방법 사용 권장)</u>**
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
 
-    1. Authorization
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
 
-       Login 되어있는 user의 email과 password를 Authorization 정보에 넣음
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
        - Username: esb@esb.com
        - Password: esb
 
-    2. Headers
+    2. Token Auth **<u>(production 때 사용)</u>**
 
-       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 Header 정보에 넣음
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
 
        | KEY           | VALUE                                          |
        | ------------- | ---------------------------------------------- |
