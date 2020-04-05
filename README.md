@@ -136,7 +136,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     ```json
     {
     	"email": "hjk@hjk.com",
-    "password": "hjk",
+    	"password": "hjk",
     	"gender": "여자"
     }
     ```
