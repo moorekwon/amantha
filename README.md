@@ -409,7 +409,41 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 ### User Image Delete
 
-*추후 업데이트*
+- URL: `/user/image/<int:pk>/`
+
+  - URL 주소에 붙은 pk 번호를 통해 User별 각 image 객체에 접근
+
+- Method: `DELETE`
+
+- User별 image 객체 삭제
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/image/1/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+- Response Sample
+
+  ```json
+  "해당 이미지가 삭제되었습니다."
+  ```
 
 
 
@@ -631,9 +665,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
       }
   }
   ```
-```
-  
-  
+
+
 
 ### User Info View
 
@@ -697,7 +730,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "introduce": "만나서 반가워요 ㅎㅎ"
       }
   }
-```
+  ```
 
 
 
@@ -759,7 +792,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 ### User Story Delete
 
-- URL: `/user/story/1/`
+- URL: `/user/story/<int:pk>/`
 
   - URL 주소에 붙은 pk 번호를 통해 User별 각 story 객체에 접근
 
@@ -789,10 +822,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  *없는 pk 번호로 DELETE 해도 하기 응답이 나올 수 있음.. (추후 업데이트)*
-
   ```json
-  "해당 스토리가 삭제되었습니다."
+"해당 스토리가 삭제되었습니다."
   ```
 
 
