@@ -203,6 +203,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - 카카오톡 로그인 링크 주소: https://kauth.kakao.com/oauth/authorize?client_id=76b2956e73b28279536c31c5fe24562a&redirect_uri=http://13.209.3.115:88/api/auth/kakao/&response_type=code
 
+  - ***아마 위 주소를 iOS팀에게 받아야 하는 것 같아요***
+
 - 카카오톡 연결 계정: email *(email 외 gender 등 연결정보 사이트에서 설정할 수 있음)*
 
 - Request Sample
@@ -215,7 +217,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-    	"access_token": "FASowF-QPcTiwc1gIVxwGdkso4usMvOQl3d2pgorDNQAAAFxSTSrcQ",
+    	"accessToken": "FASowF-QPcTiwc1gIVxwGdkso4usMvOQl3d2pgorDNQAAAFxSTSrcQ",
     	"gender": "여자"
     }
     ```
@@ -278,31 +280,31 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   
   ```json
   {
-      "user_profile": {
+      "userProfile": {
           "pk": 1,
           "email": "esb@esb.com",
           "gender": "여자",
-          "user_image": [
+          "images": [
               {
                   "pk": 1,
-                  "user_image": "https://amantha.s3.amazonaws.com/profile_images/esb.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T094447Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=40b1898f937f7072814351384b272bfd2adb312641ffecd19f6c253b3f8ec152"
+                  "image": "https://amantha.s3.amazonaws.com/profile_images/esb.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T094447Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=40b1898f937f7072814351384b272bfd2adb312641ffecd19f6c253b3f8ec152"
               },
               {
                   "pk": 2,
-                  "user_image": "https://amantha.s3.amazonaws.com/profile_images/esb.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T094447Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=40b1898f937f7072814351384b272bfd2adb312641ffecd19f6c253b3f8ec152"
+                  "image": "https://amantha.s3.amazonaws.com/profile_images/esb.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T094447Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=40b1898f937f7072814351384b272bfd2adb312641ffecd19f6c253b3f8ec152"
               },
               {
                   "pk": 3,
-                  "user_image": "https://amantha.s3.amazonaws.com/profile_images/esb2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T094447Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8b60f2346c82adf14a1ea8ea2785b4b55e3a7665c8680012a87e4750127f6441"
+                  "image": "https://amantha.s3.amazonaws.com/profile_images/esb2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T094447Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8b60f2346c82adf14a1ea8ea2785b4b55e3a7665c8680012a87e4750127f6441"
               },
               {
                   "pk": 4,
-                  "user_image": "https://amantha.s3.amazonaws.com/profile_images/esb3.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T094447Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=9a5637672e810c18a15a21880c8841b974daef8ec7cd4635074df6bf1a4b24f8"
+                  "image": "https://amantha.s3.amazonaws.com/profile_images/esb3.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T094447Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=9a5637672e810c18a15a21880c8841b974daef8ec7cd4635074df6bf1a4b24f8"
               }
           ],
-          "user_info": {
+          "info": {
               "pk": 1,
-              "average_star": 3.72,
+              "averageStar": 3.72,
               "nickname": "은순이",
               "school": "",
               "major": "정치외교학과",
@@ -312,22 +314,22 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
               "birth": "1995-04-30",
               "age": 26,
               "tall": "164",
-              "body_shape": "보통체형",
+              "bodyShape": "보통체형",
               "personality": "외향적인",
-              "blood_type": "B형",
+              "bloodType": "B형",
               "smoking": "비흡연",
               "drinking": "",
               "introduce": "안녕하세요 반가워요^^"
           },
-          "user_story": [
+          "stories": [
               {
                   "pk": 1,
                   "story": 1,
                   "content": "조용한 카페"
               }
           ],
-          "user_tag": [],
-          "user_ribbon": {}
+          "tags": [],
+          "ribbons": {}
       }
   }
   ```
@@ -372,23 +374,23 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ***(POSTMAN에서는 파일이름이 한글일 경우 에러가 뜸..)***
   
-    | KEY        | VALUE     |
-    | ---------- | --------- |
-    | user_image | hjk2.jpeg |
-    | user_image | hjk.jpg   |
+    | KEY    | VALUE     |
+    | ------ | --------- |
+    | images | hjk2.jpeg |
+    | images | hjk.jpg   |
   
 - Response Sample
 
   ```json
   {
-      "user_image": [
+      "images": [
           {
               "pk": 1,
-              "user_image": "https://amantha.s3.amazonaws.com/profile_images/hjk2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T074656Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8c1056ebf35e6ff001727ebc0842c961388c0a9b6e84a1ab2a842dfaddef6b31"
+              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T074656Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8c1056ebf35e6ff001727ebc0842c961388c0a9b6e84a1ab2a842dfaddef6b31"
           },
           {
               "pk": 2,
-              "user_image": "https://amantha.s3.amazonaws.com/profile_images/hjk.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T074656Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=4351590aa924f5321bc742d4d4e2a45115ed23457ed62cab98325ee3877276c2"
+              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T074656Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=4351590aa924f5321bc742d4d4e2a45115ed23457ed62cab98325ee3877276c2"
           }
       ]
   }
@@ -443,14 +445,14 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "email": "hjk@hjk.com",
           "gender": "여자"
       },
-      "user_image": [
+      "images": [
           {
               "pk": 1,
-              "user_image": "https://amantha.s3.amazonaws.com/profile_images/hjk2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T080726Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=bd05ec18231f176e2f369c015db8f5e9dcf2b29847af2f5f425b137cb89865ad"
+              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T080726Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=bd05ec18231f176e2f369c015db8f5e9dcf2b29847af2f5f425b137cb89865ad"
           },
           {
               "pk": 2,
-              "user_image": "https://amantha.s3.amazonaws.com/profile_images/hjk.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T080726Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3c19e70d77cba404c1475887643a9c0a8a85c7956f8fd6eb69803fd5f4734d97"
+              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T080726Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3c19e70d77cba404c1475887643a9c0a8a85c7956f8fd6eb69803fd5f4734d97"
           }
       ]
   }
@@ -464,7 +466,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `POST`
 
-- User 계정 생성 후 상세프로필 정보 넣기 (처음 한 번만 POST 가능)
+- User 계정 생성 후 상세프로필 정보 넣기 **(처음 한 번만 POST 가능)**
 
 - **User의 이미지, 스토리, 관심태그, 리본 정보 외 프로필 정보 접근**
 
@@ -494,13 +496,13 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     - 필수 정보: `nickname`
 
-    - 옵션 정보: `school`, `major`, `job`, `company`, `region`, `birth`, `tall`, `body_shape`, `personality`, `blood_type`, `smoking`, `drinking`, `introduce`
+    - 옵션 정보: `school`, `major`, `job`, `company`, `region`, `birth`, `tall`, `bodyShape`, `personality`, `bloodType`, `smoking`, `drinking`, `introduce`
     - 고정된 value를 가진 정보 ***(접근 변경 필요할 경우 반영하여 업데이트)***
       - 아래 정해진 값들만 넣을 수 있도록 str 형태의 값들로 이루어진 list로 고정시켜 놓았음
       - `region`: 서울, 경기, 인천, 대전, 충북, 충남, 강원, 부산, 경북, 경남, 대구, 울산, 광주, 전북, 전남, 제주
-      - `body_shape`: 보통체형, 통통한, 살짝볼륨, 글래머, 마른, 슬림탄탄
+      - `bodyShape`: 보통체형, 통통한, 살짝볼륨, 글래머, 마른, 슬림탄탄
       - `personality`: 지적인, 차분한, 유머있는, 낙천적인, 내향적인, 외향적인, 감성적인, 상냥한, 귀여운, 섹시한, 4차원인, 발랄한, 도도한
-      - `blood_type`: AB형, A형, B형, O형
+      - `bloodType`: AB형, A형, B형, O형
       - `drinking`: 가끔 마심, 어느정도 즐기는편, 술자리를 즐김, 마시지 않음
       - `smoking`: 흡연, 비흡연
 
@@ -514,9 +516,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     	"job": "백엔드 개발자",
     	"company": "아마존",
     	"birth": "1995-02-11",
-    	"body_shape": "보통체형",
+    	"bodyShape": "보통체형",
     	"personality": "차분한",
-    	"blood_type": "AB형",
+    	"blooType": "AB형",
     	"smoking": "비흡연",
     	"introduce": "안녕하세요 ^^"
     }
@@ -524,13 +526,13 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  average_star(별점), age(나이) 정보는 알아서 계산되어 나옴
+  averageStar(별점), age(나이) 정보는 알아서 계산되어 나옴
 
   ```json
   {
-      "user_info": {
+      "info": {
           "pk": 2,
-          "average_star": 3.1,
+          "averageStar": 3.1,
           "nickname": "권효진",
           "school": "",
           "major": "경영학전공",
@@ -540,9 +542,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "birth": "1995-02-11",
           "age": 26,
           "tall": "",
-          "body_shape": "보통체형",
+          "bodyShape": "보통체형",
           "personality": "차분한",
-          "blood_type": "AB형",
+          "bloodType": "AB형",
           "smoking": "비흡연",
           "drinking": "",
           "introduce": "안녕하세요 ^^"
@@ -596,9 +598,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   ```json
   {
-      "user_info": {
+      "info": {
           "pk": 2,
-          "average_star": 3.3,
+          "averageStar": 3.3,
           "nickname": "권효진",
           "school": "",
           "major": "경영학전공",
@@ -608,9 +610,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "birth": "1995-02-11",
           "age": 26,
           "tall": "",
-          "body_shape": "보통체형",
+          "bodyShape": "보통체형",
           "personality": "차분한",
-          "blood_type": "AB형",
+          "bloodType": "AB형",
           "smoking": "비흡연",
           "drinking": "가끔 마심",
           "introduce": "만나서 반가워요 ㅎㅎ"
@@ -661,9 +663,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "email": "esb@esb.com",
           "gender": "여자"
       },
-      "user_info": {
+      "info": {
           "pk": 2,
-          "average_star": 3.5,
+          "averageStar": 3.5,
           "nickname": "권효진",
           "school": "",
           "major": "경영학전공",
@@ -673,9 +675,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "birth": "1995-02-11",
           "age": 26,
           "tall": "",
-          "body_shape": "보통체형",
+          "bodyShape": "보통체형",
           "personality": "차분한",
-          "blood_type": "AB형",
+          "bloodType": "AB형",
           "smoking": "비흡연",
           "drinking": "가끔 마심",
           "introduce": "만나서 반가워요 ㅎㅎ"
@@ -820,7 +822,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "email": "esb@esb.com",
           "gender": "여자"
       },
-      "story": [
+      "stories": [
           {
               "pk": 1,
               "story": 1,

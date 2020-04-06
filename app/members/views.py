@@ -89,7 +89,7 @@ class UserProfileAPIView(APIView):
     def get(self, request):
         user = request.user
         data = {
-            'user_profile': UserProfileSerializer(user).data,
+            'userProfile': UserProfileSerializer(user).data,
         }
         return Response(data)
 
@@ -103,19 +103,19 @@ class UserImageAPIView(APIView):
 
         data = {
             'user': UserAccountSerializer(user).data,
-            'user_image': serializer.data,
+            'images': serializer.data,
         }
         return JsonResponse(data, safe=False)
 
     # user 프로필 이미지 추가하기
     def post(self, request):
         user = request.user
-        images = request.data.getlist('user_image')
+        images = request.data.getlist('images')
 
         arr = []
-        for user_image in images:
+        for image in images:
             data = {
-                'user_image': user_image,
+                'image': image,
             }
             serializer = UserImageSerializer(data=data)
 
@@ -126,55 +126,58 @@ class UserImageAPIView(APIView):
                 return Response(serializer.errors)
 
         data = {
-            'user_image': arr,
+            'images': arr,
         }
         return Response(data, status=status.HTTP_201_CREATED)
+
+    def delete(self, reuqest):
+        pass
 
 
 class UserInfoAPIView(APIView):
     # 해당 유저의 상세프로필 정보 가져오기
     def get(self, request):
         user = request.user
-        user_info = UserInfo.objects.filter(user=user)
+        info = UserInfo.objects.filter(user=user)
 
-        if not user_info:
+        if not info:
             return Response('등록된 프로필 정보가 없습니다.')
 
         data = {
             'user': UserAccountSerializer(user).data,
-            'user_info': UserInfoSerializer(user_info[0]).data,
+            'info': UserInfoSerializer(info[0]).data,
         }
         return Response(data)
 
     # (회원가입 직후 첫) 상세프로필 작성 (처음 생성 시 딱 한번 사용)
     def post(self, request):
         user = request.user
-        user_info = UserInfo.objects.filter(user=user)
+        info = UserInfo.objects.filter(user=user)
 
-        if user_info:
+        if info:
             return Response('이미 등록된 프로필 정보가 있습니다.')
 
         serializer = UserInfoSerializer(data=request.data)
 
         if serializer.is_valid():
-            user_info = serializer.save(user=user)
+            info = serializer.save(user=user)
 
             data = {
-                'user_info': UserInfoSerializer(user_info).data,
+                'info': UserInfoSerializer(info).data,
             }
             return Response(data)
         return Response(serializer.errors)
 
     # 상세프로필 수정
     def patch(self, request):
-        user_info = UserInfo.objects.get(user=request.user)
-        serializer = UserInfoSerializer(user_info, data=request.data, partial=True)
+        info = UserInfo.objects.get(user=request.user)
+        serializer = UserInfoSerializer(info, data=request.data, partial=True)
 
         if serializer.is_valid():
-            user_info = serializer.save()
+            info = serializer.save()
 
             data = {
-                'user_info': UserInfoSerializer(user_info).data
+                'info': UserInfoSerializer(info).data
             }
             return Response(data)
         return Response(serializer.errors)
@@ -184,16 +187,16 @@ class UserStoryAPIView(APIView):
     # 해당 유저의 스토리 불러오기
     def get(self, request):
         user = request.user
-        story = SelectStory.objects.filter(user=user)
+        stories = SelectStory.objects.filter(user=user)
 
-        if not story:
+        if not stories:
             return Response('등록된 스토리가 없습니다.')
 
-        serializer = UserStorySerializer(story, many=True)
+        serializer = UserStorySerializer(stories, many=True)
 
         data = {
             'user': UserAccountSerializer(user).data,
-            'story': serializer.data,
+            'stories': serializer.data,
         }
         return Response(data)
 
@@ -282,7 +285,7 @@ class KaKaoLoginAPIView(APIView):
 
     # 액세스 토큰 받아 가입 혹은 로그인 처리
     def post(self, request):
-        access_token = request.data['access_token']
+        access_token = request.data['accessToken']
         gender = request.data['gender']
         me_url = SECRETS['KAKAO_ME_URL']
         me_headers = {

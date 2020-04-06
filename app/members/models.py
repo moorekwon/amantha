@@ -159,7 +159,7 @@ class SendStar(models.Model):
 # 한 번에 여러 개 post 가능하도록 해야 함
 class UserImage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    user_image = models.ImageField(upload_to='profile_images/')
+    image = models.ImageField(upload_to='profile_images/')
 
 
 # 스토리 등록

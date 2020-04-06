@@ -56,20 +56,22 @@ class UserImageSerializer(serializers.ModelSerializer):
         model = UserImage
         fields = (
             'pk',
-            'user_image',
+            'image',
         )
 
 
 # UserInfo 필드정보
 class UserInfoSerializer(serializers.ModelSerializer):
     age = UserInfo.age
-    average_star = UserInfo.average_star
+    averageStar = serializers.IntegerField(source='average_star', read_only=True)
+    bodyShape = serializers.CharField(source='body_shape', required=False)
+    bloodType = serializers.CharField(source='blood_type', required=False)
 
     class Meta:
         model = UserInfo
         fields = (
             'pk',
-            'average_star',
+            'averageStar',
             'nickname',
             'school',
             'major',
@@ -79,9 +81,9 @@ class UserInfoSerializer(serializers.ModelSerializer):
             'birth',
             'age',
             'tall',
-            'body_shape',
+            'bodyShape',
             'personality',
-            'blood_type',
+            'bloodType',
             'smoking',
             'drinking',
             'introduce',
@@ -126,11 +128,11 @@ class UserRibbonSerializer(serializers.ModelSerializer):
 
 # 유저의 전체프로필 정보 (조회용)
 class UserProfileSerializer(serializers.ModelSerializer):
-    user_ribbon = UserRibbonSerializer(source='userribbon.ribbon')
-    user_image = UserImageSerializer(many=True, source='userimage_set')
-    user_info = UserInfoSerializer(source='userinfo')
-    user_story = UserStorySerializer(many=True, source='selectstory_set')
-    user_tag = UserTagSerializer(many=True, source='selecttag_set')
+    images = UserImageSerializer(many=True, source='userimage_set')
+    info = UserInfoSerializer(source='userinfo')
+    stories = UserStorySerializer(many=True, source='selectstory_set')
+    tags = UserTagSerializer(many=True, source='selecttag_set')
+    ribbons = UserRibbonSerializer(source='userribbon.ribbon')
 
     class Meta:
         model = User
@@ -138,9 +140,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'pk',
             'email',
             'gender',
-            'user_image',
-            'user_info',
-            'user_story',
-            'user_tag',
-            'user_ribbon',
+            'images',
+            'info',
+            'stories',
+            'tags',
+            'ribbons',
         )
