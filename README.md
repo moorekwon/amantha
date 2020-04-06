@@ -283,7 +283,10 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
       "userProfile": {
           "email": "esb@esb.com",
           "gender": "여자",
-          "sendMeLikeUsers": [],
+          "sendMeLikeUsers": [
+              "hgo@hgo.com",
+              "hbb@hbb.com"
+          ],
           "images": [
               {
                   "pk": 1,
@@ -512,7 +515,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
       - `drinking`: 가끔 마심, 어느정도 즐기는편, 술자리를 즐김, 마시지 않음
       - `smoking`: 흡연, 비흡연
   - `religion`: 종교 없음, 기독교, 천주교, 불교, 원불교, 유교, 이슬람교
-      
+    
     - ***multi choice 정보(필드)들은 추후 업데이트 (현재는 모두 복수 선택 불가능)***
   - ***필수 정보로 바꾸고 싶은 부분 반영하여 업데이트 가능***
     
@@ -627,6 +630,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "introduce": "만나서 반가워요 ㅎㅎ"
       }
   }
+  ```
 ```
   
   
@@ -693,7 +697,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "introduce": "만나서 반가워요 ㅎㅎ"
       }
   }
-  ```
+```
 
 
 
