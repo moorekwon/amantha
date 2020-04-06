@@ -86,6 +86,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
             'bloodType',
             'smoking',
             'drinking',
+            'religion',
             'introduce',
         )
 
@@ -140,7 +141,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'pk',
             'email',
             'gender',
             'sendMeLikeUsers',

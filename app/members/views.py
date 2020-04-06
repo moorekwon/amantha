@@ -11,10 +11,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from config.settings.dev_hj import SECRETS
-from members.models import UserInfo, UserImage, SelectStory, UserRibbon
 
-from members.serializers import KakaoUserSerializer, UserProfileSerializer, UserCreateSerializer, \
-    UserImageSerializer, UserStorySerializer, UserInfoSerializer, UserAccountSerializer
+from members.serializers import *
 
 User = get_user_model()
 
@@ -229,6 +227,28 @@ class UserStoryAPIView(APIView):
             story.delete()
             return Response('해당 스토리가 삭제되었습니다.')
         return Response('해당 스토리의 pk가 존재하지 않습니다.')
+
+
+class UserRibbonAPIView(APIView):
+    # User별 보유리본 조회
+    def get(self, request):
+        user = request.user
+        ribbons = UserRibbon.objects.filter(user=user)
+
+        if ribbons:
+            serializer = UserRibbonSerializer(ribbons[0])
+        else:
+            UserRibbon.objects.create(user=user)
+            serializer = UserRibbonSerializer(ribbons)
+
+        data = {
+            'user': UserAccountSerializer(user).data,
+            'ribbons': serializer.data,
+        }
+        return Response(data)
+
+    def post(self, request):
+        pass
 
 
 # class UserTagAPIView(APIView):

@@ -1,7 +1,6 @@
 from django.urls import path
 
-from members.views import AuthTokenAPIView, CreateUserAPIView, LogoutUserAPIView, KaKaoLoginAPIView, KaKaoTemplate, \
-    UserProfileAPIView, UserImageAPIView, UserStoryAPIView, UserInfoAPIView
+from members.views import *
 
 urlpatterns = [
     # POST 유저 회원가입
@@ -25,6 +24,7 @@ urlpatterns = [
     path('user/story/', UserStoryAPIView.as_view()),
     # DELETE 유저의 story 객체 정보
     path('user/story/<int:pk>/', UserStoryAPIView.as_view()),
+    path('user/ribbon/', UserRibbonAPIView.as_view()),
 
     # 테스트용 template (카카오톡 로그인 페이지)
     path('html/kakao/', KaKaoTemplate),

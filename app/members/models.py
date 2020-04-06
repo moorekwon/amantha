@@ -130,6 +130,15 @@ class UserInfo(models.Model):
         ('흡연', '흡연'),
         ('비흡연', '비흡연'),
     )
+    RELIGION = (
+        ('종교 없음', '종교 없음'),
+        ('기독교', '기독교'),
+        ('천주교', '천주교'),
+        ('불교', '불교'),
+        ('원불교', '원불교'),
+        ('유교', '유교'),
+        ('이슬람교', '이슬람교'),
+    )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nickname = models.CharField(unique=True, max_length=60)
@@ -139,7 +148,6 @@ class UserInfo(models.Model):
     birth = models.DateField(blank=True, null=True)
     region = models.CharField(choices=REGION, max_length=30, blank=True)
     body_shape = models.CharField(choices=BODY_SHAPE, blank=True, max_length=50)
-    introduce = models.CharField(max_length=150, blank=True)
     major = models.CharField(max_length=50, blank=True)
     tall = models.CharField(choices=((str(x), x) for x in range(140, 200)), max_length=10, blank=True)
     # personality = MultipleChoiceField(choices=PERSONALITY)
@@ -147,6 +155,8 @@ class UserInfo(models.Model):
     blood_type = models.CharField(choices=BLOOD_TYPE, max_length=30, blank=True)
     drinking = models.CharField(choices=DRINKING, max_length=60, blank=True)
     smoking = models.CharField(choices=SMOKING, max_length=60, blank=True)
+    religion = models.CharField(choices=RELIGION, max_length=60, blank=True)
+    introduce = models.CharField(max_length=150, blank=True)
 
 
 # 별점 주기
