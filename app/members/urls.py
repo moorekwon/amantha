@@ -17,6 +17,8 @@ urlpatterns = [
     path('user/profile/', UserProfileAPIView.as_view()),
     # GET,POST UserImage 정보
     path('user/image/', UserImageAPIView.as_view()),
+    # DELETE 유저의 image 객체 정보
+    path('user/image/<int:pk>/', UserImageAPIView.as_view()),
     # GET, POST, PATCH UserInfo 정보
     path('user/info/', UserInfoAPIView.as_view()),
     # GET, POST SelectStory 정보

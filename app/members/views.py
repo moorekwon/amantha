@@ -130,8 +130,14 @@ class UserImageAPIView(APIView):
         }
         return Response(data, status=status.HTTP_201_CREATED)
 
-    def delete(self, reuqest):
-        pass
+    def delete(self, request, pk):
+        user = request.user
+        print('pk >> ', pk)
+        image = UserImage.objects.filter(user=user, pk=pk)
+        if image:
+            image.delete()
+            return Response('해당 이미지가 삭제되었습니다.')
+        return Response('해당 이미지의 pk가 존재하지 않습니다.')
 
 
 class UserInfoAPIView(APIView):
@@ -218,8 +224,11 @@ class UserStoryAPIView(APIView):
     def delete(self, request, pk):
         user = request.user
         story = SelectStory.objects.filter(user=user, pk=pk)
-        story.delete()
-        return Response('해당 스토리가 삭제되었습니다.')
+
+        if story:
+            story.delete()
+            return Response('해당 스토리가 삭제되었습니다.')
+        return Response('해당 스토리의 pk가 존재하지 않습니다.')
 
 
 # class UserTagAPIView(APIView):
