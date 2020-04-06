@@ -276,7 +276,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  *user_tag, user_ribbon 부분은 추후 업데이트*
+  *tags, ribbons 부분은 추후 업데이트*
   
   ```json
   {
