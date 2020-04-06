@@ -42,6 +42,30 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['gender', ]
 
+    star_users = models.ManyToManyField('self', through='SendStar', related_name='send_me_star_users',
+                                        symmetrical=False)
+    like_users = models.ManyToManyField('self', through='SendLike', related_name='send_me_like_users',
+                                        symmetrical=False)
+
+    def average_star(self):
+        partners = self.partner_sendstar_set.all()
+        print('partners >> ', partners)
+        star = [int(partner.star) for partner in partners]
+        if len(star) > 0:
+            print('sum(star) / len(star) >> ', sum(star) / len(star))
+            return sum(star) / len(star)
+        else:
+            print(0)
+            return 0
+
+    def age(self):
+        today = datetime.date.today()
+        today_year = str(today).split('-')[0]
+        if self.userinfo.birth:
+            birth_year = str(self.userinfo.birth).split('-')[0]
+            return int(today_year) - int(birth_year) + 1
+        return None
+
     def profile_percentage(self):
         pass
 
@@ -123,28 +147,6 @@ class UserInfo(models.Model):
     blood_type = models.CharField(choices=BLOOD_TYPE, max_length=30, blank=True)
     drinking = models.CharField(choices=DRINKING, max_length=60, blank=True)
     smoking = models.CharField(choices=SMOKING, max_length=60, blank=True)
-    star_users = models.ManyToManyField('self', through='SendStar', related_name='send_me_star_users',
-                                        symmetrical=False)
-    like_users = models.ManyToManyField('self', through='SendLike', related_name='send_me_like_users',
-                                        symmetrical=False)
-
-    def average_star(self):
-        partners = self.user.partner_sendstar_set.all()
-        star = [int(partner.star) for partner in partners]
-        if len(star) > 0:
-            print('sum(star) / len(star) >> ', sum(star) / len(star))
-            return sum(star) / len(star)
-        else:
-            print(0)
-            return 0
-
-    def age(self):
-        today = datetime.date.today()
-        today_year = str(today).split('-')[0]
-        if self.birth:
-            birth_year = str(self.birth).split('-')[0]
-            return int(today_year) - int(birth_year) + 1
-        return None
 
 
 # 별점 주기

@@ -62,8 +62,8 @@ class UserImageSerializer(serializers.ModelSerializer):
 
 # UserInfo 필드정보
 class UserInfoSerializer(serializers.ModelSerializer):
-    age = UserInfo.age
-    averageStar = serializers.IntegerField(source='average_star', read_only=True)
+    age = serializers.IntegerField(source='user.age', read_only=True)
+    averageStar = serializers.IntegerField(source='user.average_star', read_only=True)
     bodyShape = serializers.CharField(source='body_shape', required=False)
     bloodType = serializers.CharField(source='blood_type', required=False)
 
@@ -128,6 +128,9 @@ class UserRibbonSerializer(serializers.ModelSerializer):
 
 # 유저의 전체프로필 정보 (조회용)
 class UserProfileSerializer(serializers.ModelSerializer):
+    sendMeLikeUsers = serializers.ListField(
+        child=serializers.CharField(), source='send_me_like_users.all'
+    )
     images = UserImageSerializer(many=True, source='userimage_set')
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
@@ -140,6 +143,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'pk',
             'email',
             'gender',
+            'sendMeLikeUsers',
             'images',
             'info',
             'stories',
