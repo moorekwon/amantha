@@ -281,9 +281,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "userProfile": {
-          "pk": 1,
           "email": "esb@esb.com",
           "gender": "여자",
+          "sendMeLikeUsers": [],
           "images": [
               {
                   "pk": 1,
@@ -319,6 +319,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
               "bloodType": "B형",
               "smoking": "비흡연",
               "drinking": "",
+              "religion": "",
               "introduce": "안녕하세요 반가워요^^"
           },
           "stories": [
@@ -329,7 +330,12 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
               }
           ],
           "tags": [],
-          "ribbons": {}
+          "ribbons": {
+          	"pk": 2,
+          	"ribbon": 10,
+          	"when": "2020-04-06 15:47",
+          	"where": "관리자 기본 지급"
+      	}
       }
   }
   ```
@@ -496,7 +502,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     - 필수 정보: `nickname`
 
-    - 옵션 정보: `school`, `major`, `job`, `company`, `region`, `birth`, `tall`, `bodyShape`, `personality`, `bloodType`, `smoking`, `drinking`, `introduce`
+    - 옵션 정보: `school`, `major`, `job`, `company`, `region`, `birth`, `tall`, `bodyShape`, `personality`, `bloodType`, `smoking`, `drinking`, `introduce`, `religion`
     - 고정된 value를 가진 정보 ***(접근 변경 필요할 경우 반영하여 업데이트)***
       - 아래 정해진 값들만 넣을 수 있도록 str 형태의 값들로 이루어진 list로 고정시켜 놓았음
       - `region`: 서울, 경기, 인천, 대전, 충북, 충남, 강원, 부산, 경북, 경남, 대구, 울산, 광주, 전북, 전남, 제주
@@ -505,10 +511,11 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
       - `bloodType`: AB형, A형, B형, O형
       - `drinking`: 가끔 마심, 어느정도 즐기는편, 술자리를 즐김, 마시지 않음
       - `smoking`: 흡연, 비흡연
-
+  - `religion`: 종교 없음, 기독교, 천주교, 불교, 원불교, 유교, 이슬람교
+      
     - ***multi choice 정보(필드)들은 추후 업데이트 (현재는 모두 복수 선택 불가능)***
-    - ***필수 정보로 바꾸고 싶은 부분 반영하여 업데이트 가능***
-
+  - ***필수 정보로 바꾸고 싶은 부분 반영하여 업데이트 가능***
+    
     ```json
     {
     	"nickname": "권효진",
@@ -547,6 +554,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "bloodType": "AB형",
           "smoking": "비흡연",
           "drinking": "",
+          "religion": "",
           "introduce": "안녕하세요 ^^"
       }
   }
@@ -615,11 +623,12 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "bloodType": "AB형",
           "smoking": "비흡연",
           "drinking": "가끔 마심",
+          "religion": "",
           "introduce": "만나서 반가워요 ㅎㅎ"
       }
   }
-  ```
-
+```
+  
   
 
 ### User Info View
@@ -680,6 +689,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "bloodType": "AB형",
           "smoking": "비흡연",
           "drinking": "가끔 마심",
+          "religion": "",
           "introduce": "만나서 반가워요 ㅎㅎ"
       }
   }
