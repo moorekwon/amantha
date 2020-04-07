@@ -816,12 +816,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  ```json
-"해당 스토리가 삭제되었습니다."
-  ```
-
-
-
 ### User Story List
 
 - URL: `/user/story/`
