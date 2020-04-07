@@ -215,9 +215,6 @@ class SelectTag(models.Model):
     created = models.DateTimeField(auto_now=True)
 
 
-# 강사님 여쭐게 있습니다!
-# django-multiselectfield 써서 choices 다중으로 선택할 수 있는 필드를 넣었는데, 그걸 postman에서 리스트 형태로 값을 post/patch 하게
-
 # one-to-one 관계
 # 리본 사용
 # 첫 유저 생성 시 바로 생성되어야 함 (default 값으로)
@@ -231,15 +228,21 @@ class UserRibbon(models.Model):
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # paid_ribbon과 where를 연결시켜줘야 하는데...
     paid_ribbon = models.IntegerField(default=10)
+    current_ribbon = models.PositiveIntegerField(default=10)
     when = models.DateTimeField(auto_now=True)
     where = models.CharField(choices=WHERE, max_length=60, default='관리자 기본 지급')
 
-    def add_subtract(self):
-        pass
-
-    def current_ribbon(self):
-        pass
+    # 첫 관리자 기본 지급 제외, 리본 지급 추가때마다 이전 current_ribbon에서 현재 paid_ribbon을 빼 현재 current_ribbon에 저장
+    def save(self, *args, **kwargs):
+        ribbons = UserRibbon.objects.filter(user=self.user)
+        if len(ribbons) == 0:
+            pass
+        else:
+            pre = ribbons[len(ribbons) - 1]
+            self.current_ribbon = pre.current_ribbon + self.paid_ribbon
+        super().save(*args, **kwargs)
 
 
 # 리본 결제

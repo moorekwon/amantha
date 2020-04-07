@@ -117,11 +117,15 @@ class UserTagSerializer(serializers.ModelSerializer):
 
 # UserRibbon 필드정보
 class UserRibbonSerializer(serializers.ModelSerializer):
+    paidRibbon = serializers.IntegerField(source='paid_ribbon')
+    currentRibbon = serializers.IntegerField(source='current_ribbon', read_only=True)
+
     class Meta:
         model = UserRibbon
         fields = (
             'pk',
-            'paid_ribbon',
+            'paidRibbon',
+            'currentRibbon',
             'when',
             'where',
         )
@@ -136,17 +140,17 @@ class UserProfileSerializer(serializers.ModelSerializer):
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
     tags = UserTagSerializer(many=True, source='selecttag_set')
-    ribbons = UserRibbonSerializer(many=True, source='userribbon_set')
+    currentRibbon = serializers.CharField(source='userribbon_set.last.current_ribbon')
 
     class Meta:
         model = User
         fields = (
             'email',
             'gender',
+            'currentRibbon',
             'sendMeLikeUsers',
             'images',
             'info',
             'stories',
             'tags',
-            'ribbons',
         )
