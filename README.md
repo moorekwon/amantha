@@ -769,15 +769,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
         "content": "네모네모 로직"
     }
     ```
-    
-    
-    
-    ```json
-    {
-    	"story": 3,
-        "content": "네모네모 로직"
-    }
-    ```
 
 - Response Sample
 
@@ -827,6 +818,12 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   ```json
 "해당 스토리가 삭제되었습니다."
+  ```
+  
+  
+  
+  ```json
+  "해당 스토리가 삭제되었습니다."
   ```
 
 
