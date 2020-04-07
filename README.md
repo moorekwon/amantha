@@ -928,7 +928,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  currentRibbon(현재보유리본), when(날짜) 정보는 알아서 추가됨
+  paidRibbon(지급리본), currentRibbon(현재보유리본), when(날짜) 정보는 알아서 추가됨
 
   ```json
   {
