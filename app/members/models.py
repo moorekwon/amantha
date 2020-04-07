@@ -159,14 +159,14 @@ class UserInfo(models.Model):
     # 유저의 현재 프로필 완성도
     def profile_percentage(self):
         story = self.user.selectstory_set.all()
-        # date_style =
-        # life_style =
-        # charm =
-        # relationship_style =
+        date_style = self.user.selecttag_set.all()
+        life_style = self.user.selecttag_set.all()
+        charm = self.user.selecttag_set.all()
+        relationship_style = self.user.selecttag_set.all()
 
         info_list = [self.job, self.company, self.school, self.region, self.body_shape, self.major, self.tall,
                      self.personality, self.blood_type, self.drinking, self.smoking, self.religion, self.introduce,
-                     story]
+                     story, date_style, life_style, charm, relationship_style]
 
         return_list = []
         for infos in info_list:
@@ -178,7 +178,7 @@ class UserInfo(models.Model):
         if sum(return_list) == 0:
             profile_percentage = 0
         else:
-            profile_percentage = format(sum(return_list) / len(return_list) * 100, '.2f')
+            profile_percentage = format(sum(return_list) / len(return_list) * 100, '.1f')
         return profile_percentage
 
 
@@ -243,11 +243,10 @@ class SelectTag(models.Model):
 # 첫 유저 생성 시 바로 생성되어야 함 (default 값으로)
 class UserRibbon(models.Model):
     WHERE = (
-        ('관리자 기본 지급', '관리자 기본 지급'),
-        ('회원심사 리본 지급', '회원심사 리본 지급'),
-        ('상위 10% 이성(무료)', '상위 10% 이성(무료)'),
-        ('테마 소개 프로필 확인', '테마 소개 프로필 확인'),
-        ('아만다 픽 프로필 확인', '아만다 픽 프로필 확인'),
+        (1, '아만다 픽 프로필 확인'),
+        (2, '회원심사 리본 지급'),
+        (3, '상위 10% 이성(무료)'),
+        (4, '테마 소개 프로필 확인'),
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)

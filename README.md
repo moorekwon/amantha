@@ -250,7 +250,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `GET`
 
-- **User별 Image, Info, Story, Tag, Ribbon 정보들 전체 표시**
+- **User별 Image, Info, Story, Tag 정보, 보유 ribbon, 등 전체 정보 표시**
 
 - Request Sample
 
@@ -276,13 +276,15 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  *tags, ribbons 부분은 추후 업데이트*
+  *tags 부분 추후 업데이트*
   
   ```json
   {
       "userProfile": {
           "email": "esb@esb.com",
           "gender": "여자",
+          "currentRibbon": 10,
+          "profilePercentage": 71.4,
           "sendMeLikeUsers": [
               "hgo@hgo.com",
               "hbb@hbb.com"
@@ -332,13 +334,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
                   "content": "조용한 카페"
               }
           ],
-          "tags": [],
-          "ribbons": {
-          	"pk": 2,
-          	"ribbon": 10,
-          	"when": "2020-04-06 15:47",
-          	"where": "관리자 기본 지급"
-      	}
+          "tags": []
       }
   }
   ```
@@ -537,9 +533,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - Body
 
-    - 필수 정보: `nickname`
+    - 필수 정보: `nickname`, `birth`
 
-    - 옵션 정보: `school`, `major`, `job`, `company`, `region`, `birth`, `tall`, `bodyShape`, `personality`, `bloodType`, `smoking`, `drinking`, `introduce`, `religion`
+    - 옵션 정보: `school`, `major`, `job`, `company`, `region`, `tall`, `bodyShape`, `personality`, `bloodType`, `smoking`, `drinking`, `introduce`, `religion`
     - 고정된 value를 가진 정보 ***(접근 변경 필요할 경우 반영하여 업데이트)***
       - 아래 정해진 값들만 넣을 수 있도록 str 형태의 값들로 이루어진 list로 고정시켜 놓았음
       - `region`: 서울, 경기, 인천, 대전, 충북, 충남, 강원, 부산, 경북, 경남, 대구, 울산, 광주, 전북, 전남, 제주
@@ -548,7 +544,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
       - `bloodType`: AB형, A형, B형, O형
       - `drinking`: 가끔 마심, 어느정도 즐기는편, 술자리를 즐김, 마시지 않음
       - `smoking`: 흡연, 비흡연
-  - `religion`: 종교 없음, 기독교, 천주교, 불교, 원불교, 유교, 이슬람교
+      - `religion`: 종교 없음, 기독교, 천주교, 불교, 원불교, 유교, 이슬람교
     
     - ***multi choice 정보(필드)들은 추후 업데이트 (현재는 모두 복수 선택 불가능)***
   - ***필수 정보로 바꾸고 싶은 부분 반영하여 업데이트 가능***
@@ -556,10 +552,10 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     ```json
     {
     	"nickname": "권효진",
+        "birth": "1995-02-11",
     	"major": "경영학전공",
     	"job": "백엔드 개발자",
     	"company": "아마존",
-    	"birth": "1995-02-11",
     	"bodyShape": "보통체형",
     	"personality": "차분한",
     	"blooType": "AB형",
@@ -575,7 +571,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "info": {
-          "pk": 2,
           "averageStar": 3.1,
           "nickname": "권효진",
           "school": "",
@@ -644,7 +639,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "info": {
-          "pk": 2,
           "averageStar": 3.3,
           "nickname": "권효진",
           "school": "",
@@ -710,7 +704,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "gender": "여자"
       },
       "info": {
-          "pk": 2,
           "averageStar": 3.5,
           "nickname": "권효진",
           "school": "",
@@ -885,6 +878,124 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Ribbon
+### User Ribbon Add
 
-*추후 업데이트*
+- URL: `/user/ribbon/`
+
+- Method: `POST`
+
+- 해당 유저의 리본사용내역 추가
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/ribbon/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    where 정보의 value는 아래 str 형태의 값들로 이루어진 list로 고정됨 ***(추후 value 추가 예정)***
+
+    - `where`: (1, 아만다 픽 프로필 확인), (2, 회원심사 리본 지급), (3, 상위 10% 이성 (무료)), (4, 테마 소개 프로필 확인)
+    - 각각 str 값(오른쪽)을 int 값(왼쪽)과 연결하여 숫자 형태로 접근하도록 함 ***(접근 변경 필요할 경우 반영하여 업데이트)***
+
+    ```json
+    {
+        "paidRibbon": -3,
+        "where": 3
+    }
+    ```
+
+- Response Sample
+
+  currentRibbon(현재보유리본), when(날짜) 정보는 알아서 추가됨
+
+  ```json
+  {
+      "ribbon": {
+          "pk": 2,
+          "paidRibbon": -3,
+          "currentRibbon": 7,
+          "when": "2020-04-08 01:07",
+          "where": 3
+      }
+  }
+  ```
+
+
+
+### User Ribbon History
+
+- URL: `/user/ribbon/`
+
+- Method: `GET`
+
+- 처음 토큰이 생성되면(계정 생성하면), 관리자 기본 지급으로 리본 10개 생성(obj)
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/ribbon/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+- Response Sample
+
+  User의 계정 정보와 현재까지 리본 사용내역 객체별로 정보 표시
+
+  ```json
+  {
+      "user": {
+          "pk": 1,
+          "email": "hjk@hjk.com",
+          "gender": "여자"
+      },
+      "ribbons": [
+          {
+              "pk": 1,
+              "paidRibbon": 10,
+              "currentRibbon": 10,
+              "when": "2020-04-07 19:52",
+              "where": "관리자 기본 지급"
+          },
+          {
+              "pk": 2,
+              "paidRibbon": -3,
+              "currentRibbon": 7,
+              "when": "2020-04-08 01:07",
+              "where": 3
+          }
+      ]
+  }
+  ```

@@ -70,7 +70,6 @@ class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserInfo
         fields = (
-            'pk',
             'averageStar',
             'nickname',
             'school',
@@ -133,7 +132,7 @@ class UserRibbonSerializer(serializers.ModelSerializer):
 
 # 유저의 전체프로필 정보 (조회용)
 class UserProfileSerializer(serializers.ModelSerializer):
-    currentRibbon = serializers.CharField(source='userribbon_set.last.current_ribbon')
+    currentRibbon = serializers.IntegerField(source='userribbon_set.last.current_ribbon')
     profilePercentage = serializers.FloatField(source='userinfo.profile_percentage')
     sendMeLikeUsers = serializers.ListField(
         child=serializers.CharField(), source='send_me_like_users.all'
