@@ -634,16 +634,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
         "introduce": "만나서 반가워요 ㅎㅎ"
     }
     ```
-    
-    
-    
-    ```json
-    {
-    	"region": "서울",
-    	"drinking": "가끔 마심",
-    	"introduce": "만나서 반가워요 ㅎㅎ"
-    }
-    ```
 
 - Response Sample
 
@@ -773,6 +763,15 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     - `story`: (1, 이상적인 첫 소개팅 장소), (2, 내 외모중 가장 마음에 드는 곳은), (3, 남들보다 이것 하나는 자신있어요)
     - 각각 str 값(오른쪽)을 int 값(왼쪽)과 연결하여 숫자 형태로 접근하도록 함 ***(접근 변경 필요할 경우 반영하여 업데이트)***
 
+    ```json
+    {
+        "story": 3,
+        "content": "네모네모 로직"
+    }
+    ```
+    
+    
+    
     ```json
     {
     	"story": 3,
