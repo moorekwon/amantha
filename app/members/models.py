@@ -258,6 +258,11 @@ class UserRibbon(models.Model):
 
     # 첫 관리자 기본 지급 제외, 리본 지급 추가때마다 이전 current_ribbon에서 현재 paid_ribbon을 빼 현재 current_ribbon에 저장
     def save(self, *args, **kwargs):
+        # where의 각 인덱스별 paid_ribbon 지정
+        pay = [-3, -5, -5, -7]
+        rib = pay[int(self.where) - 1]
+        self.paid_ribbon = rib
+
         ribbons = UserRibbon.objects.filter(user=self.user)
         if len(ribbons) == 0:
             pass

@@ -914,11 +914,14 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     where 정보의 value는 아래 str 형태의 값들로 이루어진 list로 고정됨 ***(추후 value 추가 예정)***
 
     - `where`: (1, 아만다 픽 프로필 확인), (2, 회원심사 리본 지급), (3, 상위 10% 이성 (무료)), (4, 테마 소개 프로필 확인)
+    - `paidRibbon`: (1, -3), (2, -5), (3, -5), (4, -7)
+      - 왼쪽 int 값이 `where`의 왼쪽 int 값과 연결됨, 각각의 지급 리본 수를 나타냄 ***(지급 리본 수 임의로 설정)***
+      - 직접 입력할 필요 없음
+
     - 각각 str 값(오른쪽)을 int 값(왼쪽)과 연결하여 숫자 형태로 접근하도록 함 ***(접근 변경 필요할 경우 반영하여 업데이트)***
 
     ```json
     {
-        "paidRibbon": -3,
         "where": 3
     }
     ```
@@ -931,7 +934,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   {
       "ribbon": {
           "pk": 2,
-          "paidRibbon": -3,
+          "paidRibbon": -5,
           "currentRibbon": 7,
           "when": "2020-04-08 01:07",
           "where": 3
@@ -992,8 +995,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           },
           {
               "pk": 2,
-              "paidRibbon": -3,
-              "currentRibbon": 7,
+              "paidRibbon": -5,
+              "currentRibbon": 5,
               "when": "2020-04-08 01:07",
               "where": 3
           }
