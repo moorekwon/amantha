@@ -547,7 +547,25 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
       - `religion`: 종교 없음, 기독교, 천주교, 불교, 원불교, 유교, 이슬람교
     
     - ***multi choice 정보(필드)들은 추후 업데이트 (현재는 모두 복수 선택 불가능)***
+    
   - ***필수 정보로 바꾸고 싶은 부분 반영하여 업데이트 가능***
+    
+    ```json
+    {
+        "nickname": "권효진",
+        "birth": "1995-02-11",
+        "major": "경영학전공",
+        "job": "백엔드 개발자",
+        "company": "아마존",
+        "bodyShape": "보통체형",
+        "personality": "차분한",
+        "bloodType": "AB형",
+        "smoking": "비흡연",
+        "introduce": "안녕하세요 ^^"
+    }
+    ```
+    
+    
     
     ```json
     {
