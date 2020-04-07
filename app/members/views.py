@@ -24,9 +24,8 @@ class CreateUserAPIView(APIView):
 
         if serializer.is_valid():
             user = serializer.save()
+            # 계정 생성 시 리본 기본 지급
             UserRibbon.objects.create(user=user)
-            print('bool(ribbons) >> ', bool(user.userribbon_set))
-            print('user.userribbon_set >> ', user.userribbon_set)
 
             token = Token.objects.create(user=user)
 
@@ -64,6 +63,10 @@ class AuthTokenAPIView(APIView):
         user = authenticate(email=email, password=password)
 
         if user:
+            # createsuperuser 경우, 로그인 시 리본 기본 지급 설정
+            # superuser는 로그인 POST 하기 전까지 logout 상태 (자동 로그인 x)
+            if not len(user.userribbon_set.all()):
+                UserRibbon.objects.create(user=user)
             token, _ = Token.objects.get_or_create(user=user)
         else:
             raise AuthenticationFailed('존재하지 않는 email 입니다.')
@@ -88,10 +91,13 @@ class LogoutUserAPIView(APIView):
 class UserProfileAPIView(APIView):
     def get(self, request):
         user = request.user
-        data = {
-            'userProfile': UserProfileSerializer(user).data,
-        }
-        return Response(data)
+
+        if Token.objects.filter(user=user):
+            data = {
+                'userProfile': UserProfileSerializer(user).data,
+            }
+            return Response(data)
+        return Response('로그인부터 해주십시오.')
 
 
 class UserImageAPIView(APIView):

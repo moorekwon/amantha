@@ -133,6 +133,8 @@ class UserRibbonSerializer(serializers.ModelSerializer):
 
 # 유저의 전체프로필 정보 (조회용)
 class UserProfileSerializer(serializers.ModelSerializer):
+    currentRibbon = serializers.CharField(source='userribbon_set.last.current_ribbon')
+    profilePercentage = serializers.FloatField(source='userinfo.profile_percentage')
     sendMeLikeUsers = serializers.ListField(
         child=serializers.CharField(), source='send_me_like_users.all'
     )
@@ -140,7 +142,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
     tags = UserTagSerializer(many=True, source='selecttag_set')
-    currentRibbon = serializers.CharField(source='userribbon_set.last.current_ribbon')
 
     class Meta:
         model = User
@@ -148,6 +149,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'email',
             'gender',
             'currentRibbon',
+            'profilePercentage',
             'sendMeLikeUsers',
             'images',
             'info',

@@ -47,6 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     like_users = models.ManyToManyField('self', through='SendLike', related_name='send_me_like_users',
                                         symmetrical=False)
 
+    # 유저의 현재 평균 별점
     def average_star(self):
         partners = self.partner_sendstar_set.all()
         print('partners >> ', partners)
@@ -58,6 +59,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             print(0)
             return 0
 
+    # 유저의 현재 나이
     def age(self):
         today = datetime.date.today()
         today_year = str(today).split('-')[0]
@@ -65,9 +67,6 @@ class User(AbstractBaseUser, PermissionsMixin):
             birth_year = str(self.userinfo.birth).split('-')[0]
             return int(today_year) - int(birth_year) + 1
         return None
-
-    def profile_percentage(self):
-        pass
 
 
 # 유저 생성 후 기입할 프로필 정보
@@ -145,18 +144,42 @@ class UserInfo(models.Model):
     job = models.CharField(max_length=50, blank=True)
     company = models.CharField(max_length=60, blank=True)
     school = models.CharField(max_length=50, blank=True)
-    birth = models.DateField(blank=True, null=True)
+    birth = models.DateField(blank=False)
     region = models.CharField(choices=REGION, max_length=30, blank=True)
     body_shape = models.CharField(choices=BODY_SHAPE, blank=True, max_length=50)
     major = models.CharField(max_length=50, blank=True)
     tall = models.CharField(choices=((str(x), x) for x in range(140, 200)), max_length=10, blank=True)
-    # personality = MultipleChoiceField(choices=PERSONALITY)
     personality = models.CharField(choices=PERSONALITY, blank=True, max_length=100)
     blood_type = models.CharField(choices=BLOOD_TYPE, max_length=30, blank=True)
     drinking = models.CharField(choices=DRINKING, max_length=60, blank=True)
     smoking = models.CharField(choices=SMOKING, max_length=60, blank=True)
     religion = models.CharField(choices=RELIGION, max_length=60, blank=True)
     introduce = models.CharField(max_length=150, blank=True)
+
+    # 유저의 현재 프로필 완성도
+    def profile_percentage(self):
+        story = self.user.selectstory_set.all()
+        # date_style =
+        # life_style =
+        # charm =
+        # relationship_style =
+
+        info_list = [self.job, self.company, self.school, self.region, self.body_shape, self.major, self.tall,
+                     self.personality, self.blood_type, self.drinking, self.smoking, self.religion, self.introduce,
+                     story]
+
+        return_list = []
+        for infos in info_list:
+            if not infos:
+                return_list.append(0)
+            else:
+                return_list.append(1)
+
+        if sum(return_list) == 0:
+            profile_percentage = 0
+        else:
+            profile_percentage = format(sum(return_list) / len(return_list) * 100, '.2f')
+        return profile_percentage
 
 
 # 별점 주기
