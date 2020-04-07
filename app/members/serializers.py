@@ -121,7 +121,7 @@ class UserRibbonSerializer(serializers.ModelSerializer):
         model = UserRibbon
         fields = (
             'pk',
-            'ribbon',
+            'paid_ribbon',
             'when',
             'where',
         )
@@ -136,7 +136,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
     tags = UserTagSerializer(many=True, source='selecttag_set')
-    ribbons = UserRibbonSerializer(source='userribbon.ribbon')
+    ribbons = UserRibbonSerializer(many=True, source='userribbon_set')
 
     class Meta:
         model = User

@@ -25,7 +25,9 @@ class CreateUserAPIView(APIView):
         if serializer.is_valid():
             user = serializer.save()
             UserRibbon.objects.create(user=user)
-            print('user.userribbon.ribbon >> ', user.userribbon.ribbon)
+            print('bool(ribbons) >> ', bool(user.userribbon_set))
+            print('user.userribbon_set >> ', user.userribbon_set)
+
             token = Token.objects.create(user=user)
 
             data = {
@@ -235,11 +237,7 @@ class UserRibbonAPIView(APIView):
         user = request.user
         ribbons = UserRibbon.objects.filter(user=user)
 
-        if ribbons:
-            serializer = UserRibbonSerializer(ribbons[0])
-        else:
-            UserRibbon.objects.create(user=user)
-            serializer = UserRibbonSerializer(ribbons)
+        serializer = UserRibbonSerializer(ribbons, many=True)
 
         data = {
             'user': UserAccountSerializer(user).data,
@@ -248,7 +246,17 @@ class UserRibbonAPIView(APIView):
         return Response(data)
 
     def post(self, request):
-        pass
+        user = request.user
+        serializer = UserRibbonSerializer(data=request.data)
+
+        if serializer.is_valid():
+            ribbon = serializer.save(user=user)
+
+            data = {
+                'ribbon': UserRibbonSerializer(ribbon).data,
+            }
+            return Response(data)
+        return Response(serializer.errors)
 
 
 # class UserTagAPIView(APIView):

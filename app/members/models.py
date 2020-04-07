@@ -230,15 +230,15 @@ class UserRibbon(models.Model):
         ('아만다 픽 프로필 확인', '아만다 픽 프로필 확인'),
     )
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    ribbon = models.PositiveIntegerField(default=10)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    paid_ribbon = models.IntegerField(default=10)
     when = models.DateTimeField(auto_now=True)
     where = models.CharField(choices=WHERE, max_length=60, default='관리자 기본 지급')
 
     def add_subtract(self):
         pass
 
-    def accumulate(self):
+    def current_ribbon(self):
         pass
 
 
