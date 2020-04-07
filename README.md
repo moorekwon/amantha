@@ -564,23 +564,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
         "introduce": "안녕하세요 ^^"
     }
     ```
-    
-    
-    
-    ```json
-    {
-    	"nickname": "권효진",
-        "birth": "1995-02-11",
-    	"major": "경영학전공",
-    	"job": "백엔드 개발자",
-    	"company": "아마존",
-    	"bodyShape": "보통체형",
-    	"personality": "차분한",
-    	"blooType": "AB형",
-    	"smoking": "비흡연",
-    	"introduce": "안녕하세요 ^^"
-    }
-    ```
 
 - Response Sample
 
@@ -644,6 +627,16 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - Body
 
+    ```json
+    {
+        "region": "서울",
+        "drinking": "가끔 마심",
+        "introduce": "만나서 반가워요 ㅎㅎ"
+    }
+    ```
+    
+    
+    
     ```json
     {
     	"region": "서울",
