@@ -1,15 +1,17 @@
 server {
-    listen              8000;
+    listen                  8000;
 
-    server_name         localhost;
+    server_name             localhost;
 
-    charset             utf-8;
+    charset                 utf-8;
+
+    client_max_body_size    8M;
 
     location / {
-        proxy_pass      http://unix:/run/amantha.sock;
+        proxy_pass          http://unix:/run/amantha.sock;
     }
 
     location /static/ {
-        alias           /srv/amantha/.static/;
+        alias               /srv/amantha/.static/;
     }
 }
