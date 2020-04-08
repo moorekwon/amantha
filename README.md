@@ -377,16 +377,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     **form-data** 체크, KEY에서 **File** 체크, VALUE에서 이미지 파일 선택 ***(POSTMAN에서는 파일이름이 한글일 경우 에러가 뜸..)***
 
-    |      |      |      |
-  | ---- | ---- | ---- |
-    |      |      |      |
-    |      |      |      |
-    |      |      |      |
-    
-    
-    
     | KEY    | VALUE     |
-    | ------ | --------- |
+  | ------ | --------- |
     | images | hjk2.jpeg |
     | images | hjk.jpg   |
   
