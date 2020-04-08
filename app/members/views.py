@@ -99,7 +99,7 @@ class UserProfileAPIView(APIView):
                 'userProfile': UserProfileSerializer(user).data,
             }
             return Response(data)
-        return Response('로그인부터 해주십시오.')
+        return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
 
 class UserImageAPIView(APIView):
