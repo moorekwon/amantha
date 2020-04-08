@@ -1,5 +1,5 @@
 import requests
-from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.shortcuts import render
 
@@ -9,8 +9,6 @@ from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-# from config.settings.dev_hj import SECRETS
 
 from members.serializers import *
 
@@ -25,7 +23,7 @@ class CreateUserAPIView(APIView):
         if serializer.is_valid():
             user = serializer.save()
             # 계정 생성 시 리본 기본 지급
-            UserRibbon.objects.create(user=user)
+            UserRibbon.objects.create(user=user, paid_ribbon=10, current_ribbon=10)
 
             token = Token.objects.create(user=user)
 
@@ -66,7 +64,7 @@ class AuthTokenAPIView(APIView):
             # createsuperuser 경우, 로그인 시 리본 기본 지급 설정
             # superuser는 로그인 POST 하기 전까지 logout 상태 (자동 로그인 x)
             if not len(user.userribbon_set.all()):
-                UserRibbon.objects.create(user=user)
+                UserRibbon.objects.create(user=user, paid_ribbon=10, current_ribbon=10)
             token, _ = Token.objects.get_or_create(user=user)
         else:
             raise AuthenticationFailed('존재하지 않는 email 입니다.')
@@ -85,8 +83,7 @@ class LogoutUserAPIView(APIView):
         token = Token.objects.filter(user=user)
 
         if not token:
-            print('유후')
-            return Response('인증 토큰이 없는 유저입니다.')
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
         token.delete()
         return Response('로그아웃 되었습니다.')
@@ -102,7 +99,7 @@ class UserProfileAPIView(APIView):
                 'userProfile': UserProfileSerializer(user).data,
             }
             return Response(data)
-        return Response('로그인부터 해주십시오.')
+        return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
 
 class UserImageAPIView(APIView):
@@ -187,8 +184,13 @@ class UserInfoAPIView(APIView):
 
     # 상세프로필 수정
     def patch(self, request):
-        info = UserInfo.objects.get(user=request.user)
-        serializer = UserInfoSerializer(info, data=request.data, partial=True)
+        info = UserInfo.objects.filter(user=request.user)
+        print('info >> ', info)
+
+        if not info:
+            return Response('등록된 프로필 정보가 없습니다. 프로필을 생성해 주세요.')
+
+        serializer = UserInfoSerializer(info[0], data=request.data, partial=True)
 
         if serializer.is_valid():
             info = serializer.save()
@@ -222,8 +224,41 @@ class UserStoryAPIView(APIView):
         user = request.user
         serializer = UserStorySerializer(data=request.data)
 
+        user_stories = user.selectstory_set.all()
+        user_story_numbers = set()
+        # 현재 유저가 등록한 스토리 번호 불러와 저장
+        for user_story in user_stories:
+            user_story_numbers.add(user_story.story)
+
+        # POST 요청한 스토리 번호가 이미 등록된 스토리일 경우, response 메시지
+        if str(request.data['story']) in user_story_numbers:
+            return Response('이미 등록되어있는 스토리 입니다.')
+
         if serializer.is_valid():
             story = serializer.save(user=user)
+
+            data = {
+                'story': UserStorySerializer(story).data,
+            }
+            return Response(data)
+        return Response(serializer.errors)
+
+    # 현재 유저의 등록되어있는 스토리에 접근하여 content 수정
+    def patch(self, request):
+        user = request.user
+        story = request.data['story']
+
+        user_stories = SelectStory.objects.filter(user=user, story=story)
+
+        if not user_stories:
+            return Response('등록되어있지 않은 스토리 입니다.')
+
+        # 아래 코드는 user_stories의 마지막번째를 불러옴
+        # 어차피 user_stories는 한 개밖에 없을 것이기 때문에, user_stories[0]을 불러와도 상관은 없을 것임
+        serializer = UserStorySerializer(user_stories[len(user_stories) - 1], data=request.data)
+
+        if serializer.is_valid():
+            story = serializer.save()
 
             data = {
                 'story': UserStorySerializer(story).data,
@@ -246,6 +281,11 @@ class UserRibbonAPIView(APIView):
     # User별 보유리본 조회
     def get(self, request):
         user = request.user
+        token = Token.objects.filter(user=user)
+
+        if not token:
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
         ribbons = UserRibbon.objects.filter(user=user)
 
         serializer = UserRibbonSerializer(ribbons, many=True)
@@ -259,6 +299,10 @@ class UserRibbonAPIView(APIView):
     def post(self, request):
         user = request.user
         serializer = UserRibbonSerializer(data=request.data)
+
+        # 보유 리본이 부족할 경우 response
+        if user.userribbon_set.last().current_ribbon + request.data['paidRibbon'] < 0:
+            return Response('보유 리본이 부족합니다.')
 
         if serializer.is_valid():
             ribbon = serializer.save(user=user)
@@ -304,68 +348,67 @@ class UserRibbonAPIView(APIView):
 #             return Response(data)
 #         return Response(serializer.errors)
 
-#
-# # 카카오톡 로그인 페이지
-# def KaKaoTemplate(request):
-#     return render(request, 'kakao.html')
-#
-#
-# # 카카오톡 로그인
+
+# 카카오톡 로그인 페이지
+def KaKaoTemplate(request):
+    return render(request, 'kakao.html')
+
+# 카카오톡 로그인
 # class KaKaoLoginAPIView(APIView):
-#     # iOS 부분
-#     def get(self, request):
-#         app_key = SECRETS['KAKAO_APP_KEY']
-#         kakao_access_code = request.GET.get('code', None)
-#         url = SECRETS['KAKAO_URL']
-#         headers = {
-#             'Content-type': SECRETS['KAKAO_CONTENT_TYPE']
-#         }
+# iOS 부분
+# def get(self, request):
+#     app_key = SECRETS['KAKAO_APP_KEY']
+#     kakao_access_code = request.GET.get('code', None)
+#     url = SECRETS['KAKAO_URL']
+#     headers = {
+#         'Content-type': SECRETS['KAKAO_CONTENT_TYPE']
+#     }
 #
-#         data = {
-#             'grant_type': 'authorization_code',
-#             'client_id': app_key,
-#             'redirect_uri': SECRETS['KAKAO_REDIRECT_URI'],
-#             'code': kakao_access_code,
-#         }
+#     data = {
+#         'grant_type': 'authorization_code',
+#         'client_id': app_key,
+#         'redirect_uri': SECRETS['KAKAO_REDIRECT_URI'],
+#         'code': kakao_access_code,
+#     }
 #
-#         kakao_response = requests.post(url, headers=headers, data=data)
-#         return Response(f'{kakao_response.text}')
+#     kakao_response = requests.post(url, headers=headers, data=data)
+#     return Response(f'{kakao_response.text}')
+
+# 액세스 토큰 받아 가입 혹은 로그인 처리
+# def post(self, request):
+#     access_token = request.data['accessToken']
+#     gender = request.data['gender']
+#     me_url = SECRETS['KAKAO_ME_URL']
+#     me_headers = {
+#         'Authorization': f'Bearer {access_token}',
+#         'Content-type': SECRETS['KAKAO_CONTENT_TYPE']
+#     }
+#     me_response = requests.get(me_url, headers=me_headers)
+#     me_response_data = me_response.json()
 #
-#     # 액세스 토큰 받아 가입 혹은 로그인 처리
-#     def post(self, request):
-#         access_token = request.data['accessToken']
-#         gender = request.data['gender']
-#         me_url = SECRETS['KAKAO_ME_URL']
-#         me_headers = {
-#             'Authorization': f'Bearer {access_token}',
-#             'Content-type': SECRETS['KAKAO_CONTENT_TYPE']
-#         }
-#         me_response = requests.get(me_url, headers=me_headers)
-#         me_response_data = me_response.json()
+#     # 카카오톡 계정의 이메일로 user의 email 생성
+#     kakao_email = me_response_data['kakao_account']['email']
 #
-#         # 카카오톡 계정의 이메일로 user의 email 생성
-#         kakao_email = me_response_data['kakao_account']['email']
+#     if not User.objects.filter(email=kakao_email).exists():
+#         user = User.objects.create_user(email=kakao_email, gender=gender)
+#         token = Token.objects.create(user=user)
+#     else:
+#         user = User.objects.get(email=kakao_email, gender=gender)
+#         token, _ = Token.objects.get_or_create(user=user)
 #
-#         if not User.objects.filter(email=kakao_email).exists():
-#             user = User.objects.create_user(email=kakao_email, gender=gender)
-#             token = Token.objects.create(user=user)
-#         else:
-#             user = User.objects.get(email=kakao_email, gender=gender)
-#             token, _ = Token.objects.get_or_create(user=user)
+#     # 카카오톡 계정의 고유 id로 user의 username 생성
+#     # kakao_id = me_response_data['id']
+#     # kakao_username = f'n_{kakao_id}'
+#     #
+#     # if not User.objects.filter(username=kakao_username).exists():
+#     #     user = User.objects.create_user(username=kakao_username)
+#     #     token = Token.objects.create(user=user)
+#     # else:
+#     #     user = User.objects.get(username=kakao_username)
+#     #     token, _ = Token.objects.get_or_create(user=user)
 #
-#         # 카카오톡 계정의 고유 id로 user의 username 생성
-#         # kakao_id = me_response_data['id']
-#         # kakao_username = f'n_{kakao_id}'
-#         #
-#         # if not User.objects.filter(username=kakao_username).exists():
-#         #     user = User.objects.create_user(username=kakao_username)
-#         #     token = Token.objects.create(user=user)
-#         # else:
-#         #     user = User.objects.get(username=kakao_username)
-#         #     token, _ = Token.objects.get_or_create(user=user)
-#
-#         data = {
-#             'user': KakaoUserSerializer(user).data,
-#             'token': token.key
-#         }
-#         return Response(data)
+#     data = {
+#         'user': KakaoUserSerializer(user).data,
+#         'token': token.key
+#     }
+#     return Response(data)

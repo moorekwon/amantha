@@ -242,33 +242,36 @@ class SelectTag(models.Model):
 # 리본 사용
 # 첫 유저 생성 시 바로 생성되어야 함 (default 값으로)
 class UserRibbon(models.Model):
-    WHERE = (
-        (1, '관리자 기본 지급'),
-        (2, '아만다 픽 프로필 확인'),
-        (3, '회원심사 리본 지급'),
-        (4, '상위 10% 이성(무료)'),
-        (5, '테마 소개 프로필 확인'),
-    )
+    # WHERE = (
+    #     (1, '관리자 기본 지급'),
+    #     (2, '아만다 픽 프로필 확인'),
+    #     (3, '회원심사 리본 지급'),
+    #     (4, '상위 10% 이성(무료)'),
+    #     (5, '테마 소개 프로필 확인'),
+    # )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # paid_ribbon과 where를 연결시켜줘야 하는데...
-    paid_ribbon = models.IntegerField(default=10)
-    current_ribbon = models.PositiveIntegerField(default=10)
+    paid_ribbon = models.IntegerField()
+    current_ribbon = models.PositiveIntegerField()
     when = models.DateTimeField(auto_now=True)
-    where = models.CharField(choices=WHERE, max_length=60, default=1)
+
+    # where = models.CharField(choices=WHERE, max_length=60, default=1)
 
     # 첫 관리자 기본 지급 제외, 리본 지급 추가때마다 이전 current_ribbon에서 현재 paid_ribbon을 빼 현재 current_ribbon에 저장
     def save(self, *args, **kwargs):
         # where의 각 인덱스별 paid_ribbon 지정
-        pay = [10, -3, -5, -5, -7]
-        rib = pay[int(self.where) - 1]
-        self.paid_ribbon = rib
+        # pay = [10, -3, -5, -5, -7]
+        # rib = pay[int(self.where) - 1]
+        # self.paid_ribbon = rib
 
         ribbons = UserRibbon.objects.filter(user=self.user)
+
         if len(ribbons) == 0:
             pass
         else:
             pre = ribbons[len(ribbons) - 1]
+
             self.current_ribbon = pre.current_ribbon + self.paid_ribbon
         super().save(*args, **kwargs)
 

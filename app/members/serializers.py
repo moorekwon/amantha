@@ -116,7 +116,7 @@ class UserTagSerializer(serializers.ModelSerializer):
 
 # UserRibbon 필드정보
 class UserRibbonSerializer(serializers.ModelSerializer):
-    paidRibbon = serializers.IntegerField(source='paid_ribbon', read_only=True)
+    paidRibbon = serializers.IntegerField(source='paid_ribbon')
     currentRibbon = serializers.IntegerField(source='current_ribbon', read_only=True)
 
     class Meta:
@@ -126,7 +126,7 @@ class UserRibbonSerializer(serializers.ModelSerializer):
             'paidRibbon',
             'currentRibbon',
             'when',
-            'where',
+            # 'where',
         )
 
 

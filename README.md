@@ -277,7 +277,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 - Response Sample
 
   *tags 부분 추후 업데이트*
-  
+
   ```json
   {
       "userProfile": {
@@ -315,14 +315,14 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
               "major": "정치외교학과",
               "job": "회사원",
               "company": "외국계 회사",
-              "region": "서울",
+              "region": 1,
               "birth": "1995-04-30",
               "age": 26,
               "tall": "164",
-              "bodyShape": "보통체형",
-              "personality": "외향적인",
-              "bloodType": "B형",
-              "smoking": "비흡연",
+              "bodyShape": 1,
+              "personality": 2,
+              "bloodType": 1,
+              "smoking": 2,
               "drinking": "",
               "religion": "",
               "introduce": "안녕하세요 반가워요^^"
@@ -375,15 +375,13 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - Body
 
-    **form-data** 체크, KEY에서 **File** 체크, VALUE에서 이미지 파일 선택
+    **form-data** 체크, KEY에서 **File** 체크, VALUE에서 이미지 파일 선택 ***(POSTMAN에서는 파일이름이 한글일 경우 에러가 뜸..)***
 
-    ***(POSTMAN에서는 파일이름이 한글일 경우 에러가 뜸..)***
-  
     | KEY    | VALUE     |
     | ------ | --------- |
     | images | hjk2.jpeg |
     | images | hjk.jpg   |
-  
+
 - Response Sample
 
   ```json
@@ -536,20 +534,19 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     - 필수 정보: `nickname`, `birth`
 
     - 옵션 정보: `school`, `major`, `job`, `company`, `region`, `tall`, `bodyShape`, `personality`, `bloodType`, `smoking`, `drinking`, `introduce`, `religion`
-    - 고정된 value를 가진 정보 ***(접근 변경 필요할 경우 반영하여 업데이트)***
-      - 아래 정해진 값들만 넣을 수 있도록 str 형태의 값들로 이루어진 list로 고정시켜 놓았음
-      - `region`: 서울, 경기, 인천, 대전, 충북, 충남, 강원, 부산, 경북, 경남, 대구, 울산, 광주, 전북, 전남, 제주
-      - `bodyShape`: 보통체형, 통통한, 살짝볼륨, 글래머, 마른, 슬림탄탄
-      - `personality`: 지적인, 차분한, 유머있는, 낙천적인, 내향적인, 외향적인, 감성적인, 상냥한, 귀여운, 섹시한, 4차원인, 발랄한, 도도한
-      - `bloodType`: AB형, A형, B형, O형
-      - `drinking`: 가끔 마심, 어느정도 즐기는편, 술자리를 즐김, 마시지 않음
-      - `smoking`: 흡연, 비흡연
-      - `religion`: 종교 없음, 기독교, 천주교, 불교, 원불교, 유교, 이슬람교
-    
-    - ***multi choice 정보(필드)들은 추후 업데이트 (현재는 모두 복수 선택 불가능)***
-    
-  - ***필수 정보로 바꾸고 싶은 부분 반영하여 업데이트 가능***
-    
+    - 고정된 value를 가진 정보
+      - 아래 정해진 값들만 넣을 수 있도록 str 형태의 값들로 이루어진 list로 고정됨
+        - 각각 str 값(오른쪽)을 int 값(왼쪽)과 연결하여 숫자 형태로 접근하도록 함
+      - `region`: (1, '서울'), (2, '경기'), (3, '인천'), (4, '대전'), (5, '충북'), (6, '충남'), (7, '강원'), (8, '부산'), (9, '경북'), (10, '경남'), (11, '대구'), (12, '울산'), (13, '광주'), (14, '전북'), (15, '전남'), (16, '제주')
+      - `bodyShape`: (1, '보통체형'), (2, '통통한'), (3, '살짝볼륨'), (4, '글래머'), (5, '마른'), (6, '슬림탄탄')
+      - `personality`: (1, '지적인'), (2, '차분한'), (3, '유머있는'), (4, '낙천적인'), (5, '내향적인'), (6, '외향적인'), (7, '감성적인'), (8, '상냥한'), (9, '귀여운'), (10, '섹시한'), (11, '4차원인'), (12, '발랄한'), (13, '도도한')
+        - ***multi choice 정보(필드) 추후 업데이트 (현재는 모두 복수 선택 불가능)***
+      - `bloodType`: (1, 'AB형'), (2, 'A형'), (3, 'B형'), (4, 'O형')
+      - `drinking`: (1, '가끔 마심'), (2, '어느정도 즐기는편'), (3, '술자리를 즐김'), (4, '마시지 않음')
+      - `smoking`: (1, '흡연'), (2, '비흡연')
+      - `religion`: (1, '종교 없음'), (2, '기독교'), (3, '천주교'), (4, '불교'), (5, '원불교'), (6, '유교'), (7, '이슬람교')
+
+
     ```json
     {
         "nickname": "권효진",
@@ -557,10 +554,10 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
         "major": "경영학전공",
         "job": "백엔드 개발자",
         "company": "아마존",
-        "bodyShape": "보통체형",
-        "personality": "차분한",
-        "bloodType": "AB형",
-        "smoking": "비흡연",
+        "bodyShape": 1,
+        "personality": 2,
+        "bloodType": 1,
+        "smoking": 2,
         "introduce": "안녕하세요 ^^"
     }
     ```
@@ -582,10 +579,10 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "birth": "1995-02-11",
           "age": 26,
           "tall": "",
-          "bodyShape": "보통체형",
-          "personality": "차분한",
-          "bloodType": "AB형",
-          "smoking": "비흡연",
+          "bodyShape": 1,
+          "personality": 2,
+          "bloodType": 1,
+          "smoking": 2,
           "drinking": "",
           "religion": "",
           "introduce": "안녕하세요 ^^"
@@ -629,8 +626,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-        "region": "서울",
-        "drinking": "가끔 마심",
+        "region": 1,
+        "drinking": 1,
         "introduce": "만나서 반가워요 ㅎㅎ"
     }
     ```
@@ -646,15 +643,15 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "major": "경영학전공",
           "job": "백엔드 개발자",
           "company": "아마존",
-          "region": "서울",
+          "region": 1,
           "birth": "1995-02-11",
           "age": 26,
           "tall": "",
-          "bodyShape": "보통체형",
-          "personality": "차분한",
-          "bloodType": "AB형",
-          "smoking": "비흡연",
-          "drinking": "가끔 마심",
+          "bodyShape": 1,
+          "personality": 2,
+          "bloodType": 1,
+          "smoking": 2,
+          "drinking": 1,
           "religion": "",
           "introduce": "만나서 반가워요 ㅎㅎ"
       }
@@ -711,15 +708,15 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "major": "경영학전공",
           "job": "백엔드 개발자",
           "company": "아마존",
-          "region": "서울",
+          "region": 1,
           "birth": "1995-02-11",
           "age": 26,
           "tall": "",
-          "bodyShape": "보통체형",
-          "personality": "차분한",
-          "bloodType": "AB형",
-          "smoking": "비흡연",
-          "drinking": "가끔 마심",
+          "bodyShape": 1,
+          "personality": 2,
+          "bloodType": 1,
+          "smoking": 2,
+          "drinking": 1,
           "religion": "",
           "introduce": "만나서 반가워요 ㅎㅎ"
       }
@@ -758,10 +755,10 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - Body
 
-    story 정보의 value는 아래 str 형태의 값들로 이루어진 list로 고정됨 ***(추후 value 추가 예정)***
+    story 정보의 value는 아래 str 형태의 값들로 이루어진 list로 고정됨
 
+    - 각각 str 값(오른쪽)을 int 값(왼쪽)과 연결하여 숫자 형태로 접근하도록 함
     - `story`: (1, 이상적인 첫 소개팅 장소), (2, 내 외모중 가장 마음에 드는 곳은), (3, 남들보다 이것 하나는 자신있어요)
-    - 각각 str 값(오른쪽)을 int 값(왼쪽)과 연결하여 숫자 형태로 접근하도록 함 ***(접근 변경 필요할 경우 반영하여 업데이트)***
 
     ```json
     {
@@ -778,6 +775,59 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "pk": 2,
           "story": 3,
           "content": "네모네모 로직"
+      }
+  }
+  ```
+
+
+
+### User Story Update
+
+- URL: `/user/story/`
+
+- Method: `PATCH`
+
+- 해당 유저의 등록되어 있는 스토리 객체에 접근하여 `content`(스토리 답변) 수정
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/story/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: ycs@ycs.com
+       - Password: ycs
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    ```json
+    {
+        "story": 1,
+        "content": "조용한 식당"
+    }
+    ```
+
+- Response Sample
+
+  ```json
+  {
+      "story": {
+          "pk": 11,
+          "story": 1,
+          "content": "조용한 식당"
       }
   }
   ```
@@ -911,24 +961,15 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - Body
 
-    where 정보의 value는 아래 str 형태의 값들로 이루어진 list로 고정됨 ***(추후 value 추가 예정)***
-
-    - `where`: (1, 아만다 픽 프로필 확인), (2, 회원심사 리본 지급), (3, 상위 10% 이성 (무료)), (4, 테마 소개 프로필 확인)
-    - `paidRibbon`: (1, -3), (2, -5), (3, -5), (4, -7)
-      - 왼쪽 int 값이 `where`의 왼쪽 int 값과 연결됨, 각각의 지급 리본 수를 나타냄 ***(지급 리본 수 임의로 설정)***
-      - 직접 입력할 필요 없음
-
-    - 각각 str 값(오른쪽)을 int 값(왼쪽)과 연결하여 숫자 형태로 접근하도록 함 ***(접근 변경 필요할 경우 반영하여 업데이트)***
-
     ```json
     {
-        "where": 3
+        "paidRibbon": -5
     }
     ```
 
 - Response Sample
 
-  paidRibbon(지급리본), currentRibbon(현재보유리본), when(날짜) 정보는 알아서 추가됨
+  currentRibbon(현재보유리본), when(날짜) 정보는 알아서 추가됨
 
   ```json
   {
@@ -936,8 +977,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "pk": 2,
           "paidRibbon": -5,
           "currentRibbon": 7,
-          "when": "2020-04-08 01:07",
-          "where": 3
+          "when": "2020-04-08 01:07"
       }
   }
   ```
@@ -976,7 +1016,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  User의 계정 정보와 현재까지 리본 사용내역 객체별로 정보 표시
+  - User의 계정 정보와 현재까지 리본 사용내역 객체별로 정보 표시
+  - User의 계정이 처음 생성되면 paidRibbon, currentRibbon 10개씩 기본 지급 설정
 
   ```json
   {
@@ -990,15 +1031,13 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
               "pk": 1,
               "paidRibbon": 10,
               "currentRibbon": 10,
-              "when": "2020-04-07 19:52",
-              "where": "관리자 기본 지급"
+              "when": "2020-04-07 19:52"
           },
           {
               "pk": 2,
               "paidRibbon": -5,
               "currentRibbon": 5,
-              "when": "2020-04-08 01:07",
-              "where": 3
+              "when": "2020-04-08 01:07"
           }
       ]
   }
