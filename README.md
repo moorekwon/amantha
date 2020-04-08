@@ -762,8 +762,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     - 각각 str 값(오른쪽)을 int 값(왼쪽)과 연결하여 숫자 형태로 접근하도록 함
     - `story`: (1, 이상적인 첫 소개팅 장소), (2, 내 외모중 가장 마음에 드는 곳은), (3, 남들보다 이것 하나는 자신있어요)
 
-    - `story`: 
-    
     ```json
     {
         "story": 3,
@@ -816,6 +814,15 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
        | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
 
   - Body
+
+    ```json
+    {
+        "story": 1,
+        "content": "조용한 식당"
+    }
+    ```
+
+    
 
     ```json
     {
