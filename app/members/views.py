@@ -219,6 +219,17 @@ class UserStoryAPIView(APIView):
         user = request.user
         serializer = UserStorySerializer(data=request.data)
 
+        user_stories = user.selectstory_set.all()
+        user_story_numbers = set()
+
+        # 현재 유저가 등록한 스토리 번호 불러와 저장
+        for user_story in user_stories:
+            user_story_numbers.add(user_story.story)
+
+        # POST 요청한 스토리 번호가 이미 등록된 스토리일 경우, response 메시지
+        if str(request.data['story']) in user_story_numbers:
+            return Response('이미 등록되어있는 스토리 입니다.')
+
         if serializer.is_valid():
             story = serializer.save(user=user)
 
