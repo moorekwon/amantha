@@ -10,7 +10,7 @@ urlpatterns = [
     # POST 유저 로그아웃
     path('auth/logout/', LogoutUserAPIView.as_view()),
     # POST 유저 카카오톡 로그인
-    path('auth/kakao/', KaKaoLoginAPIView.as_view()),
+    # path('auth/kakao/', KaKaoLoginAPIView.as_view()),
 
     # 유저의 모든 상세프로필 정보 조회
     path('user/profile/', UserProfileAPIView.as_view()),
@@ -27,5 +27,5 @@ urlpatterns = [
     path('user/ribbon/', UserRibbonAPIView.as_view()),
 
     # 테스트용 template (카카오톡 로그인 페이지)
-    path('html/kakao/', KaKaoTemplate),
+    # path('html/kakao/', KaKaoTemplate),
 ]
