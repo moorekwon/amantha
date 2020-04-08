@@ -16,6 +16,11 @@ pillow = "^7.0.0"
 supervisor = "^4.1.0"
 requests = "^2.23.0"
 notebook = "^6.0.3"
+beautifulsoup4 = "^4.9.0"
+selenium = "^3.141.0"
+django-phone-field = "^1.8.0"
+django-phonenumber-field = "^4.0.0"
+phonenumbers = "^8.12.1"
 
 [tool.poetry.dev-dependencies]
 

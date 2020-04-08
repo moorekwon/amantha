@@ -1,0 +1,2668 @@
+<html><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="baidu-site-verification" content="M9qjBhZly2">
+
+  <meta name="subject" content="망고플레이트: 나만의 맛집 검색">
+  <meta name="description" content="솔직하고 거짓없는 리뷰로 나만의 맛집을 쉽고 빠르게 찾아보세요!">
+  <meta name="keywords" content="이태원, 홍대, 강남역, 가로수길, 신촌, 명동, 대학로, 연남동, 부산, 합정, 대구, 여의도, 건대, 광화문, 일산, 제주, 경리단길, 한남동, 삼청동, 대전, 종로, 서촌, 잠실, 사당역, 인천, 코엑스, 상수, 서래마을, 송도, 왕십리, 분당, 혜화, 고속터미널">
+
+  <meta property="og:url" content="https://www.mangoplate.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="망고플레이트: 나만의 맛집 검색">
+  <meta property="og:description" content="솔직하고 거짓없는 리뷰로 나만의 맛집을 쉽고 빠르게 찾아보세요!">
+  <meta property="og:image" content="https://s3-ap-northeast-1.amazonaws.com/mp.resources/meta_home_image.jpg">
+
+  <!-- Twitter Meta -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:site" content="@MangoPlate">
+<meta property="twitter:url" content="https://www.mangoplate.com/">
+<meta property="twitter:title" content="망고플레이트: 나만의 맛집 검색">
+<meta property="twitter:description" content="솔직하고 거짓없는 리뷰로 나만의 맛집을 쉽고 빠르게 찾아보세요!">
+<meta property="twitter:image" content="https://s3-ap-northeast-1.amazonaws.com/mp.resources/meta_home_image.jpg">
+
+  
+	<meta property="fb:app_id" content="476661545693695">
+	<meta property="al:ios:url" content="mangoplate://">
+	<meta property="al:ios:app_store_id" content="628509224">
+	<meta property="al:ios:app_name" content="MangoPlate">
+
+  <meta property="al:android:url" content="mangoplate://">
+	<meta property="al:android:package" content="com.mangoplate">
+	<meta property="al:android:app_name" content="MangoPlate">
+
+
+  <title>망고플레이트: 나만의 맛집 검색</title>
+
+  <link rel="stylesheet" media="screen" href="/assets/dist/home-842811949712dd7a487da086f15ac688abfcfd498d118e40a41c95365e3ebfcb.css">
+
+  <link rel="shortcut icon" href="/assets/favicon.ico">
+
+  <!-- alternate urls -->
+  <link rel="canonical" href="https://www.mangoplate.com">
+    <link rel="alternate" href="https://www.mangoplate.com/" hreflang="ko">
+    <link rel="alternate" href="https://www.mangoplate.com/en/" hreflang="en">
+    <link rel="alternate" href="https://www.mangoplate.com/zh/" hreflang="zh">
+
+  <script src="https://www.googletagservices.com/activeview/js/current/osd.js?cb=%2Fr20100101"></script><script src="https://cdn.ampproject.org/rtv/012003171848440/amp4ads-host-v0.js"></script><script src="https://securepubads.g.doubleclick.net/gpt/pubads_impl_rendering_2020032401.js"></script><script src="https://connect.facebook.net/ko_KR/sdk.js?hash=1462b04f973aeca3263d466a76aaa692&amp;ua=modern_es6" async="" crossorigin="anonymous"></script><script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://d31qbv1cthcecs.cloudfront.net/atrk.js"></script><script async="async" src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+
+  <script id="dfp_ads" type="application/json">[{"id":21,"platform":"web_desktop","page":"init","inventory":"all","sizes":null,"tag":"/395211568/init/desktop_all","enabled":true,"created_at":"2017-06-23T01:58:50.000+09:00","updated_at":"2018-11-16T17:06:11.000+09:00","args":{"display_type":{"value":"popup"}}},{"id":23,"platform":"web_desktop","page":"home","inventory":"card_list","sizes":[[728,90]],"tag":"/395211568/production/desktop-web.main.sections.atf","enabled":true,"created_at":"2017-06-23T01:59:45.000+09:00","updated_at":"2017-06-23T01:59:46.000+09:00","args":{"start":{"value":0}}},{"id":24,"platform":"web_desktop","page":"home","inventory":"card_list_btf","sizes":[[728,90]],"tag":"/395211568/production/desktop-web.main.sections.btf","enabled":true,"created_at":"2017-06-23T02:00:14.000+09:00","updated_at":"2017-06-23T02:00:15.000+09:00","args":{"start":{"value":2},"every":{"value":2}}},{"id":25,"platform":"web_mobile","page":"home","inventory":"card_list","sizes":[[320,100]],"tag":"/395211568/production/mobile-web.main.sections.atf","enabled":true,"created_at":"2017-06-23T02:00:36.000+09:00","updated_at":"2017-06-23T02:00:37.000+09:00","args":{"start":{"value":0}}},{"id":39,"platform":"web_mobile","page":"home","inventory":"card_list_btf","sizes":[[320,100]],"tag":"/395211568/production/mobile-web.main.sections.btf","enabled":true,"created_at":"2017-09-12T15:51:25.000+09:00","updated_at":"2017-09-12T15:51:25.000+09:00","args":{"start":{"value":2},"every":{"value":2}}},{"id":43,"platform":"web_mobile","page":"init","inventory":"all","sizes":null,"tag":"/395211568/init/mobile_all","enabled":true,"created_at":"2020-02-12T01:57:59.000+09:00","updated_at":"2020-03-23T00:29:37.000+09:00","args":{"display_type":{"value":"popup"},"display":{"value":"once"}}},{"id":53,"platform":"web_mobile","page":"init","inventory":"popop_use_app","sizes":null,"tag":"","enabled":true,"created_at":"2020-01-30T01:49:26.000+09:00","updated_at":"2020-03-06T12:00:28.000+09:00","args":{}},{"id":57,"platform":"web_mobile","page":"init","inventory":"area_use_app","sizes":null,"tag":"","enabled":true,"created_at":"2020-01-30T01:49:26.000+09:00","updated_at":"2020-03-06T12:22:14.000+09:00","args":{}}]</script>
+  <script id="location" type="application/json">{"ip":"220.117.71.145","country_code":"KR","country_name":"South Korea","region_code":"11","region_name":"Seoul","city":"Songpa-dong","zip_code":"05670","time_zone":"Asia/Seoul","latitude":37.5082,"longitude":127.1179,"metro_code":0}</script>
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "https://www.mangoplate.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.mangoplate.com/search/{search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+<link rel="preload" href="https://adservice.google.co.kr/adsid/integrator.js?domain=www.mangoplate.com" as="script"><script type="text/javascript" src="https://adservice.google.co.kr/adsid/integrator.js?domain=www.mangoplate.com"></script><link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=www.mangoplate.com" as="script"><script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=www.mangoplate.com"></script><script src="https://securepubads.g.doubleclick.net/gpt/pubads_impl_2020032401.js" async=""></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-37/html/container.html"><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#043b87;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}</style></head>
+
+<body class="home_page" onunload="" style="overflow: hidden;">
+
+<main class="pg-main">
+  <div class="black_screen"></div>
+  <article class="contents main-padding">
+    <header class="main-header" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/a4283e5725fb56755b9bbeb8f285d0dc.jpg');">
+      <div>
+  <p class="title">솔직한 리뷰, 믿을 수 있는 평점!</p>
+  <h1 class="title">망고플레이트</h1>
+  <p class="options">
+    <a href="#">Download app</a>
+    <a href="#">add/Claim restaurant</a>
+    <a href="#">Become a holic</a>
+  </p>
+
+  <fieldset class="main-search">
+    <legend>전체 검색</legend>
+
+    <label class="search-word" for="main-search">
+      <span class="icon">검색 :</span>
+      <input id="main-search" class="HomeSearchInput" name="main-search" type="text" maxlength="50" placeholder="지역, 식당 또는 음식" autocomplete="off" onclick="trackEvent('CLICK_SEARCH_MAIN')">
+      <span class="clear_btn">CLEAR</span>
+    </label>
+
+    <input class="btn-search" type="submit" value="검색" onclick="trackEvent('CLICK_KEYWORD_SEARCH');">
+  </fieldset>
+
+  <aside class="shortcut-app type-main">
+      <a class="btn inbound only-desktop " href="https://www.mangoplate.com/eat_deals" onclick="common_ga('PG_MAIN', 'CLICK_SALES_LOCAL')" style=""><img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/nf58dxcb-7ikpwam.png"></a>
+
+    <button class="btn android" data-event_term="V1" data-event_name="CLICK_DOWNLOAD_MAIN_ANDROID" onclick="trackEvent('CLICK_DOWNLOAD_MAIN_ANDROID');go_to_app_or_market(this, 'android');">
+      <img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/bzdlmp2toaxrdjqg.png" width="180" alt="android market button">
+    </button>
+
+    <button class="btn ios" data-event_term="V1" data-event_name="CLICK_DOWNLOAD_MAIN_IOS" onclick="trackEvent('CLICK_DOWNLOAD_MAIN_IOS');go_to_app_or_market(this, 'ios');">
+      <img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/f7eokfaszt4gpkh6.svg?v=1" width="180" alt="app store">
+    </button>
+  </aside>
+</div>
+
+    </header>
+
+      <a class="inbound_banner only-mobile is_background" href="https://www.mangoplate.com/eat_deals" onclick="common_ga('PG_MAIN', 'CLICK_SALES_LOCAL')" style="background-image: url(https://mp-seoul-image-production-s3.mangoplate.com/web/resources/zanmofgd-kuncgxq.png)"></a>
+
+        <section class="module popular_top_list_wrap">
+  <div class="module_title_wrap">
+    <h2 class="title">믿고 보는 맛집 리스트</h2>
+      <a class="module_more" href="/top_lists" onclick="trackEvent('CLICK_TOPLIST_LIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;more_link&quot;:&quot;/top_lists&quot;,&quot;more_label&quot;:&quot;리스트 더보기&quot;})">
+        리스트 더보기
+      </a>
+  </div>
+  <div class="slider-container toplist-slider">
+    <button class="btn-nav prev slick-arrow slick-disabled" aria-disabled="true" style="display: inline-block;"></button>
+    <button class="btn-nav next slick-arrow" aria-disabled="false" style="display: block;"></button>
+
+    <div class="top_list_slide slick-initialized slick-slider slick-dotted" role="toolbar">
+        
+        
+        
+        
+        
+        
+    <div aria-live="polite" class="slick-list draggable"><div class="slick-track" role="listbox" style="opacity: 1; width: 3060px; transform: translate3d(0px, 0px, 0px);"><ul class="list-toplist-slider slick-slide slick-current slick-active" style="width: 481px;" data-slick-index="0" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide00">
+            <li>
+              <img class="center-croping" alt="문래동 맛집 베스트 20곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/5ce29hn-y_thsv08.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/1318_mullae" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;position&quot;:0,&quot;link_key&quot;:&quot;JDVH0TU&quot;});" tabindex="0">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="1">문래동 맛집 베스트 20곳</span>
+                      <p class="desc" data-ellipsis-id="31">"떠오르는 핫플은 바로 여기!"</p>
+                      <p class="hash">
+                          <span>#문래동 </span>
+                          <span>#문래역 </span>
+                          <span>#문래 </span>
+                          <span>#영등포 </span>
+                          <span>#문래창작촌 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="채식 맛집 베스트 45곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/mnjja5lrlijw2vf4.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/721_vegan" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;position&quot;:1,&quot;link_key&quot;:&quot;SQUM3TS&quot;});" tabindex="0">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="2">채식 맛집 베스트 45곳</span>
+                      <p class="desc" data-ellipsis-id="32">"채소도 얼마나 맛있는데!"</p>
+                      <p class="hash">
+                          <span>#비건 </span>
+                          <span>#비건식당 </span>
+                          <span>#비건카페 </span>
+                          <span>#채식 </span>
+                          <span>#채식주의 </span>
+                          <span>#채식메뉴 </span>
+                          <span>#건강 </span>
+                          <span>#웰빙 </span>
+                          <span>#건강한 </span>
+                          <span>#락토 </span>
+                          <span>#오보 </span>
+                          <span>#락토오보 </span>
+                          <span>#페스코 </span>
+                          <span>#폴로 </span>
+                          <span>#플렉시테리언 </span>
+                          <span>#비건옵션 </span>
+                          <span>#채식옵션 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul><ul class="list-toplist-slider slick-slide slick-active" style="width: 481px;" data-slick-index="1" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide01">
+            <li>
+              <img class="center-croping" alt="홍익대 맛집 베스트 60곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/kkohaa2f6yn2ghj5.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/1623_hongik_university" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;position&quot;:2,&quot;link_key&quot;:&quot;3TOPY-9&quot;});" tabindex="0">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="3">홍익대 맛집 베스트 60곳</span>
+                      <p class="desc" data-ellipsis-id="33">"홍익대학교 학생들을 위한 홍익대 맛집"</p>
+                      <p class="hash">
+                          <span>#홍익대 </span>
+                          <span>#홍익대학교 </span>
+                          <span>#홍대 </span>
+                          <span>#마포구 </span>
+                          <span>#마포 </span>
+                          <span>#합정 </span>
+                          <span>#상수 </span>
+                          <span>#망원 </span>
+                          <span>#홍익 </span>
+                          <span>#홍대입구 </span>
+                          <span>#홍대입구역 </span>
+                          <span>#합정역 </span>
+                          <span>#상수역 </span>
+                          <span>#홍대 입구 </span>
+                          <span>#홍대정문 </span>
+                          <span>#홍대후문 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="샌드위치 맛집 베스트 25곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/qstnl6aca58hz3u_.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/631_sandwich" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;position&quot;:3,&quot;link_key&quot;:&quot;KZ0EPEX&quot;});" tabindex="0">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="4">샌드위치 맛집 베스트 25곳</span>
+                      <p class="desc" data-ellipsis-id="34">"1일 1샌드위치 각!"</p>
+                      <p class="hash">
+                          <span>#샌드위치 </span>
+                          <span>#바게트 샌드위치 </span>
+                          <span>#파니니 </span>
+                          <span>#치아바타 </span>
+                          <span>#센드위치 </span>
+                          <span>#토스트 </span>
+                          <span>#브런치 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul><ul class="list-toplist-slider slick-slide" style="width: 481px;" data-slick-index="2" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide02">
+            <li>
+              <img class="center-croping" alt="이화여대 맛집 베스트 40곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/arew-iedycthob8z.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/1610_ewhawomans_university" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;position&quot;:4,&quot;link_key&quot;:&quot;-X43LU2&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="5">이화여대 맛집 베스트 40곳</span>
+                      <p class="desc" data-ellipsis-id="35">"이화여자대학교 학생들을 위한 이화여대 맛집"</p>
+                      <p class="hash">
+                          <span>#이화여자대학교 </span>
+                          <span>#이대 </span>
+                          <span>#이화여대 </span>
+                          <span>#이대역 </span>
+                          <span>#신촌기차역 </span>
+                          <span>#이대정문 </span>
+                          <span>#이대역2번출구 </span>
+                          <span>#신촌 </span>
+                          <span>#신촌역중앙선 </span>
+                          <span>#이대역3번출구 </span>
+                          <span>#서대문구 </span>
+                          <span>#대현동 </span>
+                          <span>#이대앞 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="혼밥 맛집 베스트 45곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/fzawtpacboosbfpx.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/1245_eatingalone" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;position&quot;:5,&quot;link_key&quot;:&quot;8WWLIMI&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="6">혼밥 맛집 베스트 45곳</span>
+                      <p class="desc" data-ellipsis-id="36">"나와 밥에만 집중하는 시간♥"</p>
+                      <p class="hash">
+                          <span>#혼밥 </span>
+                          <span>#혼면 </span>
+                          <span>#혼술 </span>
+                          <span>#1인용 </span>
+                          <span>#1인분 </span>
+                          <span>#홀로 </span>
+                          <span>#일인용 </span>
+                          <span>#일인분 </span>
+                          <span>#조용한 </span>
+                          <span>#혼자 </span>
+                          <span>#1인식사 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul><ul class="list-toplist-slider slick-slide" style="width: 481px;" data-slick-index="3" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide03">
+            <li>
+              <img class="center-croping" alt="강원도 원주 맛집 베스트 20곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/0epidvfy4ki9lfsv.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/1766_kangwonwonju" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;position&quot;:6,&quot;link_key&quot;:&quot;YLDBVSK&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="7">강원도 원주 맛집 베스트 20곳</span>
+                      <p class="desc" data-ellipsis-id="37">"원주 여행 시, 필수 먹킷 리스트!"</p>
+                      <p class="hash">
+                          <span>#강원도 </span>
+                          <span>#원주 </span>
+                          <span>#강원도 원주 </span>
+                          <span>#강원도 원주시 </span>
+                          <span>#원주시 </span>
+                          <span>#강원도원주 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="된장찌개 맛집 베스트 7곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/zripxan_lf26kuqh.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/1002_doenjangjjigae" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;position&quot;:7,&quot;link_key&quot;:&quot;DW3V41T&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="8">된장찌개 맛집 베스트 7곳</span>
+                      <p class="desc" data-ellipsis-id="38">"구수하고 진~한 맛은 된장찌개가 최고! "</p>
+                      <p class="hash">
+                          <span>#된장찌개 </span>
+                          <span>#된장 찌개 </span>
+                          <span>#된장 </span>
+                          <span>#찌개 </span>
+                          <span>#된장요리 </span>
+                          <span>#된장 요리 </span>
+                          <span>#된찌 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul><ul class="list-toplist-slider slick-slide" style="width: 481px;" data-slick-index="4" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide04">
+            <li>
+              <img class="center-croping" alt="연세대 맛집 베스트 35곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/nzgnzi1ejulgqhlj.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/1620_yonsei_university" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;position&quot;:8,&quot;link_key&quot;:&quot;UW2BQ4F&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="9">연세대 맛집 베스트 35곳</span>
+                      <p class="desc" data-ellipsis-id="39">"연세대학교 학생들을 위한 연세대 맛집"</p>
+                      <p class="hash">
+                          <span>#연세대학교 </span>
+                          <span>#연세대 </span>
+                          <span>#연대 </span>
+                          <span>#신촌 </span>
+                          <span>#연세대 정문 </span>
+                          <span>#현대백화점 신촌점 </span>
+                          <span>#신촌역 </span>
+                          <span>#현대신촌 </span>
+                          <span>#현대 신촌 </span>
+                          <span>#연세 대학교 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="와플 맛집 베스트 25곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/tnwcskecietrcprd.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/1184_waffle" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;position&quot;:9,&quot;link_key&quot;:&quot;OYMVP6S&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="10">와플 맛집 베스트 25곳</span>
+                      <p class="desc" data-ellipsis-id="40">"클래식한 와플부터 요즘 핫한 크로플까지!"</p>
+                      <p class="hash">
+                          <span>#와플 </span>
+                          <span>#아이스크림와플 </span>
+                          <span>#크림치즈와플 </span>
+                          <span>#과일와플 </span>
+                          <span>#벨기에와플 </span>
+                          <span>#생크림와플 </span>
+                          <span>#딸기와플 </span>
+                          <span>#망고와플 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul><ul class="list-toplist-slider slick-slide" style="width: 481px;" data-slick-index="5" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide05">
+            <li>
+              <img class="center-croping" alt="망원동 카페 베스트 20곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/ljcz4_bv036hbs6r.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/1511_mangwondongcafe" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;position&quot;:10,&quot;link_key&quot;:&quot;SCEPYIG&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="11">망원동 카페 베스트 20곳</span>
+                      <p class="desc" data-ellipsis-id="41">"카페 투어는 당근 망원동이지!"</p>
+                      <p class="hash">
+                          <span>#망원동 </span>
+                          <span>#카페 </span>
+                          <span>#망원 </span>
+                          <span>#망원역 </span>
+                          <span>#망원동카페 </span>
+                          <span>#망리단길 </span>
+                          <span>#망원동 카페 </span>
+                          <span>#망원동디저트 </span>
+                          <span>#디저트 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="서울대 맛집 베스트 30곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/9a-hj64xuoxv1l-h.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/1627_seoulnational_university" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:0,&quot;section_title&quot;:&quot;믿고 보는 맛집 리스트&quot;,&quot;position&quot;:11,&quot;link_key&quot;:&quot;LLX5IS2&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="12">서울대 맛집 베스트 30곳</span>
+                      <p class="desc" data-ellipsis-id="42">"서울대학교 학생들을 위한 서울대 맛집 "</p>
+                      <p class="hash">
+                          <span>#서울대학교 </span>
+                          <span>#서울대 </span>
+                          <span>#서울대입구역 </span>
+                          <span>#서울대입구 </span>
+                          <span>#낙성대 </span>
+                          <span>#샤로수길 </span>
+                          <span>#설대입구 </span>
+                          <span>#샤로수 </span>
+                          <span>#서울 대학교 </span>
+                          <span>#봉천동 </span>
+                          <span>#신림동 </span>
+                          <span>#관악 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul></div></div><ul class="slick-dots" style="display: block;" role="tablist"><li class="slick-active" aria-hidden="false" role="presentation" aria-selected="true" aria-controls="navigation00" id="slick-slide00"><button type="button" data-role="none" role="button" tabindex="0">1</button></li><li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation01" id="slick-slide01"><button type="button" data-role="none" role="button" tabindex="0">2</button></li><li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation02" id="slick-slide02"><button type="button" data-role="none" role="button" tabindex="0">3</button></li></ul></div>
+  </div>
+</section><div class="ad_area card_list only-mobile" id="web_mobile-home-card_list-0"><div class="ad_wrap"><div class="content" id="web_mobile-home-card_list-0-content"></div></div></div><div class="ad_area card_list only-desktop" id="web_desktop-home-card_list-0"><div class="ad_wrap"><div class="content" id="web_desktop-home-card_list-0-content" data-google-query-id="CJ25x7G92OgCFVmylgodPpgFsw"><div id="google_ads_iframe_/395211568/production/desktop-web.main.sections.atf_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/395211568/production/desktop-web.main.sections.atf_0" title="3rd party ad content" name="google_ads_iframe_/395211568/production/desktop-web.main.sections.atf_0" width="728" height="90" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" srcdoc="" style="border: 0px; vertical-align: bottom;" data-google-container-id="1" data-load-complete="true"></iframe></div></div></div></div>
+
+        <section class="module mp20_main_mango_pick_wrap">
+  <div class="module_title_wrap">
+    <h2 class="title">맛집 스토리</h2>
+      <a class="module_more" href="/mango_picks" onclick="trackEvent('CLICK_STORY_LIST', {&quot;section_position&quot;:1,&quot;section_title&quot;:&quot;맛집 스토리&quot;,&quot;more_link&quot;:&quot;/mango_picks&quot;,&quot;more_label&quot;:&quot;스토리 더보기&quot;})">
+        스토리 더보기
+      </a>
+  </div>
+
+  <div class="slider-container mango_pick_list">
+    <div style="position: relative;">
+      <button class="btn-nav prev slick-arrow slick-disabled" aria-disabled="true" style="display: inline-block;"></button>
+      <button class="btn-nav next slick-arrow" aria-disabled="false" style="display: block;"></button>
+
+      <div class="list-main-slider slick-initialized slick-slider slick-dotted" role="toolbar">
+          <div aria-live="polite" class="slick-list draggable"><div class="slick-track" role="listbox" style="opacity: 1; width: 3060px; transform: translate3d(0px, 0px, 0px);"><div class="main_mango_pick_slide_item slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide30" style="width: 300px;">
+            <img class="center-croping" alt="환상적인 봄꽃 명소 9곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/xnojns2dvwhcpf.png?fit=around|600:382&amp;crop=600:382;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+            <a href="/mango_picks/1779" tabindex="0">
+              <figure class="mango-pick-item" onclick="trackEvent('CLICK_STORY', {&quot;section_position&quot;:1,&quot;section_title&quot;:&quot;맛집 스토리&quot;,&quot;position&quot;:0,&quot;story_id&quot;:1779});">
+                <div class="thumb">
+                  <div class="inner">
+                  </div>
+                </div>
+                <figcaption>
+                  <strong class="title">환상적인 봄꽃 명소 9곳</strong>
+                  <p class="hash">올해 놓쳤다면, 내년에는 꼭!</p>
+                  <figure class="editor">
+                    <span class="badge"></span>
+                    <div class="thumb">
+                      <img class="center-crop" alt="Editor Image" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/a-uxmchxx7prvx.jpeg?fit=around|56:56&amp;crop=56:56;*,*&amp;output-format=jpg&amp;output-quality=80">
+                    </div>
+                    <figcaption>망고양</figcaption>
+                  </figure>
+                </figcaption>
+              </figure>
+            </a>
+          </div><div class="main_mango_pick_slide_item slick-slide slick-active" data-slick-index="1" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide31" style="width: 300px;">
+            <img class="center-croping" alt="요즘 핫한 한강 근처 맛집, <꽁비비알> 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/eufcvng0twcty3.png?fit=around|600:382&amp;crop=600:382;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+            <a href="/mango_picks/1778" tabindex="0">
+              <figure class="mango-pick-item" onclick="trackEvent('CLICK_STORY', {&quot;section_position&quot;:1,&quot;section_title&quot;:&quot;맛집 스토리&quot;,&quot;position&quot;:1,&quot;story_id&quot;:1778});">
+                <div class="thumb">
+                  <div class="inner">
+                  </div>
+                </div>
+                <figcaption>
+                  <strong class="title">요즘 핫한 한강 근처 맛집, &lt;꽁비비알&gt;</strong>
+                  <p class="hash">맛, 분위기, 가격, 햇살까지도 완벽해!</p>
+                  <figure class="editor">
+                    <span class="badge"></span>
+                    <div class="thumb">
+                      <img class="center-crop" alt="Editor Image" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|56:56&amp;crop=56:56;*,*&amp;output-format=jpg&amp;output-quality=80">
+                    </div>
+                    <figcaption>망고소녀</figcaption>
+                  </figure>
+                </figcaption>
+              </figure>
+            </a>
+          </div><div class="main_mango_pick_slide_item slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide32" style="width: 300px;">
+            <img class="center-croping" alt="쑥 디저트 맛집 6곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/rhyxxdwn_cb0wu.jpg?fit=around|600:382&amp;crop=600:382;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+            <a href="/mango_picks/1777" tabindex="0">
+              <figure class="mango-pick-item" onclick="trackEvent('CLICK_STORY', {&quot;section_position&quot;:1,&quot;section_title&quot;:&quot;맛집 스토리&quot;,&quot;position&quot;:2,&quot;story_id&quot;:1777});">
+                <div class="thumb">
+                  <div class="inner">
+                  </div>
+                </div>
+                <figcaption>
+                  <strong class="title">쑥 디저트 맛집 6곳</strong>
+                  <p class="hash">할매입맛을 사로잡아버렸지~</p>
+                  <figure class="editor">
+                    <span class="badge"></span>
+                    <div class="thumb">
+                      <img class="center-crop" alt="Editor Image" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/jk5tg1s0xzjfqb.jpg?fit=around|56:56&amp;crop=56:56;*,*&amp;output-format=jpg&amp;output-quality=80">
+                    </div>
+                    <figcaption>미스망고</figcaption>
+                  </figure>
+                </figcaption>
+              </figure>
+            </a>
+          </div><div class="main_mango_pick_slide_item slick-slide" data-slick-index="3" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide33" style="width: 300px;">
+            <img class="center-croping" alt="전지적 참견 시점 방송 맛집 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/ftqkx1r-wk6lxz.jpg?fit=around|600:382&amp;crop=600:382;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+            <a href="/mango_picks/1776" tabindex="-1">
+              <figure class="mango-pick-item" onclick="trackEvent('CLICK_STORY', {&quot;section_position&quot;:1,&quot;section_title&quot;:&quot;맛집 스토리&quot;,&quot;position&quot;:3,&quot;story_id&quot;:1776});">
+                <div class="thumb">
+                  <div class="inner">
+                  </div>
+                </div>
+                <figcaption>
+                  <strong class="title">전지적 참견 시점 방송 맛집</strong>
+                  <p class="hash">스타들이 사랑하는 그곳!</p>
+                  <figure class="editor">
+                    <span class="badge"></span>
+                    <div class="thumb">
+                      <img class="center-crop" alt="Editor Image" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/jk5tg1s0xzjfqb.jpg?fit=around|56:56&amp;crop=56:56;*,*&amp;output-format=jpg&amp;output-quality=80">
+                    </div>
+                    <figcaption>미스망고</figcaption>
+                  </figure>
+                </figcaption>
+              </figure>
+            </a>
+          </div><div class="main_mango_pick_slide_item slick-slide" data-slick-index="4" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide34" style="width: 300px;">
+            <img class="center-croping" alt="충북 청주카페 7곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/avnfi9n9t-zdoa.jpg?fit=around|600:382&amp;crop=600:382;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+            <a href="/mango_picks/1775" tabindex="-1">
+              <figure class="mango-pick-item" onclick="trackEvent('CLICK_STORY', {&quot;section_position&quot;:1,&quot;section_title&quot;:&quot;맛집 스토리&quot;,&quot;position&quot;:4,&quot;story_id&quot;:1775});">
+                <div class="thumb">
+                  <div class="inner">
+                  </div>
+                </div>
+                <figcaption>
+                  <strong class="title">충북 청주카페 7곳</strong>
+                  <p class="hash">청주 카페투어는 나에게 맡겨줘!</p>
+                  <figure class="editor">
+                    <span class="badge"></span>
+                    <div class="thumb">
+                      <img class="center-crop" alt="Editor Image" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/jk5tg1s0xzjfqb.jpg?fit=around|56:56&amp;crop=56:56;*,*&amp;output-format=jpg&amp;output-quality=80">
+                    </div>
+                    <figcaption>미스망고</figcaption>
+                  </figure>
+                </figcaption>
+              </figure>
+            </a>
+          </div><div class="main_mango_pick_slide_item slick-slide" data-slick-index="5" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide35" style="width: 300px;">
+            <img class="center-croping" alt="성수동 맛집 7곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/mv8z2-dx8boklc.jpg?fit=around|600:382&amp;crop=600:382;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+            <a href="/mango_picks/1773" tabindex="-1">
+              <figure class="mango-pick-item" onclick="trackEvent('CLICK_STORY', {&quot;section_position&quot;:1,&quot;section_title&quot;:&quot;맛집 스토리&quot;,&quot;position&quot;:5,&quot;story_id&quot;:1773});">
+                <div class="thumb">
+                  <div class="inner">
+                  </div>
+                </div>
+                <figcaption>
+                  <strong class="title">성수동 맛집 7곳</strong>
+                  <p class="hash">성수동 HOT&amp;NEW 파헤치기!</p>
+                  <figure class="editor">
+                    <span class="badge"></span>
+                    <div class="thumb">
+                      <img class="center-crop" alt="Editor Image" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/jk5tg1s0xzjfqb.jpg?fit=around|56:56&amp;crop=56:56;*,*&amp;output-format=jpg&amp;output-quality=80">
+                    </div>
+                    <figcaption>미스망고</figcaption>
+                  </figure>
+                </figcaption>
+              </figure>
+            </a>
+          </div><div class="main_mango_pick_slide_item slick-slide" data-slick-index="6" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide36" style="width: 300px;">
+            <img class="center-croping" alt="밥블레스유 방송 맛집 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/dekg_93ktzgo8s.jpg?fit=around|600:382&amp;crop=600:382;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+            <a href="/mango_picks/1772" tabindex="-1">
+              <figure class="mango-pick-item" onclick="trackEvent('CLICK_STORY', {&quot;section_position&quot;:1,&quot;section_title&quot;:&quot;맛집 스토리&quot;,&quot;position&quot;:6,&quot;story_id&quot;:1772});">
+                <div class="thumb">
+                  <div class="inner">
+                  </div>
+                </div>
+                <figcaption>
+                  <strong class="title">밥블레스유 방송 맛집</strong>
+                  <p class="hash">시즌 2로 돌아온 신개념 먹방  버라이어티!</p>
+                  <figure class="editor">
+                    <span class="badge"></span>
+                    <div class="thumb">
+                      <img class="center-crop" alt="Editor Image" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/jk5tg1s0xzjfqb.jpg?fit=around|56:56&amp;crop=56:56;*,*&amp;output-format=jpg&amp;output-quality=80">
+                    </div>
+                    <figcaption>미스망고</figcaption>
+                  </figure>
+                </figcaption>
+              </figure>
+            </a>
+          </div><div class="main_mango_pick_slide_item slick-slide" data-slick-index="7" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide37" style="width: 300px;">
+            <img class="center-croping" alt="한강 근처 테이크아웃 맛집 6곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/6inlonbzpt2sfk.png?fit=around|600:382&amp;crop=600:382;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+            <a href="/mango_picks/1771" tabindex="-1">
+              <figure class="mango-pick-item" onclick="trackEvent('CLICK_STORY', {&quot;section_position&quot;:1,&quot;section_title&quot;:&quot;맛집 스토리&quot;,&quot;position&quot;:7,&quot;story_id&quot;:1771});">
+                <div class="thumb">
+                  <div class="inner">
+                  </div>
+                </div>
+                <figcaption>
+                  <strong class="title">한강 근처 테이크아웃 맛집 6곳</strong>
+                  <p class="hash">봄나들이 가게 되면 제일 먼저 한강!</p>
+                  <figure class="editor">
+                    <span class="badge"></span>
+                    <div class="thumb">
+                      <img class="center-crop" alt="Editor Image" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/fmsvfia71h84uy.jpg?fit=around|56:56&amp;crop=56:56;*,*&amp;output-format=jpg&amp;output-quality=80">
+                    </div>
+                    <figcaption>망고소녀</figcaption>
+                  </figure>
+                </figcaption>
+              </figure>
+            </a>
+          </div><div class="main_mango_pick_slide_item slick-slide" data-slick-index="8" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide38" style="width: 300px;">
+            <img class="center-croping" alt="맛있는 녀석들 방송맛집 6곳 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/s6sezkeshf1h8o.jpg?fit=around|600:382&amp;crop=600:382;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+            <a href="/mango_picks/1770" tabindex="-1">
+              <figure class="mango-pick-item" onclick="trackEvent('CLICK_STORY', {&quot;section_position&quot;:1,&quot;section_title&quot;:&quot;맛집 스토리&quot;,&quot;position&quot;:8,&quot;story_id&quot;:1770});">
+                <div class="thumb">
+                  <div class="inner">
+                  </div>
+                </div>
+                <figcaption>
+                  <strong class="title">맛있는 녀석들 방송맛집 6곳</strong>
+                  <p class="hash">방송에 나온 그곳이 궁금하다!</p>
+                  <figure class="editor">
+                    <span class="badge"></span>
+                    <div class="thumb">
+                      <img class="center-crop" alt="Editor Image" src="https://mp-seoul-image-production-s3.mangoplate.com/mango_pick/jk5tg1s0xzjfqb.jpg?fit=around|56:56&amp;crop=56:56;*,*&amp;output-format=jpg&amp;output-quality=80">
+                    </div>
+                    <figcaption>미스망고</figcaption>
+                  </figure>
+                </figcaption>
+              </figure>
+            </a>
+          </div></div></div>
+          
+          
+          
+          
+          
+          
+          
+          
+      <ul class="slick-dots" style="display: block;" role="tablist"><li class="slick-active" aria-hidden="false" role="presentation" aria-selected="true" aria-controls="navigation30" id="slick-slide30"><button type="button" data-role="none" role="button" tabindex="0">1</button></li><li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation31" id="slick-slide31"><button type="button" data-role="none" role="button" tabindex="0">2</button></li><li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation32" id="slick-slide32"><button type="button" data-role="none" role="button" tabindex="0">3</button></li></ul></div>
+    </div>
+  </div>
+</section>
+
+        <aside class="banner">
+          <button data-event_term="V1" data-event_name="CLICK_DOWNLOAD_BANNER" onclick="trackEvent('CLICK_DOWNLOAD_BANNER_1'); go_to_app_or_market(this); ">
+            <img class="lazy" data-original="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/d9abbdfgaqieyoxf.png?fit=around|750:220&amp;crop=750:220;*,*&amp;output-format=jpg&amp;output-quality=80" alt="app download banner" src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/d9abbdfgaqieyoxf.png?fit=around|750:220&amp;crop=750:220;*,*&amp;output-format=jpg&amp;output-quality=80" style="display: inline;">
+          </button>
+        </aside>
+        <section class="module main_popular_restaurant_wrap">
+  <h2 class="title">EAT딜을 판매중인 식당</h2>
+  <div class="slider-container popular_restaurant_container">
+    <ul class="list-restaurants main_popular_restaurant_list type-main">
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/DSEX0yHBpyTW" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:0,&quot;restaurant_key&quot;:&quot;DSEX0yHBpyTW&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
+                  <img class="center-croping lazy" alt="지노스 피자리아 사진 - 서울시 용산구 이태원동 455-47" data-original="https://mp-seoul-image-production-s3.mangoplate.com/278483/54384_1524926994136_184097?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">지노스 피자리아</span>
+                    <strong class="point search_point expected">4.0</strong>
+                    <p class="etc">
+                      이태원/한남동 -
+                      기타 양식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/V_84MLWVttQY" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:1,&quot;restaurant_key&quot;:&quot;V_84MLWVttQY&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
+                  <img class="center-croping lazy" alt="모터시티 사진 - 서울시 용산구 이태원동 56-30" data-original="https://mp-seoul-image-production-s3.mangoplate.com/added_restaurants/61216_1468415252697362.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">모터시티</span>
+                    <strong class="point search_point ">4.3</strong>
+                    <p class="etc">
+                      이태원/한남동 -
+                      이탈리안
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/p6V-TEpk_g" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:2,&quot;restaurant_key&quot;:&quot;p6V-TEpk_g&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
+                  <img class="center-croping lazy" alt="훌리오 사진 - 서울시 마포구 서교동 411-18" data-original="https://mp-seoul-image-production-s3.mangoplate.com/2148/reviews/ea54c4f05893.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">훌리오</span>
+                    <strong class="point search_point ">4.1</strong>
+                    <p class="etc">
+                      홍대 -
+                      남미 음식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/Xn6RcdfFQu5s" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:3,&quot;restaurant_key&quot;:&quot;Xn6RcdfFQu5s&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
+                  <img class="center-croping lazy" alt="모로코코 카페 사진 - 서울시 용산구 용산동2가 45-9" data-original="https://mp-seoul-image-production-s3.mangoplate.com/281517/172778_1558772627954_84160?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">모로코코 카페</span>
+                    <strong class="point search_point ">4.4</strong>
+                    <p class="etc">
+                      이태원/한남동 -
+                      세계음식 기타
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/b6dt2oKCybfM" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:4,&quot;restaurant_key&quot;:&quot;b6dt2oKCybfM&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
+                  <img class="center-croping lazy" alt="JVL부대찌개 사진 - 서울시 강남구 대치동 891-41" data-original="https://mp-seoul-image-production-s3.mangoplate.com/328104/_naygypctcojl6.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">JVL부대찌개</span>
+                    <strong class="point search_point expected"></strong>
+                    <p class="etc">
+                      대치동 -
+                      탕 / 찌개 / 전골
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/CV5ho_J7LLPG" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:5,&quot;restaurant_key&quot;:&quot;CV5ho_J7LLPG&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
+                  <img class="center-croping lazy" alt="파불라 사진 - 서울시 강남구 청담동 100" data-original="https://mp-seoul-image-production-s3.mangoplate.com/247675/1082689_1531640891581_238782?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">파불라</span>
+                    <strong class="point search_point ">4.0</strong>
+                    <p class="etc">
+                      청담동 -
+                      정통 중식 / 일반 중식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/pTzjtFuhPsAS" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:6,&quot;restaurant_key&quot;:&quot;pTzjtFuhPsAS&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
+                  <img class="center-croping lazy" alt="스트릿 사진 - 서울시 강남구 역삼동 831-6" data-original="https://mp-seoul-image-production-s3.mangoplate.com/347301/kmsts8mattx1ch.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">스트릿</span>
+                    <strong class="point search_point ">3.8</strong>
+                    <p class="etc">
+                      강남역 -
+                      다국적 아시아 음식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/3pC7ThiRL4MA" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:2,&quot;section_title&quot;:&quot;EAT딜을 판매중인 식당&quot;,&quot;position&quot;:7,&quot;restaurant_key&quot;:&quot;3pC7ThiRL4MA&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
+                  <img class="center-croping lazy" alt="우육면관 사진 - 서울시 종로구 관철동 11-11" data-original="https://mp-seoul-image-production-s3.mangoplate.com/396519/1404441_1563006889925_24177?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">우육면관</span>
+                    <strong class="point search_point ">4.2</strong>
+                    <p class="etc">
+                      종로 -
+                      기타 중식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+    </ul>
+  </div>
+</section><div class="ad_area card_list card_list_btf only-mobile" id="web_mobile-home-card_list_btf-2"><div class="ad_wrap"><div class="content" id="web_mobile-home-card_list_btf-2-content"></div></div></div><div class="ad_area card_list card_list_btf only-desktop" id="web_desktop-home-card_list_btf-2" style="display: none;"><div class="ad_wrap"><div class="content" id="web_desktop-home-card_list_btf-2-content" data-google-query-id="CKqHxrG92OgCFVmylgodPpgFsw" style="display: none;"><div id="google_ads_iframe_/395211568/production/desktop-web.main.sections.btf_0__container__" style="border: 0pt none; width: 728px; height: 90px;"></div></div></div></div>
+
+        <section class="module main_popular_restaurant_wrap">
+  <h2 class="title">에디터가 선정한 식당</h2>
+  <div class="slider-container popular_restaurant_container">
+    <ul class="list-restaurants main_popular_restaurant_list type-main">
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/EV_iVEYdPISo" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:3,&quot;section_title&quot;:&quot;에디터가 선정한 식당&quot;,&quot;position&quot;:0,&quot;restaurant_key&quot;:&quot;EV_iVEYdPISo&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="미화당살롱 사진 - 부산시 부산진구 부전동 168-19" data-original="https://mp-seoul-image-production-s3.mangoplate.com/320906/yoo3gbmvwhl3vf.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">미화당살롱</span>
+                    <strong class="point search_point expected"></strong>
+                    <p class="etc">
+                      부산 부산진구 -
+                      치킨 / 호프 / 펍
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/fTxnzfnsmlvl" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:3,&quot;section_title&quot;:&quot;에디터가 선정한 식당&quot;,&quot;position&quot;:1,&quot;restaurant_key&quot;:&quot;fTxnzfnsmlvl&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="Pho Bida Viet Nam 사진 - 36-38 Rue Nationale, 75013 Paris" data-original="https://mp-seoul-image-production-s3.mangoplate.com/331975/a-canyxzfspime.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">Pho Bida Viet Nam</span>
+                    <strong class="point search_point expected"></strong>
+                    <p class="etc">
+                      파리 -
+                      베트남 음식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/t4EIwBA_VhRR" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:3,&quot;section_title&quot;:&quot;에디터가 선정한 식당&quot;,&quot;position&quot;:2,&quot;restaurant_key&quot;:&quot;t4EIwBA_VhRR&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="사량도자연산횟집 사진 - 울산시 남구 달동 573-8" data-original="https://mp-seoul-image-production-s3.mangoplate.com/279369/odiqaqhivz8yth.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">사량도자연산횟집</span>
+                    <strong class="point search_point expected"></strong>
+                    <p class="etc">
+                      울산 남구 -
+                      해산물 요리
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/dJa5sNs-jR" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:3,&quot;section_title&quot;:&quot;에디터가 선정한 식당&quot;,&quot;position&quot;:3,&quot;restaurant_key&quot;:&quot;dJa5sNs-jR&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="티에리스 사진 - 서울시 서초구 방배동 456-2" data-original="https://mp-seoul-image-production-s3.mangoplate.com/665/68297_1524037874019_64278?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">티에리스</span>
+                    <strong class="point search_point ">4.3</strong>
+                    <p class="etc">
+                      방배/반포/잠원 -
+                      카페 / 디저트
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/pjEQfhYNFtqL" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:3,&quot;section_title&quot;:&quot;에디터가 선정한 식당&quot;,&quot;position&quot;:4,&quot;restaurant_key&quot;:&quot;pjEQfhYNFtqL&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="소복 사진 - 인천시 중구 운서동 2840" data-original="https://mp-seoul-image-production-s3.mangoplate.com/added_restaurants/2392_1453948267620.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">소복</span>
+                    <strong class="point search_point expected"></strong>
+                    <p class="etc">
+                      인천 중구 -
+                      카페 / 디저트
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/lzdwoi6u5UAm" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:3,&quot;section_title&quot;:&quot;에디터가 선정한 식당&quot;,&quot;position&quot;:5,&quot;restaurant_key&quot;:&quot;lzdwoi6u5UAm&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="카페브리프 사진 - 제주 제주시 애월읍 고성리 443" data-original="https://mp-seoul-image-production-s3.mangoplate.com/361411/qloahpglskeikp.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">카페브리프</span>
+                    <strong class="point search_point expected"></strong>
+                    <p class="etc">
+                      제주 한림/애월 -
+                      카페 / 디저트
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/C1EUU9PoZuIN" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:3,&quot;section_title&quot;:&quot;에디터가 선정한 식당&quot;,&quot;position&quot;:6,&quot;restaurant_key&quot;:&quot;C1EUU9PoZuIN&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="한입소반 사진 - 서울시 용산구 청파동3가 15-5" data-original="https://mp-seoul-image-production-s3.mangoplate.com/284356/28187_1491791116667_28187_1491791013437_262487?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">한입소반</span>
+                    <strong class="point search_point ">4.1</strong>
+                    <p class="etc">
+                      용산/숙대 -
+                      기타 한식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/dAshnxG-W6Bi" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:3,&quot;section_title&quot;:&quot;에디터가 선정한 식당&quot;,&quot;position&quot;:7,&quot;restaurant_key&quot;:&quot;dAshnxG-W6Bi&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="엄마김밥 사진 - 경기도 의정부시 신곡동 448-15" data-original="https://mp-seoul-image-production-s3.mangoplate.com/387158/t2fo_krdn2qphf.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">엄마김밥</span>
+                    <strong class="point search_point expected"></strong>
+                    <p class="etc">
+                      의정부시 -
+                      기타 한식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+    </ul>
+  </div>
+</section>
+
+        <section class="module main_popular_restaurant_wrap">
+  <h2 class="title">TV에 나온 식당</h2>
+  <div class="slider-container popular_restaurant_container">
+    <ul class="list-restaurants main_popular_restaurant_list type-main">
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/mTr15vdpA4" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:4,&quot;section_title&quot;:&quot;TV에 나온 식당&quot;,&quot;position&quot;:0,&quot;restaurant_key&quot;:&quot;mTr15vdpA4&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="진남포면옥 사진 - 서울시 중구 신당동 368-89" data-original="https://mp-seoul-image-production-s3.mangoplate.com/12887_1423612148373?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">진남포면옥</span>
+                    <strong class="point search_point ">4.3</strong>
+                    <p class="etc">
+                      중구 -
+                      기타 한식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/jKC5NNmiUq" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:4,&quot;section_title&quot;:&quot;TV에 나온 식당&quot;,&quot;position&quot;:1,&quot;restaurant_key&quot;:&quot;jKC5NNmiUq&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="동해원 사진 - 충청남도 공주시 소학동 194-1" data-original="https://mp-seoul-image-production-s3.mangoplate.com/121884/838901_1507527783165_5799?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">동해원</span>
+                    <strong class="point search_point expected">3.6</strong>
+                    <p class="etc">
+                      충남 공주시 -
+                      정통 중식 / 일반 중식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/vbS60S4HLH" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:4,&quot;section_title&quot;:&quot;TV에 나온 식당&quot;,&quot;position&quot;:2,&quot;restaurant_key&quot;:&quot;vbS60S4HLH&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="명동영양센터 사진 - 서울시 중구 충무로1가 25-32" data-original="https://mp-seoul-image-production-s3.mangoplate.com/39056_1425818949068?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">명동영양센터</span>
+                    <strong class="point search_point ">4.3</strong>
+                    <p class="etc">
+                      명동/남산 -
+                      탕 / 찌개 / 전골
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/VY1l9-bN-5" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:4,&quot;section_title&quot;:&quot;TV에 나온 식당&quot;,&quot;position&quot;:3,&quot;restaurant_key&quot;:&quot;VY1l9-bN-5&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="순옥이네명가 사진 - 제주 제주시 도두일동 2615-5" data-original="https://mp-seoul-image-production-s3.mangoplate.com/added_restaurants/571641_1475733806918099.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">순옥이네명가</span>
+                    <strong class="point search_point ">3.1</strong>
+                    <p class="etc">
+                      제주 제주시내 -
+                      해산물 요리
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/2J0axpUplhy7" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:4,&quot;section_title&quot;:&quot;TV에 나온 식당&quot;,&quot;position&quot;:4,&quot;restaurant_key&quot;:&quot;2J0axpUplhy7&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="옥동식 사진 - 서울시 마포구 서교동 385-6" data-original="https://mp-seoul-image-production-s3.mangoplate.com/added_restaurants/132097_1489737655731317.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">옥동식</span>
+                    <strong class="point search_point ">4.2</strong>
+                    <p class="etc">
+                      홍대 -
+                      탕 / 찌개 / 전골
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/g3hhVhZ4_v" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:4,&quot;section_title&quot;:&quot;TV에 나온 식당&quot;,&quot;position&quot;:5,&quot;restaurant_key&quot;:&quot;g3hhVhZ4_v&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="현대본가 사진 - 서울시 용산구 한강로1가 166-2" data-original="https://mp-seoul-image-production-s3.mangoplate.com/45934_1513609922251190.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">현대본가</span>
+                    <strong class="point search_point expected"></strong>
+                    <p class="etc">
+                      용산/숙대 -
+                      고기 요리
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/5HeqtDuK5R" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:4,&quot;section_title&quot;:&quot;TV에 나온 식당&quot;,&quot;position&quot;:6,&quot;restaurant_key&quot;:&quot;5HeqtDuK5R&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="외고집설렁탕 사진 - 서울시 강남구 삼성동 120-8" data-original="https://mp-seoul-image-production-s3.mangoplate.com/659/753280_1563639192315_13531?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">외고집설렁탕</span>
+                    <strong class="point search_point ">4.6</strong>
+                    <p class="etc">
+                      삼성동 -
+                      탕 / 찌개 / 전골
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/NxnDsnNYyxiO" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:4,&quot;section_title&quot;:&quot;TV에 나온 식당&quot;,&quot;position&quot;:7,&quot;restaurant_key&quot;:&quot;NxnDsnNYyxiO&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="송백보리밥 사진 - 경기도 여주시 강천면 이호리 496-2" data-original="https://mp-seoul-image-production-s3.mangoplate.com/339710/gtdkqkvmme0wus.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">송백보리밥</span>
+                    <strong class="point search_point expected"></strong>
+                    <p class="etc">
+                      여주시 -
+                      한정식 / 백반 / 정통 한식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+    </ul>
+  </div>
+</section><div class="ad_area card_list card_list_btf only-mobile" id="web_mobile-home-card_list_btf-4"><div class="ad_wrap"><div class="content" id="web_mobile-home-card_list_btf-4-content"></div></div></div><div class="ad_area card_list card_list_btf only-desktop" id="web_desktop-home-card_list_btf-4" style="display: none;"><div class="ad_wrap"><div class="content" id="web_desktop-home-card_list_btf-4-content" data-google-query-id="CKuHxrG92OgCFVmylgodPpgFsw" style="display: none;"><div id="google_ads_iframe_/395211568/production/desktop-web.main.sections.btf_1__container__" style="border: 0pt none; width: 728px; height: 90px;"></div></div></div></div>
+
+        <section class="module main_popular_restaurant_wrap">
+  <h2 class="title">평점이 높은 인기 식당</h2>
+  <div class="slider-container popular_restaurant_container">
+    <ul class="list-restaurants main_popular_restaurant_list type-main">
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/phK__CKmeq-X" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:5,&quot;section_title&quot;:&quot;평점이 높은 인기 식당&quot;,&quot;position&quot;:0,&quot;restaurant_key&quot;:&quot;phK__CKmeq-X&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="중앙해장 사진 - 서울시 강남구 대치동 996-16" data-original="https://mp-seoul-image-production-s3.mangoplate.com/361632_1494296497357311.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">중앙해장</span>
+                    <strong class="point search_point ">4.4</strong>
+                    <p class="etc">
+                      대치동 -
+                      탕 / 찌개 / 전골
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/4ZAhmdGvnTNj" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:5,&quot;section_title&quot;:&quot;평점이 높은 인기 식당&quot;,&quot;position&quot;:1,&quot;restaurant_key&quot;:&quot;4ZAhmdGvnTNj&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="마르셀 사진 - 서울시 중구 북창동 93-42" data-original="https://mp-seoul-image-production-s3.mangoplate.com/255515/172778_1527642372513_41021?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">마르셀</span>
+                    <strong class="point search_point ">4.4</strong>
+                    <p class="etc">
+                      시청/남대문 -
+                      이탈리안
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/L_bBLRFSidkM" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:5,&quot;section_title&quot;:&quot;평점이 높은 인기 식당&quot;,&quot;position&quot;:2,&quot;restaurant_key&quot;:&quot;L_bBLRFSidkM&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                    <i class="featured_badge" style="background-image: url('https://mp-seoul-image-production-s3.mangoplate.com/badge_pictures/r-i0n1w_hdfo4vlf.png')"></i>
+                  <img class="center-croping lazy" alt="레리엇 사진 - 서울시 용산구 이태원동 455-23" data-original="https://mp-seoul-image-production-s3.mangoplate.com/400622/0g1jvbnyuhqj7o.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">레리엇</span>
+                    <strong class="point search_point ">4.7</strong>
+                    <p class="etc">
+                      이태원/한남동 -
+                      세계음식 기타
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/Bw6EBZ9YdHHB" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:5,&quot;section_title&quot;:&quot;평점이 높은 인기 식당&quot;,&quot;position&quot;:3,&quot;restaurant_key&quot;:&quot;Bw6EBZ9YdHHB&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="요멘야고에몬 사진 - 서울시 마포구 동교동 190-1" data-original="https://mp-seoul-image-production-s3.mangoplate.com/245342_1535772165946240.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">요멘야고에몬</span>
+                    <strong class="point search_point ">4.3</strong>
+                    <p class="etc">
+                      홍대 -
+                      퓨전 일식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/ClXc3TPM4v" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:5,&quot;section_title&quot;:&quot;평점이 높은 인기 식당&quot;,&quot;position&quot;:4,&quot;restaurant_key&quot;:&quot;ClXc3TPM4v&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="별버거 사진 - 서울시 마포구 상수동 317-8" data-original="https://mp-seoul-image-production-s3.mangoplate.com/226036/883263_1525260392862_136748?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">별버거</span>
+                    <strong class="point search_point ">4.4</strong>
+                    <p class="etc">
+                      홍대 -
+                      브런치 / 버거 / 샌드위치
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/012Bpc16Zc" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:5,&quot;section_title&quot;:&quot;평점이 높은 인기 식당&quot;,&quot;position&quot;:5,&quot;restaurant_key&quot;:&quot;012Bpc16Zc&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="아트리오 사진 - 서울시 영등포구 여의도동 23" data-original="https://mp-seoul-image-production-s3.mangoplate.com/196453/zgv2ruhutgj1_l.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">아트리오</span>
+                    <strong class="point search_point ">4.3</strong>
+                    <p class="etc">
+                      여의도 -
+                      이탈리안
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/HfphJTLvQwE9" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:5,&quot;section_title&quot;:&quot;평점이 높은 인기 식당&quot;,&quot;position&quot;:6,&quot;restaurant_key&quot;:&quot;HfphJTLvQwE9&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="오늘여기우리 사진 - 인천시 부평구 부평동 211-102" data-original="https://mp-seoul-image-production-s3.mangoplate.com/646029_1505872218901151.jpg?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">오늘여기우리</span>
+                    <strong class="point search_point ">4.4</strong>
+                    <p class="etc">
+                      인천 부평구 -
+                      카페 / 디저트
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+        <li class="restaurant-item">
+          <div class="popular_restaurant_inner_wrap">
+            <a href="/restaurants/7A-UpyjiDuXH" onclick="trackEvent('CLICK_RESTAURANT', {&quot;section_position&quot;:5,&quot;section_title&quot;:&quot;평점이 높은 인기 식당&quot;,&quot;position&quot;:7,&quot;restaurant_key&quot;:&quot;7A-UpyjiDuXH&quot;})">
+              <figure class="restaurant-item">
+                <div class="thumb">
+                  <img class="center-croping lazy" alt="루트 사진 - 서울시 용산구 한남동 741-19" data-original="https://mp-seoul-image-production-s3.mangoplate.com/sources/web/restaurants/263622/67078_1573613668925?fit=around|362:362&amp;crop=362:362;*,*&amp;output-format=jpg&amp;output-quality=80" data-error="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kssf5eveeva_xlmy.jpg?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC">
+                </div>
+                <figcaption>
+                  <div class="info">
+                    <span class="title">루트</span>
+                    <strong class="point search_point ">4.3</strong>
+                    <p class="etc">
+                      이태원/한남동 -
+                      기타 양식
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        </li>
+    </ul>
+  </div>
+</section>
+
+        <section class="module popular_top_list_wrap">
+  <div class="module_title_wrap">
+    <h2 class="title">지역별 인기 맛집</h2>
+  </div>
+  <div class="slider-container toplist-slider">
+    <button class="btn-nav prev slick-arrow slick-disabled" aria-disabled="true" style="display: inline-block;"></button>
+    <button class="btn-nav next slick-arrow" aria-disabled="false" style="display: block;"></button>
+
+    <div class="top_list_slide slick-initialized slick-slider slick-dotted" role="toolbar">
+        
+        
+        
+    <div aria-live="polite" class="slick-list draggable"><div class="slick-track" role="listbox" style="opacity: 1; width: 1530px; transform: translate3d(0px, 0px, 0px);"><ul class="list-toplist-slider slick-slide slick-current slick-active" style="width: 481px;" data-slick-index="0" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide10">
+            <li>
+              <img class="center-croping" alt="2020 인천 인기 맛집 TOP 30 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/hjzjw4xchqeqw4lf.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2260_incheon2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:6,&quot;section_title&quot;:&quot;지역별 인기 맛집&quot;,&quot;position&quot;:0,&quot;link_key&quot;:&quot;COVIQGH&quot;});" tabindex="0">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="13">2020 인천 인기 맛집 TOP 30</span>
+                      <p class="desc" data-ellipsis-id="43">"2020년엔 꼭 가봐야 할 인천 핫플레이스는?"</p>
+                      <p class="hash">
+                          <span>#인천 </span>
+                          <span>#인천시 </span>
+                          <span>#인천광역시 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="2020 강원도 인기 맛집 TOP 50 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/uhrghkndt7-1nsvw.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2250_kangwon2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:6,&quot;section_title&quot;:&quot;지역별 인기 맛집&quot;,&quot;position&quot;:1,&quot;link_key&quot;:&quot;9RGXJHZ&quot;});" tabindex="0">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="14">2020 강원도 인기 맛집 TOP 50</span>
+                      <p class="desc" data-ellipsis-id="44">"1년 내내 핫한 #강원도 여행지 맛집"</p>
+                      <p class="hash">
+                          <span>#강원도 </span>
+                          <span>#2020강원 </span>
+                          <span>#2020 강원도 </span>
+                          <span>#2020 </span>
+                          <span>#강원 </span>
+                          <span>#원주 </span>
+                          <span>#양양 </span>
+                          <span>#평창 </span>
+                          <span>#속초 </span>
+                          <span>#강릉 </span>
+                          <span>#동해 </span>
+                          <span>#춘천 </span>
+                          <span>#경포대 </span>
+                          <span>#중앙시장 </span>
+                          <span>#대포항 </span>
+                          <span>#정동진 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul><ul class="list-toplist-slider slick-slide slick-active" style="width: 481px;" data-slick-index="1" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide11">
+            <li>
+              <img class="center-croping" alt="2020 부산 인기 맛집 TOP 50 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/9wspd158yfsvvvqw.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2252_busan2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:6,&quot;section_title&quot;:&quot;지역별 인기 맛집&quot;,&quot;position&quot;:2,&quot;link_key&quot;:&quot;WWM-TC0&quot;});" tabindex="0">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="15">2020 부산 인기 맛집 TOP 50</span>
+                      <p class="desc" data-ellipsis-id="45">"부산에 가면 꼭! 먹어야 할 먹킷리스트"</p>
+                      <p class="hash">
+                          <span>#부산 </span>
+                          <span>#2020 부산 </span>
+                          <span>#2020부산 </span>
+                          <span>#부산시 </span>
+                          <span>#돼지국밥 </span>
+                          <span>#해운대구 </span>
+                          <span>#부산 중구 </span>
+                          <span>#부산시 중구 </span>
+                          <span>#부산시 해운대구 </span>
+                          <span>#해운대 </span>
+                          <span>#부산 해운대구 </span>
+                          <span>#밀면 </span>
+                          <span>#떡볶이 </span>
+                          <span>#서면 </span>
+                          <span>#부산 남포동 </span>
+                          <span>#남포동 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="2020  핫플레이스 TOP 50 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/58zbtv8kd2pui3pr.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2277_2020popular" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:6,&quot;section_title&quot;:&quot;지역별 인기 맛집&quot;,&quot;position&quot;:3,&quot;link_key&quot;:&quot;3I1TTXW&quot;});" tabindex="0">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="16">2020  핫플레이스 TOP 50</span>
+                      <p class="desc" data-ellipsis-id="46">"이미 유명하지만 2020년이 더욱 기대돼!"</p>
+                      <p class="hash">
+                          <span>#2020 </span>
+                          <span>#2020 핫플레이스 </span>
+                          <span>#핫플레이스 </span>
+                          <span>#신상맛집 </span>
+                          <span>#핫플 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul><ul class="list-toplist-slider slick-slide" style="width: 481px;" data-slick-index="2" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide12">
+            <li>
+              <img class="center-croping" alt="2020 서울 인기 맛집 TOP 100 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/yxb7plcmqoau2thb.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2247_seoul2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:6,&quot;section_title&quot;:&quot;지역별 인기 맛집&quot;,&quot;position&quot;:4,&quot;link_key&quot;:&quot;O5J9VF_&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="17">2020 서울 인기 맛집 TOP 100</span>
+                      <p class="desc" data-ellipsis-id="47">"2020년 먹킷리스트 메모 부지런히 해두자!"</p>
+                      <p class="hash">
+                          <span>#2020 </span>
+                          <span>#서울 </span>
+                          <span>#2020서울맛집 </span>
+                          <span>#2020서울 </span>
+                          <span>#2020 서울 </span>
+                          <span>#2020 서울맛집 </span>
+                          <span>#서울 맛집 </span>
+                          <span>#핫플레이스 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="2020 제주 인기 맛집 TOP 60 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/7zsdxmpu4kauzpk7.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2264_jeju2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:6,&quot;section_title&quot;:&quot;지역별 인기 맛집&quot;,&quot;position&quot;:5,&quot;link_key&quot;:&quot;PQQTL_E&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="18">2020 제주 인기 맛집 TOP 60</span>
+                      <p class="desc" data-ellipsis-id="48">"제주의 인기 맛집만 쏙쏙 골라 모았다!"</p>
+                      <p class="hash">
+                          <span>#제주도 </span>
+                          <span>#제주 </span>
+                          <span>#서귀포시 </span>
+                          <span>#제주시 </span>
+                          <span>#제주여행 </span>
+                          <span>#제주맛집 </span>
+                          <span>#고기국수 </span>
+                          <span>#돔베고기 </span>
+                          <span>#흑돼지 </span>
+                          <span>#고등어회 </span>
+                          <span>#갈치회 </span>
+                          <span>#몸국 </span>
+                          <span>#오겹살 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul></div></div><ul class="slick-dots" style="display: block;" role="tablist"><li class="slick-active" aria-hidden="false" role="presentation" aria-selected="true" aria-controls="navigation10" id="slick-slide10"><button type="button" data-role="none" role="button" tabindex="0">1</button></li><li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation11" id="slick-slide11"><button type="button" data-role="none" role="button" tabindex="0">2</button></li></ul></div>
+  </div>
+</section><div class="ad_area card_list card_list_btf only-mobile" id="web_mobile-home-card_list_btf-6"><div class="ad_wrap"><div class="content" id="web_mobile-home-card_list_btf-6-content"></div></div></div><div class="ad_area card_list card_list_btf only-desktop" id="web_desktop-home-card_list_btf-6" style="display: none;"><div class="ad_wrap"><div class="content" id="web_desktop-home-card_list_btf-6-content" data-google-query-id="CKyHxrG92OgCFVmylgodPpgFsw" style="display: none;"><div id="google_ads_iframe_/395211568/production/desktop-web.main.sections.btf_2__container__" style="border: 0pt none; width: 728px; height: 90px;"></div></div></div></div>
+
+        <section class="module popular_top_list_wrap">
+  <div class="module_title_wrap">
+    <h2 class="title">메뉴별 인기 맛집</h2>
+  </div>
+  <div class="slider-container toplist-slider">
+    <button class="btn-nav prev slick-arrow slick-disabled" aria-disabled="true" style="display: inline-block;"></button>
+    <button class="btn-nav next slick-arrow" aria-disabled="false" style="display: block;"></button>
+
+    <div class="top_list_slide slick-initialized slick-slider slick-dotted" role="toolbar">
+        
+        
+        
+        
+        
+        
+    <div aria-live="polite" class="slick-list draggable"><div class="slick-track" role="listbox" style="opacity: 1; width: 3060px; transform: translate3d(0px, 0px, 0px);"><ul class="list-toplist-slider slick-slide slick-current slick-active" style="width: 481px;" data-slick-index="0" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide20">
+            <li>
+              <img class="center-croping" alt="2020 세계음식 인기 맛집 TOP 100 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/c9nry4tyestnqm4w.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2249_worldcuisine2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:7,&quot;section_title&quot;:&quot;메뉴별 인기 맛집&quot;,&quot;position&quot;:0,&quot;link_key&quot;:&quot;MEOQDGR&quot;});" tabindex="0">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="19">2020 세계음식 인기 맛집 TOP 100</span>
+                      <p class="desc" data-ellipsis-id="49">"망고플레이트가 선정한 2020년에 꼭 가봐야 할 세계음식 맛집"</p>
+                      <p class="hash">
+                          <span>#2020 </span>
+                          <span>#세계음식 </span>
+                          <span>#2020세계음식맛집 </span>
+                          <span>#2020세계음식 </span>
+                          <span>#2020 세계음식 </span>
+                          <span>#2020 세계음식맛집 </span>
+                          <span>#세계 음식 </span>
+                          <span>#2020 세계 음식 </span>
+                          <span>#2020세계 음식 </span>
+                          <span>#베트남 </span>
+                          <span>#태국 </span>
+                          <span>#멕시칸 </span>
+                          <span>#해외 </span>
+                          <span>#세계 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="2020 수제버거 인기 맛집 TOP 40 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/fsasem-sfssudhwj.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2267_sujeburger2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:7,&quot;section_title&quot;:&quot;메뉴별 인기 맛집&quot;,&quot;position&quot;:1,&quot;link_key&quot;:&quot;XURT9SQ&quot;});" tabindex="0">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="20">2020 수제버거 인기 맛집 TOP 40</span>
+                      <p class="desc" data-ellipsis-id="50">"완벽한 밸런스의 수제버거 맛집 총정리!"</p>
+                      <p class="hash">
+                          <span>#2020 </span>
+                          <span>#2020수제버거 </span>
+                          <span>#2020 수제버거 </span>
+                          <span>#수제버거 </span>
+                          <span>#수제 버거 </span>
+                          <span>#버거 </span>
+                          <span>#햄버거 </span>
+                          <span>#패티 </span>
+                          <span>#감자튀김 </span>
+                          <span>#감튀 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul><ul class="list-toplist-slider slick-slide slick-active" style="width: 481px;" data-slick-index="1" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide21">
+            <li>
+              <img class="center-croping" alt="2020 스시 인기 맛집 TOP 50 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/4_hv8gkwoaf7qs2a.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2270_sushi2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:7,&quot;section_title&quot;:&quot;메뉴별 인기 맛집&quot;,&quot;position&quot;:2,&quot;link_key&quot;:&quot;CPMLUCD&quot;});" tabindex="0">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="21">2020 스시 인기 맛집 TOP 50</span>
+                      <p class="desc" data-ellipsis-id="51">"꼭 그곳에 안가도 이렇게 훌륭한 스시를 맛볼 수 있다구!"</p>
+                      <p class="hash">
+                          <span>#2019스시 </span>
+                          <span>#2019 스시 </span>
+                          <span>#스시 </span>
+                          <span>#초밥 </span>
+                          <span>#오마카세 </span>
+                          <span>#우니 </span>
+                          <span>#사시미 </span>
+                          <span>#회초밥 </span>
+                          <span>#회 </span>
+                          <span>#초밥코스 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="2020 일식 인기 맛집 TOP 100 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/mnthfx2qidgzoezu.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2253_japanese2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:7,&quot;section_title&quot;:&quot;메뉴별 인기 맛집&quot;,&quot;position&quot;:3,&quot;link_key&quot;:&quot;-H9MUIC&quot;});" tabindex="0">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="22">2020 일식 인기 맛집 TOP 100</span>
+                      <p class="desc" data-ellipsis-id="52">"정갈하고 깔끔한 맛! 자꾸 먹고 싶어지는 이것!"</p>
+                      <p class="hash">
+                          <span>#2020일식 </span>
+                          <span>#일식 </span>
+                          <span>#2020 </span>
+                          <span>#2020스시 </span>
+                          <span>#스시 </span>
+                          <span>#라멘 </span>
+                          <span>#덮밥 </span>
+                          <span>#카츠 </span>
+                          <span>#우동 </span>
+                          <span>#오마카세 </span>
+                          <span>#초밥 </span>
+                          <span>#일본요리 </span>
+                          <span>#일본음식 </span>
+                          <span>#일본 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul><ul class="list-toplist-slider slick-slide" style="width: 481px;" data-slick-index="2" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide22">
+            <li>
+              <img class="center-croping" alt="2020 파스타 인기 맛집 TOP 50 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/jgosnw6h5oy6vya9.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2263_pasta2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:7,&quot;section_title&quot;:&quot;메뉴별 인기 맛집&quot;,&quot;position&quot;:4,&quot;link_key&quot;:&quot;KU8_JSK&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="23">2020 파스타 인기 맛집 TOP 50</span>
+                      <p class="desc" data-ellipsis-id="53">"무궁무진한 파스타의 세계에 빠져보실 분?"</p>
+                      <p class="hash">
+                          <span>#2020파스타 </span>
+                          <span>#2020 </span>
+                          <span>#2020스파게티 </span>
+                          <span>#스파게티 </span>
+                          <span>#생면파스타 </span>
+                          <span>#파스타 </span>
+                          <span>#크림파스타 </span>
+                          <span>#토마토파스타 </span>
+                          <span>#이탈리안 </span>
+                          <span>#라쟈냐 </span>
+                          <span>#카르보나라 </span>
+                          <span>#까르보나라 </span>
+                          <span>#봉골레 </span>
+                          <span>#오일파스타 </span>
+                          <span>#링귀네 </span>
+                          <span>#로제파스타 </span>
+                          <span>#로제 </span>
+                          <span>#라구 </span>
+                          <span>#이탈리아음식 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="2020 양식 인기 맛집 TOP 100 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/ezg4hsmu_fb8xabb.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2259_westernfood2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:7,&quot;section_title&quot;:&quot;메뉴별 인기 맛집&quot;,&quot;position&quot;:5,&quot;link_key&quot;:&quot;XTFOZNQ&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="24">2020 양식 인기 맛집 TOP 100</span>
+                      <p class="desc" data-ellipsis-id="54">"고품격 레스토랑부터 캐주얼까지 총정리!"</p>
+                      <p class="hash">
+                          <span>#2020양식 </span>
+                          <span>#2020 </span>
+                          <span>#파스타 </span>
+                          <span>#스테이크 </span>
+                          <span>#이탈리안 </span>
+                          <span>#프랑스음식 </span>
+                          <span>#프렌치 </span>
+                          <span>#이탈리아음식 </span>
+                          <span>#바베큐 </span>
+                          <span>#브런치 </span>
+                          <span>#스파게티 </span>
+                          <span>#리조또 </span>
+                          <span>#라구 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul><ul class="list-toplist-slider slick-slide" style="width: 481px;" data-slick-index="3" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide23">
+            <li>
+              <img class="center-croping" alt="2020 중식 인기 맛집 TOP 100 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/962naqz9f4sjhjlj.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2251_chinese2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:7,&quot;section_title&quot;:&quot;메뉴별 인기 맛집&quot;,&quot;position&quot;:6,&quot;link_key&quot;:&quot;VH1L8ZH&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="25">2020 중식 인기 맛집 TOP 100</span>
+                      <p class="desc" data-ellipsis-id="55">"유산슬? 마라탕? 2020을 강타할 중식 맛집은 여기 다 있지!"</p>
+                      <p class="hash">
+                          <span>#중식 </span>
+                          <span>#중국 </span>
+                          <span>#중국식 </span>
+                          <span>#중국집 </span>
+                          <span>#마라 </span>
+                          <span>#짜장 </span>
+                          <span>#자장 </span>
+                          <span>#짬봉 </span>
+                          <span>#탕수육 </span>
+                          <span>#유린기 </span>
+                          <span>#깐풍 </span>
+                          <span>#멘보샤 </span>
+                          <span>#어향동고 </span>
+                          <span>#가지 </span>
+                          <span>#딤섬 </span>
+                          <span>#만두 </span>
+                          <span>#동파육 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="2020 인기 베이커리 맛집 TOP 90 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/paiymtxavhnoy2zc.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2269_bakery2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:7,&quot;section_title&quot;:&quot;메뉴별 인기 맛집&quot;,&quot;position&quot;:7,&quot;link_key&quot;:&quot;O0DMZOE&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="26">2020 인기 베이커리 맛집 TOP 90</span>
+                      <p class="desc" data-ellipsis-id="56">"빵덕후 취향저격 할 베이커리 맛집 총집합!"</p>
+                      <p class="hash">
+                          <span>#2020 </span>
+                          <span>#2020베이커리 </span>
+                          <span>#2020 베이커리 </span>
+                          <span>#베이커리 </span>
+                          <span>#2020인기베이커리 </span>
+                          <span>#2020 인기베이커리 </span>
+                          <span>#빵 </span>
+                          <span>#식빵 </span>
+                          <span>#빵집 </span>
+                          <span>#브레드 </span>
+                          <span>#크루와상 </span>
+                          <span>#마들렌 </span>
+                          <span>#케이크 </span>
+                          <span>#케익 </span>
+                          <span>#스콘 </span>
+                          <span>#바게트 </span>
+                          <span>#바게뜨 </span>
+                          <span>#과자점 </span>
+                          <span>#치아바타 </span>
+                          <span>#타르트 </span>
+                          <span>#앙버터 </span>
+                          <span>#디저트 </span>
+                          <span>#카페 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul><ul class="list-toplist-slider slick-slide" style="width: 481px;" data-slick-index="4" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide24">
+            <li>
+              <img class="center-croping" alt="2020 피자 인기 맛집 TOP 35 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/rxbxooykcvw3wxia.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2266_pizza2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:7,&quot;section_title&quot;:&quot;메뉴별 인기 맛집&quot;,&quot;position&quot;:8,&quot;link_key&quot;:&quot;BQ9WGVE&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="27">2020 피자 인기 맛집 TOP 35</span>
+                      <p class="desc" data-ellipsis-id="57">"치즈가 쭈욱! 도우가 쫄깃! 메모 필수 인생 피자집 "</p>
+                      <p class="hash">
+                          <span>#2020 </span>
+                          <span>#2020피자 </span>
+                          <span>#피자 </span>
+                          <span>#화덕피자 </span>
+                          <span>#화덕 </span>
+                          <span>#토마토소스피자 </span>
+                          <span>#이탈리안 </span>
+                          <span>#조각피자 </span>
+                          <span>#조각 피자 </span>
+                          <span>#하프 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="2020 인기 카페 TOP 100 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/fdwydbomaytx3au-.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2255_cafe2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:7,&quot;section_title&quot;:&quot;메뉴별 인기 맛집&quot;,&quot;position&quot;:9,&quot;link_key&quot;:&quot;RGTPD0W&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="28">2020 인기 카페 TOP 100</span>
+                      <p class="desc" data-ellipsis-id="58">"2020년 카페 도장깨기 리스트!"</p>
+                      <p class="hash">
+                          <span>#2020 </span>
+                          <span>#2020카페 </span>
+                          <span>#인기카페 </span>
+                          <span>#인기 카페 </span>
+                          <span>#카페 </span>
+                          <span>#디저트 </span>
+                          <span>#찻집 </span>
+                          <span>#차 </span>
+                          <span>#티 </span>
+                          <span>#빙수 </span>
+                          <span>#cafe </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul><ul class="list-toplist-slider slick-slide" style="width: 481px;" data-slick-index="5" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide25">
+            <li>
+              <img class="center-croping" alt="2020 한식 인기 맛집 TOP 100 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/mdw8wnrjbhnth_p7.jpg?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2268_korean2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:7,&quot;section_title&quot;:&quot;메뉴별 인기 맛집&quot;,&quot;position&quot;:10,&quot;link_key&quot;:&quot;OFFYDZX&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="29">2020 한식 인기 맛집 TOP 100</span>
+                      <p class="desc" data-ellipsis-id="59">"한국인은 한식 아니겠어?"</p>
+                      <p class="hash">
+                          <span>#2020 </span>
+                          <span>#한식 </span>
+                          <span>#2020한식맛집 </span>
+                          <span>#2020한식 </span>
+                          <span>#2020 한식 </span>
+                          <span>#2020 한식맛집 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+            <li>
+              <img class="center-croping" alt="2020 다이닝 인기 맛집 TOP 35 사진" src="https://mp-seoul-image-production-s3.mangoplate.com/keyword_search/meta/pictures/hihfj3r04m52zkkz.png?fit=around|600:400&amp;crop=600:400;*,*&amp;output-format=jpg&amp;output-quality=80">
+
+              <a href="/top_lists/2261_dining2020" onclick="trackEvent('CLICK_TOPLIST', {&quot;section_position&quot;:7,&quot;section_title&quot;:&quot;메뉴별 인기 맛집&quot;,&quot;position&quot;:11,&quot;link_key&quot;:&quot;VIGUZXL&quot;});" tabindex="-1">
+                <figure class="ls-item">
+                  <figcaption class="info">
+                    <div class="info_inner_wrap">
+                      <span class="title" data-ellipsis-id="30">2020 다이닝 인기 맛집 TOP 35</span>
+                      <p class="desc" data-ellipsis-id="60">"처음부터 끝까지 만족하는 완벽한 다이닝 코스!"</p>
+                      <p class="hash">
+                          <span>#다이닝 </span>
+                          <span>#파인다이닝 </span>
+                          <span>#컨템포러리 </span>
+                          <span>#모던 </span>
+                          <span>#코스 </span>
+                          <span>#코스요리 </span>
+                          <span>#이탈리안 </span>
+                          <span>#프렌치 </span>
+                          <span>#모던 한식 </span>
+                          <span>#2020망고플레이트인기맛집 </span>
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </a>
+            </li>
+        </ul></div></div><ul class="slick-dots" style="display: block;" role="tablist"><li class="slick-active" aria-hidden="false" role="presentation" aria-selected="true" aria-controls="navigation20" id="slick-slide20"><button type="button" data-role="none" role="button" tabindex="0">1</button></li><li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation21" id="slick-slide21"><button type="button" data-role="none" role="button" tabindex="0">2</button></li><li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation22" id="slick-slide22"><button type="button" data-role="none" role="button" tabindex="0">3</button></li></ul></div>
+  </div>
+</section>
+
+  </article>
+
+    
+
+
+    
+
+</main>
+
+
+<div class="Menu" data-new="true">
+  <header class="Menu__Header">
+    <a href="/" class="Menu__LogoLink">
+      <i class="Menu__Logo sprite"></i>
+    </a>
+
+    <button class="Menu__CloseButton">
+      <i class="Menu__CloseButtonIcon sprite"></i>
+    </button>
+  </header>
+
+  <nav class="Menu__Nav">
+    <ul class="Menu__NavList">
+      <li class="Menu__NavItem">
+        <a href="/" class="Menu__NavLink Menu__HomeLink" onclick="trackEvent('CLICK_HOME','','','PG_MENU');">
+          <span class="Menu__NavText">홈</span>
+        </a>
+      </li>
+
+      <li class="Menu__NavItem">
+        <a href="/top_lists" class="Menu__NavLink Menu__TopListLink" onclick="trackEvent('CLICK_TOP_LIST','','','PG_MENU');">
+          <span class="Menu__NavText">맛집 리스트</span>
+        </a>
+      </li>
+
+      <li class="Menu__NavItem">
+        <a href="/mango_picks" class="Menu__NavLink Menu__StoryLink" onclick="trackEvent('CLICK_MANGOPICK','','','PG_MENU');">
+          <span class="Menu__NavText">망고 스토리</span>
+        </a>
+      </li>
+
+        <li class="Menu__NavItem
+          ">
+          <a href="https://www.mangoforbiz.com/?utm_campaign=20180116v1&amp;utm_medium=main_menu_adinquiry&amp;utm_source=mp_web" class="Menu__NavLink" onclick="trackEvent('CLICK_SALES_LOCAL','','','PG_MENU')">
+            <span class="Menu__NavText">광고 문의</span>
+          </a>
+        </li>
+        <li class="Menu__NavItem
+          Menu__NavItem--New
+          ">
+          <a href="/eat_deals" class="Menu__NavLink" onclick="trackEvent('CLICK_EAT_DEALS','','','PG_MENU')">
+            <span class="Menu__NavText">EAT딜</span>
+          </a>
+        </li>
+
+      <li class="Menu__NavItem">
+        <div class="Menu__NavLink Menu__LoginButton">
+          <span class="Menu__NavText">로그인</span>
+        </div>
+      </li>
+
+      <li class="Menu__NavItem Menu__NavItem--Hide">
+        <div class="Menu__NavLink Menu__LogoutButton">
+          <span class="Menu__NavText">로그아웃</span>
+        </div>
+      </li>
+
+      <li class="Menu__NavItem">
+        <div class="Menu__NavLink Menu__toAppButton">
+          <span class="Menu__NavText">앱에서 보기</span>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+
+
+
+<header class="Header Header--Transparent" data-page="home">
+  <a href="/" class="Header__Logo" onclick="trackEvent('CLICK_HEADER_LOGO');">
+    <i class="Header__LogoIcon"></i>
+  </a>
+
+  <div class="Header__SearchBox">
+    <i class="Header__SearchIcon"></i>
+
+    <label class="Header__SearchInputWrap">
+      <input type="text" class="Header__SearchInput" placeholder="지역, 식당 또는 음식" value="" autocomplete="off" maxlength="50">
+    </label>
+
+    <button class="Header__SearchInputClearButton">CLEAR</button>
+  </div>
+
+  <ul class="Header__MenuList">
+      <li class="Header__MenuItem Header__MenuItem--New">
+        <a href="/eat_deals" class="Header__MenuLink" onclick="trackEvent('CLICK_EAT_DEALS')">
+          <span class="Header__MenuText">EAT딜</span>
+        </a>
+      </li>
+
+    <li class="Header__MenuItem">
+      <a href="/top_lists" class="Header__MenuLink" onclick="trackEvent('CLICK_TOP_LIST')">
+        <span class="Header__MenuText">맛집 리스트</span>
+      </a>
+    </li>
+
+    <li class="Header__MenuItem">
+      <a href="/mango_picks" class="Header__MenuLink" onclick="trackEvent('CLICK_MANGO_PICK')">
+        <span class="Header__MenuText">망고 스토리</span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="Header__IconButtonList">
+    <li class="Header__IconButtonItem only-mobile Header__IconButtonItem--MenuButton MenuButton--New">
+      <button class="MenuButton" onclick="trackEvent('CLICK_MENU');">
+        <i class="MenuButton__Icon"></i>
+      </button>
+    </li>
+
+    <li class="Header__IconButtonItem Header__IconButtonItem--UserRestaurantHistory">
+      <button class="UserProfileButton" onclick="trackEvent('CLICK_PROFILE');">
+        <i class="UserProfileButton__Picture" style="background-image: url(&quot;https://mp-seoul-image-production-s3.mangoplate.com/web/resources/fljgy-rm4b8v6vni.png&quot;), url(&quot;https://mp-seoul-image-production-s3.mangoplate.com/web/resources/fljgy-rm4b8v6vni.png&quot;);"></i>
+        <i class="UserProfileButton__PersonIcon"></i>
+        <span class="UserProfileButton__HistoryCount">0</span>
+      </button>
+    </li>
+
+    <li class="Header__IconButtonItem Header__IconButtonItem--CloseButton Header__IconButtonItem--Hide">
+      <button class="Header__CloseButton"></button>
+    </li>
+  </ul>
+</header>
+
+<div class="KeywordSuggester">
+  <div class="KeywordSuggester__BlackDeem"></div>
+
+  <div class="KeywordSuggester__Container">
+    <nav class="KeywordSuggester__TabNavigation">
+      <ul class="KeywordSuggester__TabList">
+        <li class="KeywordSuggester__TabItem">
+          <div class="KeywordSuggester__TabButton KeywordSuggester__RecommendTabButton" onclick="trackEvent('CLICK_SEARCH_RECOMMEND')" role="button">
+            추천 검색어
+          </div>
+        </li>
+
+        <li class="KeywordSuggester__TabItem">
+          <div class="KeywordSuggester__TabButton KeywordSuggester__PopularTabButton" onclick="trackEvent('CLICK_SEARCH_POPULAR')" role="button">
+            인기 검색어
+          </div>
+        </li>
+
+        <li class="KeywordSuggester__TabItem">
+          <div class="KeywordSuggester__TabButton KeywordSuggester__HistoryTabButton" onclick="trackEvent('CLICK_SEARCH_RECENT')" role="button">
+            최근 검색어
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="KeywordSuggester__SuggestKeywordListWrap" data-simplebar="init"><div class="simplebar-wrapper" style="margin: 0px -24px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: auto; overflow: hidden;"><div class="simplebar-content KeywordSuggester__SuggestKeywordList--FixedHeight" style="padding: 0px 24px;">
+      <p class="KeywordSuggester__EmptyKeywordMessage">최근 검색어가 없습니다.</p>
+
+      <div class="KeywordSuggester__Footer">
+        <button class="KeywordSuggester__RemoveAllHistoryKeywordButton">
+          x clear all
+        </button>
+      </div>
+    </div></div></div></div><div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div></div>
+  </div>
+</div>
+
+<div class="UserRestaurantHistory">
+  <div class="UserRestaurantHistory__BlackDeem"></div>
+
+  <div class="UserRestaurantHistory__Container">
+    <i class="UserRestaurantHistory__Triangle"></i>
+
+    <ul class="UserRestaurantHistory__TabList">
+      <li class="UserRestaurantHistory__TabItem UserRestaurantHistory__TabItem--Viewed" onclick="trackEvent('CLICK_RECENT_TAB')">
+        <button class="UserRestaurantHistory__TabButton">최근 본 맛집 </button>
+      </li>
+
+      <li class="UserRestaurantHistory__TabItem UserRestaurantHistory__TabItem--Wannago" onclick="trackEvent('CLICK_WAANGO_TAB')">
+        <button class="UserRestaurantHistory__TabButton">가고싶다</button>
+      </li>
+    </ul>
+
+    <div class="UserRestaurantHistory__HistoryContainer">
+      <div class="UserRestaurantHistory__HistoryHeader">
+        <button class="UserRestaurantHistory__ClearAllHistoryButton" onclick="trackEvent('CLICK_VIEWED_RESTAURANT_CLEAR')">
+          x clear all
+        </button>
+      </div>
+
+      <ul class="UserRestaurantHistory__RestaurantList">
+
+      </ul>
+
+      <div class="UserRestaurantHistory__EmptyViewedRestaurantHistory">
+        <span class="UserRestaurantHistory__EmptyViewedRestaurantHistoryTitle">
+          거기가 어디였지?
+        </span>
+
+        <p class="UserRestaurantHistory__EmptyViewedRestaurantHistoryDescription">
+          내가 둘러 본 식당이 이 곳에 순서대로 기록됩니다.
+        </p>
+      </div>
+
+      <div class="UserRestaurantHistory__EmptyWannagoRestaurantHistory">
+        <img class="UserRestaurantHistory__EmptyWannagoRestaurantHistoryImage" src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/kycrji1bsrupvbem.png?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" alt="wannago empty star">
+        <p class="UserRestaurantHistory__EmptyWannagoRestaurantHistoryTitle">격하게 가고싶다..</p>
+        <p class="UserRestaurantHistory__EmptyWannagoRestaurantHistoryDescription">
+          식당의 ‘별’ 아이콘을 누르면 가고싶은 곳을 쉽게 저장할 수 있습니다.
+        </p>
+      </div>
+    </div>
+
+    <footer class="UserRestaurantHistory__Footer">
+      <button class="UserRestaurantHistory__LoginButton UserRestaurantHistory__LoginButton--Show" onclick="trackEvent('CLICK_LOGIN')">로그인</button>
+      <button class="UserRestaurantHistory__LogoutButton" onclick="trackEvent('CLICK_LOGOUT')">logout</button>
+    </footer>
+  </div>
+</div>
+
+
+<div class="wannago_go_app_popup">
+  <div class="wannago_go_app_popup_inner">
+    <img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/5rh5cjpxshg5kw7o.png?fit=around|:&amp;crop=:;*,*&amp;output-format=png&amp;output-quality=80" alt="wannago_go_app_popup_main_image" class="wannago_go_app_popup_main_image">
+
+    <p class="wannago_go_app_popup_text">더 많은 가고싶다를 원한다면<br>망고플레이트 앱을 다운받아 보세요</p>
+    <button class="wannago_go_app_popup_btn" onclick="trackEvent('CLICK_WANNAGO_MORE_DWN');go_to_app_or_market(this);">
+      <img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/nsfd8y92hyjmlhtd.png?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" alt="wannago_go_app_popup_btn_icon" class="wannago_go_app_popup_btn_icon">
+      앱 다운받기, 클릭!
+    </button>
+  </div>
+
+  <button class="close_btn">
+
+  </button>
+</div>
+
+<div class="black_screen"></div>
+
+<div class="wannago_login_popup">
+  <button class="close_btn"></button>
+
+  <div class="wannago_login_popup_inner">
+    <img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/belwdh7sngu0nq9r.png?fit=around|:&amp;crop=:;*,*&amp;output-format=png&amp;output-quality=80" alt="wannago_login_popup_main_img" class="wannago_login_popup_main_img">
+
+    <div class="wannago_login_popup_main_tab">
+      <div class="wannago_login_popup_signin tab selected" data-tab_name="signin">로그인</div>
+      <div class="wannago_login_popup_signup tab" data-tab_name="signup">회원가입</div>
+    </div>
+
+    <div class="wannago_login_popup_msg">
+      로그인 해보세요<br>가고싶은 곳을 저장할 수 있어요
+    </div>
+
+    <div class="wannago_login_popup_sign_bar">
+      <button class="wannago_login_popup_sign facebook">
+        <div class="wannago_login_popup_sign_wrap">
+          <img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/3pe2me0b7amj8fw9.png?fit=around|:&amp;crop=:;*,*&amp;output-format=png&amp;output-quality=80" alt="wannago_login_popup_sign_facebook_icon">
+          <span class="wannago_login_popup_facebook_text">클릭 한 번이면 페이스북 로그인</span>
+        </div>
+      </button>
+
+      <button class="wannago_login_popup_sign kakao">
+        <div class="wannago_login_popup_sign_wrap">
+          <img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/7nvfge9jjvu6ngsw.png?fit=around|:&amp;crop=:;*,*&amp;output-format=png&amp;output-quality=80" alt="wannago_login_popup_sign_kakao_icon">
+          <span class="wannago_login_popup_kakao_text">클릭 한 번이면 카카오톡 로그인</span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="black_screen"></div>
+
+
+<script src="/assets/mp20/event/page/home_first_load-9f7362a99deeee10de21fecea61cde7b596c039fddc921be0392f79c3d2fdd6d.js"></script>
+
+<!-- 하단 영역 -->
+<footer class="footer">
+  <div class="inner">
+    <div class="mp_logo">
+      <a href="/" class="btn-mp">
+        <img class="mp_logo_img" src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/mangoplate-gray-logo.svg" alt="mangoplate logo">
+      </a>
+      <p class="subtitle">Eat, Share, Be Happy.</p>
+    </div>
+
+    <button class="btn-mp-app" data-event_term="V1" data-event_name="CLICK_DOWNLOAD_BOTTOM_DEFAULT" onclick="trackEvent('CLICK_DOWNLOAD_BOTTOM_DEFAULT'); go_to_app_or_market(this);">
+      망고플레이트 앱에서 열기
+    </button>
+
+    <p class="sns-shortcut">
+      <a class="btn blog" href="http://blog.mangoplate.com" target="_blank" onclick="trackEvent('CLICK_SHARE_BLOG');">
+        망고플레이트 네이버 블로그 계정으로 바로가기
+      </a>
+
+      <a class="btn facebook" href="https://www.facebook.com/mangoplate" target="_blank" onclick="trackEvent('CLICK_SHARE_FACEBOOK');">
+        망고플레이트 페이스북 계정으로 바로가기
+      </a>
+
+      <a class="btn instagram" href="https://instagram.com/mangoplate/" target="_blank" onclick="trackEvent('CLICK_SHARE_INSTA');">
+        망고플레이트 인스타그램 계정으로 바로가기
+      </a>
+    </p>
+
+    <nav class="links-external">
+      <ul class="list-links">
+          <li>
+            <a href="/company">
+              회사소개
+            </a>
+          </li>
+
+          <li>
+            <a href="/careers">
+              망고플레이트 채용
+            </a>
+          </li>
+
+            <li>
+              <a href="/investment">
+                투자 정보
+              </a>
+            </li>
+
+          <li class="only-desktop">
+            <a href="/etc/download_company_ci" target="_blank">
+              브랜드 가이드라인
+            </a>
+          </li>
+
+            <li>
+              <a href="https://www.mangoforbiz.com/?utm_campaign=main_bottom_business&amp;utm_medium=bizhome&amp;utm_source=web" target="_blank">
+                망고플레이트 비즈니스
+              </a>
+            </li>
+        
+          <li>
+            <a href="https://www.mangoforbiz.com/?utm_campaign=20180116v1&amp;utm_medium=main_bottom_adinquiry&amp;utm_source=mp_web" target="_blank">
+              광고 문의
+            </a>
+          </li>
+
+      </ul>
+
+      <ul class="list-links">
+            <li>
+              <a href="/notice" target="_blank">
+                공지사항
+              </a>
+            </li>
+
+            <li>
+              <a class="" href="/terms/contract" onclick="trackEvent('CLICK_TERMS', 'contract')" target="_blank">
+                이용약관
+              </a>
+            </li>
+            <li>
+              <a class="" href="/terms/contract_non_signup" onclick="trackEvent('CLICK_TERMS', 'contract_non_signup')" target="_blank">
+                비회원 이용자 이용정책
+              </a>
+            </li>
+            <li>
+              <a class="bold" href="/terms/privacy" onclick="trackEvent('CLICK_TERMS', 'privacy')" target="_blank">
+                개인정보처리방침
+              </a>
+            </li>
+            <li>
+              <a class="" href="/terms/location" onclick="trackEvent('CLICK_TERMS', 'location')" target="_blank">
+                위치기반서비스 이용약관
+              </a>
+            </li>
+            <li>
+              <a class="" href="/terms/community_guidelines" onclick="trackEvent('CLICK_TERMS', 'community_guidelines')" target="_blank">
+                커뮤니티 가이드라인
+              </a>
+            </li>
+
+            <li>
+              <a href="http://wp.me/p7PaEV-iA" target="_blank">
+                홀릭 소개
+              </a>
+            </li>
+
+            <li>
+              <a href="/company#contact">
+                문의하기
+              </a>
+            </li>
+      </ul>
+    </nav>
+
+    <div class="sitemap-location-keywords">
+      <div class="keyword_wrap">
+        <span class="keyword">인기지역 : </span>
+            <a class="keyword" target="_blank" href="/search/이태원" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:0,&quot;keyword&quot;:&quot;이태원&quot;})">
+              이태원
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/홍대" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:1,&quot;keyword&quot;:&quot;홍대&quot;})">
+              홍대
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/강남역" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:2,&quot;keyword&quot;:&quot;강남역&quot;})">
+              강남역
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/가로수길" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:3,&quot;keyword&quot;:&quot;가로수길&quot;})">
+              가로수길
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/신촌" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:4,&quot;keyword&quot;:&quot;신촌&quot;})">
+              신촌
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/명동" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:5,&quot;keyword&quot;:&quot;명동&quot;})">
+              명동
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/대학로" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:6,&quot;keyword&quot;:&quot;대학로&quot;})">
+              대학로
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/연남동" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:7,&quot;keyword&quot;:&quot;연남동&quot;})">
+              연남동
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/부산" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:8,&quot;keyword&quot;:&quot;부산&quot;})">
+              부산
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/합정" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:9,&quot;keyword&quot;:&quot;합정&quot;})">
+              합정
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/대구" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:10,&quot;keyword&quot;:&quot;대구&quot;})">
+              대구
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/여의도" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:11,&quot;keyword&quot;:&quot;여의도&quot;})">
+              여의도
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/건대" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:12,&quot;keyword&quot;:&quot;건대&quot;})">
+              건대
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/광화문" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:13,&quot;keyword&quot;:&quot;광화문&quot;})">
+              광화문
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/일산" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:14,&quot;keyword&quot;:&quot;일산&quot;})">
+              일산
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/제주" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:15,&quot;keyword&quot;:&quot;제주&quot;})">
+              제주
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/경리단길" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:16,&quot;keyword&quot;:&quot;경리단길&quot;})">
+              경리단길
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/한남동" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:17,&quot;keyword&quot;:&quot;한남동&quot;})">
+              한남동
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/삼청동" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:18,&quot;keyword&quot;:&quot;삼청동&quot;})">
+              삼청동
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/대전" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:19,&quot;keyword&quot;:&quot;대전&quot;})">
+              대전
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/종로" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:20,&quot;keyword&quot;:&quot;종로&quot;})">
+              종로
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/서촌" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:21,&quot;keyword&quot;:&quot;서촌&quot;})">
+              서촌
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/잠실" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:22,&quot;keyword&quot;:&quot;잠실&quot;})">
+              잠실
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/사당역" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:23,&quot;keyword&quot;:&quot;사당역&quot;})">
+              사당역
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/인천" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:24,&quot;keyword&quot;:&quot;인천&quot;})">
+              인천
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/코엑스" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:25,&quot;keyword&quot;:&quot;코엑스&quot;})">
+              코엑스
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/상수" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:26,&quot;keyword&quot;:&quot;상수&quot;})">
+              상수
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/서래마을" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:27,&quot;keyword&quot;:&quot;서래마을&quot;})">
+              서래마을
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/송도" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:28,&quot;keyword&quot;:&quot;송도&quot;})">
+              송도
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/왕십리" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:29,&quot;keyword&quot;:&quot;왕십리&quot;})">
+              왕십리
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/분당" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:30,&quot;keyword&quot;:&quot;분당&quot;})">
+              분당
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/혜화" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:31,&quot;keyword&quot;:&quot;혜화&quot;})">
+              혜화
+            </a>
+            |
+            <a class="keyword" target="_blank" href="/search/고속터미널" onclick="trackEvent('CLICK_FOOTER_POPULAR_LOCATION', {&quot;position&quot;:32,&quot;keyword&quot;:&quot;고속터미널&quot;})">
+              고속터미널
+            </a>
+                  </div>
+    </div>
+
+    <div class="language-copyrights">
+      <p class="select-language">
+        <a href="/" class="selected">
+          한국어
+        </a>
+
+        <a href="/en">
+          English
+        </a>
+
+        <a href="/zh">
+          简体中文
+        </a>
+      </p>
+
+      <small>
+        <p>
+          
+          ㈜ 망고플레이트<br>서울특별시 서초구 강남대로99길 53, 6층 (잠원동, 삼우빌딩)<br>대표이사: OH JOON HWAN(오준환)<br>사업자 등록번호: 211-88-92374 <a href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=2118892374" target="_blank">[사업자정보확인]</a><br>통신판매업 신고번호: 2014-서울강남-02615<br>고객센터: 02-565-5988<br><br>
+          <span class="copyrights">© 2020 MangoPlate Co., Ltd. All rights reserved.</span>
+        </p>
+      </small>
+    </div>
+  </div>
+</footer>
+
+<div class="account_terms_layer">
+  <img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/ojlwsg-0cpi1dz8p.png?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" alt="checkbox" style="position:absolute;top: -9999px;display: block">
+
+  <div class="account_terms_layer_header">
+    <button class="close_btn">
+      <img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/zva6r-2wxzbxhw_n.png?fit=around|*:*&amp;crop=*:*;*,*&amp;output-format=jpg&amp;output-quality=80" alt="arrow">
+    </button>
+
+    <span>이용약관 동의</span>
+  </div>
+
+  <div class="account_terms_layer_content">
+    <div class="account_terms_layer_content_location">
+      <p class="terms_content">
+        전체 동의
+      </p>
+
+      <div class="check_area">
+        <button class="check_terms_btn all_terms_btn" data-ischecked="false">
+          <img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/24_jjq1lbdgzpdnp.png?fit=around|:&amp;crop=:;*,*&amp;output-format=png&amp;output-quality=80" alt="arrow" title="">
+        </button>
+      </div>
+    </div>
+
+    <p class="sub_content">
+      망고플레이트 서비스 이용을 위해 다음의 약관에 동의해 주세요.
+    </p>
+
+    <hr class="seper_hr">
+
+    <ul class="account_terms_items">
+
+    </ul>
+  </div>
+
+  <button class="account_terms_layer_ok_btn" disabled="true">확인</button>
+</div>
+
+<aside class="pop-context pg-login" style="display: none;">
+  <div class="contents-box">
+    <button class="btn-nav-close" onclick="mp_login_layer.close_layer();">
+      닫기
+    </button>
+
+    <p class="title">로그인</p>
+
+      <p class="message">
+       로그인 하면 가고싶은 식당을 <br>저장할 수 있어요
+      </p>
+
+      <p>
+        <a class="btn-login facebook" href="#" onclick="trackEvent('CLICK_LOGIN_FACEBOOK','','','PU_LOGIN');">
+          <span class="text">페이스북으로 시작하기</span>
+        </a>
+
+        <a class="btn-login kakaotalk" href="#" onclick="trackEvent('CLICK_LOGIN_KAKAO','','','PU_LOGIN');">
+          <span class="text">카카오톡으로 시작하기</span>
+        </a>
+      </p>
+  </div>
+</aside>
+
+<div class="login_loading_area">
+  <img src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/ldcyd5lxlvtlppe3.gif?fit=around|:&amp;crop=:;*,*&amp;output-format=gif&amp;output-quality=80" alt="login loading bar">
+</div>
+
+<!-- Start Alexa Certify Javascript -->
+<script type="text/javascript">
+	_atrk_opts = { atrk_acct:"hTunm1akKd60uG", domain:"mangoplate.com",dynamic: true};
+	(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=hTunm1akKd60uG" style="display:none" height="1" width="1" alt="alexa analytics" /></noscript>
+<!-- End Alexa Certify Javascript -->
+
+
+<div class="dfp_ad_front_popup web_desktop_all all only-desktop" style="display: block;">  <div class="dfp_ad_front_banner_wrap">
+    <div class="dfp_ad_front_banner_content">
+      <div class="ad_area" id="web_desktop-init-all">
+        <div class="ad_wrap"><div class="content" id="web_desktop-init-all-content" data-google-query-id="CK2HxrG92OgCFVmylgodPpgFsw"><div id="google_ads_iframe_/395211568/init/desktop_all_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/395211568/init/desktop_all_0" title="3rd party ad content" name="google_ads_iframe_/395211568/init/desktop_all_0" width="1" height="1" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" srcdoc="" data-google-container-id="5" style="border: 0px; vertical-align: bottom;" data-load-complete="true"></iframe></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dfp_ad_front_popup web_mobile_all all only-mobile">  <div class="dfp_ad_front_banner_wrap">
+    <div class="dfp_ad_front_banner_content">
+      <div class="ad_area" id="web_mobile-init-all">
+        <div class="ad_wrap"><div class="content" id="web_mobile-init-all-content"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+						(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+					m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-39170270-2', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<script src="/assets/dist/vendor.all.min-7634bfbfc1d911db0d45d14ad8ca4fa5522c68a3f28601496b5de525cab4be1d.js"></script>
+<!-- Facebook SDK -->
+<script id="facebook-jssdk" src="//connect.facebook.net/ko_KR/sdk.js"></script>
+<script type="text/javascript">
+  // \x3C/ is <
+  if (!window.FB) {
+    $("#facebook-jssdk").remove();
+    document.write('<script id="facebook-jssdk" src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/facebook_sdk_20190510.js">\x3C/script>')
+  }
+</script>
+
+<!-- Kakao SDK -->
+<script src="https://mp-seoul-image-production-s3.mangoplate.com/web/resources/js/kakao-sdk/1.36.6/kakao.min.js"></script>
+<script type="text/javascript">
+  // \x3C/ is <
+  if (!window.Kakao) {
+    document.write('<script src="//developers.kakao.com/sdk/js/kakao.min.js">\x3C/script>')
+  }
+
+  // I18n Default Setting
+  if (window.I18n) {
+    I18n.defaultLocale = "ko";
+    I18n.locale = "ko";
+  }
+</script>
+
+<script type="text/javascript" src="https://cdn.branch.io/branch-latest.min.js"></script>
+<!-- Branch io SDK -->
+<script type="text/javascript" charset="utf-8">
+  // \x3C/ is <
+  if (!window.branch) {
+    document.write('<script src="/assets/vendor/branch_io.min.js">\x3C/script>')
+  }
+</script>
+
+<script src="/assets/dist/home.all.min-9ac227d84b80e2185b6b99df4c85191ea5a38302defaeb391d37cd1e7a2c80f2.js"></script>
+<script src="/packs/home-6b12b663f5873201ae89.js"></script>
+
+
+
+
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div></div><iframe id="google_osd_static_frame_283929418379" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;"></iframe></body></html>
