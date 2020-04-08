@@ -822,15 +822,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     }
     ```
 
-    
-
-    ```json
-    {
-    	"story": 1,
-    	"content": "조용한 식당"
-    }
-    ```
-
 - Response Sample
 
   ```json
@@ -1029,6 +1020,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - User의 계정 정보와 현재까지 리본 사용내역 객체별로 정보 표시
 - User의 계정이 처음 생성되면 paidRibbon, currentRibbon 10개씩 기본 지급 설정
+  - User의 계정이 처음 생성되면 paidRibbon, currentRibbon 10개씩 기본 지급 설정
   
   ```json
   {
