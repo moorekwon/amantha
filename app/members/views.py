@@ -82,7 +82,12 @@ class AuthTokenAPIView(APIView):
 class LogoutUserAPIView(APIView):
     def get(self, request):
         user = request.user
-        token = Token.objects.get(user=user)
+        token = Token.objects.filter(user=user)
+
+        if not token:
+            print('유후')
+            return Response('인증 토큰이 없는 유저입니다.')
+
         token.delete()
         return Response('로그아웃 되었습니다.')
 
