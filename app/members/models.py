@@ -54,7 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         star = [int(partner.star) for partner in partners]
         if len(star) > 0:
             print('sum(star) / len(star) >> ', sum(star) / len(star))
-            return sum(star) / len(star)
+            return format(sum(star) / len(star), '.2f')
         else:
             print(0)
             return 0
@@ -243,10 +243,11 @@ class SelectTag(models.Model):
 # 첫 유저 생성 시 바로 생성되어야 함 (default 값으로)
 class UserRibbon(models.Model):
     WHERE = (
-        (1, '아만다 픽 프로필 확인'),
-        (2, '회원심사 리본 지급'),
-        (3, '상위 10% 이성(무료)'),
-        (4, '테마 소개 프로필 확인'),
+        (1, '관리자 기본 지급'),
+        (2, '아만다 픽 프로필 확인'),
+        (3, '회원심사 리본 지급'),
+        (4, '상위 10% 이성(무료)'),
+        (5, '테마 소개 프로필 확인'),
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -254,12 +255,12 @@ class UserRibbon(models.Model):
     paid_ribbon = models.IntegerField(default=10)
     current_ribbon = models.PositiveIntegerField(default=10)
     when = models.DateTimeField(auto_now=True)
-    where = models.CharField(choices=WHERE, max_length=60, default='관리자 기본 지급')
+    where = models.CharField(choices=WHERE, max_length=60, default=1)
 
     # 첫 관리자 기본 지급 제외, 리본 지급 추가때마다 이전 current_ribbon에서 현재 paid_ribbon을 빼 현재 current_ribbon에 저장
     def save(self, *args, **kwargs):
         # where의 각 인덱스별 paid_ribbon 지정
-        pay = [-3, -5, -5, -7]
+        pay = [10, -3, -5, -5, -7]
         rib = pay[int(self.where) - 1]
         self.paid_ribbon = rib
 
