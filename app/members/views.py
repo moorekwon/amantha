@@ -221,7 +221,6 @@ class UserStoryAPIView(APIView):
 
         user_stories = user.selectstory_set.all()
         user_story_numbers = set()
-
         # 현재 유저가 등록한 스토리 번호 불러와 저장
         for user_story in user_stories:
             user_story_numbers.add(user_story.story)
@@ -232,6 +231,29 @@ class UserStoryAPIView(APIView):
 
         if serializer.is_valid():
             story = serializer.save(user=user)
+
+            data = {
+                'story': UserStorySerializer(story).data,
+            }
+            return Response(data)
+        return Response(serializer.errors)
+
+    # 현재 유저의 등록되어있는 스토리에 접근하여 content 수정
+    def patch(self, request):
+        user = request.user
+        story = request.data['story']
+
+        user_stories = SelectStory.objects.filter(user=user, story=story)
+
+        if not user_stories:
+            return Response('등록되어있지 않은 스토리 입니다.')
+
+        # 아래 코드는 user_stories의 마지막번째를 불러옴
+        # 어차피 user_stories는 한 개밖에 없을 것이기 때문에, user_stories[0]을 불러와도 상관은 없을 것임
+        serializer = UserStorySerializer(user_stories[len(user_stories) - 1], data=request.data)
+
+        if serializer.is_valid():
+            story = serializer.save()
 
             data = {
                 'story': UserStorySerializer(story).data,
