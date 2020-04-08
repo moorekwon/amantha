@@ -378,6 +378,66 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     **form-data** 체크, KEY에서 **File** 체크, VALUE에서 이미지 파일 선택 ***(POSTMAN에서는 파일이름이 한글일 경우 에러가 뜸..)***
 
     |      |      |
+    | ---- | ---- |
+    |      |      |
+    |      |      |
+
+- Response Sample
+
+  ```json
+  {
+      "images": [
+          {
+              "pk": 1,
+              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T074656Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8c1056ebf35e6ff001727ebc0842c961388c0a9b6e84a1ab2a842dfaddef6b31"
+          },
+          {
+              "pk": 2,
+              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T074656Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=4351590aa924f5321bc742d4d4e2a45115ed23457ed62cab98325ee3877276c2"
+          }
+      ]
+  }
+  ```
+
+
+
+### User Image Add
+
+- URL: `/user/image/`
+
+- Method: `POST`
+
+- User별 image들 추가
+
+- 보낸 이미지 파일(들)은 AWS S3 버킷에 업로드됨
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/image/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    **form-data** 체크, KEY에서 **File** 체크, VALUE에서 이미지 파일 선택 ***(POSTMAN에서는 파일이름이 한글일 경우 에러가 뜸..)***
+
+    |      |      |
   | ---- | ---- |
     |      |      |
     |      |      |
