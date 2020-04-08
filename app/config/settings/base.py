@@ -63,7 +63,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
-
+    'phone_field',
     'django_extensions',
 
     'members.apps.MembersConfig',

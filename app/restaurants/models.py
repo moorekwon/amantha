@@ -1,5 +1,5 @@
 from django.db import models
-# from phone_field import PhoneField
+from phone_field import PhoneField
 
 
 # from phonenumber_field.formfields import PhoneNumberField
@@ -11,7 +11,7 @@ class Restaurant(models.Model):
     name_address1_unique = models.CharField(max_length=100, unique=True, verbose_name='primary_key')
     address2 = models.CharField(default='없음', max_length=100, blank=True, verbose_name='식당지번주소')
     point = models.DecimalField(max_digits=5, decimal_places=3, default=0, blank=True, verbose_name='식당평점')
-    # phone = PhoneField(default='없음', blank=True, null=True, help_text='Contact phone number')
+    phone = PhoneField(default='없음', blank=True, null=True, help_text='Contact phone number')
     price_range = models.CharField(default='없음', max_length=100, blank=True, null=True, verbose_name='식당가격대')
     parking = models.CharField(default='없음', max_length=200, blank=True, null=True, verbose_name='주차여부')
     opening_hours = models.CharField(default='없음', max_length=100, blank=True, null=True, verbose_name='오픈시간')
