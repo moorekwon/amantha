@@ -35,7 +35,7 @@ class RestaurantCategoryListCreateAPIView(generics.ListCreateAPIView):
             return RestaurantCategoryCreateSerializer
 
     def perform_create(self, serializer):
-        name = self.request.data['restaurant_name']
+        name = self.request.data['restaurant']
         restaurant = Restaurant.objects.get(name=name)
         serializer.save(restaurant=restaurant)
 
