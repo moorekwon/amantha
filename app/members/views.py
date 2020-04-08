@@ -184,8 +184,13 @@ class UserInfoAPIView(APIView):
 
     # 상세프로필 수정
     def patch(self, request):
-        info = UserInfo.objects.get(user=request.user)
-        serializer = UserInfoSerializer(info, data=request.data, partial=True)
+        info = UserInfo.objects.filter(user=request.user)
+        print('info >> ', info)
+
+        if not info:
+            return Response('등록된 프로필 정보가 없습니다. 프로필을 생성해 주세요.')
+
+        serializer = UserInfoSerializer(info[0], data=request.data, partial=True)
 
         if serializer.is_valid():
             info = serializer.save()
