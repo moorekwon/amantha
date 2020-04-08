@@ -381,15 +381,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   | ------ | --------- |
     | images | hjk2.jpeg |
     | images | hjk.jpg   |
-    
-    
-    
-    ****
-    
-    | KEY    | VALUE     |
-    | ------ | --------- |
-    | images | hjk2.jpeg |
-    | images | hjk.jpg   |
   
 - Response Sample
 
