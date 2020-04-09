@@ -4,8 +4,8 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
+
 # Create your models here.
-from rest_framework.fields import MultipleChoiceField
 
 
 class UserManager(BaseUserManager):
@@ -46,17 +46,19 @@ class User(AbstractBaseUser, PermissionsMixin):
                                         symmetrical=False)
     like_users = models.ManyToManyField('self', through='SendLike', related_name='send_me_like_users',
                                         symmetrical=False)
+    # tags = models.ManyToManyField('Tag', related_name='my_tags')
+    date_style_tag = models.ManyToManyField('Tag', related_name='my_date_style_tags')
+    life_style_tag = models.ManyToManyField('Tag', related_name='my_life_style_tags')
+    charm_tag = models.ManyToManyField('Tag', related_name='my_charm_tags')
+    relationship_style_tag = models.ManyToManyField('Tag', related_name='my_relationship_style_tags')
 
     # 유저의 현재 평균 별점
     def average_star(self):
         partners = self.partner_sendstar_set.all()
-        print('partners >> ', partners)
         star = [int(partner.star) for partner in partners]
         if len(star) > 0:
-            print('sum(star) / len(star) >> ', sum(star) / len(star))
             return format(sum(star) / len(star), '.2f')
         else:
-            print(0)
             return 0
 
     # 유저의 현재 나이
@@ -68,6 +70,26 @@ class User(AbstractBaseUser, PermissionsMixin):
             return int(today_year) - int(birth_year) + 1
         return None
 
+
+class Tag(models.Model):
+    # TYPE = (
+    #     (1, '데이트 스타일'),
+    #     (2, '연애 스타일'),
+    #     (3, '나만의 매력'),
+    #     (4, '라이프 스타일')
+    # )
+    #
+    # type = models.CharField(choices=TYPE, max_length=30, blank=True)
+    name = models.CharField(max_length=60, blank=True)
+
+
+# 태그 등록
+# class SelectTag(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     date_style = models.CharField(max_length=60, blank=True)
+#     relationship_style = models.CharField(max_length=60, blank=True)
+#     life_style = models.CharField(max_length=60, blank=True)
+#     charm = models.CharField(max_length=60, blank=True)
 
 # 유저 생성 후 기입할 프로필 정보
 class UserInfo(models.Model):
@@ -159,14 +181,11 @@ class UserInfo(models.Model):
     # 유저의 현재 프로필 완성도
     def profile_percentage(self):
         story = self.user.selectstory_set.all()
-        date_style = self.user.selecttag_set.all()
-        life_style = self.user.selecttag_set.all()
-        charm = self.user.selecttag_set.all()
-        relationship_style = self.user.selecttag_set.all()
+        tag = self.user.selecttag_set.all()
 
         info_list = [self.job, self.company, self.school, self.region, self.body_shape, self.major, self.tall,
                      self.personality, self.blood_type, self.drinking, self.smoking, self.religion, self.introduce,
-                     story, date_style, life_style, charm, relationship_style]
+                     story, tag]
 
         return_list = []
         for infos in info_list:
@@ -211,60 +230,17 @@ class SelectStory(models.Model):
     created = models.DateTimeField(auto_now=True)
 
 
-# 태그 등록
-class SelectTag(models.Model):
-    DATE_STYLE = (
-        (1, '인스타감성 카페가기'),
-        (2, '퇴근 후 치맥하기'),
-    )
-    RELATIONSHIP_STYLE = (
-        (1, '연상이 좋아요'),
-        (2, '연상보다 연하'),
-    )
-    LIFE_STYLE = (
-        (1, '패션에 관심 많아요'),
-        (2, '여행 자주 가요'),
-    )
-    CHARM = (
-        (1, '고기를 잘 구워요'),
-        (2, '커리어 중요해요'),
-    )
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date_style = MultipleChoiceField(choices=DATE_STYLE, allow_blank=True)
-    relationship_style = MultipleChoiceField(choices=RELATIONSHIP_STYLE, allow_blank=True)
-    life_style = MultipleChoiceField(choices=LIFE_STYLE, allow_blank=True)
-    charm = MultipleChoiceField(choices=CHARM, allow_blank=True)
-    created = models.DateTimeField(auto_now=True)
-
-
 # one-to-one 관계
 # 리본 사용
 # 첫 유저 생성 시 바로 생성되어야 함 (default 값으로)
 class UserRibbon(models.Model):
-    # WHERE = (
-    #     (1, '관리자 기본 지급'),
-    #     (2, '아만다 픽 프로필 확인'),
-    #     (3, '회원심사 리본 지급'),
-    #     (4, '상위 10% 이성(무료)'),
-    #     (5, '테마 소개 프로필 확인'),
-    # )
-
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # paid_ribbon과 where를 연결시켜줘야 하는데...
     paid_ribbon = models.IntegerField()
     current_ribbon = models.PositiveIntegerField()
     when = models.DateTimeField(auto_now=True)
 
-    # where = models.CharField(choices=WHERE, max_length=60, default=1)
-
     # 첫 관리자 기본 지급 제외, 리본 지급 추가때마다 이전 current_ribbon에서 현재 paid_ribbon을 빼 현재 current_ribbon에 저장
     def save(self, *args, **kwargs):
-        # where의 각 인덱스별 paid_ribbon 지정
-        # pay = [10, -3, -5, -5, -7]
-        # rib = pay[int(self.where) - 1]
-        # self.paid_ribbon = rib
-
         ribbons = UserRibbon.objects.filter(user=self.user)
 
         if len(ribbons) == 0:
@@ -274,11 +250,6 @@ class UserRibbon(models.Model):
 
             self.current_ribbon = pre.current_ribbon + self.paid_ribbon
         super().save(*args, **kwargs)
-
-
-# 리본 결제
-# class PayRibbon(models.Model):
-#     pass
 
 
 # 좋아요 주기

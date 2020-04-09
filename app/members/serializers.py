@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from members.models import UserImage, SelectStory, UserInfo, UserRibbon, SelectTag
+from members.models import UserImage, SelectStory, UserInfo, UserRibbon
 
 User = get_user_model()
 
@@ -101,19 +101,6 @@ class UserStorySerializer(serializers.ModelSerializer):
         )
 
 
-# SelectTag 필드정보
-class UserTagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SelectTag
-        fields = (
-            'pk',
-            'date_style',
-            'relationship_style',
-            'life_style',
-            'charm',
-        )
-
-
 # UserRibbon 필드정보
 class UserRibbonSerializer(serializers.ModelSerializer):
     paidRibbon = serializers.IntegerField(source='paid_ribbon')
@@ -130,17 +117,34 @@ class UserRibbonSerializer(serializers.ModelSerializer):
         )
 
 
+class UserTagSerializer(serializers.ModelSerializer):
+    dateStyle = serializers.CharField(source='date_style_tag')
+    relationshipStyle = serializers.CharField(source='relationship_style_tag')
+    charm = serializers.CharField(source='charm_tag')
+    lifeStyle = serializers.CharField(source='life_style_tag')
+
+    class Meta:
+        model = User
+        fields = (
+            'dateStyle',
+            'relationshipStyle',
+            'charm',
+            'lifeStyle',
+        )
+
+
 # 유저의 전체프로필 정보 (조회용)
 class UserProfileSerializer(serializers.ModelSerializer):
     currentRibbon = serializers.IntegerField(source='userribbon_set.last.current_ribbon')
     profilePercentage = serializers.FloatField(source='userinfo.profile_percentage')
     sendMeLikeUsers = serializers.ListField(
-        child=serializers.CharField(), source='send_me_like_users.all'
+        child=serializers.EmailField(), source='send_me_like_users.all'
     )
     images = UserImageSerializer(many=True, source='userimage_set')
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
-    tags = UserTagSerializer(many=True, source='selecttag_set')
+
+    # tags = UserTagSerializer(many=True, source='selecttag_set')
 
     class Meta:
         model = User
@@ -153,5 +157,5 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'images',
             'info',
             'stories',
-            'tags',
+            # 'tags',
         )

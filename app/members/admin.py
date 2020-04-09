@@ -39,6 +39,6 @@ class SelectStoryAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(SelectTag)
+@admin.register(Tag)
 class SelectTagAdmin(admin.ModelAdmin):
     pass
