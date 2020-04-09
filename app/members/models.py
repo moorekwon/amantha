@@ -72,14 +72,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Tag(models.Model):
-    # TYPE = (
-    #     (1, '데이트 스타일'),
-    #     (2, '연애 스타일'),
-    #     (3, '나만의 매력'),
-    #     (4, '라이프 스타일')
-    # )
-    #
-    # type = models.CharField(choices=TYPE, max_length=30, blank=True)
     name = models.CharField(max_length=60, blank=True)
 
 
