@@ -74,9 +74,9 @@ class RestaurantCategoryTypeList(generics.ListAPIView):
     def get_queryset(self):
 
         category_name = urlparse(self.kwargs['category_name'])
-        print(category_name)
+        print(category_name.path)
         if category_name is not None:
-            queryset = RestaurantCategory.objects.filter(category=category_name)
+            queryset = RestaurantCategory.objects.filter(category=category_name.path)
         return queryset
 
     def get_serializer_class(self):
