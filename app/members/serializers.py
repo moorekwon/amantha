@@ -125,17 +125,17 @@ class UserTagSerializer(serializers.ModelSerializer):
         )
 
 
-class TagTypeSerializer(serializers.ModelSerializer):
-    tags = UserTagSerializer(many=True, read_only=True)
-
-    dateStyle = serializers.CharField(source='date_style_tag.all')
-
-    class Meta:
-        model = User
-        fields = (
-            'tags',
-            'dateStyle',
-        )
+# class TagTypeSerializer(serializers.ModelSerializer):
+#     tags = UserTagSerializer(many=True, read_only=True)
+#
+#     dateStyle = serializers.CharField(source='date_style_tag.all')
+#
+#     class Meta:
+#         model = User
+#         fields = (
+#             'tags',
+#             'dateStyle',
+#         )
 
 
 # 유저의 전체프로필 정보 (조회용)
@@ -148,6 +148,10 @@ class UserProfileSerializer(serializers.ModelSerializer):
     images = UserImageSerializer(many=True, source='userimage_set')
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
+    dateStyle = UserTagSerializer(source='date_style_tag', many=True, partial=True)
+    lifeStyle = UserTagSerializer(source='life_style_tag', many=True, partial=True)
+    charmTag = UserTagSerializer(source='charm_tag', many=True, partial=True)
+    relationshipStyle = UserTagSerializer(source='relationship_style_tag', many=True, partial=True)
 
     class Meta:
         model = User
@@ -160,5 +164,26 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'images',
             'info',
             'stories',
+            'dateStyle',
+            'lifeStyle',
+            'charmTag',
+            'relationshipStyle',
+
             # 'tags'
+        )
+
+
+class TagTypeSerializer(serializers.ModelSerializer):
+    dateStyle = UserTagSerializer(source='date_style_tag', many=True, required=False)
+    lifeStyle = UserTagSerializer(source='life_style_tag', many=True, required=False)
+    charmTag = UserTagSerializer(source='charm_tag', many=True, required=False)
+    relationshipStyle = UserTagSerializer(source='relationship_style_tag', many=True, required=False)
+
+    class Meta:
+        model = User
+        fields = (
+            'dateStyle',
+            'lifeStyle',
+            'charmTag',
+            'relationshipStyle',
         )

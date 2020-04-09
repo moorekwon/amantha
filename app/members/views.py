@@ -101,6 +101,42 @@ class UserProfileAPIView(APIView):
             return Response(data)
         return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
+    def post(self, request):
+        user = request.user
+        serializers = TagTypeSerializer(data=request.data)
+        if serializers.is_valid():
+            date_tags = []
+            life_tags = []
+            ch_tags = []
+            relationship_tags = []
+
+            date_styles = serializers.validated_data.pop('date_style_tag')
+            life_styles = serializers.validated_data.pop('life_style_tag')
+            charms = serializers.validated_data.pop('charm_tag')
+            relationship_styles = serializers.validated_data.pop('relationship_style_tag')
+
+            for date_style in date_styles:
+                date_tags.append(Tag.objects.get_or_create(**date_style)[0])
+            for life_style in life_styles:
+                life_tags.append(Tag.objects.get_or_create(**life_style)[0])
+            for charm in charms:
+                ch_tags.append(Tag.objects.get_or_create(**charm)[0])
+            for relationship_style in relationship_styles:
+                relationship_tags.append(Tag.objects.get_or_create(**relationship_style)[0])
+
+            if not date_tags:
+                user.date_style_tag.set(date_tags)
+            if not life_tags:
+                user.life_style_tag.set(life_tags)
+            if not ch_tags:
+                user.charm_tag.set(ch_tags)
+            if not relationship_tags:
+                user.relationship_style_tag.set(relationship_tags)
+
+            serializers = UserProfileSerializer(user)
+            return Response(serializers.data)
+        return Response(serializers.errors)
+
 
 class UserImageAPIView(APIView):
     # user 프로필 이미지 갖고오기
