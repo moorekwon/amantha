@@ -138,9 +138,9 @@ class UserImageAPIView(APIView):
         }
         return Response(data, status=status.HTTP_201_CREATED)
 
+    # user 프로필 이미지 삭제하기
     def delete(self, request, pk):
         user = request.user
-        print('pk >> ', pk)
         image = UserImage.objects.filter(user=user, pk=pk)
         if image:
             image.delete()
@@ -185,7 +185,6 @@ class UserInfoAPIView(APIView):
     # 상세프로필 수정
     def patch(self, request):
         info = UserInfo.objects.filter(user=request.user)
-        print('info >> ', info)
 
         if not info:
             return Response('등록된 프로필 정보가 없습니다. 프로필을 생성해 주세요.')
@@ -314,39 +313,54 @@ class UserRibbonAPIView(APIView):
         return Response(serializer.errors)
 
 
-# class UserTagAPIView(APIView):
-#     # 해당 유저의 관심태그 불러오기
-#     def get(self, request):
-#         user = request.user
-#         tag = SelectTag.objects.filter(user=user)
-#
-#         if not tag:
-#             return Response('등록된 관심태그가 없습니다.')
-#
-#         tag = UserTagSerializer(tag, many=True)
-#
-#         data = {
-#             'tag': UserTagSerializer(tag).data,
-#         }
-#         return Response(data)
-#
-#     # 관심태그 수정 (multi-check, 기존 데이터와 상관없이 request.data로 완전 수정)
-#     def patch(self, request):
-#         user = request.user
-#         user_tag = SelectTag.objects.get(user=user)
-#
-#         serializer = UserTagSerializer(user_tag, data=request.data, partial=True)
-#         print('serializer.data >>', serializer.is_valid())
-#
-#         if serializer.is_valid():
-#             tag = serializer.save()
-#             print('tag >> ', tag)
-#
-#             data = {
-#                 'tag': UserTagSerializer(tag).data,
-#             }
-#             return Response(data)
-#         return Response(serializer.errors)
+class UserTagAPIView(APIView):
+    # 해당 유저의 관심태그 불러오기
+    def get(self, request):
+        user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        # if not user.tags.all():
+        #     return Response('등록된 관심태그가 없습니다.')
+
+        # date_style = user.date_style_tag()
+        # date_style_name = [date_style.name for date_style in date_style.all()]
+
+        data = {
+            'user': UserAccountSerializer(user).data,
+            # 'tags': UserTagSerializer(user).data,
+        }
+        return Response(data)
+
+    # 관심태그 추가(및 변경)
+    def post(self, request):
+        user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        # 처음 관심태그 등록할 경우,
+        # if not user.tags.all():
+        #     type = request.data['type']
+        #     name = request.data['name']
+        #
+        #     user_tag = user.tags.create(type=type, name=name)
+        #     serializer = UserTagSerializer(user_tag, data=request.data, many=True)
+        #
+        # # 관심태그 추가할 경우, 기존 데이터와 상관없이 해당 KEY값에 대해 request.data로 완전 수정
+        # else:
+        #     serializer = UserTagSerializer(user.tags, data=request.data, partial=True)
+        #
+        # if serializer.is_valid():
+        #     tag = serializer.save()
+        #
+        #     data = {
+        #         'tags': UserTagSerializer(tag).data,
+        #     }
+        #     return Response(data)
+        # return Response(serializer.errors)
+        return 0
 
 
 # 카카오톡 로그인 페이지
@@ -355,7 +369,7 @@ def KaKaoTemplate(request):
 
 # 카카오톡 로그인
 # class KaKaoLoginAPIView(APIView):
-# iOS 부분
+# # iOS 부분
 # def get(self, request):
 #     app_key = SECRETS['KAKAO_APP_KEY']
 #     kakao_access_code = request.GET.get('code', None)
