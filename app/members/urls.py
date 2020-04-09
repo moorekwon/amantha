@@ -24,7 +24,10 @@ urlpatterns = [
     path('user/story/', UserStoryAPIView.as_view()),
     # DELETE 유저의 story 객체 정보
     path('user/story/<int:pk>/', UserStoryAPIView.as_view()),
+    # GET, POST 유저의 리본내역 조회 및 리본지급 추가
     path('user/ribbon/', UserRibbonAPIView.as_view()),
+    # GET, PATCH 유저의 태그 조회 및 추가(수정)
+    path('user/tag/', UserTagAPIView.as_view()),
 
     # 테스트용 template (카카오톡 로그인 페이지)
     path('html/kakao/', KaKaoTemplate),

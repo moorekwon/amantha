@@ -73,10 +73,10 @@ description = "The AWS SDK for Python"
 name = "boto3"
 optional = false
 python-versions = "*"
-version = "1.12.38"
+version = "1.12.39"
 
 [package.dependencies]
-botocore = ">=1.15.38,<1.16.0"
+botocore = ">=1.15.39,<1.16.0"
 jmespath = ">=0.7.1,<1.0.0"
 s3transfer = ">=0.3.0,<0.4.0"
 
@@ -86,7 +86,7 @@ description = "Low-level, data-driven core of boto 3."
 name = "botocore"
 optional = false
 python-versions = "*"
-version = "1.15.38"
+version = "1.15.39"
 
 [package.dependencies]
 docutils = ">=0.10,<0.16"
@@ -167,11 +167,12 @@ six = ">=1.2"
 
 [[package]]
 category = "main"
-description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
-name = "django-filter"
+
+description = "Django-MySQL extends Django's built-in MySQL and MariaDB support their specific features not available on other databases."
+name = "django-mysql"
 optional = false
-python-versions = ">=3.4"
-version = "2.2.0"
+python-versions = ">=3.5"
+version = "3.3.0"
 
 [package.dependencies]
 Django = ">=1.11"
@@ -848,7 +849,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "6f0a3067f16ca4dffb90b203cf9fb5e6a66b49eaa880d7cfaa2e3755d0731f74"
+content-hash = "ad5749ad8bfffa343870801f36356d406e9bb1ec9d9d151739059affa0eee715"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -878,12 +879,12 @@ bleach = [
     {file = "bleach-3.1.4.tar.gz", hash = "sha256:e78e426105ac07026ba098f04de8abe9b6e3e98b5befbf89b51a5ef0a4292b03"},
 ]
 boto3 = [
-    {file = "boto3-1.12.38-py2.py3-none-any.whl", hash = "sha256:c61ab9b65b05f58c6ec6fcec6820f45e2a72f7a9b52ec894e2152bbf419e9d4e"},
-    {file = "boto3-1.12.38.tar.gz", hash = "sha256:fb3d5dbded3b5c4ff6e1c0750b9fa8a0f9d1cbe056f6d542cc2beda2ebaa71ed"},
+    {file = "boto3-1.12.39-py2.py3-none-any.whl", hash = "sha256:cdd79a3a7bbe1f33a365f0acfcc75c4405b482b3eb9ce3f4e6b16c418e201ac3"},
+    {file = "boto3-1.12.39.tar.gz", hash = "sha256:970bd7b332e73d7b51077ed36772c634811b38c81b0cc6ed0f910e50d7ebadf8"},
 ]
 botocore = [
-    {file = "botocore-1.15.38-py2.py3-none-any.whl", hash = "sha256:f3dc5e45abc1f1c8e86cf6ae8d787084230ae4b9c92a4e5d73213dff807a3802"},
-    {file = "botocore-1.15.38.tar.gz", hash = "sha256:903df3186ab1f222b78539920cfba09891da341dc45623a6159f88b2a8775f60"},
+    {file = "botocore-1.15.39-py2.py3-none-any.whl", hash = "sha256:e20ba56476b1031ce5ac8e22b59dabc75bd0e03231f124ed6b9ff99fe0b0c96b"},
+    {file = "botocore-1.15.39.tar.gz", hash = "sha256:94232b44e1540b7e043e220bd43f855400d0a243e926b26b3fb72994e971d518"},
 ]
 certifi = [
     {file = "certifi-2020.4.5.1-py2.py3-none-any.whl", hash = "sha256:1d987a998c75633c40847cc966fcf5904906c920a7f17ef374f5aa4282abd304"},
@@ -913,9 +914,13 @@ django-extensions = [
     {file = "django-extensions-2.2.9.tar.gz", hash = "sha256:2f81b618ba4d1b0e58603e25012e5c74f88a4b706e0022a3b21f24f0322a6ce6"},
     {file = "django_extensions-2.2.9-py2.py3-none-any.whl", hash = "sha256:b19182d101a441fe001c5753553a901e2ef3ff60e8fbbe38881eb4a61fdd17c4"},
 ]
+
 django-filter = [
     {file = "django-filter-2.2.0.tar.gz", hash = "sha256:c3deb57f0dd7ff94d7dce52a047516822013e2b441bed472b722a317658cfd14"},
     {file = "django_filter-2.2.0-py3-none-any.whl", hash = "sha256:558c727bce3ffa89c4a7a0b13bc8976745d63e5fd576b3a9a851650ef11c401b"},
+django-mysql = [
+    {file = "django-mysql-3.3.0.tar.gz", hash = "sha256:b984dfe75bedeb01bfcb974fe8400c224a6b55677b98a799f1c96274d96c5a72"},
+    {file = "django_mysql-3.3.0-py3-none-any.whl", hash = "sha256:ceaf6d93396b7f7b3798ac5f9a819dd70d5f0e1112850f2a34c57f062fa19398"},
 ]
 django-phone-field = [
     {file = "django-phone-field-1.8.0.tar.gz", hash = "sha256:eac0ad7043c103e78dcfe2b215e105cfa042fcaa5471c9072bf0bcb124a457b9"},
