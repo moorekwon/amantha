@@ -108,12 +108,3 @@ class RestaurantImagesSerializer(serializers.ModelSerializer):
         )
 
 
-class RestaurantImagesCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = RestaurantImages
-        fields = (
-            'restaurant',
-            'photo',
-            'date_joined',
-            'date_update',
-        )

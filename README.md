@@ -1042,3 +1042,63 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
       ]
   }
   ```
+
+
+### Restaurants Category List
+
+- URL: `/restaurants/category/<category_name>/`
+
+- Method: `GET`
+
+- 카테고리 별 가게 리스트 데이터
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/restaurants/category/강원도원주맛집베스트20곳/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+
+
+- Response Sample
+
+  - 각 Category 별로 Restaurants 정보를 제공 
+
+  ```json
+ [
+    {
+        "id": 21,
+        "restaurant": 21,
+        "category": "강원도원주맛집베스트20곳",
+        "thumbnail": "https://wps-web-clone.s3.amazonaws.com/https%3A/mp-seoul-image-production-s3.mangoplate.com/341890/261386_1582692232865_35208%3Ffit%3Daround%7C512%3A512%26crop%3D512%3A512%3B%2A%2C%2A%26output-format%3Djpg%26output-quality%3D80?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3FVIADFZ45JSAID7%2F20200409%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200409T104645Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8fa436e03ffbdda790638b77826f52d1b201d1d32ca3757ce9ab3034619cbaf4",
+        "date_joined": "2020-04-09 17:53",
+        "date_update": "2020-04-09 17:53"
+    },
+    {
+        "id": 22,
+        "restaurant": 22,
+        "category": "강원도원주맛집베스트20곳",
+        "thumbnail": "https://wps-web-clone.s3.amazonaws.com/https%3A/mp-seoul-image-production-s3.mangoplate.com/348050/933379_1575600903888_3288%3Ffit%3Daround%7C512%3A512%26crop%3D512%3A512%3B%2A%2C%2A%26output-format%3Djpg%26output-quality%3D80?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3FVIADFZ45JSAID7%2F20200409%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200409T104645Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=1005334353f09009cc9ed121623e791702eaf1d569f504abe98ca0cd77a72e6f",
+        "date_joined": "2020-04-09 17:53",
+        "date_update": "2020-04-09 17:53"
+    }
+]
+
+  ```
+
