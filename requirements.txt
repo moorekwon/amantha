@@ -44,6 +44,9 @@ django==2.2.12 \
 django-extensions==2.2.9 \
     --hash=sha256:2f81b618ba4d1b0e58603e25012e5c74f88a4b706e0022a3b21f24f0322a6ce6 \
     --hash=sha256:b19182d101a441fe001c5753553a901e2ef3ff60e8fbbe38881eb4a61fdd17c4
+django-filter==2.2.0 \
+    --hash=sha256:c3deb57f0dd7ff94d7dce52a047516822013e2b441bed472b722a317658cfd14 \
+    --hash=sha256:558c727bce3ffa89c4a7a0b13bc8976745d63e5fd576b3a9a851650ef11c401b
 django-phone-field==1.8.0 \
     --hash=sha256:eac0ad7043c103e78dcfe2b215e105cfa042fcaa5471c9072bf0bcb124a457b9 \
     --hash=sha256:beb6e909dd174ab8860f4fc9daaf6465d05e1974eea5b00ab6abd64f30248b50

@@ -16,6 +16,9 @@ ALLOWED_HOSTS += []
 
 INSTALLED_APPS += []
 
+
+REST_FRAMEWORK['DEFAULT_FILTER_BACKENDS'] = ['django_filters.rest_framework.DjangoFilterBackend']
+# print(REST_FRAMEWORK)
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_STORAGE_BUCKET_NAME = 'wps-web-clone'
 AWS_AUTO_CREATE_BUCKET = True
