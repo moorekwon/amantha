@@ -1,35 +1,38 @@
 #!/usr/bin/env python
 import requests
 from bs4 import BeautifulSoup
-from django.db import OperationalError
+from django.db import OperationalError, IntegrityError
 from selenium import webdriver
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import os
 import django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.dev_dooh')
 django.setup()
 
-from restaurants.models import Restaurant
+from restaurants.models import Restaurant, RestaurantCategory, RestaurantImages, RestaurantLocation
 
 
 def firstpage_web_crawler():
-    chrom_path= '../chromedriver'
+    chrom_path = '../chromedriver'
     rootPath = 'https://www.mangoplate.com/'
 
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
     options.add_argument('disable-gpu')
-    driver = webdriver.Chrome(chrom_path,chrome_options=options)
+    driver = webdriver.Chrome(chrom_path, chrome_options=options)
 
     driver.get(rootPath)
     html = driver.page_source
-    r = open( '../home_first_page.txt', mode='w', encoding='utf-8')
+    r = open('../home_first_page.txt', mode='w', encoding='utf-8')
     r.write(html)
     print(rootPath)
     r.close()
 
     driver.quit()
+
+
 firstpage_web_crawler()
 
 html = open('../home_first_page.txt', "r").read()
@@ -59,7 +62,8 @@ for text in one_ul_two_a:
 print(category_data)
 
 import os
-path='../data/'+ big_category+'/'
+
+path = '../data/' + big_category + '/'
 file_list = [i for i in os.listdir(path) if '곳' in i]
 print(file_list)
 
@@ -69,7 +73,6 @@ for category_detail_list in file_list:
     file_name = os.listdir(path + category_detail_list + '/')
     parent_text = {}
     for restaurant in file_name:
-
 
         try:
             html = open(path + category_detail_list + '/' + restaurant, "r").read()
@@ -112,74 +115,152 @@ for category_detail_list in file_list:
 
 print(detail_page_craw)
 print(Restaurant)
-for catetory_name, restaurant_name in detail_page_craw.items():
-    #     print( restaurant_factors)
-    for key, restaurant_factors in restaurant_name.items():
 
-        try:
-            restaurant_factors['title']
-            restaurant_factors['주소']
-            restaurant_factors['지번']
-            restaurant_factors['가격대']
 
-        except KeyError:
-            print(file_name, '   못만듬')
+def restaurant_create():
+
+    for catetory_name, restaurant_name in detail_page_craw.items():
+        #     print( restaurant_factors)
+        for key, restaurant_factors in restaurant_name.items():
+
+            try:
+                restaurant_factors['title']
+                restaurant_factors['주소']
+                restaurant_factors['지번']
+                restaurant_factors['가격대']
+
+            except KeyError:
+                print(file_name, '   못만듬')
+                print('\n')
+                continue
+            try:
+                restaurant_factors['주차']
+            except KeyError:
+                restaurant_factors['주차'] = '정보없음'
+
+            try:
+                restaurant_factors['전화번호']
+            except KeyError:
+                restaurant_factors['전화번호'] = '010-0000-0000'
+            try:
+                restaurant_factors['음식 종류']
+            except KeyError:
+                restaurant_factors['음식 종류'] = '정보없음'
+
+            unique = catetory_name + restaurant_factors['title'].replace(" ", "") + restaurant_factors['주소'].replace(
+                " ",
+                "")
+            print(unique)
+            name = restaurant_factors['title'].replace(" ", "")
+            print(restaurant_factors['title'].replace(" ", ""))
+
+            address1 = restaurant_factors['주소'].replace(" ", "")
+            print(restaurant_factors['주소'].replace(" ", ""))
+
+            address2 = restaurant_factors['지번'].replace(" ", "")
+            print(restaurant_factors['지번'].replace(" ", ""))
+
+            restaurant_type = restaurant_factors['음식 종류'].replace(" ", "")
+            print(restaurant_factors['음식 종류'].replace(" ", ""))
+
+            price_range = restaurant_factors['가격대'].replace(" ", "")
+            print(restaurant_factors['가격대'].replace(" ", ""))
+
+            phone = restaurant_factors['전화번호'].replace(" ", "")
+            print(restaurant_factors['전화번호'].replace(" ", ""))
+
+            parking = restaurant_factors['주차'].replace(" ", "")
+            print(restaurant_factors['주차'].replace(" ", ""))
+
+            try:
+
+                Restaurant.objects.create(
+                    name_address1_unique=unique,
+                    name=name,
+                    address1=address1,
+                    address2=address2,
+                    restaurant_type=restaurant_type,
+                    price_range=price_range,
+                    phone=phone,
+                    parking=parking,
+                )
+            except OperationalError:
+                print('unique 에러여서 넘어감')
+                continue
+
+
+def restaurant_category_create():
+    for catetory_name, restaurant_name in detail_page_craw.items():
+        for key, restaurant_factors in restaurant_name.items():
+
+            print(restaurant_factors['images']['image_0'])
+            unique = catetory_name + restaurant_factors['title'].replace(" ", "") + restaurant_factors['주소'].replace(
+                " ",
+                "")
+            aa = Restaurant.objects.get(name_address1_unique=unique)
+            print(aa.name)
+            try:
+
+                RestaurantCategory.objects.create(
+                    restaurant=Restaurant.objects.get(name_address1_unique=unique),
+                    thumbnail=restaurant_factors['images']['image_0'],
+                    category=catetory_name,
+
+                )
+            except IntegrityError:
+                print('unique 에러여서 넘어감')
+                continue
+
+
+def restaurant_location_create():
+    for catetory_name, restaurant_name in detail_page_craw.items():
+
+        for key, restaurant_factors in restaurant_name.items():
+            unique = catetory_name + restaurant_factors['title'].replace(" ", "") + restaurant_factors['주소'].replace(
+                " ", "")
+
+            print(restaurant_factors['지번'].split()[1])
+            try:
+
+                RestaurantLocation.objects.create(
+                    restaurant=Restaurant.objects.get(name_address1_unique=unique),
+                    location=restaurant_factors['지번'].split()[1],
+
+                )
+            except IntegrityError:
+                print('unique 에러여서 넘어감')
+                continue
+
+
+def restaurant_images_create():
+    for catetory_name, restaurant_name in detail_page_craw.items():
+
+        for key, restaurant_factors in restaurant_name.items():
+            unique = catetory_name + restaurant_factors['title'].replace(" ", "") + restaurant_factors['주소'].replace(
+                " ", "")
+
+            #         print(restaurant_factors['images'])
             print('\n')
-            continue
-        try:
-            restaurant_factors['주차']
-        except KeyError:
-            restaurant_factors['주차'] = '정보없음'
+            for image in restaurant_factors['images']:
+                print(restaurant_factors['images'][image])
 
-        try:
-            restaurant_factors['전화번호']
-        except KeyError:
-            restaurant_factors['전화번호'] = '010-0000-0000'
-        try :
-            restaurant_factors['음식 종류']
-        except KeyError:
-            restaurant_factors['음식 종류']= '정보없음'
+                #         print(aa.name)
+                try:
 
-        unique = catetory_name + restaurant_factors['title'].replace(" ", "") + restaurant_factors['주소'].replace(
-            " ",
-            "")
-        print(unique)
-        name = restaurant_factors['title'].replace(" ", "")
-        print(restaurant_factors['title'].replace(" ", ""))
-
-        address1 = restaurant_factors['주소'].replace(" ", "")
-        print(restaurant_factors['주소'].replace(" ", ""))
-
-        address2 = restaurant_factors['지번'].replace(" ", "")
-        print(restaurant_factors['지번'].replace(" ", ""))
-
-        restaurant_type = restaurant_factors['음식 종류'].replace(" ", "")
-        print(restaurant_factors['음식 종류'].replace(" ", ""))
-
-        price_range = restaurant_factors['가격대'].replace(" ", "")
-        print(restaurant_factors['가격대'].replace(" ", ""))
-
-        phone = restaurant_factors['전화번호'].replace(" ", "")
-        print(restaurant_factors['전화번호'].replace(" ", ""))
-
-        parking = restaurant_factors['주차'].replace(" ", "")
-        print(restaurant_factors['주차'].replace(" ", ""))
+                    RestaurantImages.objects.create(
+                        restaurant=Restaurant.objects.get(name_address1_unique=unique),
+                        photo=restaurant_factors['images'][image],
+                    )
+                except IntegrityError:
+                    print('unique 에러여서 넘어감')
+                    continue
 
 
-        try:
+try:
+    restaurant_create()
+    restaurant_category_create()
+    restaurant_location_create()
+    restaurant_images_create()
 
-            Restaurant.objects.create(
-                name_address1_unique=unique,
-                name=name,
-                address1=address1,
-                address2=address2,
-                restaurant_type=restaurant_type,
-                price_range=price_range,
-                phone=phone,
-                parking=parking,
-            )
-        except OperationalError:
-            print('unique 에러여서 넘어감')
-            continue
-
-
+except IntegrityError:
+    print('error 발생 모델 생성에')
