@@ -417,6 +417,53 @@ class UserTagAPIView(APIView):
         }
         return Response(data)
 
+    def patch(self, request):
+        user = request.user
+        serializer = TagTypeSerializer(data=request.data, partial=True)
+        print('serializer >> ', serializer)
+
+        if serializer.is_valid():
+            print('valid!')
+            date_style_tags = []
+            life_style_tags = []
+            charm_tags = []
+            relationship_style_tags = []
+
+            if request.data['dateStyle']:
+                update_date_tags = serializer.validated_data.pop('date_style_tag')
+
+                for update_date_tag in update_date_tags:
+                    date_style_tags.append(Tag.objects.get_or_create(**update_date_tag[0]))
+            print('date_style_tags >> ', date_style_tags)
+            user.date_style_tag.set(date_style_tags)
+
+            if request.data['lifeStyle']:
+                update_life_tags = serializer.validated_data.pop('life_style_tag')
+
+                for update_life_tag in update_life_tags:
+                    life_style_tags.append(Tag.objects.get_or_create(**update_life_tag[0]))
+            user.life_style_tag.set(life_style_tags)
+            print('life_style_tags >> ', life_style_tags)
+
+            if request.data['charm']:
+                update_charm_tags = serializer.validated_data.pop('charm_tag')
+
+                for update_charm_tag in update_charm_tags:
+                    charm_tags.append(Tag.objects.get_or_create(**update_charm_tag[0]))
+            user.charm_tag.set(charm_tags)
+            print('charm_tags >> ', charm_tags)
+
+            if request.data['relationshipStyle']:
+                update_relationship_tags = serializer.validated_data.pop('relathionship_style_tag')
+
+                for update_relationship_tag in update_relationship_tags:
+                    relationship_style_tags.append(Tag.objects.get_or_create(**update_relationship_tag[0]))
+            user.relationship_style_tag.set(relationship_style_tags)
+            print('relationship_style_tags >> ', relationship_style_tags)
+
+            return Response(TagTypeSerializer(user).data)
+        return Response(serializer.errors)
+
 
 # 카카오톡 로그인 페이지
 def KaKaoTemplate(request):
