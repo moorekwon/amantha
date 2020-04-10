@@ -26,10 +26,12 @@ urlpatterns = [
     path('user/story/<int:pk>/', UserStoryAPIView.as_view()),
     # GET, POST 유저의 리본내역 조회 및 리본지급 추가
     path('user/ribbon/', UserRibbonAPIView.as_view()),
-    # GET, PATCH 유저의 태그 조회 및 추가(수정)
-    path('user/tag/', UserTagAPIView.as_view()),
 
+    # GET 유저의 태그 전체 조회
+    path('user/tag/', UserTagAPIView.as_view()),
+    # PATCH 유저의 데이트 스타일 태그 수정
     path('user/tag/date/', UserDateStyleTagAPIView.as_view()),
+    # PATCH 유저의 라이프 스타일 태그 수정
     path('user/tag/life/', UserLifeStyleTagAPIView.as_view()),
 
     # 테스트용 template (카카오톡 로그인 페이지)

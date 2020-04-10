@@ -89,68 +89,6 @@ class LogoutUserAPIView(APIView):
         return Response('로그아웃 되었습니다.')
 
 
-class UserDateStyleTagAPIView(APIView):
-    # 등록한 모든 관심태그 조회
-    def get(self, request):
-        user = request.user
-
-        data = {
-            'user': UserAccountSerializer(user).data,
-            'tags': TagTypeSerializer(user).data,
-        }
-        return Response(data)
-
-    # 데이트 스타일 관심태그 추가
-    def post(self, request):
-        user = request.user
-        serializer = TagTypeSerializer(data=request.data, partial=True)
-        print('serializer >> ', serializer)
-
-        if serializer.is_valid():
-            print('valid!')
-            tags = []
-            update_tags = serializer.validated_data.pop('date_style_tag')
-
-            for update_tag in update_tags:
-                tags.append(Tag.objects.get_or_create(**update_tag)[0])
-
-            print('update_tags >> ', update_tags)
-
-            # if not tags:
-            user.date_style_tag.set(tags)
-
-            print('user.date_style_tag.all() >> ', user.date_style_tag.all())
-
-            return Response(TagTypeSerializer(user).data)
-        return Response(serializer.errors)
-
-
-class UserLifeStyleTagAPIView(APIView):
-    # 라이프 스타일 관심태그 추가
-    def post(self, request):
-        user = request.user
-        serializer = TagTypeSerializer(data=request.data, partial=True)
-        print('serializer >> ', serializer)
-
-        if serializer.is_valid():
-            print('valid!')
-            tags = []
-            update_tags = serializer.validated_data.pop('life_style_tag')
-
-            for update_tag in update_tags:
-                tags.append(Tag.objects.get_or_create(**update_tag)[0])
-
-            print('update_tags >> ', update_tags)
-
-            # if not tags:
-            user.life_style_tag.set(tags)
-
-            print('user.life_style_tag.all() >> ', user.life_style_tag.all())
-
-            return Response(TagTypeSerializer(user).data)
-        return Response(serializer.errors)
-
-
 # 유저의 상세프로필 전체 정보 가져오기
 class UserProfileAPIView(APIView):
     def get(self, request):
@@ -415,96 +353,69 @@ class UserRibbonAPIView(APIView):
         return Response(serializer.errors)
 
 
-# class UserDataStyleAPIView(APIView):
-#     def get(self, request):
-#         user = request.user
-#         tag = user.date_style_tag.all()
-#         print('tag >> ', tag)
-#         name = [date.name for date in user.date_style_tag.all()]
-#         print('name >> ', name)
-#
-#         if not Token.objects.filter(user=user):
-#             return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
-#
-#         if not tag:
-#             return Response('등록된 데이트 스타일 태그가 없습니다.')
-#
-#         data = {
-#             'user': UserAccountSerializer(user).data,
-#             'dateStyle': UserTagSerializer(name).data,
-#         }
-#
-#         return Response(data)
-#
-#     def post(self, request):
-#         user = request.user
-#
-#         if not Token.objects.filter(user=user):
-#             return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
-#
-#         data = {
-#             'name': request.data['name'],
-#         }
-#
-#         serializer = UserTagSerializer(instance=user, data=data)
-#         print('serializer >> ', serializer)
-#
-#         if serializer.is_valid():
-#             tags = serializer.save()
-#             print('tags >> ', tags)
-#             # user_serializer = UserTagSerializer(data=serializer.data,many=True)
-#             # print(user_serializer)
-#             # if user_serializer.is_valid():
-#             #     tag = UserTagSerializer.save()
-#             data = {
-#                 'tags': UserTagSerializer(tags).data
-#             }
-#             return Response(data)
-#         return Response(serializer.errors)
-
-
-class UserTagAPIView(APIView):
-    # 해당 유저의 관심태그 불러오기
-    def get(self, request):
-        user = request.user
-
-        if not Token.objects.filter(user=user):
-            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
-
-        if not (
-                user.date_style_tag.all() or user.life_style_tag.all() or user.charm_tag.all() or user.relationship_style_tag.all()):
-            return Response('등록된 관심태그가 없습니다.')
-
-        # date_style = user.date_style_tag()
-        # date_style_name = [date_style.name for date_style in date_style.all()]
-
-        data = {
-            'user': UserAccountSerializer(user).data,
-            # 'tags': UserTagSerializer(user).data,
-        }
-        return Response(data)
-
-    # 관심태그 추가(및 변경)
+class UserDateStyleTagAPIView(APIView):
+    # 데이트 스타일 관심태그 추가
     def patch(self, request):
         user = request.user
-
-        if not Token.objects.filter(user=user):
-            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
-
-        serializer = TagTypeSerializer(data=request.data)
+        serializer = TagTypeSerializer(data=request.data, partial=True)
         print('serializer >> ', serializer)
 
         if serializer.is_valid():
-            # print('serializer.data >> ', serializer.data.get('dateStyle'))
-            # print(user.date_style_tag.set(serializer.data))
-            tag = serializer.save()
-            # tag = user.date_style_tag.all()
-            data = {
-                'tags': TagTypeSerializer(tag).data,
-            }
-            # print('UserTagSerializer(tag).data >> ', UserTagSerializer(tag).data)
-            return Response(data)
+            print('valid!')
+            tags = []
+            update_tags = serializer.validated_data.pop('date_style_tag')
+
+            for update_tag in update_tags:
+                tags.append(Tag.objects.get_or_create(**update_tag)[0])
+
+            print('update_tags >> ', update_tags)
+
+            # if not tags:
+            user.date_style_tag.set(tags)
+
+            print('user.date_style_tag.all() >> ', user.date_style_tag.all())
+
+            return Response(TagTypeSerializer(user).data)
         return Response(serializer.errors)
+
+
+class UserLifeStyleTagAPIView(APIView):
+    # 라이프 스타일 관심태그 수정
+    # 기존 등록된 관심태그에서 추가되고 삭제되는 것이 아니라, request.data로 타입별 태그 전체 수정
+    def patch(self, request):
+        user = request.user
+        serializer = TagTypeSerializer(data=request.data, partial=True)
+        print('serializer >> ', serializer)
+
+        if serializer.is_valid():
+            print('valid!')
+            tags = []
+            update_tags = serializer.validated_data.pop('life_style_tag')
+
+            for update_tag in update_tags:
+                tags.append(Tag.objects.get_or_create(**update_tag)[0])
+
+            print('update_tags >> ', update_tags)
+
+            # if not tags:
+            user.life_style_tag.set(tags)
+
+            print('user.life_style_tag.all() >> ', user.life_style_tag.all())
+
+            return Response(TagTypeSerializer(user).data)
+        return Response(serializer.errors)
+
+
+class UserTagAPIView(APIView):
+    # 해당 유저의 모든 관심태그 조회
+    def get(self, request):
+        user = request.user
+
+        data = {
+            'user': UserAccountSerializer(user).data,
+            'tags': TagTypeSerializer(user).data,
+        }
+        return Response(data)
 
 
 # 카카오톡 로그인 페이지
