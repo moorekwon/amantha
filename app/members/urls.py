@@ -28,11 +28,16 @@ urlpatterns = [
     path('user/ribbon/', UserRibbonAPIView.as_view()),
 
     # GET 유저의 태그 전체 조회
+    # PATCH 추후 추가... (현재는 아래 4개 url 주소로 태그타입별 각각 PATCH 설정)
     path('user/tag/', UserTagAPIView.as_view()),
     # PATCH 유저의 데이트 스타일 태그 수정
-    path('user/tag/date/', UserDateStyleTagAPIView.as_view()),
+    path('user/tag/date/', UserTagDateStyleAPIView.as_view()),
     # PATCH 유저의 라이프 스타일 태그 수정
-    path('user/tag/life/', UserLifeStyleTagAPIView.as_view()),
+    path('user/tag/life/', UserTagLifeStyleAPIView.as_view()),
+    # PATCH 유저의 나만의 매력 태그 수정
+    path('user/tag/charm/', UserTagCharmAPIView.as_view()),
+    # PATCH 유저의 연애 스타일 태그 수정
+    path('user/tag/relationship/', UserTagRelationshipAPIView.as_view()),
 
     # 테스트용 template (카카오톡 로그인 페이지)
     path('html/kakao/', KaKaoTemplate),
