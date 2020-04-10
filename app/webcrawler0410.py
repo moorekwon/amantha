@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import os
 import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.dev_dooh')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.dev_hj')
 django.setup()
 
 from restaurants.models import Restaurant, RestaurantCategory, RestaurantImages, RestaurantLocation
@@ -39,11 +39,17 @@ for text in one_ul_two_a:
 
 print(category_data)
 
-import os
+try:
+    os.mkdir('../data/'+ big_category + '/')
+except FileExistsError:
+    print('파일 이미 있음')
 
-path = '../data/' + big_category + '/'
+import os
+path='../data/'+ big_category+'/'
 file_list = [i for i in os.listdir(path) if '곳' in i]
 print(file_list)
+
+
 
 detail_page_craw = {}
 path = '../data/' + big_category + '/'
@@ -51,7 +57,6 @@ for category_detail_list in file_list:
     file_name = os.listdir(path + category_detail_list + '/')
     parent_text = {}
     for restaurant in file_name:
-
         try:
             html = open(path + category_detail_list + '/' + restaurant, "r").read()
             health_restaurant_detail = BeautifulSoup(html)
@@ -69,6 +74,7 @@ for category_detail_list in file_list:
             div_owl_item = div_owl_wrapper.select('div.owl-item')
         except AttributeError as ex:
             print(f'page 없는 데이터 존재', ex)
+            continue
         ###################################################################################
         image_contents = {
 
@@ -93,6 +99,7 @@ for category_detail_list in file_list:
 
 print(detail_page_craw)
 print(Restaurant)
+
 
 
 def restaurant_create():
@@ -165,8 +172,6 @@ def restaurant_create():
             except OperationalError:
                 print('unique 에러여서 넘어감')
                 continue
-
-
 def restaurant_category_create():
     for catetory_name, restaurant_name in detail_page_craw.items():
         for key, restaurant_factors in restaurant_name.items():
@@ -188,8 +193,6 @@ def restaurant_category_create():
             except IntegrityError:
                 print('unique 에러여서 넘어감')
                 continue
-
-
 def restaurant_location_create():
     for catetory_name, restaurant_name in detail_page_craw.items():
 
@@ -208,8 +211,6 @@ def restaurant_location_create():
             except IntegrityError:
                 print('unique 에러여서 넘어감')
                 continue
-
-
 def restaurant_images_create():
     for catetory_name, restaurant_name in detail_page_craw.items():
 
@@ -242,3 +243,4 @@ try:
 
 except IntegrityError:
     print('error 발생 모델 생성에')
+
