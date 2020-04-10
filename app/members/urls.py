@@ -29,8 +29,8 @@ urlpatterns = [
     # GET, PATCH 유저의 태그 조회 및 추가(수정)
     path('user/tag/', UserTagAPIView.as_view()),
 
-    path('user/tag/date/', UserDataStyleAPIView.as_view()),
-
+    path('user/tag/date/', UserDateStyleTagAPIView.as_view()),
+    path('user/tag/life/', UserLifeStyleTagAPIView.as_view()),
 
     # 테스트용 template (카카오톡 로그인 페이지)
     path('html/kakao/', KaKaoTemplate),
