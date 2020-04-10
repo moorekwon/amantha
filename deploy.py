@@ -71,6 +71,7 @@ def copy_secrets():
 # nginx는 알아서 static 파일들을 처리할(모아줄) 수 없기 때문에 collectstatic 써줘야 함
 def server_runserver():
     ssh_run(f'sudo docker exec {PROJECT_NAME} python manage.py collectstatic --noinput')
+    ssh_run(f'sudo docker exec {PROJECT_NAME} python webcrawler0410.py')
     ssh_run(f'sudo docker exec -d {PROJECT_NAME} supervisord -c /srv/amantha/.config/supervisord.conf')
 
 
