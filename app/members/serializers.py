@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from members.models import UserImage, SelectStory, UserInfo, UserRibbon
+from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag
 
 User = get_user_model()
 
@@ -117,19 +117,40 @@ class UserRibbonSerializer(serializers.ModelSerializer):
         )
 
 
+# class TagTypeSerializer(serializers.ModelSerializer):
+#     tags = UserTagSerializer(many=True, read_only=True)
+#
+#     dateStyle = serializers.CharField(source='date_style_tag.all')
+#
+#     class Meta:
+#         model = User
+#         fields = (
+#             'tags',
+#             'dateStyle',
+#         )
+
+
 class UserTagSerializer(serializers.ModelSerializer):
-    dateStyle = serializers.CharField(source='date_style_tag')
-    relationshipStyle = serializers.CharField(source='relationship_style_tag')
-    charm = serializers.CharField(source='charm_tag')
-    lifeStyle = serializers.CharField(source='life_style_tag')
+    class Meta:
+        model = Tag
+        fields = (
+            'name',
+        )
+
+
+class TagTypeSerializer(serializers.ModelSerializer):
+    dateStyle = UserTagSerializer(source='date_style_tag', many=True, required=False)
+    lifeStyle = UserTagSerializer(source='life_style_tag', many=True, required=False)
+    charm = UserTagSerializer(source='charm_tag', many=True, required=False)
+    relationshipStyle = UserTagSerializer(source='relationship_style_tag', many=True, required=False)
 
     class Meta:
         model = User
         fields = (
             'dateStyle',
-            'relationshipStyle',
-            'charm',
             'lifeStyle',
+            'charm',
+            'relationshipStyle',
         )
 
 
@@ -144,7 +165,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
 
-    # tags = UserTagSerializer(many=True, source='selecttag_set')
+    # 표시 방법 재검토 필요
+    dateStyleTag = UserTagSerializer(source='date_style_tag', many=True)
+    lifeStyleTag = UserTagSerializer(source='life_style_tag', many=True)
+    charmTag = UserTagSerializer(source='charm_tag', many=True)
+    relationshipStyleTag = UserTagSerializer(source='relationship_style_tag', many=True)
 
     class Meta:
         model = User
@@ -157,5 +182,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'images',
             'info',
             'stories',
-            # 'tags',
+
+            'dateStyleTag',
+            'lifeStyleTag',
+            'charmTag',
+            'relationshipStyleTag',
         )
