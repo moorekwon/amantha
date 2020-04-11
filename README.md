@@ -649,14 +649,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-    	"region": "서울",
-    	"drinking": "가끔 마심",
-    	"introduce": "제 매력이 뭔지 직접 알아가 보세요 ^^"
-    }
-    ```
-    
-    ```json
-    {
         "region": "서울",
         "drinking": "가끔 마심",
         "introduce": "제 매력이 뭔지 직접 알아가 보세요 ^^"
@@ -1064,6 +1056,14 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     	"dateStyle": [
     		{"name": "광란의 댄스 배틀"}
     	]
+    }
+    ```
+    
+    ```json
+    {
+        "dateStyle": [
+            {"name": "광란의 댄스 배틀"}
+        ]
     }
     ```
 
