@@ -459,6 +459,10 @@ class UserTagDateStyleAPIView(APIView):
     # 데이트 스타일 관심태그 추가
     def patch(self, request):
         user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
         serializer = TagTypeSerializer(data=request.data, partial=True)
 
         if serializer.is_valid():
@@ -472,7 +476,6 @@ class UserTagDateStyleAPIView(APIView):
                 user.tag = TagType.objects.create()
                 user.save()
 
-            print(user.tag)
             user.tag.date_style_tag.set(tags)
             return Response(TagTypeSerializer(user.tag).data)
         return Response(serializer.errors)
@@ -483,6 +486,10 @@ class UserTagLifeStyleAPIView(APIView):
     # 기존 등록된 관심태그에서 추가되고 삭제되는 것이 아니라, request.data로 타입별 태그 전체 수정
     def patch(self, request):
         user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
         serializer = TagTypeSerializer(data=request.data, partial=True)
 
         if serializer.is_valid():
@@ -492,7 +499,10 @@ class UserTagLifeStyleAPIView(APIView):
             for update_tag in update_tags:
                 tags.append(Tag.objects.get_or_create(**update_tag)[0])
 
-            TagType.objects.get_or_create(user=user)
+            if user.tag is None:
+                user.tag = TagType.objects.create()
+                user.save()
+
             user.tag.life_style_tag.set(tags)
             return Response(TagTypeSerializer(user.tag).data)
         return Response(serializer.errors)
@@ -501,6 +511,10 @@ class UserTagLifeStyleAPIView(APIView):
 class UserTagCharmAPIView(APIView):
     def patch(self, request):
         user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
         serializer = TagTypeSerializer(data=request.data, partial=True)
 
         if serializer.is_valid():
@@ -510,7 +524,10 @@ class UserTagCharmAPIView(APIView):
             for update_tag in update_tags:
                 tags.append(Tag.objects.get_or_create(**update_tag)[0])
 
-            TagType.objects.get_or_create(user=user)
+            if user.tag is None:
+                user.tag = TagType.objects.create()
+                user.save()
+
             user.tag.charm_tag.set(tags)
             return Response(TagTypeSerializer(user.tag).data)
         return Response(serializer.errors)
@@ -519,6 +536,10 @@ class UserTagCharmAPIView(APIView):
 class UserTagRelationshipAPIView(APIView):
     def patch(self, request):
         user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
         serializer = TagTypeSerializer(data=request.data, partial=True)
 
         if serializer.is_valid():
@@ -528,7 +549,10 @@ class UserTagRelationshipAPIView(APIView):
             for update_tag in update_tags:
                 tags.append(Tag.objects.get_or_create(**update_tag)[0])
 
-            TagType.objects.get_or_create(user=user)
+            if user.tag is None:
+                user.tag = TagType.objects.create()
+                user.save()
+
             user.tag.relationship_style_tag.set(tags)
             return Response(TagTypeSerializer(user.tag).data)
         return Response(serializer.errors)

@@ -308,7 +308,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
               }
           ],
           "info": {
-              "pk": 1,
               "averageStar": 3.72,
               "nickname": "은순이",
               "school": "",
@@ -948,9 +947,316 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Tag
+### User All Tag View
 
-*multiple choice 필드 추후 업데이트*
+- URL: `/user/tag/`
+
+- Method: `GET`
+
+- 해당 유저의 **전체** 등록한 관심태그 조회
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/tag/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+- Response Sample
+
+  User의 계정 정보와 등록한 전체 태그 정보 표시
+
+  ```json
+  {
+      "user": {
+          "pk": 1,
+          "email": "hjk@hjk.com",
+          "gender": "여자"
+      },
+      "tags": {
+          "dateStyle": [
+              {
+                  "name": "광란의 댄스 배틀"
+              }
+          ],
+          "lifeStyle": [
+              {
+                  "name": "퇴근 후엔 운동"
+              },
+              {
+                  "name": "여행 자주 가요"
+              },
+              {
+                  "name": "여유를 즐겨요"
+              }
+          ],
+          "charm": [],
+          "relationshipStyle": [
+              {
+                  "name": "가벼운 연애 추구"
+              },
+              {
+                  "name": "카톡보단 전화"
+              }
+          ]
+      }
+  }
+  ```
+
+
+
+### User Tag Date Style Update
+
+- URL: `/user/tag/date/`
+
+- Method: `PATCH`
+
+- 해당 유저의 **데이트 스타일** 태그 수정(추가)
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/tag/date/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    ```json
+    {
+    	"dateStyle": [
+    		{"name": "광란의 댄스 배틀"}
+    	]
+    }
+    ```
+
+- Response Sample
+
+  ```json
+  {
+      "dateStyle": [
+          {
+              "name": "광란의 댄스 배틀"
+          }
+      ],
+      "lifeStyle": [],
+      "charm": [],
+      "relationshipStyle": []
+  }
+  ```
+
+
+
+### User Tag Life Style Update
+
+- URL: `/user/tag/life/`
+
+- Method: `PATCH`
+
+- 해당 유저의 **라이프 스타일** 태그 수정(추가)
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/tag/life/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    ```json
+    {
+    	"lifeStyle": [
+    		{"name": "퇴근 후엔 운동"},
+    		{"name": "여행 자주 가요"},
+    		{"name": "여유를 즐겨요"}
+    	]
+    }
+    ```
+
+- Response Sample
+
+  ```json
+  {
+      "dateStyle": [],
+      "lifeStyle": [
+          {
+              "name": "퇴근 후엔 운동"
+          },
+          {
+              "name": "여행 자주 가요"
+          },
+          {
+              "name": "여유를 즐겨요"
+          }
+      ],
+      "charm": [],
+      "relationshipStyle": []
+  }
+  ```
+
+
+
+### User Tag Relationship Style Update
+
+- URL: `/user/tag/relationship/`
+
+- Method: `PATCH`
+
+- 해당 유저의 **연애 스타일** 태그 수정(추가)
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/tag/relationship/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    ```json
+    {
+    	"relationshipStyle": [
+    		{"name": "가벼운 연애 추구"},
+    		{"name": "카톡보단 전화"}
+    	]
+    }
+    ```
+
+- Response Sample
+
+  ```json
+  {
+      "dateStyle": [],
+      "lifeStyle": [],
+      "charm": [],
+      "relationshipStyle": [
+          {
+              "name": "가벼운 연애 추구"
+          },
+          {
+              "name": "카톡보단 전화"
+          }
+      ]
+  }
+  ```
+
+
+
+### User Tag Charm Update
+
+- URL: `/user/tag/charm/`
+
+- Method: `PATCH`
+
+- 해당 유저의 **나만의 매력** 태그 수정(추가)
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/tag/charm/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    ```json
+    {
+    	"charm": [
+    		{"name": "화를 잘 안 내요"}
+    	]
+    }
+    ```
+
+- Response Sample
+
+  ```json
+  {
+      "dateStyle": [],
+      "lifeStyle": [],
+      "charm": [
+          {
+              "name": "화를 잘 안 내요"
+          }
+      ],
+      "relationshipStyle": []
+  }
+  ```
 
 
 
