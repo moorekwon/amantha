@@ -28,11 +28,9 @@ client에서는 해당 email과 password로 서명된 HTTP 기본 인증을 사�
 
 [DRF 라이브러리](https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication)에서 제공하는 토큰 인증 방식
 
-**<u>실제 production</u>**에서 사용할 인증 방식
-
-**<u>실제 production</u>**에서 사용할 인증 방식
-
 HTTP Header의 `Authorization` 키에 `Token <value>` 값을 넣어 전송
+
+**<u>실제 production</u>**에서 사용할 인증 방식
 
 `<value>`에 들어가는 값은 Token을 발급받는 API(AuthToken)에 자격증명(email과 password)를 전달 후 받은 **token** 값을 사용
 
