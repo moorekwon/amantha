@@ -1236,21 +1236,11 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-    	"charm": [
-    		{"name": "화를 잘 안 내요"}
-    	]
-    }
-    ```
-    
-    ```json
-    {
         "charm": [
             {"name": "화를 잘 안 내요"}
         ]
     }
     ```
-    
-    
 
 - Response Sample
 
@@ -1424,6 +1414,14 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     	"partner": "hjk@hjk.com"
     }
     ```
+    
+    ```json
+    {
+        "partner": "hjk@hjk.com"
+    }
+    ```
+    
+    
 
 - Response Sample
 
