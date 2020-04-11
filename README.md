@@ -1175,23 +1175,12 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-    	"relationshipStyle": [
-    		{"name": "가벼운 연애 추구"},
-    		{"name": "카톡보단 전화"}
-    	]
-    }
-    ```
-    
-    ```json
-    {
         "relationshipStyle": [
             {"name": "가벼운 연애 추구"},
             {"name": "카톡보단 전화"}
         ]
     }
     ```
-    
-    
 
 - Response Sample
 
@@ -1252,6 +1241,16 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     	]
     }
     ```
+    
+    ```json
+    {
+        "charm": [
+            {"name": "화를 잘 안 내요"}
+        ]
+    }
+    ```
+    
+    
 
 - Response Sample
 
