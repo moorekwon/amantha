@@ -1053,14 +1053,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-    	"dateStyle": [
-    		{"name": "광란의 댄스 배틀"}
-    	]
-    }
-    ```
-    
-    ```json
-    {
         "dateStyle": [
             {"name": "광란의 댄스 배틀"}
         ]
@@ -1125,6 +1117,18 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     	]
     }
     ```
+    
+    ```json
+    {
+        "lifeStyle": [
+            {"name": "퇴근 후엔 운동"},
+            {"name": "여행 자주 가요"},
+            {"name": "여유를 즐겨요"}
+        ]
+    }
+    ```
+    
+    
 
 - Response Sample
 
