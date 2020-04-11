@@ -217,13 +217,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-    	"accessToken": "FASowF-QPcTiwc1gIVxwGdkso4usMvOQl3d2pgorDNQAAAFxSTSrcQ",
-    	"gender": "여자"
-    }
-    ```
-    
-    ```json
-    {
         "accessToken": "FASowF-QPcTiwc1gIVxwGdkso4usMvOQl3d2pgorDNQAAAFxSTSrcQ",
         "gender": "여자"
     }
@@ -576,6 +569,23 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
       - `drinking`: `가끔 마심`, `어느정도 즐기는편`, `술자리를 즐김`, `마시지 않음`
       - `smoking`: `흡연`, `비흡연`
       - `religion`: `종교 없음`, `기독교`, `천주교`, `불교`, `원불교`, `유교`, `이슬람교`
+    
+    ```json
+    {
+        "nickname": "정수지",
+        "birth": "1996-12-11",
+        "major": "멀티미디어학과",
+        "job": "프론트엔드 개발자",
+        "company": "아마존",
+        "bodyShape": "슬림탄탄",
+        "personality": "귀여운",
+        "bloodType": "O형",
+        "smoking": "비흡연",
+        "introduce": "수줍음이 많아요 ^^"
+    }
+    ```
+    
+    
 
 
 ```json
