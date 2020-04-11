@@ -68,19 +68,10 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-    	"email": "esb@esb.com",
-    	"password": "esb"
-    }
-    ```
-    
-    ```json
-    {
         "email": "esb@esb.com",
         "password": "esb"
     }
     ```
-    
-    
 
 - Response Sample
 
@@ -147,6 +138,14 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     	"email": "hjk@hjk.com",
     	"password": "hjk",
     	"gender": "여자"
+    }
+    ```
+    
+    ```json
+    {
+        "email": "hjk@hjk.com",
+        "password": "hjk",
+        "gender": "여자"
     }
     ```
 
