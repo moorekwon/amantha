@@ -113,21 +113,7 @@ class UserRibbonSerializer(serializers.ModelSerializer):
             'paidRibbon',
             'currentRibbon',
             'when',
-            # 'where',
         )
-
-
-# class TagTypeSerializer(serializers.ModelSerializer):
-#     tags = UserTagSerializer(many=True, read_only=True)
-#
-#     dateStyle = serializers.CharField(source='date_style_tag.all')
-#
-#     class Meta:
-#         model = User
-#         fields = (
-#             'tags',
-#             'dateStyle',
-#         )
 
 
 class UserTagSerializer(serializers.ModelSerializer):
@@ -164,12 +150,13 @@ class UserProfileSerializer(serializers.ModelSerializer):
     images = UserImageSerializer(many=True, source='userimage_set')
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
+    tags = TagTypeSerializer(source='tag')
 
     # 표시 방법 재검토 필요
-    dateStyleTag = UserTagSerializer(source='date_style_tag', many=True)
-    lifeStyleTag = UserTagSerializer(source='life_style_tag', many=True)
-    charmTag = UserTagSerializer(source='charm_tag', many=True)
-    relationshipStyleTag = UserTagSerializer(source='relationship_style_tag', many=True)
+    # dateStyleTag = UserTagSerializer(source='date_style_tag', many=True)
+    # lifeStyleTag = UserTagSerializer(source='life_style_tag', many=True)
+    # charmTag = UserTagSerializer(source='charm_tag', many=True)
+    # relationshipStyleTag = UserTagSerializer(source='relationship_style_tag', many=True)
 
     class Meta:
         model = User
@@ -182,9 +169,10 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'images',
             'info',
             'stories',
+            'tags',
 
-            'dateStyleTag',
-            'lifeStyleTag',
-            'charmTag',
-            'relationshipStyleTag',
+            # 'dateStyleTag',
+            # 'lifeStyleTag',
+            # 'charmTag',
+            # 'relationshipStyleTag',
         )

@@ -46,11 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                                         symmetrical=False)
     like_users = models.ManyToManyField('self', through='SendLike', related_name='send_me_like_users',
                                         symmetrical=False)
-    # tags = models.ManyToManyField('Tag', related_name='my_tags')
-    date_style_tag = models.ManyToManyField('Tag', related_name='my_date_style_tags')
-    life_style_tag = models.ManyToManyField('Tag', related_name='my_life_style_tags')
-    charm_tag = models.ManyToManyField('Tag', related_name='my_charm_tags')
-    relationship_style_tag = models.ManyToManyField('Tag', related_name='my_relationship_style_tags')
+    tag = models.OneToOneField('TagType', on_delete=models.CASCADE, blank=True, null=True)
 
     # 유저의 현재 평균 별점
     def average_star(self):
@@ -71,17 +67,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         return None
 
 
+class TagType(models.Model):
+    date_style_tag = models.ManyToManyField('Tag', related_name='my_date_style_tags', blank=True)
+    life_style_tag = models.ManyToManyField('Tag', related_name='my_life_style_tags', blank=True)
+    charm_tag = models.ManyToManyField('Tag', related_name='my_charm_tags', blank=True)
+    relationship_style_tag = models.ManyToManyField('Tag', related_name='my_relationship_style_tags', blank=True)
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=60, blank=True)
 
-
-# 태그 등록
-# class SelectTag(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     date_style = models.CharField(max_length=60, blank=True)
-#     relationship_style = models.CharField(max_length=60, blank=True)
-#     life_style = models.CharField(max_length=60, blank=True)
-#     charm = models.CharField(max_length=60, blank=True)
 
 # 유저 생성 후 기입할 프로필 정보
 class UserInfo(models.Model):
@@ -172,12 +167,12 @@ class UserInfo(models.Model):
 
     # 유저의 현재 프로필 완성도
     def profile_percentage(self):
-        story = self.user.selectstory_set.all()
-        tag = self.user.selecttag_set.all()
+        stories = self.user.selectstory_set.all()
+        tags = self.user.tag
 
         info_list = [self.job, self.company, self.school, self.region, self.body_shape, self.major, self.tall,
                      self.personality, self.blood_type, self.drinking, self.smoking, self.religion, self.introduce,
-                     story, tag]
+                     stories, tags]
 
         return_list = []
         for infos in info_list:
@@ -185,6 +180,8 @@ class UserInfo(models.Model):
                 return_list.append(0)
             else:
                 return_list.append(1)
+
+        print('return_list >> ', return_list)
 
         if sum(return_list) == 0:
             profile_percentage = 0

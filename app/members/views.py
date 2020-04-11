@@ -10,6 +10,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from members.models import TagType
 from members.serializers import *
 
 User = get_user_model()
@@ -318,59 +319,66 @@ class UserTagAPIView(APIView):
     def get(self, request):
         user = request.user
 
+        # TagType.objects.get_or_create(user=user)
+        if user.tag is None:
+            user.tag = TagType.objects.create()
+            user.save()
+
+        print('user.tag >> ', user.tag)
+
         data = {
             'user': UserAccountSerializer(user).data,
-            'tags': TagTypeSerializer(user).data,
+            'tags': TagTypeSerializer(user.tag).data,
         }
         return Response(data)
 
     # 현재 작동 안됨.! (태그타입별로 api 넣지 않고 한꺼번에 partial update 시도했으나 실패..)
-    def patch(self, request):
-        user = request.user
-        serializer = TagTypeSerializer(data=request.data, partial=True)
-        print('serializer >> ', serializer)
-
-        if serializer.is_valid():
-            print('valid!')
-            date_style_tags = []
-            life_style_tags = []
-            charm_tags = []
-            relationship_style_tags = []
-
-            if request.data['dateStyle']:
-                update_date_tags = serializer.validated_data.pop('date_style_tag')
-
-                for update_date_tag in update_date_tags:
-                    date_style_tags.append(Tag.objects.get_or_create(**update_date_tag[0]))
-            print('date_style_tags >> ', date_style_tags)
-            user.date_style_tag.set(date_style_tags)
-
-            if request.data['lifeStyle']:
-                update_life_tags = serializer.validated_data.pop('life_style_tag')
-
-                for update_life_tag in update_life_tags:
-                    life_style_tags.append(Tag.objects.get_or_create(**update_life_tag[0]))
-            user.life_style_tag.set(life_style_tags)
-            print('life_style_tags >> ', life_style_tags)
-
-            if request.data['charm']:
-                update_charm_tags = serializer.validated_data.pop('charm_tag')
-
-                for update_charm_tag in update_charm_tags:
-                    charm_tags.append(Tag.objects.get_or_create(**update_charm_tag[0]))
-            user.charm_tag.set(charm_tags)
-            print('charm_tags >> ', charm_tags)
-
-            if request.data['relationshipStyle']:
-                update_relationship_tags = serializer.validated_data.pop('relathionship_style_tag')
-
-                for update_relationship_tag in update_relationship_tags:
-                    relationship_style_tags.append(Tag.objects.get_or_create(**update_relationship_tag[0]))
-            user.relationship_style_tag.set(relationship_style_tags)
-            print('relationship_style_tags >> ', relationship_style_tags)
-
-            return Response(TagTypeSerializer(user).data)
-        return Response(serializer.errors)
+    # def patch(self, request):
+    #     user = request.user
+    #     serializer = TagTypeSerializer(data=request.data, partial=True)
+    #     print('serializer >> ', serializer)
+    #
+    #     if serializer.is_valid():
+    #         print('valid!')
+    #         date_style_tags = []
+    #         life_style_tags = []
+    #         charm_tags = []
+    #         relationship_style_tags = []
+    #
+    #         if request.data['dateStyle']:
+    #             update_date_tags = serializer.validated_data.pop('date_style_tag')
+    #
+    #             for update_date_tag in update_date_tags:
+    #                 date_style_tags.append(Tag.objects.get_or_create(**update_date_tag[0]))
+    #         print('date_style_tags >> ', date_style_tags)
+    #         user.date_style_tag.set(date_style_tags)
+    #
+    #         if request.data['lifeStyle']:
+    #             update_life_tags = serializer.validated_data.pop('life_style_tag')
+    #
+    #             for update_life_tag in update_life_tags:
+    #                 life_style_tags.append(Tag.objects.get_or_create(**update_life_tag[0]))
+    #         user.life_style_tag.set(life_style_tags)
+    #         print('life_style_tags >> ', life_style_tags)
+    #
+    #         if request.data['charm']:
+    #             update_charm_tags = serializer.validated_data.pop('charm_tag')
+    #
+    #             for update_charm_tag in update_charm_tags:
+    #                 charm_tags.append(Tag.objects.get_or_create(**update_charm_tag[0]))
+    #         user.charm_tag.set(charm_tags)
+    #         print('charm_tags >> ', charm_tags)
+    #
+    #         if request.data['relationshipStyle']:
+    #             update_relationship_tags = serializer.validated_data.pop('relathionship_style_tag')
+    #
+    #             for update_relationship_tag in update_relationship_tags:
+    #                 relationship_style_tags.append(Tag.objects.get_or_create(**update_relationship_tag[0]))
+    #         user.relationship_style_tag.set(relationship_style_tags)
+    #         print('relationship_style_tags >> ', relationship_style_tags)
+    #
+    #         return Response(TagTypeSerializer(user).data)
+    #     return Response(serializer.errors)
 
 
 class UserTagDateStyleAPIView(APIView):
@@ -378,20 +386,21 @@ class UserTagDateStyleAPIView(APIView):
     def patch(self, request):
         user = request.user
         serializer = TagTypeSerializer(data=request.data, partial=True)
-        print('serializer >> ', serializer)
 
         if serializer.is_valid():
-            print('valid!')
             tags = []
             update_tags = serializer.validated_data.pop('date_style_tag')
 
             for update_tag in update_tags:
                 tags.append(Tag.objects.get_or_create(**update_tag)[0])
-            print('update_tags >> ', update_tags)
 
-            user.date_style_tag.set(tags)
-            print('user.date_style_tag.all() >> ', user.date_style_tag.all())
-            return Response(TagTypeSerializer(user).data)
+            if user.tag is None:
+                user.tag = TagType.objects.create()
+                user.save()
+
+            print(user.tag)
+            user.tag.date_style_tag.set(tags)
+            return Response(TagTypeSerializer(user.tag).data)
         return Response(serializer.errors)
 
 
@@ -401,20 +410,17 @@ class UserTagLifeStyleAPIView(APIView):
     def patch(self, request):
         user = request.user
         serializer = TagTypeSerializer(data=request.data, partial=True)
-        print('serializer >> ', serializer)
 
         if serializer.is_valid():
-            print('valid!')
             tags = []
             update_tags = serializer.validated_data.pop('life_style_tag')
 
             for update_tag in update_tags:
                 tags.append(Tag.objects.get_or_create(**update_tag)[0])
-            print('update_tags >> ', update_tags)
 
-            user.life_style_tag.set(tags)
-            print('user.life_style_tag.all() >> ', user.life_style_tag.all())
-            return Response(TagTypeSerializer(user).data)
+            TagType.objects.get_or_create(user=user)
+            user.tag.life_style_tag.set(tags)
+            return Response(TagTypeSerializer(user.tag).data)
         return Response(serializer.errors)
 
 
@@ -422,20 +428,17 @@ class UserTagCharmAPIView(APIView):
     def patch(self, request):
         user = request.user
         serializer = TagTypeSerializer(data=request.data, partial=True)
-        print('serializer >> ', serializer)
 
         if serializer.is_valid():
-            print('valid!')
             tags = []
             update_tags = serializer.validated_data.pop('charm_tag')
 
             for update_tag in update_tags:
                 tags.append(Tag.objects.get_or_create(**update_tag)[0])
-            print('update_tags >> ', update_tags)
 
-            user.charm_tag.set(tags)
-            print('user.charm_tag.all() >> ', user.charm_tag.all())
-            return Response(TagTypeSerializer(user).data)
+            TagType.objects.get_or_create(user=user)
+            user.tag.charm_tag.set(tags)
+            return Response(TagTypeSerializer(user.tag).data)
         return Response(serializer.errors)
 
 
@@ -443,20 +446,17 @@ class UserTagRelationshipAPIView(APIView):
     def patch(self, request):
         user = request.user
         serializer = TagTypeSerializer(data=request.data, partial=True)
-        print('serializer >> ', serializer)
 
         if serializer.is_valid():
-            print('valid!')
             tags = []
             update_tags = serializer.validated_data.pop('relationship_style_tag')
 
             for update_tag in update_tags:
                 tags.append(Tag.objects.get_or_create(**update_tag)[0])
-            print('update_tags >> ', update_tags)
 
-            user.relationship_style_tag.set(tags)
-            print('user.relationship_style_tag.all() >> ', user.relationship_style_tag.all())
-            return Response(TagTypeSerializer(user).data)
+            TagType.objects.get_or_create(user=user)
+            user.tag.relationship_style_tag.set(tags)
+            return Response(TagTypeSerializer(user.tag).data)
         return Response(serializer.errors)
 
 
