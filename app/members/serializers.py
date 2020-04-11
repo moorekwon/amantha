@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag, SendLike
+from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag, SendLike, SendStar
 
 User = get_user_model()
 
@@ -122,6 +122,17 @@ class UserLikeSerializer(serializers.ModelSerializer):
         fields = (
             'user',
             'partner',
+            'created',
+        )
+
+
+class UserStarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SendStar
+        fields = (
+            'user',
+            'partner',
+            'star',
             'created',
         )
 

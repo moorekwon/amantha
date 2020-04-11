@@ -51,9 +51,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     # 유저의 현재 평균 별점
     def average_star(self):
         partners = self.partner_sendstar_set.all()
-        star = [int(partner.star) for partner in partners]
+        star = [partner.star for partner in partners]
+        print('partners, star >> ', partners, star)
         if len(star) > 0:
-            return format(sum(star) / len(star), '.2f')
+            average_star = format(sum(star) / len(star), '.2f')
+            return float(average_star)
         else:
             return 0
 
@@ -202,7 +204,7 @@ class Tag(models.Model):
 class SendStar(models.Model):
     user = models.ForeignKey(User, related_name='user_sendstar_set', on_delete=models.CASCADE)
     partner = models.ForeignKey(User, related_name='partner_sendstar_set', on_delete=models.CASCADE)
-    star = models.CharField(choices=((str(x), x) for x in range(1, 6)), max_length=30)
+    star = models.PositiveIntegerField()
     created = models.DateTimeField(auto_now=True)
 
 

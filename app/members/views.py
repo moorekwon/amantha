@@ -356,12 +356,32 @@ class UserLikeAPIView(APIView):
         serializer = UserLikeSerializer(data=data)
 
         if serializer.is_valid():
-            likeTrue = serializer.save()
+            like_true = serializer.save()
+            return Response(UserLikeSerializer(like_true).data)
+        return Response(serializer.errors)
 
-            data = {
-                'like': UserLikeSerializer(likeTrue).data,
-            }
-            return Response(data)
+
+class UserStarAPIView(APIView):
+    def post(self, request):
+        user = request.user
+        # partner의 email 정보를 통해 pk에 접근
+        partner = User.objects.get(email=request.data['partner'])
+        star = request.data['star']
+
+        if user in partner.send_me_star_users.all():
+            return Response('이미 가입심사한 이성 입니다.')
+
+        data = {
+            'user': user.pk,
+            'partner': partner.pk,
+            'star': star,
+        }
+
+        serializer = UserStarSerializer(data=data)
+
+        if serializer.is_valid():
+            star = serializer.save()
+            return Response(UserStarSerializer(star).data)
         return Response(serializer.errors)
 
 
