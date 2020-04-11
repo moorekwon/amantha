@@ -285,7 +285,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "gender": "여자",
           "currentRibbon": 10,
           "profilePercentage": 71.4,
-          "sendMeLikeUsers": [
+          "pickFrom": [
               "hgo@hgo.com",
               "hbb@hbb.com"
           ],
@@ -312,20 +312,20 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
               "averageStar": 3.72,
               "nickname": "은순이",
               "school": "",
-              "major": "정치외교학과",
+              "major": "정치외교학",
               "job": "회사원",
-              "company": "외국계 회사",
-              "region": 1,
-              "birth": "1995-04-30",
+              "company": "",
+              "region": "서울",
+              "birth": "1995-02-23",
               "age": 26,
               "tall": "164",
-              "bodyShape": 1,
-              "personality": 2,
-              "bloodType": 1,
-              "smoking": 2,
+              "bodyShape": "보통체형",
+              "personality": "외향적인",
+              "bloodType": "B형",
+              "smoking": "비흡연",
               "drinking": "",
               "religion": "",
-              "introduce": "안녕하세요 반가워요^^"
+              "introduce": "안녕하세요 ^^"
           },
           "stories": [
               {
@@ -334,7 +334,33 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
                   "content": "조용한 카페"
               }
           ],
-          "tags": []
+          "tags": {
+              "dateStyle": [
+                  {
+                      "name": "광란의 댄스 배틀"
+                  }
+              ],
+              "lifeStyle": [
+                  {
+                      "name": "퇴근 후엔 운동"
+                  },
+                  {
+                      "name": "여행 자주 가요"
+                  },
+                  {
+                      "name": "여유를 즐겨요"
+                  }
+              ],
+              "charm": [],
+              "relationshipStyle": [
+                  {
+                      "name": "가벼운 연애 추구"
+                  },
+                  {
+                      "name": "카톡보단 전화"
+                  }
+              ]
+          }
       }
   }
   ```
@@ -518,8 +544,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
        Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
-       - Username: hjk@hjk.com
-       - Password: hjk
+       - Username: szj@szj.com
+       - Password: szj
 
     2. Token Auth **<u>(production 때 사용)</u>**
 
@@ -535,32 +561,31 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     - 옵션 정보: `school`, `major`, `job`, `company`, `region`, `tall`, `bodyShape`, `personality`, `bloodType`, `smoking`, `drinking`, `introduce`, `religion`
     - 고정된 value를 가진 정보
-      - 아래 정해진 값들만 넣을 수 있도록 str 형태의 값들로 이루어진 list로 고정됨
-        - 각각 str 값(오른쪽)을 int 값(왼쪽)과 연결하여 숫자 형태로 접근하도록 함
-      - `region`: (1, '서울'), (2, '경기'), (3, '인천'), (4, '대전'), (5, '충북'), (6, '충남'), (7, '강원'), (8, '부산'), (9, '경북'), (10, '경남'), (11, '대구'), (12, '울산'), (13, '광주'), (14, '전북'), (15, '전남'), (16, '제주')
-      - `bodyShape`: (1, '보통체형'), (2, '통통한'), (3, '살짝볼륨'), (4, '글래머'), (5, '마른'), (6, '슬림탄탄')
-      - `personality`: (1, '지적인'), (2, '차분한'), (3, '유머있는'), (4, '낙천적인'), (5, '내향적인'), (6, '외향적인'), (7, '감성적인'), (8, '상냥한'), (9, '귀여운'), (10, '섹시한'), (11, '4차원인'), (12, '발랄한'), (13, '도도한')
-        - ***multi choice 정보(필드) 추후 업데이트 (현재는 모두 복수 선택 불가능)***
-      - `bloodType`: (1, 'AB형'), (2, 'A형'), (3, 'B형'), (4, 'O형')
-      - `drinking`: (1, '가끔 마심'), (2, '어느정도 즐기는편'), (3, '술자리를 즐김'), (4, '마시지 않음')
-      - `smoking`: (1, '흡연'), (2, '비흡연')
-      - `religion`: (1, '종교 없음'), (2, '기독교'), (3, '천주교'), (4, '불교'), (5, '원불교'), (6, '유교'), (7, '이슬람교')
+      - 아래 정해진 값들만 넣을 수 있도록 **str** 형태의 값들로 이루어진 list로 고정됨
+      - `region`: `서울`, `경기`, `인천`, `대전`, `충북`, `충남`, `강원`, `부산`, `경북`, `경남`, `대구`, `울산`, `광주`, `전북`, `전남`, `제주`
+      - `bodyShape`: `보통체형`, `통통한`, `살짝볼륨`, `글래머`, `마른`, `슬림탄탄`
+      - `personality`: `지적인`, `차분한`, `유머있는`, `낙천적인`, `내향적인`, `외향적인`, `감성적인`, `상냥한`, `귀여운`, `섹시한`, `4차원인`, `발랄한`, `도도한`
+        - ***multi choice 정보(필드) 추후 업데이트 (현재는 복수 선택 불가능)***
+      - `bloodType`: `AB형`, `A형`, `B형`, `O형`
+      - `drinking`: `가끔 마심`, `어느정도 즐기는편`, `술자리를 즐김`, `마시지 않음`
+      - `smoking`: `흡연`, `비흡연`
+      - `religion`: `종교 없음`, `기독교`, `천주교`, `불교`, `원불교`, `유교`, `이슬람교`
 
 
-    ```json
-    {
-        "nickname": "권효진",
-        "birth": "1995-02-11",
-        "major": "경영학전공",
-        "job": "백엔드 개발자",
-        "company": "아마존",
-        "bodyShape": 1,
-        "personality": 2,
-        "bloodType": 1,
-        "smoking": 2,
-        "introduce": "안녕하세요 ^^"
-    }
-    ```
+```json
+{
+	"nickname": "정수지",
+	"birth": "1996-12-11",
+	"major": "멀티미디어학과",
+	"job": "프론트엔드 개발자",
+	"company": "아마존",
+	"bodyShape": "슬림탄탄",
+	"personality": "귀여운",
+	"bloodType": "O형",
+	"smoking": "비흡연",
+	"introduce": "수줍음이 많아요 ^^"
+}
+```
 
 - Response Sample
 
@@ -569,23 +594,23 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "info": {
-          "averageStar": 3.1,
-          "nickname": "권효진",
+          "averageStar": 4.02,
+          "nickname": "정수지",
           "school": "",
-          "major": "경영학전공",
-          "job": "백엔드 개발자",
+          "major": "멀티미디어학과",
+          "job": "프론트엔드 개발자",
           "company": "아마존",
           "region": "",
-          "birth": "1995-02-11",
-          "age": 26,
+          "birth": "1996-12-11",
+          "age": 25,
           "tall": "",
-          "bodyShape": 1,
-          "personality": 2,
-          "bloodType": 1,
-          "smoking": 2,
+          "bodyShape": "슬림탄탄",
+          "personality": "귀여운",
+          "bloodType": "O형",
+          "smoking": "비흡연",
           "drinking": "",
           "religion": "",
-          "introduce": "안녕하세요 ^^"
+          "introduce": "수줍음이 많아요 ^^"
       }
   }
   ```
@@ -611,8 +636,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
        Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
-       - Username: hjk@hjk.com
-       - Password: hjk
+       - Username: szj@szj.com
+       - Password: szj
 
     2. Token Auth **<u>(production 때 사용)</u>**
 
@@ -626,9 +651,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-        "region": 1,
-        "drinking": 1,
-        "introduce": "만나서 반가워요 ㅎㅎ"
+    	"region": "서울",
+    	"drinking": "가끔 마심",
+    	"introduce": "제 매력이 뭔지 직접 알아가 보세요 ^^"
     }
     ```
 
@@ -637,23 +662,23 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "info": {
-          "averageStar": 3.3,
-          "nickname": "권효진",
+          "averageStar": 4.22,
+          "nickname": "정수지",
           "school": "",
-          "major": "경영학전공",
-          "job": "백엔드 개발자",
+          "major": "멀티미디어학과",
+          "job": "프론트엔드 개발자",
           "company": "아마존",
-          "region": 1,
-          "birth": "1995-02-11",
-          "age": 26,
+          "region": "서울",
+          "birth": "1996-12-11",
+          "age": 25,
           "tall": "",
-          "bodyShape": 1,
-          "personality": 2,
-          "bloodType": 1,
-          "smoking": 2,
-          "drinking": 1,
+          "bodyShape": "슬림탄탄",
+          "personality": "귀여운",
+          "bloodType": "O형",
+          "smoking": "비흡연",
+          "drinking": "가끔 마심",
           "religion": "",
-          "introduce": "만나서 반가워요 ㅎㅎ"
+          "introduce": "제 매력이 뭔지 직접 알아가 보세요 ^^"
       }
   }
   ```
@@ -679,8 +704,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
        Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
-       - Username: esb@esb.com
-       - Password: esb
+       - Username: szj@szj.com
+       - Password: szj
 
     2. Token Auth **<u>(production 때 사용)</u>**
 
@@ -697,28 +722,28 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "user": {
-          "pk": 1,
-          "email": "esb@esb.com",
+          "pk": 4,
+          "email": "szj@szj.com",
           "gender": "여자"
       },
       "info": {
-          "averageStar": 3.5,
-          "nickname": "권효진",
+          "averageStar": 4.26,
+          "nickname": "정수지",
           "school": "",
-          "major": "경영학전공",
-          "job": "백엔드 개발자",
+          "major": "멀티미디어학과",
+          "job": "프론트엔드 개발자",
           "company": "아마존",
-          "region": 1,
-          "birth": "1995-02-11",
-          "age": 26,
+          "region": "서울",
+          "birth": "1996-12-11",
+          "age": 25,
           "tall": "",
-          "bodyShape": 1,
-          "personality": 2,
-          "bloodType": 1,
-          "smoking": 2,
-          "drinking": 1,
+          "bodyShape": "슬림탄탄",
+          "personality": "귀여운",
+          "bloodType": "O형",
+          "smoking": "비흡연",
+          "drinking": "가끔 마심",
           "religion": "",
-          "introduce": "만나서 반가워요 ㅎㅎ"
+          "introduce": "제 매력이 뭔지 직접 알아가 보세요 ^^"
       }
   }
   ```
@@ -758,7 +783,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     story 정보의 value는 아래 str 형태의 값들로 이루어진 list로 고정됨
 
     - 각각 str 값(오른쪽)을 int 값(왼쪽)과 연결하여 숫자 형태로 접근하도록 함
-    - `story`: (1, 이상적인 첫 소개팅 장소), (2, 내 외모중 가장 마음에 드는 곳은), (3, 남들보다 이것 하나는 자신있어요)
+    - `story`: (1, `이상적인 첫 소개팅 장소`), (2, `내 외모중 가장 마음에 드는 곳은`), (3, `남들보다 이것 하나는 자신있어요`)
 
     ```json
     {
