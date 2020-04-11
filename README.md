@@ -1110,16 +1110,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-    	"lifeStyle": [
-    		{"name": "퇴근 후엔 운동"},
-    		{"name": "여행 자주 가요"},
-    		{"name": "여유를 즐겨요"}
-    	]
-    }
-    ```
-    
-    ```json
-    {
         "lifeStyle": [
             {"name": "퇴근 후엔 운동"},
             {"name": "여행 자주 가요"},
@@ -1127,8 +1117,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
         ]
     }
     ```
-    
-    
 
 - Response Sample
 
@@ -1193,6 +1181,17 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     	]
     }
     ```
+    
+    ```json
+    {
+        "relationshipStyle": [
+            {"name": "가벼운 연애 추구"},
+            {"name": "카톡보단 전화"}
+        ]
+    }
+    ```
+    
+    
 
 - Response Sample
 
