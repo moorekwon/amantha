@@ -250,7 +250,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `GET`
 
-- **User별 Image, Info, Story, Tag 정보, 보유 ribbon, 등 전체 정보 표시**
+- **User별 Image, Info, Story, Tag 정보, 보유 ribbon, pick받은 이성, 등 전체 정보 표시**
 
 - Request Sample
 
@@ -1378,11 +1378,116 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 ### User Pick Add
 
+- URL: `/user/pick/`
 
+- Method: `POST`
+
+- partner의 email 정보를 통해 해당 partner의 pk값에 접근 ***(email이 아닌 다른 user를 식별할 수 있는 고유값으로 접근할 수 있음)***
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/pick/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hbb@hbb.com
+       - Password: hbb
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    pick할 이성의 이메일 정보 기입
+
+    ```json
+    {
+    	"partner": "hjk@hjk.com"
+    }
+    ```
+
+- Response Sample
+
+  해당 user와 pick한 이성의 pk값, pick 보낸 시간 표시
+
+  `hbb@hbb.com` 유저의 pk 값이 `5`, `hjk@hjk.com` 유저의 pk 값이 `1`
+
+  ```json
+  {
+      "user": 5,
+      "partner": 1,
+      "created": "2020-04-12 02:59"
+  }
+  ```
 
 
 
 ### User Pick List
+
+- URL: `/user/pick/`
+
+- Method: `GET`
+
+- 해당 user를 pick한 이성과 해당 user가 pick한 이성 조회
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/pick/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+- Response Sample
+
+  User의 계정 정보와 현재 pick한 이성의 email, pick받은 이성의 email 표시 ***(email이 아닌 다른 유저를 식별할 수 있는 고유값으로 표시 가능)***
+
+  ```json
+  {
+      "user": {
+          "pk": 1,
+          "email": "hjk@hjk.com",
+          "gender": "여자"
+      },
+      "pickFrom": [
+          "hbb@hbb.com"
+      ],
+      "pickTo": [
+          "hgo@hgo.com",
+          "hbb@hbb.com"
+      ]
+  }
+  ```
+
+
+
+### User Star
+
+*추후 업데이트*
 
 
 
