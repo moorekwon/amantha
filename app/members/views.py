@@ -298,6 +298,10 @@ class UserRibbonAPIView(APIView):
 
     def post(self, request):
         user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
         serializer = UserRibbonSerializer(data=request.data)
 
         # 보유 리본이 부족할 경우 response
