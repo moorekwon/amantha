@@ -390,6 +390,9 @@ class UserTagAPIView(APIView):
     def get(self, request):
         user = request.user
 
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
         # TagType.objects.get_or_create(user=user)
         if user.tag is None:
             user.tag = TagType.objects.create()
