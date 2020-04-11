@@ -584,24 +584,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
         "introduce": "수줍음이 많아요 ^^"
     }
     ```
-    
-    
-
-
-```json
-{
-	"nickname": "정수지",
-	"birth": "1996-12-11",
-	"major": "멀티미디어학과",
-	"job": "프론트엔드 개발자",
-	"company": "아마존",
-	"bodyShape": "슬림탄탄",
-	"personality": "귀여운",
-	"bloodType": "O형",
-	"smoking": "비흡연",
-	"introduce": "수줍음이 많아요 ^^"
-}
-```
 
 - Response Sample
 
@@ -670,6 +652,14 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     	"region": "서울",
     	"drinking": "가끔 마심",
     	"introduce": "제 매력이 뭔지 직접 알아가 보세요 ^^"
+    }
+    ```
+    
+    ```json
+    {
+        "region": "서울",
+        "drinking": "가끔 마심",
+        "introduce": "제 매력이 뭔지 직접 알아가 보세요 ^^"
     }
     ```
 
