@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag, SendLike, SendStar
+from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag, SendStar, SendPick
 
 User = get_user_model()
 
@@ -116,9 +116,9 @@ class UserRibbonSerializer(serializers.ModelSerializer):
         )
 
 
-class UserLikeSerializer(serializers.ModelSerializer):
+class UserPickSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SendLike
+        model = SendPick
         fields = (
             'user',
             'partner',
@@ -166,7 +166,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     currentRibbon = serializers.IntegerField(source='userribbon_set.last.current_ribbon')
     profilePercentage = serializers.FloatField(source='userinfo.profile_percentage')
     pickFrom = serializers.ListField(
-        child=serializers.EmailField(), source='send_me_like_users.all'
+        child=serializers.EmailField(), source='send_me_pick_users.all'
     )
     images = UserImageSerializer(many=True, source='userimage_set')
     info = UserInfoSerializer(source='userinfo')

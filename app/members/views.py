@@ -318,12 +318,12 @@ class UserRibbonAPIView(APIView):
         return Response(serializer.errors)
 
 
-class UserLikeAPIView(APIView):
+class UserPickAPIView(APIView):
     # 해당 유저에 해 pick한 이성과 pick받은 이성 조회
     def get(self, request):
         user = request.user
-        pick_from_users = user.send_me_like_users.all()
-        pick_to_users = SendLike.objects.filter(user=user)
+        pick_from_users = user.send_me_pick_users.all()
+        pick_to_users = SendPick.objects.filter(user=user)
 
         # 해당 유저가 pick받은 이성들
         pick_from_list = list()
@@ -349,7 +349,7 @@ class UserLikeAPIView(APIView):
         # partner의 email 정보를 통해 pk에 접근
         partner = User.objects.get(email=request.data['partner'])
 
-        if user in partner.send_me_like_users.all():
+        if user in partner.send_me_pick_users.all():
             return Response('이미 pick한 이성 입니다.')
 
         data = {
@@ -357,11 +357,11 @@ class UserLikeAPIView(APIView):
             'partner': partner.pk,
         }
 
-        serializer = UserLikeSerializer(data=data)
+        serializer = UserPickSerializer(data=data)
 
         if serializer.is_valid():
             like_true = serializer.save()
-            return Response(UserLikeSerializer(like_true).data)
+            return Response(UserPickSerializer(like_true).data)
         return Response(serializer.errors)
 
 

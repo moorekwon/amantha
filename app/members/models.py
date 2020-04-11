@@ -44,7 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     star_users = models.ManyToManyField('self', through='SendStar', related_name='send_me_star_users',
                                         symmetrical=False)
-    like_users = models.ManyToManyField('self', through='SendLike', related_name='send_me_like_users',
+    pick_users = models.ManyToManyField('self', through='SendPick', related_name='send_me_pick_users',
                                         symmetrical=False)
     tag = models.OneToOneField('TagType', on_delete=models.CASCADE, blank=True, null=True)
 
@@ -182,9 +182,9 @@ class UserInfo(models.Model):
 
 
 # 좋아요 주기
-class SendLike(models.Model):
-    user = models.ForeignKey(User, related_name='user_sendlike_set', on_delete=models.CASCADE)
-    partner = models.ForeignKey(User, related_name='partner_sendlike_set', on_delete=models.CASCADE)
+class SendPick(models.Model):
+    user = models.ForeignKey(User, related_name='user_sendpick_set', on_delete=models.CASCADE)
+    partner = models.ForeignKey(User, related_name='partner_sendpick_set', on_delete=models.CASCADE)
     like = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now=True)
 

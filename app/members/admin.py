@@ -29,7 +29,7 @@ class SendStarAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(SendLike)
+@admin.register(SendPick)
 class SendLikeAdmin(admin.ModelAdmin):
     pass
 

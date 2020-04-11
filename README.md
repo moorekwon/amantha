@@ -1375,6 +1375,18 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```
 
 
+
+### User Pick Add
+
+
+
+
+
+### User Pick List
+
+
+
+
 ### Restaurants Category List
 
 - URL: `/restaurants/category/<category_name>/`
