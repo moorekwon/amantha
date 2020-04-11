@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag
+from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag, SendLike
 
 User = get_user_model()
 
@@ -116,6 +116,16 @@ class UserRibbonSerializer(serializers.ModelSerializer):
         )
 
 
+class UserLikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SendLike
+        fields = (
+            'user',
+            'partner',
+            'created',
+        )
+
+
 class UserTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
@@ -144,19 +154,13 @@ class TagTypeSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     currentRibbon = serializers.IntegerField(source='userribbon_set.last.current_ribbon')
     profilePercentage = serializers.FloatField(source='userinfo.profile_percentage')
-    sendMeLikeUsers = serializers.ListField(
+    pickFrom = serializers.ListField(
         child=serializers.EmailField(), source='send_me_like_users.all'
     )
     images = UserImageSerializer(many=True, source='userimage_set')
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
     tags = TagTypeSerializer(source='tag')
-
-    # 표시 방법 재검토 필요
-    # dateStyleTag = UserTagSerializer(source='date_style_tag', many=True)
-    # lifeStyleTag = UserTagSerializer(source='life_style_tag', many=True)
-    # charmTag = UserTagSerializer(source='charm_tag', many=True)
-    # relationshipStyleTag = UserTagSerializer(source='relationship_style_tag', many=True)
 
     class Meta:
         model = User
@@ -165,14 +169,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'gender',
             'currentRibbon',
             'profilePercentage',
-            'sendMeLikeUsers',
+            'pickFrom',
             'images',
             'info',
             'stories',
             'tags',
-
-            # 'dateStyleTag',
-            # 'lifeStyleTag',
-            # 'charmTag',
-            # 'relationshipStyleTag',
         )

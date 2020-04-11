@@ -314,6 +314,57 @@ class UserRibbonAPIView(APIView):
         return Response(serializer.errors)
 
 
+class UserLikeAPIView(APIView):
+    # 해당 유저에 해 pick한 이성과 pick받은 이성 조회
+    def get(self, request):
+        user = request.user
+        pick_from_users = user.send_me_like_users.all()
+        pick_to_users = SendLike.objects.filter(user=user)
+
+        # 해당 유저가 pick받은 이성들
+        pick_from_list = list()
+        for pick_from_user in pick_from_users:
+            # pick받은 이성들의 email 정보를 표대시
+            pick_from_list.append(pick_from_user.email)
+
+        # 해당 유저가 pick한 이성들
+        pick_to_list = list()
+        for pick_to_user in pick_to_users:
+            pick_to_list.append(pick_to_user.partner.email)
+
+        data = {
+            'user': UserAccountSerializer(user).data,
+            'pickFrom': pick_from_list,
+            'pickTo': pick_to_list,
+        }
+        return Response(data)
+
+    # partner에게 like 주기
+    def post(self, request):
+        user = request.user
+        # partner의 email 정보를 통해 pk에 접근
+        partner = User.objects.get(email=request.data['partner'])
+
+        if user in partner.send_me_like_users.all():
+            return Response('이미 pick한 이성 입니다.')
+
+        data = {
+            'user': user.pk,
+            'partner': partner.pk,
+        }
+
+        serializer = UserLikeSerializer(data=data)
+
+        if serializer.is_valid():
+            likeTrue = serializer.save()
+
+            data = {
+                'like': UserLikeSerializer(likeTrue).data,
+            }
+            return Response(data)
+        return Response(serializer.errors)
+
+
 class UserTagAPIView(APIView):
     # 해당 유저의 모든 관심태그 조회
     def get(self, request):

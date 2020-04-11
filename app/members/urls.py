@@ -26,6 +26,7 @@ urlpatterns = [
     path('user/story/<int:pk>/', UserStoryAPIView.as_view()),
     # GET, POST 유저의 리본내역 조회 및 리본지급 추가
     path('user/ribbon/', UserRibbonAPIView.as_view()),
+    path('user/like/', UserLikeAPIView.as_view()),
 
     # GET 유저의 태그 전체 조회
     # PATCH 추후 추가... (현재는 아래 4개 url 주소로 태그타입별 각각 PATCH 설정)

@@ -67,17 +67,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         return None
 
 
-class TagType(models.Model):
-    date_style_tag = models.ManyToManyField('Tag', related_name='my_date_style_tags', blank=True)
-    life_style_tag = models.ManyToManyField('Tag', related_name='my_life_style_tags', blank=True)
-    charm_tag = models.ManyToManyField('Tag', related_name='my_charm_tags', blank=True)
-    relationship_style_tag = models.ManyToManyField('Tag', related_name='my_relationship_style_tags', blank=True)
-
-
-class Tag(models.Model):
-    name = models.CharField(max_length=60, blank=True)
-
-
 # 유저 생성 후 기입할 프로필 정보
 class UserInfo(models.Model):
     REGION = (
@@ -190,6 +179,25 @@ class UserInfo(models.Model):
         return profile_percentage
 
 
+# 좋아요 주기
+class SendLike(models.Model):
+    user = models.ForeignKey(User, related_name='user_sendlike_set', on_delete=models.CASCADE)
+    partner = models.ForeignKey(User, related_name='partner_sendlike_set', on_delete=models.CASCADE)
+    like = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now=True)
+
+
+class TagType(models.Model):
+    date_style_tag = models.ManyToManyField('Tag', related_name='my_date_style_tags', blank=True)
+    life_style_tag = models.ManyToManyField('Tag', related_name='my_life_style_tags', blank=True)
+    charm_tag = models.ManyToManyField('Tag', related_name='my_charm_tags', blank=True)
+    relationship_style_tag = models.ManyToManyField('Tag', related_name='my_relationship_style_tags', blank=True)
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=60, blank=True)
+
+
 # 별점 주기
 class SendStar(models.Model):
     user = models.ForeignKey(User, related_name='user_sendstar_set', on_delete=models.CASCADE)
@@ -239,11 +247,3 @@ class UserRibbon(models.Model):
 
             self.current_ribbon = pre.current_ribbon + self.paid_ribbon
         super().save(*args, **kwargs)
-
-
-# 좋아요 주기
-class SendLike(models.Model):
-    user = models.ForeignKey(User, related_name='user_sendlike_set', on_delete=models.CASCADE)
-    partner = models.ForeignKey(User, related_name='partner_sendlike_set', on_delete=models.CASCADE)
-    like = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now=True)
