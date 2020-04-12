@@ -1484,9 +1484,73 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Star
+### User Star Add
 
-*추후 업데이트*
+
+
+### User Star List
+
+- URL: `/user/star/`
+
+- Method: `GET`
+
+- 해당 user가 가입심사한 이성과 해당 user를 가입심사한 이성 및 별점 조회
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/star/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hgo@hgo.com
+       - Password: hgo
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+- Response Sample
+
+  User의 계정 정보, User가 가입심사한 이성의 email과 보낸 별점(StarTo), User를 가입심사한 이성의 email과 받은 별점(StarFrom) 표시 ***(다른 방식으로 접근하기 원하면 수정)***
+
+  ```json
+  {
+      "user": {
+          "pk": 2,
+          "email": "hgo@hgo.com",
+          "gender": "남자"
+      },
+      "StarTo": [
+          [
+              "hjk@hjk.com",
+              5
+          ],
+          [
+              "szj@szj.com",
+              4
+          ]
+      ],
+      "StarFrom": [
+          [
+              "hjk@hjk.com",
+              5
+          ],
+          [
+              "szj@szj.com",
+              2
+          ]
+      ]
+  }
+  ```
 
 
 
@@ -1528,7 +1592,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   - 각 Category 별로 Restaurants 정보를 제공 
 
   ```json
- [
+   [
     {
         "id": 21,
         "restaurant": 21,
@@ -1545,7 +1609,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
         "date_joined": "2020-04-09 17:53",
         "date_update": "2020-04-09 17:53"
     }
-]
-
+  ]
+  
   ```
 
