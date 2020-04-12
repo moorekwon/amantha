@@ -373,18 +373,22 @@ class UserStarAPIView(APIView):
         if not Token.objects.filter(user=user):
             return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
-        stars_from = user.star_users.all()
+        stars_from = user.send_me_star_users.all()
         stars_to = SendStar.objects.filter(user=user)
 
         stars_from_list = list()
         for star_from in stars_from:
             # 가입심사 한 이성의 email 값과 이성이 준 별점을 tuple 형태로 추가
-            stars_from_list.append((star_from.email, SendStar.objects.get(user=star_from, partner=user).star))
+            stars_from_list.append(
+                (star_from.email, SendStar.objects.filter(user=star_from, partner=user)[0].star)
+            )
 
         stars_to_list = list()
         for star_to in stars_to:
             # 가입심사 받은 이성의 email 값과 이성에게 준 별점을 tuple 형태로 추가
-            stars_to_list.append((star_to.partner.email, SendStar.objects.get(user=user, partner=star_to.partner).star))
+            stars_to_list.append(
+                (star_to.partner.email, SendStar.objects.filter(user=user, partner=star_to.partner)[0].star)
+            )
 
         data = {
             'user': UserAccountSerializer(user).data,
