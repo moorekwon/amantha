@@ -10,6 +10,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from members.models import TagType
 from members.serializers import *
 
 User = get_user_model()
@@ -100,46 +101,6 @@ class UserProfileAPIView(APIView):
             }
             return Response(data)
         return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
-
-    # def post(self, request):
-    #     user = request.user
-    #     serializers = TagTypeSerializer(data=request.data, partial=True)
-    #     print('serializers >> ', serializers)
-    #
-    #     if serializers.is_valid():
-    #         print('valid?')
-    #         date_tags = []
-    #         life_tags = []
-    #         ch_tags = []
-    #         relationship_tags = []
-    #
-    #         date_styles = serializers.validated_data.pop('date_style_tag')
-    #         print('date_styles >> ', date_styles)
-    #         life_styles = serializers.validated_data.pop('life_style_tag')
-    #         charms = serializers.validated_data.pop('charm_tag')
-    #         relationship_styles = serializers.validated_data.pop('relationship_style_tag')
-    #
-    #         for date_style in date_styles:
-    #             date_tags.append(Tag.objects.get_or_create(**date_style)[0])
-    #         for life_style in life_styles:
-    #             life_tags.append(Tag.objects.get_or_create(**life_style)[0])
-    #         for charm in charms:
-    #             ch_tags.append(Tag.objects.get_or_create(**charm)[0])
-    #         for relationship_style in relationship_styles:
-    #             relationship_tags.append(Tag.objects.get_or_create(**relationship_style)[0])
-    #
-    #         if not date_tags:
-    #             user.date_style_tag.set(date_tags)
-    #         if not life_tags:
-    #             user.life_style_tag.set(life_tags)
-    #         if not ch_tags:
-    #             user.charm_tag.set(ch_tags)
-    #         if not relationship_tags:
-    #             user.relationship_style_tag.set(relationship_tags)
-    #
-    #         serializers = TagTypeSerializer(user)
-    #         return Response(serializers.data)
-    #     return Response(serializers.errors)
 
 
 class UserImageAPIView(APIView):
@@ -337,6 +298,10 @@ class UserRibbonAPIView(APIView):
 
     def post(self, request):
         user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
         serializer = UserRibbonSerializer(data=request.data)
 
         # 보유 리본이 부족할 경우 response
@@ -353,56 +318,109 @@ class UserRibbonAPIView(APIView):
         return Response(serializer.errors)
 
 
-class UserDateStyleTagAPIView(APIView):
-    # 데이트 스타일 관심태그 추가
-    def patch(self, request):
+class UserPickAPIView(APIView):
+    # 해당 유저에 해 pick한 이성과 pick받은 이성 조회
+    def get(self, request):
         user = request.user
-        serializer = TagTypeSerializer(data=request.data, partial=True)
-        print('serializer >> ', serializer)
+        pick_from_users = user.send_me_pick_users.all()
+        pick_to_users = SendPick.objects.filter(user=user)
+
+        # 해당 유저가 pick받은 이성들
+        pick_from_list = list()
+        for pick_from_user in pick_from_users:
+            # pick받은 이성들의 email 정보를 표대시
+            pick_from_list.append(pick_from_user.email)
+
+        # 해당 유저가 pick한 이성들
+        pick_to_list = list()
+        for pick_to_user in pick_to_users:
+            pick_to_list.append(pick_to_user.partner.email)
+
+        data = {
+            'user': UserAccountSerializer(user).data,
+            'pickFrom': pick_from_list,
+            'pickTo': pick_to_list,
+        }
+        return Response(data)
+
+    # partner에게 like 주기
+    def post(self, request):
+        user = request.user
+        # partner의 email 정보를 통해 pk에 접근
+        partner = User.objects.get(email=request.data['partner'])
+
+        if user in partner.send_me_pick_users.all():
+            return Response('이미 pick한 이성 입니다.')
+
+        data = {
+            'user': user.pk,
+            'partner': partner.pk,
+        }
+
+        serializer = UserPickSerializer(data=data)
 
         if serializer.is_valid():
-            print('valid!')
-            tags = []
-            update_tags = serializer.validated_data.pop('date_style_tag')
-
-            for update_tag in update_tags:
-                tags.append(Tag.objects.get_or_create(**update_tag)[0])
-
-            print('update_tags >> ', update_tags)
-
-            # if not tags:
-            user.date_style_tag.set(tags)
-
-            print('user.date_style_tag.all() >> ', user.date_style_tag.all())
-
-            return Response(TagTypeSerializer(user).data)
+            like_true = serializer.save()
+            return Response(UserPickSerializer(like_true).data)
         return Response(serializer.errors)
 
 
-class UserLifeStyleTagAPIView(APIView):
-    # 라이프 스타일 관심태그 수정
-    # 기존 등록된 관심태그에서 추가되고 삭제되는 것이 아니라, request.data로 타입별 태그 전체 수정
-    def patch(self, request):
+class UserStarAPIView(APIView):
+    # 가입심사 보낸 이성과 받은 이성 리스트 조회
+    def get(self, request):
         user = request.user
-        serializer = TagTypeSerializer(data=request.data, partial=True)
-        print('serializer >> ', serializer)
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        stars_from = user.send_me_star_users.all()
+        stars_to = SendStar.objects.filter(user=user)
+
+        stars_from_list = list()
+        for star_from in stars_from:
+            # 가입심사 한 이성의 email 값과 이성이 준 별점을 tuple 형태로 추가
+            stars_from_list.append(
+                (star_from.email, SendStar.objects.filter(user=star_from, partner=user)[0].star)
+            )
+
+        stars_to_list = list()
+        for star_to in stars_to:
+            # 가입심사 받은 이성의 email 값과 이성에게 준 별점을 tuple 형태로 추가
+            stars_to_list.append(
+                (star_to.partner.email, SendStar.objects.filter(user=user, partner=star_to.partner)[0].star)
+            )
+
+        data = {
+            'user': UserAccountSerializer(user).data,
+            'StarTo': stars_to_list,
+            'StarFrom': stars_from_list,
+        }
+        return Response(data)
+
+    def post(self, request):
+        user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        # partner의 email 정보를 통해 pk에 접근
+        partner = User.objects.get(email=request.data['partner'])
+        star = request.data['star']
+
+        if user in partner.send_me_star_users.all():
+            return Response('이미 가입심사한 이성 입니다.')
+
+        data = {
+            'user': user.pk,
+            'partner': partner.pk,
+            'star': star,
+        }
+
+        serializer = UserStarSerializer(data=data)
 
         if serializer.is_valid():
-            print('valid!')
-            tags = []
-            update_tags = serializer.validated_data.pop('life_style_tag')
-
-            for update_tag in update_tags:
-                tags.append(Tag.objects.get_or_create(**update_tag)[0])
-
-            print('update_tags >> ', update_tags)
-
-            # if not tags:
-            user.life_style_tag.set(tags)
-
-            print('user.life_style_tag.all() >> ', user.life_style_tag.all())
-
-            return Response(TagTypeSerializer(user).data)
+            star = serializer.save()
+            return Response(UserStarSerializer(star).data)
         return Response(serializer.errors)
 
 
@@ -411,57 +429,171 @@ class UserTagAPIView(APIView):
     def get(self, request):
         user = request.user
 
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        # TagType.objects.get_or_create(user=user)
+        if user.tag is None:
+            user.tag = TagType.objects.create()
+            user.save()
+
+        print('user.tag >> ', user.tag)
+
         data = {
             'user': UserAccountSerializer(user).data,
-            'tags': TagTypeSerializer(user).data,
+            'tags': TagTypeSerializer(user.tag).data,
         }
         return Response(data)
 
+    # 현재 작동 안됨.! (태그타입별로 api 넣지 않고 한꺼번에 partial update 시도했으나 실패..)
+    # def patch(self, request):
+    #     user = request.user
+    #     serializer = TagTypeSerializer(data=request.data, partial=True)
+    #     print('serializer >> ', serializer)
+    #
+    #     if serializer.is_valid():
+    #         print('valid!')
+    #         date_style_tags = []
+    #         life_style_tags = []
+    #         charm_tags = []
+    #         relationship_style_tags = []
+    #
+    #         if request.data['dateStyle']:
+    #             update_date_tags = serializer.validated_data.pop('date_style_tag')
+    #
+    #             for update_date_tag in update_date_tags:
+    #                 date_style_tags.append(Tag.objects.get_or_create(**update_date_tag[0]))
+    #         print('date_style_tags >> ', date_style_tags)
+    #         user.date_style_tag.set(date_style_tags)
+    #
+    #         if request.data['lifeStyle']:
+    #             update_life_tags = serializer.validated_data.pop('life_style_tag')
+    #
+    #             for update_life_tag in update_life_tags:
+    #                 life_style_tags.append(Tag.objects.get_or_create(**update_life_tag[0]))
+    #         user.life_style_tag.set(life_style_tags)
+    #         print('life_style_tags >> ', life_style_tags)
+    #
+    #         if request.data['charm']:
+    #             update_charm_tags = serializer.validated_data.pop('charm_tag')
+    #
+    #             for update_charm_tag in update_charm_tags:
+    #                 charm_tags.append(Tag.objects.get_or_create(**update_charm_tag[0]))
+    #         user.charm_tag.set(charm_tags)
+    #         print('charm_tags >> ', charm_tags)
+    #
+    #         if request.data['relationshipStyle']:
+    #             update_relationship_tags = serializer.validated_data.pop('relathionship_style_tag')
+    #
+    #             for update_relationship_tag in update_relationship_tags:
+    #                 relationship_style_tags.append(Tag.objects.get_or_create(**update_relationship_tag[0]))
+    #         user.relationship_style_tag.set(relationship_style_tags)
+    #         print('relationship_style_tags >> ', relationship_style_tags)
+    #
+    #         return Response(TagTypeSerializer(user).data)
+    #     return Response(serializer.errors)
+
+
+class UserTagDateStyleAPIView(APIView):
+    # 데이트 스타일 관심태그 추가
     def patch(self, request):
         user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
         serializer = TagTypeSerializer(data=request.data, partial=True)
-        print('serializer >> ', serializer)
 
         if serializer.is_valid():
-            print('valid!')
-            date_style_tags = []
-            life_style_tags = []
-            charm_tags = []
-            relationship_style_tags = []
+            tags = []
+            update_tags = serializer.validated_data.pop('date_style_tag')
 
-            if request.data['dateStyle']:
-                update_date_tags = serializer.validated_data.pop('date_style_tag')
+            for update_tag in update_tags:
+                tags.append(Tag.objects.get_or_create(**update_tag)[0])
 
-                for update_date_tag in update_date_tags:
-                    date_style_tags.append(Tag.objects.get_or_create(**update_date_tag[0]))
-            print('date_style_tags >> ', date_style_tags)
-            user.date_style_tag.set(date_style_tags)
+            if user.tag is None:
+                user.tag = TagType.objects.create()
+                user.save()
 
-            if request.data['lifeStyle']:
-                update_life_tags = serializer.validated_data.pop('life_style_tag')
+            user.tag.date_style_tag.set(tags)
+            return Response(TagTypeSerializer(user.tag).data)
+        return Response(serializer.errors)
 
-                for update_life_tag in update_life_tags:
-                    life_style_tags.append(Tag.objects.get_or_create(**update_life_tag[0]))
-            user.life_style_tag.set(life_style_tags)
-            print('life_style_tags >> ', life_style_tags)
 
-            if request.data['charm']:
-                update_charm_tags = serializer.validated_data.pop('charm_tag')
+class UserTagLifeStyleAPIView(APIView):
+    # 라이프 스타일 관심태그 수정
+    # 기존 등록된 관심태그에서 추가되고 삭제되는 것이 아니라, request.data로 타입별 태그 전체 수정
+    def patch(self, request):
+        user = request.user
 
-                for update_charm_tag in update_charm_tags:
-                    charm_tags.append(Tag.objects.get_or_create(**update_charm_tag[0]))
-            user.charm_tag.set(charm_tags)
-            print('charm_tags >> ', charm_tags)
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
-            if request.data['relationshipStyle']:
-                update_relationship_tags = serializer.validated_data.pop('relathionship_style_tag')
+        serializer = TagTypeSerializer(data=request.data, partial=True)
 
-                for update_relationship_tag in update_relationship_tags:
-                    relationship_style_tags.append(Tag.objects.get_or_create(**update_relationship_tag[0]))
-            user.relationship_style_tag.set(relationship_style_tags)
-            print('relationship_style_tags >> ', relationship_style_tags)
+        if serializer.is_valid():
+            tags = []
+            update_tags = serializer.validated_data.pop('life_style_tag')
 
-            return Response(TagTypeSerializer(user).data)
+            for update_tag in update_tags:
+                tags.append(Tag.objects.get_or_create(**update_tag)[0])
+
+            if user.tag is None:
+                user.tag = TagType.objects.create()
+                user.save()
+
+            user.tag.life_style_tag.set(tags)
+            return Response(TagTypeSerializer(user.tag).data)
+        return Response(serializer.errors)
+
+
+class UserTagCharmAPIView(APIView):
+    def patch(self, request):
+        user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        serializer = TagTypeSerializer(data=request.data, partial=True)
+
+        if serializer.is_valid():
+            tags = []
+            update_tags = serializer.validated_data.pop('charm_tag')
+
+            for update_tag in update_tags:
+                tags.append(Tag.objects.get_or_create(**update_tag)[0])
+
+            if user.tag is None:
+                user.tag = TagType.objects.create()
+                user.save()
+
+            user.tag.charm_tag.set(tags)
+            return Response(TagTypeSerializer(user.tag).data)
+        return Response(serializer.errors)
+
+
+class UserTagRelationshipAPIView(APIView):
+    def patch(self, request):
+        user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        serializer = TagTypeSerializer(data=request.data, partial=True)
+
+        if serializer.is_valid():
+            tags = []
+            update_tags = serializer.validated_data.pop('relationship_style_tag')
+
+            for update_tag in update_tags:
+                tags.append(Tag.objects.get_or_create(**update_tag)[0])
+
+            if user.tag is None:
+                user.tag = TagType.objects.create()
+                user.save()
+
+            user.tag.relationship_style_tag.set(tags)
+            return Response(TagTypeSerializer(user.tag).data)
         return Response(serializer.errors)
 
 

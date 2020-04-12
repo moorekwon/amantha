@@ -1,3 +1,5 @@
+[POSTMAN API URL](https://documenter.getpostman.com/view/9448838/SzYevFGb?version=latest)
+
 # 아만다 클론 앱 API 문서
 
 Base URL: `http://13.209.3.115:88/api`
@@ -28,7 +30,7 @@ client에서는 해당 email과 password로 서명된 HTTP 기본 인증을 사�
 
 [DRF 라이브러리](https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication)에서 제공하는 토큰 인증 방식
 
-**<u>실제 production</u>**에서 사용할 인증 방식
+<u>**실제 production**</u>에서 사용할 인증 방식
 
 HTTP Header의 `Authorization` 키에 `Token <value>` 값을 넣어 전송
 
@@ -68,8 +70,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-    	"email": "esb@esb.com",
-    	"password": "esb"
+        "email": "esb@esb.com",
+        "password": "esb"
     }
     ```
 
@@ -135,9 +137,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-    	"email": "hjk@hjk.com",
-    	"password": "hjk",
-    	"gender": "여자"
+        "email": "hjk@hjk.com",
+        "password": "hjk",
+        "gender": "여자"
     }
     ```
 
@@ -217,8 +219,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-    	"accessToken": "FASowF-QPcTiwc1gIVxwGdkso4usMvOQl3d2pgorDNQAAAFxSTSrcQ",
-    	"gender": "여자"
+        "accessToken": "FASowF-QPcTiwc1gIVxwGdkso4usMvOQl3d2pgorDNQAAAFxSTSrcQ",
+        "gender": "여자"
     }
     ```
 
@@ -250,7 +252,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `GET`
 
-- **User별 Image, Info, Story, Tag 정보, 보유 ribbon, 등 전체 정보 표시**
+- **User별 Image, Info, Story, Tag 정보, 보유 ribbon, pick받은 이성, 등 전체 정보 표시**
 
 - Request Sample
 
@@ -285,7 +287,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "gender": "여자",
           "currentRibbon": 10,
           "profilePercentage": 71.4,
-          "sendMeLikeUsers": [
+          "pickFrom": [
               "hgo@hgo.com",
               "hbb@hbb.com"
           ],
@@ -308,24 +310,23 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
               }
           ],
           "info": {
-              "pk": 1,
               "averageStar": 3.72,
               "nickname": "은순이",
               "school": "",
-              "major": "정치외교학과",
+              "major": "정치외교학",
               "job": "회사원",
-              "company": "외국계 회사",
-              "region": 1,
-              "birth": "1995-04-30",
+              "company": "",
+              "region": "서울",
+              "birth": "1995-02-23",
               "age": 26,
               "tall": "164",
-              "bodyShape": 1,
-              "personality": 2,
-              "bloodType": 1,
-              "smoking": 2,
+              "bodyShape": "보통체형",
+              "personality": "외향적인",
+              "bloodType": "B형",
+              "smoking": "비흡연",
               "drinking": "",
               "religion": "",
-              "introduce": "안녕하세요 반가워요^^"
+              "introduce": "안녕하세요 ^^"
           },
           "stories": [
               {
@@ -334,7 +335,33 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
                   "content": "조용한 카페"
               }
           ],
-          "tags": []
+          "tags": {
+              "dateStyle": [
+                  {
+                      "name": "광란의 댄스 배틀"
+                  }
+              ],
+              "lifeStyle": [
+                  {
+                      "name": "퇴근 후엔 운동"
+                  },
+                  {
+                      "name": "여행 자주 가요"
+                  },
+                  {
+                      "name": "여유를 즐겨요"
+                  }
+              ],
+              "charm": [],
+              "relationshipStyle": [
+                  {
+                      "name": "가벼운 연애 추구"
+                  },
+                  {
+                      "name": "카톡보단 전화"
+                  }
+              ]
+          }
       }
   }
   ```
@@ -518,8 +545,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
        Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
-       - Username: hjk@hjk.com
-       - Password: hjk
+       - Username: szj@szj.com
+       - Password: szj
 
     2. Token Auth **<u>(production 때 사용)</u>**
 
@@ -535,30 +562,28 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     - 옵션 정보: `school`, `major`, `job`, `company`, `region`, `tall`, `bodyShape`, `personality`, `bloodType`, `smoking`, `drinking`, `introduce`, `religion`
     - 고정된 value를 가진 정보
-      - 아래 정해진 값들만 넣을 수 있도록 str 형태의 값들로 이루어진 list로 고정됨
-        - 각각 str 값(오른쪽)을 int 값(왼쪽)과 연결하여 숫자 형태로 접근하도록 함
-      - `region`: (1, '서울'), (2, '경기'), (3, '인천'), (4, '대전'), (5, '충북'), (6, '충남'), (7, '강원'), (8, '부산'), (9, '경북'), (10, '경남'), (11, '대구'), (12, '울산'), (13, '광주'), (14, '전북'), (15, '전남'), (16, '제주')
-      - `bodyShape`: (1, '보통체형'), (2, '통통한'), (3, '살짝볼륨'), (4, '글래머'), (5, '마른'), (6, '슬림탄탄')
-      - `personality`: (1, '지적인'), (2, '차분한'), (3, '유머있는'), (4, '낙천적인'), (5, '내향적인'), (6, '외향적인'), (7, '감성적인'), (8, '상냥한'), (9, '귀여운'), (10, '섹시한'), (11, '4차원인'), (12, '발랄한'), (13, '도도한')
-        - ***multi choice 정보(필드) 추후 업데이트 (현재는 모두 복수 선택 불가능)***
-      - `bloodType`: (1, 'AB형'), (2, 'A형'), (3, 'B형'), (4, 'O형')
-      - `drinking`: (1, '가끔 마심'), (2, '어느정도 즐기는편'), (3, '술자리를 즐김'), (4, '마시지 않음')
-      - `smoking`: (1, '흡연'), (2, '비흡연')
-      - `religion`: (1, '종교 없음'), (2, '기독교'), (3, '천주교'), (4, '불교'), (5, '원불교'), (6, '유교'), (7, '이슬람교')
-
-
+      - 아래 정해진 값들만 넣을 수 있도록 **str** 형태의 값들로 이루어진 list로 고정됨
+      - `region`: `서울`, `경기`, `인천`, `대전`, `충북`, `충남`, `강원`, `부산`, `경북`, `경남`, `대구`, `울산`, `광주`, `전북`, `전남`, `제주`
+      - `bodyShape`: `보통체형`, `통통한`, `살짝볼륨`, `글래머`, `마른`, `슬림탄탄`
+      - `personality`: `지적인`, `차분한`, `유머있는`, `낙천적인`, `내향적인`, `외향적인`, `감성적인`, `상냥한`, `귀여운`, `섹시한`, `4차원인`, `발랄한`, `도도한`
+        - ***multi choice 정보(필드) 추후 업데이트 (현재는 복수 선택 불가능)***
+      - `bloodType`: `AB형`, `A형`, `B형`, `O형`
+      - `drinking`: `가끔 마심`, `어느정도 즐기는편`, `술자리를 즐김`, `마시지 않음`
+      - `smoking`: `흡연`, `비흡연`
+      - `religion`: `종교 없음`, `기독교`, `천주교`, `불교`, `원불교`, `유교`, `이슬람교`
+    
     ```json
     {
-        "nickname": "권효진",
-        "birth": "1995-02-11",
-        "major": "경영학전공",
-        "job": "백엔드 개발자",
+        "nickname": "정수지",
+        "birth": "1996-12-11",
+        "major": "멀티미디어학과",
+        "job": "프론트엔드 개발자",
         "company": "아마존",
-        "bodyShape": 1,
-        "personality": 2,
-        "bloodType": 1,
-        "smoking": 2,
-        "introduce": "안녕하세요 ^^"
+        "bodyShape": "슬림탄탄",
+        "personality": "귀여운",
+        "bloodType": "O형",
+        "smoking": "비흡연",
+        "introduce": "수줍음이 많아요 ^^"
     }
     ```
 
@@ -569,23 +594,23 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "info": {
-          "averageStar": 3.1,
-          "nickname": "권효진",
+          "averageStar": 4.02,
+          "nickname": "정수지",
           "school": "",
-          "major": "경영학전공",
-          "job": "백엔드 개발자",
+          "major": "멀티미디어학과",
+          "job": "프론트엔드 개발자",
           "company": "아마존",
           "region": "",
-          "birth": "1995-02-11",
-          "age": 26,
+          "birth": "1996-12-11",
+          "age": 25,
           "tall": "",
-          "bodyShape": 1,
-          "personality": 2,
-          "bloodType": 1,
-          "smoking": 2,
+          "bodyShape": "슬림탄탄",
+          "personality": "귀여운",
+          "bloodType": "O형",
+          "smoking": "비흡연",
           "drinking": "",
           "religion": "",
-          "introduce": "안녕하세요 ^^"
+          "introduce": "수줍음이 많아요 ^^"
       }
   }
   ```
@@ -611,8 +636,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
        Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
-       - Username: hjk@hjk.com
-       - Password: hjk
+       - Username: szj@szj.com
+       - Password: szj
 
     2. Token Auth **<u>(production 때 사용)</u>**
 
@@ -626,9 +651,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-        "region": 1,
-        "drinking": 1,
-        "introduce": "만나서 반가워요 ㅎㅎ"
+        "region": "서울",
+        "drinking": "가끔 마심",
+        "introduce": "제 매력이 뭔지 직접 알아가 보세요 ^^"
     }
     ```
 
@@ -637,23 +662,23 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "info": {
-          "averageStar": 3.3,
-          "nickname": "권효진",
+          "averageStar": 4.22,
+          "nickname": "정수지",
           "school": "",
-          "major": "경영학전공",
-          "job": "백엔드 개발자",
+          "major": "멀티미디어학과",
+          "job": "프론트엔드 개발자",
           "company": "아마존",
-          "region": 1,
-          "birth": "1995-02-11",
-          "age": 26,
+          "region": "서울",
+          "birth": "1996-12-11",
+          "age": 25,
           "tall": "",
-          "bodyShape": 1,
-          "personality": 2,
-          "bloodType": 1,
-          "smoking": 2,
-          "drinking": 1,
+          "bodyShape": "슬림탄탄",
+          "personality": "귀여운",
+          "bloodType": "O형",
+          "smoking": "비흡연",
+          "drinking": "가끔 마심",
           "religion": "",
-          "introduce": "만나서 반가워요 ㅎㅎ"
+          "introduce": "제 매력이 뭔지 직접 알아가 보세요 ^^"
       }
   }
   ```
@@ -679,8 +704,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
        Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
 
        - TYPE: Basic Auth
-       - Username: esb@esb.com
-       - Password: esb
+       - Username: szj@szj.com
+       - Password: szj
 
     2. Token Auth **<u>(production 때 사용)</u>**
 
@@ -697,28 +722,28 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "user": {
-          "pk": 1,
-          "email": "esb@esb.com",
+          "pk": 4,
+          "email": "szj@szj.com",
           "gender": "여자"
       },
       "info": {
-          "averageStar": 3.5,
-          "nickname": "권효진",
+          "averageStar": 4.26,
+          "nickname": "정수지",
           "school": "",
-          "major": "경영학전공",
-          "job": "백엔드 개발자",
+          "major": "멀티미디어학과",
+          "job": "프론트엔드 개발자",
           "company": "아마존",
-          "region": 1,
-          "birth": "1995-02-11",
-          "age": 26,
+          "region": "서울",
+          "birth": "1996-12-11",
+          "age": 25,
           "tall": "",
-          "bodyShape": 1,
-          "personality": 2,
-          "bloodType": 1,
-          "smoking": 2,
-          "drinking": 1,
+          "bodyShape": "슬림탄탄",
+          "personality": "귀여운",
+          "bloodType": "O형",
+          "smoking": "비흡연",
+          "drinking": "가끔 마심",
           "religion": "",
-          "introduce": "만나서 반가워요 ㅎㅎ"
+          "introduce": "제 매력이 뭔지 직접 알아가 보세요 ^^"
       }
   }
   ```
@@ -758,7 +783,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
     story 정보의 value는 아래 str 형태의 값들로 이루어진 list로 고정됨
 
     - 각각 str 값(오른쪽)을 int 값(왼쪽)과 연결하여 숫자 형태로 접근하도록 함
-    - `story`: (1, 이상적인 첫 소개팅 장소), (2, 내 외모중 가장 마음에 드는 곳은), (3, 남들보다 이것 하나는 자신있어요)
+    - `story`: (1, `이상적인 첫 소개팅 장소`), (2, `내 외모중 가장 마음에 드는 곳은`), (3, `남들보다 이것 하나는 자신있어요`)
 
     ```json
     {
@@ -923,9 +948,316 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Tag
+### User All Tag View
 
-*multiple choice 필드 추후 업데이트*
+- URL: `/user/tag/`
+
+- Method: `GET`
+
+- 해당 유저의 **전체** 등록한 관심태그 조회
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/tag/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+- Response Sample
+
+  User의 계정 정보와 등록한 전체 태그 정보 표시
+
+  ```json
+  {
+      "user": {
+          "pk": 1,
+          "email": "hjk@hjk.com",
+          "gender": "여자"
+      },
+      "tags": {
+          "dateStyle": [
+              {
+                  "name": "광란의 댄스 배틀"
+              }
+          ],
+          "lifeStyle": [
+              {
+                  "name": "퇴근 후엔 운동"
+              },
+              {
+                  "name": "여행 자주 가요"
+              },
+              {
+                  "name": "여유를 즐겨요"
+              }
+          ],
+          "charm": [],
+          "relationshipStyle": [
+              {
+                  "name": "가벼운 연애 추구"
+              },
+              {
+                  "name": "카톡보단 전화"
+              }
+          ]
+      }
+  }
+  ```
+
+
+
+### User Tag Date Style Update
+
+- URL: `/user/tag/date/`
+
+- Method: `PATCH`
+
+- 해당 유저의 **데이트 스타일** 태그 수정(추가)
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/tag/date/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    ```json
+    {
+        "dateStyle": [
+            {"name": "광란의 댄스 배틀"}
+        ]
+    }
+    ```
+
+- Response Sample
+
+  ```json
+  {
+      "dateStyle": [
+          {
+              "name": "광란의 댄스 배틀"
+          }
+      ],
+      "lifeStyle": [],
+      "charm": [],
+      "relationshipStyle": []
+  }
+  ```
+
+
+
+### User Tag Life Style Update
+
+- URL: `/user/tag/life/`
+
+- Method: `PATCH`
+
+- 해당 유저의 **라이프 스타일** 태그 수정(추가)
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/tag/life/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    ```json
+    {
+        "lifeStyle": [
+            {"name": "퇴근 후엔 운동"},
+            {"name": "여행 자주 가요"},
+            {"name": "여유를 즐겨요"}
+        ]
+    }
+    ```
+
+- Response Sample
+
+  ```json
+  {
+      "dateStyle": [],
+      "lifeStyle": [
+          {
+              "name": "퇴근 후엔 운동"
+          },
+          {
+              "name": "여행 자주 가요"
+          },
+          {
+              "name": "여유를 즐겨요"
+          }
+      ],
+      "charm": [],
+      "relationshipStyle": []
+  }
+  ```
+
+
+
+### User Tag Relationship Style Update
+
+- URL: `/user/tag/relationship/`
+
+- Method: `PATCH`
+
+- 해당 유저의 **연애 스타일** 태그 수정(추가)
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/tag/relationship/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    ```json
+    {
+        "relationshipStyle": [
+            {"name": "가벼운 연애 추구"},
+            {"name": "카톡보단 전화"}
+        ]
+    }
+    ```
+
+- Response Sample
+
+  ```json
+  {
+      "dateStyle": [],
+      "lifeStyle": [],
+      "charm": [],
+      "relationshipStyle": [
+          {
+              "name": "가벼운 연애 추구"
+          },
+          {
+              "name": "카톡보단 전화"
+          }
+      ]
+  }
+  ```
+
+
+
+### User Tag Charm Update
+
+- URL: `/user/tag/charm/`
+
+- Method: `PATCH`
+
+- 해당 유저의 **나만의 매력** 태그 수정(추가)
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/tag/charm/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    ```json
+    {
+        "charm": [
+            {"name": "화를 잘 안 내요"}
+        ]
+    }
+    ```
+
+- Response Sample
+
+  ```json
+  {
+      "dateStyle": [],
+      "lifeStyle": [],
+      "charm": [
+          {
+              "name": "화를 잘 안 내요"
+          }
+      ],
+      "relationshipStyle": []
+  }
+  ```
 
 
 
@@ -1044,6 +1376,240 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```
 
 
+
+### User Pick Add
+
+- URL: `/user/pick/`
+
+- Method: `POST`
+
+- partner의 email 정보를 통해 해당 partner의 pk값에 접근 ***(email이 아닌 다른 user를 식별할 수 있는 고유값으로 접근할 수 있음)***
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/pick/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hbb@hbb.com
+       - Password: hbb
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    pick할 이성의 emall 정보 기입
+
+    ```json
+    {
+        "partner": "hjk@hjk.com"
+    }
+    ```
+
+- Response Sample
+
+  해당 user와 pick한 이성의 pk값, pick 보낸 시간 표시
+
+  `hbb@hbb.com` 유저의 pk 값이 `5`, `hjk@hjk.com` 유저의 pk 값이 `1`
+
+  ```json
+  {
+      "user": 5,
+      "partner": 1,
+      "created": "2020-04-12 02:59"
+  }
+  ```
+
+
+
+### User Pick List
+
+- URL: `/user/pick/`
+
+- Method: `GET`
+
+- 해당 user를 pick한 이성과 해당 user가 pick한 이성 조회
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/pick/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+- Response Sample
+
+  User의 계정 정보와 현재 pick한 이성의 email, pick받은 이성의 email 표시 ***(email이 아닌 다른 유저를 식별할 수 있는 고유값으로 표시 가능)***
+
+  ```json
+  {
+      "user": {
+          "pk": 1,
+          "email": "hjk@hjk.com",
+          "gender": "여자"
+      },
+      "pickFrom": [
+          "hbb@hbb.com"
+      ],
+      "pickTo": [
+          "hgo@hgo.com",
+          "hbb@hbb.com"
+      ]
+  }
+  ```
+
+
+
+### User Star Add
+
+- URL: `/user/star/`
+
+- Method: `POST`
+
+- 이성 가입심사 별점(1~5) 보내기
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/star/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hgo@hgo.com
+       - Password: hgo
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    가입심사하는 이성의 emall 정보와 별점 기입
+
+    ```json
+    {
+        "partner": "hjk@hjk.com",
+        "star": 4
+    }
+    ```
+
+
+- Response Sample
+
+  해당 user와 partner의 각 pk값, 보낸 별점, 그리고 보낸 시간 표시
+
+  ```json
+  {
+      "user": 2,
+      "partner": 4,
+      "star": 4,
+      "created": "2020-04-13 02:36"
+  }
+  ```
+
+
+
+### User Star List
+
+- URL: `/user/star/`
+
+- Method: `GET`
+
+- 해당 user가 가입심사한 이성과 해당 user를 가입심사한 이성 및 별점 조회
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/star/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hgo@hgo.com
+       - Password: hgo
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+- Response Sample
+
+  User의 계정 정보, User가 가입심사한 이성의 email과 보낸 별점(StarTo), User를 가입심사한 이성의 email과 받은 별점(StarFrom) 표시 ***(다른 방식으로 접근하기 원하면 수정)***
+
+  ```json
+  {
+      "user": {
+          "pk": 2,
+          "email": "hgo@hgo.com",
+          "gender": "남자"
+      },
+      "StarTo": [
+          [
+              "hjk@hjk.com",
+              5
+          ],
+          [
+              "szj@szj.com",
+              4
+          ]
+      ],
+      "StarFrom": [
+          [
+              "hjk@hjk.com",
+              5
+          ],
+          [
+              "szj@szj.com",
+              2
+          ]
+      ]
+  }
+  ```
+
+
+
+
 ### Restaurants Category List
 
 - URL: `/restaurants/category/<category_name>/`
@@ -1081,7 +1647,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   - 각 Category 별로 Restaurants 정보를 제공 
 
   ```json
- [
+   [
     {
         "id": 21,
         "restaurant": 21,
@@ -1098,7 +1664,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
         "date_joined": "2020-04-09 17:53",
         "date_update": "2020-04-09 17:53"
     }
-]
-
+  ]
+  
   ```
 

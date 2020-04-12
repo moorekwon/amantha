@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag
+from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag, SendStar, SendPick
 
 User = get_user_model()
 
@@ -63,7 +63,7 @@ class UserImageSerializer(serializers.ModelSerializer):
 # UserInfo 필드정보
 class UserInfoSerializer(serializers.ModelSerializer):
     age = serializers.IntegerField(source='user.age', read_only=True)
-    averageStar = serializers.IntegerField(source='user.average_star', read_only=True)
+    averageStar = serializers.FloatField(source='user.average_star', read_only=True)
     bodyShape = serializers.CharField(source='body_shape', required=False)
     bloodType = serializers.CharField(source='blood_type', required=False)
 
@@ -113,21 +113,28 @@ class UserRibbonSerializer(serializers.ModelSerializer):
             'paidRibbon',
             'currentRibbon',
             'when',
-            # 'where',
         )
 
 
-# class TagTypeSerializer(serializers.ModelSerializer):
-#     tags = UserTagSerializer(many=True, read_only=True)
-#
-#     dateStyle = serializers.CharField(source='date_style_tag.all')
-#
-#     class Meta:
-#         model = User
-#         fields = (
-#             'tags',
-#             'dateStyle',
-#         )
+class UserPickSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SendPick
+        fields = (
+            'user',
+            'partner',
+            'created',
+        )
+
+
+class UserStarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SendStar
+        fields = (
+            'user',
+            'partner',
+            'star',
+            'created',
+        )
 
 
 class UserTagSerializer(serializers.ModelSerializer):
@@ -158,18 +165,13 @@ class TagTypeSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     currentRibbon = serializers.IntegerField(source='userribbon_set.last.current_ribbon')
     profilePercentage = serializers.FloatField(source='userinfo.profile_percentage')
-    sendMeLikeUsers = serializers.ListField(
-        child=serializers.EmailField(), source='send_me_like_users.all'
+    pickFrom = serializers.ListField(
+        child=serializers.EmailField(), source='send_me_pick_users.all'
     )
     images = UserImageSerializer(many=True, source='userimage_set')
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
-
-    # 표시 방법 재검토 필요
-    dateStyleTag = UserTagSerializer(source='date_style_tag', many=True)
-    lifeStyleTag = UserTagSerializer(source='life_style_tag', many=True)
-    charmTag = UserTagSerializer(source='charm_tag', many=True)
-    relationshipStyleTag = UserTagSerializer(source='relationship_style_tag', many=True)
+    tags = TagTypeSerializer(source='tag')
 
     class Meta:
         model = User
@@ -178,13 +180,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'gender',
             'currentRibbon',
             'profilePercentage',
-            'sendMeLikeUsers',
+            'pickFrom',
             'images',
             'info',
             'stories',
-
-            'dateStyleTag',
-            'lifeStyleTag',
-            'charmTag',
-            'relationshipStyleTag',
+            'tags',
         )

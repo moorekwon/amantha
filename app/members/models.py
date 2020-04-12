@@ -44,20 +44,18 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     star_users = models.ManyToManyField('self', through='SendStar', related_name='send_me_star_users',
                                         symmetrical=False)
-    like_users = models.ManyToManyField('self', through='SendLike', related_name='send_me_like_users',
+    pick_users = models.ManyToManyField('self', through='SendPick', related_name='send_me_pick_users',
                                         symmetrical=False)
-    # tags = models.ManyToManyField('Tag', related_name='my_tags')
-    date_style_tag = models.ManyToManyField('Tag', related_name='my_date_style_tags')
-    life_style_tag = models.ManyToManyField('Tag', related_name='my_life_style_tags')
-    charm_tag = models.ManyToManyField('Tag', related_name='my_charm_tags')
-    relationship_style_tag = models.ManyToManyField('Tag', related_name='my_relationship_style_tags')
+    tag = models.OneToOneField('TagType', on_delete=models.CASCADE, blank=True, null=True)
 
     # 유저의 현재 평균 별점
     def average_star(self):
         partners = self.partner_sendstar_set.all()
-        star = [int(partner.star) for partner in partners]
+        star = [partner.star for partner in partners]
+
         if len(star) > 0:
-            return format(sum(star) / len(star), '.2f')
+            average_star = format(sum(star) / len(star), '.2f')
+            return float(average_star)
         else:
             return 0
 
@@ -70,18 +68,6 @@ class User(AbstractBaseUser, PermissionsMixin):
             return int(today_year) - int(birth_year) + 1
         return None
 
-
-class Tag(models.Model):
-    name = models.CharField(max_length=60, blank=True)
-
-
-# 태그 등록
-# class SelectTag(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     date_style = models.CharField(max_length=60, blank=True)
-#     relationship_style = models.CharField(max_length=60, blank=True)
-#     life_style = models.CharField(max_length=60, blank=True)
-#     charm = models.CharField(max_length=60, blank=True)
 
 # 유저 생성 후 기입할 프로필 정보
 class UserInfo(models.Model):
@@ -172,12 +158,12 @@ class UserInfo(models.Model):
 
     # 유저의 현재 프로필 완성도
     def profile_percentage(self):
-        story = self.user.selectstory_set.all()
-        tag = self.user.selecttag_set.all()
+        stories = self.user.selectstory_set.all()
+        tags = self.user.tag
 
         info_list = [self.job, self.company, self.school, self.region, self.body_shape, self.major, self.tall,
                      self.personality, self.blood_type, self.drinking, self.smoking, self.religion, self.introduce,
-                     story, tag]
+                     stories, tags]
 
         return_list = []
         for infos in info_list:
@@ -186,6 +172,8 @@ class UserInfo(models.Model):
             else:
                 return_list.append(1)
 
+        print('return_list >> ', return_list)
+
         if sum(return_list) == 0:
             profile_percentage = 0
         else:
@@ -193,11 +181,30 @@ class UserInfo(models.Model):
         return profile_percentage
 
 
+# 좋아요 주기
+class SendPick(models.Model):
+    user = models.ForeignKey(User, related_name='user_sendpick_set', on_delete=models.CASCADE)
+    partner = models.ForeignKey(User, related_name='partner_sendpick_set', on_delete=models.CASCADE)
+    like = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now=True)
+
+
+class TagType(models.Model):
+    date_style_tag = models.ManyToManyField('Tag', related_name='my_date_style_tags', blank=True)
+    life_style_tag = models.ManyToManyField('Tag', related_name='my_life_style_tags', blank=True)
+    charm_tag = models.ManyToManyField('Tag', related_name='my_charm_tags', blank=True)
+    relationship_style_tag = models.ManyToManyField('Tag', related_name='my_relationship_style_tags', blank=True)
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=60, blank=True)
+
+
 # 별점 주기
 class SendStar(models.Model):
     user = models.ForeignKey(User, related_name='user_sendstar_set', on_delete=models.CASCADE)
     partner = models.ForeignKey(User, related_name='partner_sendstar_set', on_delete=models.CASCADE)
-    star = models.CharField(choices=((str(x), x) for x in range(1, 6)), max_length=30)
+    star = models.PositiveIntegerField()
     created = models.DateTimeField(auto_now=True)
 
 
@@ -242,11 +249,3 @@ class UserRibbon(models.Model):
 
             self.current_ribbon = pre.current_ribbon + self.paid_ribbon
         super().save(*args, **kwargs)
-
-
-# 좋아요 주기
-class SendLike(models.Model):
-    user = models.ForeignKey(User, related_name='user_sendlike_set', on_delete=models.CASCADE)
-    partner = models.ForeignKey(User, related_name='partner_sendlike_set', on_delete=models.CASCADE)
-    like = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now=True)
