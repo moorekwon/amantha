@@ -1407,7 +1407,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - Body
 
-    pick할 이성의 이메일 정보 기입
+    pick할 이성의 emall 정보 기입
 
     ```json
     {
@@ -1485,6 +1485,59 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 ### User Star Add
+
+- URL: `/user/star/`
+
+- Method: `POST`
+
+- 이성 가입심사 별점(1~5) 보내기
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/star/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hgo@hgo.com
+       - Password: hgo
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    가입심사하는 이성의 emall 정보와 별점 기입
+
+    ```json
+    {
+        "partner": "hjk@hjk.com",
+        "star": 4
+    }
+    ```
+
+
+- Response Sample
+
+  해당 user와 partner의 각 pk값, 보낸 별점, 그리고 보낸 시간 표시
+
+  ```json
+  {
+      "user": 2,
+      "partner": 4,
+      "star": 4,
+      "created": "2020-04-13 02:36"
+  }
+  ```
 
 
 
