@@ -1,3 +1,5 @@
+[POSTMAN API URL](https://documenter.getpostman.com/view/9448838/SzYevFGb?version=latest)
+
 # 아만다 클론 앱 API 문서
 
 Base URL: `http://13.209.3.115:88/api`
