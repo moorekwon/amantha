@@ -63,7 +63,7 @@ class UserImageSerializer(serializers.ModelSerializer):
 # UserInfo 필드정보
 class UserInfoSerializer(serializers.ModelSerializer):
     age = serializers.IntegerField(source='user.age', read_only=True)
-    averageStar = serializers.IntegerField(source='user.average_star', read_only=True)
+    averageStar = serializers.FloatField(source='user.average_star', read_only=True)
     bodyShape = serializers.CharField(source='body_shape', required=False)
     bloodType = serializers.CharField(source='blood_type', required=False)
 

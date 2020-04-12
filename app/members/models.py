@@ -52,7 +52,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def average_star(self):
         partners = self.partner_sendstar_set.all()
         star = [partner.star for partner in partners]
-        print('partners, star >> ', partners, star)
+
         if len(star) > 0:
             average_star = format(sum(star) / len(star), '.2f')
             return float(average_star)
