@@ -28,6 +28,7 @@ urlpatterns = [
     path('user/ribbon/', UserRibbonAPIView.as_view()),
     # GET, POST 유저가 pick한 이성 추가 및 조회, 유저를 pick한 이성 조회
     path('user/pick/', UserPickAPIView.as_view()),
+    # GET, POST 유저가 가입심사한 이성과 보낸 별점 및 유저에게 가입심사한 이성과 받은 별점 조회, 이성 가입심사 별점 보내기
     path('user/star/', UserStarAPIView.as_view()),
 
     # GET 유저의 태그 전체 조회
