@@ -30,6 +30,7 @@ urlpatterns = [
     path('user/pick/', UserPickAPIView.as_view()),
     # GET, POST 유저가 가입심사한 이성과 보낸 별점 및 유저에게 가입심사한 이성과 받은 별점 조회, 이성 가입심사 별점 보내기
     path('user/star/', UserStarAPIView.as_view()),
+    path('user/ideal/', UserIdealTypeAPIView.as_view()),
 
     # GET 유저의 태그 전체 조회
     # PATCH 추후 추가... (현재는 아래 4개 url 주소로 태그타입별 각각 PATCH 설정)

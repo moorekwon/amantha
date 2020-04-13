@@ -424,6 +424,124 @@ class UserStarAPIView(APIView):
         return Response(serializer.errors)
 
 
+class UserIdealTypeAPIView(APIView):
+    # 해당 유저의 현재 이상형 설정 정보 불러오기
+    def get(self, request):
+        user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        ideal_type = UserIdealType.objects.filter(user=user)
+        print('ideal_type >> ', ideal_type)
+
+        if not ideal_type:
+            return Response('등록된 이상형 정보가 없습니다.')
+
+        data = {
+            'user': UserAccountSerializer(user).data,
+            'idealType': IdealTypeSerializer(ideal_type.last()).data,
+        }
+        return Response(data)
+
+    # (첫) 이상형 설정하여 맞춤 이성 추천받기
+    def post(self, request):
+        user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        # ideal_type = UserIdealType.objects.filter(user=user)
+        # if ideal_type:
+        #     return Response('이미 등록한 이상형 정보가 있습니다.')
+
+        if user.gender == '여자':
+            partner_gender = '남자'
+        else:
+            partner_gender = '여자'
+
+        # 해당 유저와 성별이 다른 이성들 필터링
+        partners = User.objects.filter(gender=partner_gender)
+
+        serializer = IdealTypeSerializer(data=request.data, partial=True)
+        print('serializer >> ', serializer)
+
+        # ideal_partners에 이상형 조건이 (하나라도) 포함된 이성 저장
+        ideal_partners = list()
+
+        for partner in partners:
+            if (request.data.get('ageFrom') is not None) and (partner.age() >= request.data.get('ageFrom')) and (
+                    partner.age() <= request.data['ageTo']):
+                ideal_partners.append(partner)
+            print('ideal_partners age >> ', ideal_partners)
+
+            if (request.data.get('region') is not None) and (partner.userinfo.region is not None) and (
+                    partner.userinfo.region == request.data['region']):
+                ideal_partners.append(partner)
+            print('ideal_partners region >> ', ideal_partners)
+
+            if (request.data.get('tallFrom') is not None) and (partner.userinfo.tall is not None) and (
+                    partner.userinfo.tall >= request.data['tallFrom']) and (
+                    partner.userinfo.tall <= request.data['tallTo']):
+                ideal_partners.append(partner)
+            print('ideal_partners tall >> ', ideal_partners)
+
+            if (request.data.get('bodyShape') is not None) and (partner.userinfo.body_shape is not None) and (
+                    partner.userinfo.body_shape == request.data['bodyShape']):
+                ideal_partners.append(partner)
+            print('ideal_partners body >> ', ideal_partners)
+
+            if (request.data.get('religion') is not None) and (partner.userinfo.religion is not None) and (
+                    partner.userinfo.religion == request.data['religion']):
+                ideal_partners.append(partner)
+            print('ideal_partners religion >> ', ideal_partners)
+
+            if (request.data.get('smoking') is not None) and (partner.userinfo.smoking is not None) and (
+                    partner.userinfo.smoking == request.data['smoking']):
+                ideal_partners.append(partner)
+            print('ideal_partners smoking >> ', ideal_partners)
+
+            if (request.data.get('drinking') is not None) and (partner.userinfo.drinking is not None) and (
+                    partner.userinfo.drinking == request.data['drinking']):
+                ideal_partners.append(partner)
+            print('ideal_partners drinking >> ', ideal_partners)
+        print('ideal_partners >> ', ideal_partners)
+
+        # better_partners에 포함된 이성들의 중복 횟수 저장 (많을수록 better)
+        better_partners = dict()
+        for ideal_partner in ideal_partners:
+            try:
+                better_partners[ideal_partner] += 1
+            except:
+                better_partners[ideal_partner] = 1
+        print('better_partners >> ', better_partners)
+
+        if better_partners:
+            max_count = max(better_partners.values())
+
+            # best_partners에 횟수가 가장 많은 이성 저장
+            best_partners = list()
+            for key, value in better_partners.items():
+                if value == max_count:
+                    best_partners.append(key.email)
+            print('best_partners >> ', best_partners)
+
+            if serializer.is_valid():
+                ideal_type = serializer.save(user=user)
+                data = {
+                    'idealType': IdealTypeSerializer(ideal_type).data,
+                    'idealPartners': best_partners,
+                }
+                return Response(data)
+            return Response(serializer.errors)
+        else:
+            return Response('설정하신 이상형 정보와 매칭되는 이성이 없습니다.')
+
+    # 등록돼 있는 이상형 정보 수정
+    def patch(self, request):
+        pass
+
+
 class UserTagAPIView(APIView):
     # 해당 유저의 모든 관심태그 조회
     def get(self, request):

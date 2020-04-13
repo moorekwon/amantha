@@ -144,11 +144,11 @@ class UserInfo(models.Model):
     job = models.CharField(max_length=50, blank=True)
     company = models.CharField(max_length=60, blank=True)
     school = models.CharField(max_length=50, blank=True)
-    birth = models.DateField(blank=False)
+    birth = models.DateField(blank=False, null=True)
     region = models.CharField(choices=REGION, max_length=30, blank=True)
     body_shape = models.CharField(choices=BODY_SHAPE, blank=True, max_length=50)
     major = models.CharField(max_length=50, blank=True)
-    tall = models.CharField(choices=((str(x), x) for x in range(140, 200)), max_length=10, blank=True)
+    tall = models.PositiveIntegerField(blank=True, null=True)
     personality = models.CharField(choices=PERSONALITY, blank=True, max_length=100)
     blood_type = models.CharField(choices=BLOOD_TYPE, max_length=30, blank=True)
     drinking = models.CharField(choices=DRINKING, max_length=60, blank=True)
@@ -249,3 +249,80 @@ class UserRibbon(models.Model):
 
             self.current_ribbon = pre.current_ribbon + self.paid_ribbon
         super().save(*args, **kwargs)
+
+
+# 유저의 이상형 설정
+class UserIdealType(models.Model):
+    REGION = (
+        ('서울', '서울'),
+        ('경기', '경기'),
+        ('인천', '인천'),
+        ('대전', '대전'),
+        ('충북', '충북'),
+        ('충남', '충남'),
+        ('강원', '강원'),
+        ('부산', '부산'),
+        ('경북', '경북'),
+        ('경남', '경남'),
+        ('대구', '대구'),
+        ('울산', '울산'),
+        ('광주', '광주'),
+        ('전북', '전북'),
+        ('전남', '전남'),
+        ('제주', '제주'),
+    )
+    BODY_SHAPE = (
+        ('보통체형', '보통체형'),
+        ('통통한', '통통한'),
+        ('살짝볼륨', '살짝볼륨'),
+        ('글래머', '글래머'),
+        ('마른', '마른'),
+        ('슬림탄탄', '슬림탄탄'),
+    )
+    # 여러 개 선택 가능하게 하도록 해야함
+    PERSONALITY = (
+        ('지적인', '지적인'),
+        ('차분한', '차분한'),
+        ('유머있는', '유머있는'),
+        ('낙천적인', '낙천적인'),
+        ('내향적인', '내향적인'),
+        ('외향적인', '외향적인'),
+        ('감성적인', '감성적인'),
+        ('상냥한', '상냥한'),
+        ('귀여운', '귀여운'),
+        ('섹시한', '섹시한'),
+        ('4차원인', '4차원인'),
+        ('발랄한', '발랄한'),
+        ('도도한', '도도한'),
+    )
+    RELIGION = (
+        ('종교 없음', '종교 없음'),
+        ('기독교', '기독교'),
+        ('천주교', '천주교'),
+        ('불교', '불교'),
+        ('원불교', '원불교'),
+        ('유교', '유교'),
+        ('이슬람교', '이슬람교'),
+    )
+    SMOKING = (
+        ('흡연', '흡연'),
+        ('비흡연', '비흡연'),
+    )
+    DRINKING = (
+        ('가끔 마심', '가끔 마심'),
+        ('어느정도 즐기는편', '어느정도 즐기는편'),
+        ('술자리를 즐김', '술자리를 즐김'),
+        ('마시지 않음', '마시지 않음'),
+    )
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    age_from = models.PositiveIntegerField(blank=True, null=True)
+    age_to = models.PositiveIntegerField(blank=True, null=True)
+    region = models.CharField(choices=REGION, blank=True, max_length=60)
+    tall_from = models.PositiveIntegerField(blank=True)
+    tall_to = models.PositiveIntegerField(blank=True)
+    body_shape = models.CharField(choices=BODY_SHAPE, blank=True, max_length=60)
+    personality = models.CharField(choices=PERSONALITY, blank=True, max_length=60)
+    religion = models.CharField(choices=RELIGION, blank=True, max_length=60)
+    smoking = models.CharField(choices=SMOKING, blank=True, max_length=60)
+    drinking = models.CharField(choices=DRINKING, blank=True, max_length=60)

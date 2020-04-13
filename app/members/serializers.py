@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag, SendStar, SendPick
+from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag, SendStar, SendPick, UserIdealType
 
 User = get_user_model()
 
@@ -161,7 +161,29 @@ class TagTypeSerializer(serializers.ModelSerializer):
         )
 
 
-# 유저의 전체프로필 정보 (조회용)
+class IdealTypeSerializer(serializers.ModelSerializer):
+    ageFrom = serializers.IntegerField(source='age_from', required=True)
+    ageTo = serializers.IntegerField(source='age_to', required=True)
+    tallFrom = serializers.IntegerField(source='tall_from', required=False)
+    tallTo = serializers.IntegerField(source='tall_to', required=False)
+    bodyShape = serializers.CharField(source='body_shape', required=False)
+
+    class Meta:
+        model = UserIdealType
+        fields = (
+            'ageFrom',
+            'ageTo',
+            'region',
+            'tallFrom',
+            'tallTo',
+            'bodyShape',
+            'personality',
+            'religion',
+            'smoking',
+            'drinking',
+        )
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     currentRibbon = serializers.IntegerField(source='userribbon_set.last.current_ribbon')
     profilePercentage = serializers.FloatField(source='userinfo.profile_percentage')
