@@ -294,14 +294,69 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
               },
               {
                   "pk": 2,
-                  "image": ""
+                  "image": "https://amantha.s3.amazonaws.com/profile_images/esb.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T094447Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=40b1898f937f7072814351384b272bfd2adb312641ffecd19f6c253b3f8ec152"
+              },
+              {
+                  "pk": 3,
+                  "image": "https://amantha.s3.amazonaws.com/profile_images/esb2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T094447Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8b60f2346c82adf14a1ea8ea2785b4b55e3a7665c8680012a87e4750127f6441"
               }
-          ]
+          ],
+          "info": {
+              "averageStar": 3.72,
+              "nickname": "은순이",
+              "school": "",
+              "major": "정치외교학",
+              "job": "회사원",
+              "company": "",
+              "region": "서울",
+              "birth": "1995-02-23",
+              "age": 26,
+              "tall": null,
+              "bodyShape": "보통체형",
+              "personality": "외향적인",
+              "bloodType": "B형",
+              "smoking": "비흡연",
+              "drinking": "",
+              "religion": "",
+              "introduce": "안녕하세요 ^^"
+          },
+          "stories": [
+              {
+                  "pk": 1,
+                  "story": 1,
+                  "content": "조용한 카페"
+              }
+          ],
+          "tags": {
+              "dateStyle": [
+                  {
+                      "name": "광란의 댄스 배틀"
+                  }
+              ],
+              "lifeStyle": [
+                  {
+                      "name": "퇴근 후엔 운동"
+                  },
+                  {
+                      "name": "여행 자주 가요"
+                  },
+                  {
+                      "name": "여유를 즐겨요"
+                  }
+              ],
+              "charm": [],
+              "relationshipStyle": [
+                  {
+                      "name": "가벼운 연애 추구"
+                  },
+                  {
+                      "name": "카톡보단 전화"
+                  }
+              ]
+          }
       }
   }
   ```
-
-  
 
 
 
