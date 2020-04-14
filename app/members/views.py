@@ -255,7 +255,7 @@ class UserStoryAPIView(APIView):
 
         # 아래 코드는 user_stories의 마지막번째를 불러옴
         # 어차피 user_stories는 한 개밖에 없을 것이기 때문에, user_stories[0]을 불러와도 상관은 없을 것임
-        serializer = UserStorySerializer(user_stories[len(user_stories) - 1], data=request.data)
+        serializer = UserStorySerializer(user_stories.last(), data=request.data)
 
         if serializer.is_valid():
             story = serializer.save()
@@ -425,7 +425,7 @@ class UserStarAPIView(APIView):
 
 
 class UserIdealTypeAPIView(APIView):
-    # 해당 유저의 현재 이상형 설정 정보 불러오기
+    # 해당 유저의 현재 이상형 설정 정보 조회와 맞춤 이성 소개
     def get(self, request):
         user = request.user
 
@@ -438,74 +438,57 @@ class UserIdealTypeAPIView(APIView):
         if not ideal_type:
             return Response('등록된 이상형 정보가 없습니다.')
 
-        data = {
-            'user': UserAccountSerializer(user).data,
-            'idealType': IdealTypeSerializer(ideal_type.last()).data,
-        }
-        return Response(data)
-
-    # (첫) 이상형 설정하여 맞춤 이성 추천받기
-    def post(self, request):
-        user = request.user
-
-        if not Token.objects.filter(user=user):
-            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
-
-        # ideal_type = UserIdealType.objects.filter(user=user)
-        # if ideal_type:
-        #     return Response('이미 등록한 이상형 정보가 있습니다.')
-
         if user.gender == '여자':
             partner_gender = '남자'
         else:
             partner_gender = '여자'
 
         # 해당 유저와 성별이 다른 이성들 필터링
+        # UserInfo 정보가 없는 partner의 경우 걸러내는 작업 추가 필요!
         partners = User.objects.filter(gender=partner_gender)
-
-        serializer = IdealTypeSerializer(data=request.data, partial=True)
-        print('serializer >> ', serializer)
 
         # ideal_partners에 이상형 조건이 (하나라도) 포함된 이성 저장
         ideal_partners = list()
 
         for partner in partners:
-            if (request.data.get('ageFrom') is not None) and (partner.age() >= request.data.get('ageFrom')) and (
-                    partner.age() <= request.data['ageTo']):
+            if (user.useridealtype_set.last().age_from is not None) and (
+                    partner.age() >= user.useridealtype_set.last().age_from) and (
+                    partner.age() <= user.useridealtype_set.last().age_to):
                 ideal_partners.append(partner)
             print('ideal_partners age >> ', ideal_partners)
 
-            if (request.data.get('region') is not None) and (partner.userinfo.region is not None) and (
-                    partner.userinfo.region == request.data['region']):
+            if (user.useridealtype_set.last().region is not None) and (partner.userinfo.region is not None) and (
+                    partner.userinfo.region == user.useridealtype_set.last().region):
                 ideal_partners.append(partner)
             print('ideal_partners region >> ', ideal_partners)
 
-            if (request.data.get('tallFrom') is not None) and (partner.userinfo.tall is not None) and (
-                    partner.userinfo.tall >= request.data['tallFrom']) and (
-                    partner.userinfo.tall <= request.data['tallTo']):
+            if (user.useridealtype_set.last().tall_from is not None) and (partner.userinfo.tall is not None) and (
+                    partner.userinfo.tall >= user.useridealtype_set.last().tall_from) and (
+                    partner.userinfo.tall <= user.useridealtype_set.last().tall_to):
                 ideal_partners.append(partner)
             print('ideal_partners tall >> ', ideal_partners)
 
-            if (request.data.get('bodyShape') is not None) and (partner.userinfo.body_shape is not None) and (
-                    partner.userinfo.body_shape == request.data['bodyShape']):
+            # 성격 복수 가능 변경 필요!
+            if (user.useridealtype_set.last().body_shape is not None) and (
+                    partner.userinfo.body_shape is not None) and (
+                    partner.userinfo.body_shape == user.useridealtype_set.last().body_shape):
                 ideal_partners.append(partner)
             print('ideal_partners body >> ', ideal_partners)
 
-            if (request.data.get('religion') is not None) and (partner.userinfo.religion is not None) and (
-                    partner.userinfo.religion == request.data['religion']):
+            if (user.useridealtype_set.last().religion is not None) and (partner.userinfo.religion is not None) and (
+                    partner.userinfo.religion == user.useridealtype_set.last().religion):
                 ideal_partners.append(partner)
             print('ideal_partners religion >> ', ideal_partners)
 
-            if (request.data.get('smoking') is not None) and (partner.userinfo.smoking is not None) and (
-                    partner.userinfo.smoking == request.data['smoking']):
+            if (user.useridealtype_set.last().smoking is not None) and (partner.userinfo.smoking is not None) and (
+                    partner.userinfo.smoking == user.useridealtype_set.last().smoking):
                 ideal_partners.append(partner)
             print('ideal_partners smoking >> ', ideal_partners)
 
-            if (request.data.get('drinking') is not None) and (partner.userinfo.drinking is not None) and (
-                    partner.userinfo.drinking == request.data['drinking']):
+            if (user.useridealtype_set.last().drinking is not None) and (partner.userinfo.drinking is not None) and (
+                    partner.userinfo.drinking == user.useridealtype_set.last().drinking):
                 ideal_partners.append(partner)
             print('ideal_partners drinking >> ', ideal_partners)
-        print('ideal_partners >> ', ideal_partners)
 
         # better_partners에 포함된 이성들의 중복 횟수 저장 (많을수록 better)
         better_partners = dict()
@@ -526,20 +509,61 @@ class UserIdealTypeAPIView(APIView):
                     best_partners.append(key.email)
             print('best_partners >> ', best_partners)
 
-            if serializer.is_valid():
-                ideal_type = serializer.save(user=user)
-                data = {
-                    'idealType': IdealTypeSerializer(ideal_type).data,
-                    'idealPartners': best_partners,
-                }
-                return Response(data)
-            return Response(serializer.errors)
+            data = {
+                'idealType': IdealTypeSerializer(ideal_type.last(), partial=True).data,
+                'idealPartners': best_partners,
+            }
+            return Response(data)
         else:
-            return Response('설정하신 이상형 정보와 매칭되는 이성이 없습니다.')
+            data = {
+                'idealType': IdealTypeSerializer(ideal_type.last(), partial=True),
+            }
+            return Response(data)
+
+    # (첫) 이상형 정보 설정
+    def post(self, request):
+        user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        ideal_type = UserIdealType.objects.filter(user=user)
+        if ideal_type:
+            return Response('이미 등록한 이상형 정보가 있습니다.')
+
+        serializer = IdealTypeSerializer(data=request.data, partial=True)
+        print('serializer >> ', serializer)
+
+        if serializer.is_valid():
+            ideal_type = serializer.save(user=user)
+            data = {
+                'idealType': IdealTypeSerializer(ideal_type).data,
+            }
+            return Response(data)
+        return Response(serializer.errors)
 
     # 등록돼 있는 이상형 정보 수정
     def patch(self, request):
-        pass
+        user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        ideal_type = UserIdealType.objects.filter(user=user)
+
+        if not ideal_type:
+            return Response('등록된 이상형 정보가 없습니다.')
+
+        serializer = IdealTypeSerializer(ideal_type.last(), data=request.data, partial=True)
+
+        if serializer.is_valid():
+            ideal_type = serializer.save()
+
+            data = {
+                'idealType': IdealTypeSerializer(ideal_type).data,
+            }
+            return Response(data)
+        return Response(serializer.errors)
 
 
 class UserTagAPIView(APIView):
