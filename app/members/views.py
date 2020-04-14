@@ -10,6 +10,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from config.settings.base import SECRETS
 from members.models import TagType
 from members.serializers import *
 
@@ -255,7 +256,7 @@ class UserStoryAPIView(APIView):
 
         # 아래 코드는 user_stories의 마지막번째를 불러옴
         # 어차피 user_stories는 한 개밖에 없을 것이기 때문에, user_stories[0]을 불러와도 상관은 없을 것임
-        serializer = UserStorySerializer(user_stories[len(user_stories) - 1], data=request.data)
+        serializer = UserStorySerializer(user_stories.last(), data=request.data)
 
         if serializer.is_valid():
             story = serializer.save()
@@ -424,6 +425,152 @@ class UserStarAPIView(APIView):
         return Response(serializer.errors)
 
 
+class UserIdealTypeAPIView(APIView):
+    # 해당 유저의 현재 이상형 설정 정보 조회와 맞춤 이성 소개
+    def get(self, request):
+        user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        ideal_type = UserIdealType.objects.filter(user=user)
+        print('ideal_type >> ', ideal_type)
+
+        if not ideal_type:
+            return Response('등록된 이상형 정보가 없습니다.')
+
+        if user.gender == '여자':
+            partner_gender = '남자'
+        else:
+            partner_gender = '여자'
+
+        # 해당 유저와 성별이 다른 이성들 필터링
+        # UserInfo 정보가 없는 partner의 경우 걸러내는 작업 추가 필요!
+        partners = User.objects.filter(gender=partner_gender)
+
+        # ideal_partners에 이상형 조건이 (하나라도) 포함된 이성 저장
+        ideal_partners = list()
+
+        for partner in partners:
+            if user.useridealtype_set.last().age_from and (
+                    partner.age() >= user.useridealtype_set.last().age_from) and (
+                    partner.age() <= user.useridealtype_set.last().age_to):
+                ideal_partners.append(partner)
+            print('ideal_partners age >> ', ideal_partners)
+
+            if user.useridealtype_set.last().region and (
+                    partner.userinfo.region == user.useridealtype_set.last().region):
+                ideal_partners.append(partner)
+            print('ideal_partners region >> ', ideal_partners)
+
+            print('type(partner.userinfo.tall) >> ', type(partner.userinfo.tall))
+            if user.useridealtype_set.last().tall_from and partner.userinfo.tall and (
+                    partner.userinfo.tall >= user.useridealtype_set.last().tall_from) and (
+                    partner.userinfo.tall <= user.useridealtype_set.last().tall_to):
+                ideal_partners.append(partner)
+            print('ideal_partners tall >> ', ideal_partners)
+
+            # 성격 복수 가능 변경 필요!
+            if user.useridealtype_set.last().body_shape and (
+                    partner.userinfo.body_shape == user.useridealtype_set.last().body_shape):
+                ideal_partners.append(partner)
+            print('ideal_partners body >> ', ideal_partners)
+
+            if user.useridealtype_set.last().religion and (
+                    partner.userinfo.religion == user.useridealtype_set.last().religion):
+                ideal_partners.append(partner)
+            print('ideal_partners religion >> ', ideal_partners)
+
+            if user.useridealtype_set.last().smoking and (
+                    partner.userinfo.smoking == user.useridealtype_set.last().smoking):
+                ideal_partners.append(partner)
+            print('ideal_partners smoking >> ', ideal_partners)
+
+            if user.useridealtype_set.last().drinking and (
+                    partner.userinfo.drinking == user.useridealtype_set.last().drinking):
+                ideal_partners.append(partner)
+            print('ideal_partners drinking >> ', ideal_partners)
+
+        # better_partners에 포함된 이성들의 중복 횟수 저장 (많을수록 better)
+        better_partners = dict()
+        for ideal_partner in ideal_partners:
+            try:
+                better_partners[ideal_partner] += 1
+            except:
+                better_partners[ideal_partner] = 1
+        print('better_partners >> ', better_partners)
+
+        if better_partners:
+            max_count = max(better_partners.values())
+
+            # best_partners에 횟수가 가장 많은 이성 저장
+            best_partners = list()
+            for key, value in better_partners.items():
+                if value == max_count:
+                    best_partners.append(key.email)
+            print('best_partners >> ', best_partners)
+
+            data = {
+                'user': UserAccountSerializer(user).data,
+                'idealType': IdealTypeSerializer(ideal_type.last(), partial=True).data,
+                'idealPartners': best_partners,
+            }
+            return Response(data)
+        else:
+            data = {
+                'user': UserAccountSerializer(user).data,
+                'idealType': IdealTypeSerializer(ideal_type.last(), partial=True).data,
+                'idealPartners': '없음',
+            }
+            return Response(data)
+
+    # (첫) 이상형 정보 설정
+    def post(self, request):
+        user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        ideal_type = UserIdealType.objects.filter(user=user)
+        if ideal_type:
+            return Response('이미 등록한 이상형 정보가 있습니다.')
+
+        serializer = IdealTypeSerializer(data=request.data, partial=True)
+        print('serializer >> ', serializer)
+
+        if serializer.is_valid():
+            ideal_type = serializer.save(user=user)
+            data = {
+                'idealType': IdealTypeSerializer(ideal_type).data,
+            }
+            return Response(data)
+        return Response(serializer.errors)
+
+    # 등록돼 있는 이상형 정보 수정
+    def patch(self, request):
+        user = request.user
+
+        if not Token.objects.filter(user=user):
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        ideal_type = UserIdealType.objects.filter(user=user)
+
+        if not ideal_type:
+            return Response('등록된 이상형 정보가 없습니다.')
+
+        # 현재는 기존 저장된 데이터는 수정되지 않으면 그대로 저장되도록 설정 (partial=True)
+        serializer = IdealTypeSerializer(ideal_type.last(), data=request.data, partial=True)
+
+        if serializer.is_valid():
+            ideal_type = serializer.save()
+
+            data = {
+                'idealType': IdealTypeSerializer(ideal_type).data,
+            }
+            return Response(data)
+        return Response(serializer.errors)
+
+
 class UserTagAPIView(APIView):
     # 해당 유저의 모든 관심태그 조회
     def get(self, request):
@@ -432,7 +579,6 @@ class UserTagAPIView(APIView):
         if not Token.objects.filter(user=user):
             return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
-        # TagType.objects.get_or_create(user=user)
         if user.tag is None:
             user.tag = TagType.objects.create()
             user.save()
@@ -597,66 +743,137 @@ class UserTagRelationshipAPIView(APIView):
         return Response(serializer.errors)
 
 
+# 테마 소개 (남자)
+class UserThemaAPIView(APIView):
+    def get(self, request):
+        user = request.user
+        token = Token.objects.filter(user=user)
+
+        if not token:
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        # 해당 유저가 여자일 경우, 남자 테마별 이성 소개
+        if user.gender == '여자':
+            partners = User.objects.filter(gender='남자')
+            print('partners >> ', partners)
+
+            neither_drinks_nor_smokes = list()
+            four_years_older = list()
+            over_180_tall = list()
+            church_men = list()
+
+            for partner in partners:
+                # 술담배를 멀리하는 남자
+                if (partner.userinfo.drinking == '마시지 않음') and (partner.userinfo.smoking == '비흡연'):
+                    neither_drinks_nor_smokes.append(partner.email)
+
+                # 성숙한 매력의 4살연상
+                if partner.age() == (user.age() + 4):
+                    four_years_older.append(partner.email)
+
+                # 키 180cm 이상의 훈남
+                if partner.userinfo.tall >= 180:
+                    over_180_tall.append(partner.email)
+
+                # 다정다감한 교회오빠
+                if partner.userinfo.religion == '기독교':
+                    church_men.append(partner.email)
+
+            data = {
+                'user': UserAccountSerializer(user).data,
+                'neitherDrinksNorSmokes': neither_drinks_nor_smokes,
+                'fourYearsOlder': four_years_older,
+                'over180Tall': over_180_tall,
+                'churchMen': church_men,
+            }
+            return Response(data)
+
+        # 해당 유저가 남자일 경우, 여자 테마별 이성 소개
+        else:
+            partners = User.objects.filter(gender='여자')
+            print('partners >> ', partners)
+
+            first_thema = list()
+            second_thema = list()
+            third_thema = list()
+            fourth_thema = list()
+
+            # 테마별 알고리즘 추가
+            for partner in partners:
+                pass
+
+            data = {
+                'user': UserAccountSerializer(user).data,
+                'firstThema': first_thema,
+                'secondThema': second_thema,
+                'thirdThema': third_thema,
+                'fourthThema': fourth_thema,
+            }
+            return Response(data)
+
+
 # 카카오톡 로그인 페이지
 def KaKaoTemplate(request):
     return render(request, 'kakao.html')
 
-# 카카오톡 로그인
-# class KaKaoLoginAPIView(APIView):
-# # iOS 부분
-# def get(self, request):
-#     app_key = SECRETS['KAKAO_APP_KEY']
-#     kakao_access_code = request.GET.get('code', None)
-#     url = SECRETS['KAKAO_URL']
-#     headers = {
-#         'Content-type': SECRETS['KAKAO_CONTENT_TYPE']
-#     }
-#
-#     data = {
-#         'grant_type': 'authorization_code',
-#         'client_id': app_key,
-#         'redirect_uri': SECRETS['KAKAO_REDIRECT_URI'],
-#         'code': kakao_access_code,
-#     }
-#
-#     kakao_response = requests.post(url, headers=headers, data=data)
-#     return Response(f'{kakao_response.text}')
 
-# 액세스 토큰 받아 가입 혹은 로그인 처리
-# def post(self, request):
-#     access_token = request.data['accessToken']
-#     gender = request.data['gender']
-#     me_url = SECRETS['KAKAO_ME_URL']
-#     me_headers = {
-#         'Authorization': f'Bearer {access_token}',
-#         'Content-type': SECRETS['KAKAO_CONTENT_TYPE']
-#     }
-#     me_response = requests.get(me_url, headers=me_headers)
-#     me_response_data = me_response.json()
-#
-#     # 카카오톡 계정의 이메일로 user의 email 생성
-#     kakao_email = me_response_data['kakao_account']['email']
-#
-#     if not User.objects.filter(email=kakao_email).exists():
-#         user = User.objects.create_user(email=kakao_email, gender=gender)
-#         token = Token.objects.create(user=user)
-#     else:
-#         user = User.objects.get(email=kakao_email, gender=gender)
-#         token, _ = Token.objects.get_or_create(user=user)
-#
-#     # 카카오톡 계정의 고유 id로 user의 username 생성
-#     # kakao_id = me_response_data['id']
-#     # kakao_username = f'n_{kakao_id}'
-#     #
-#     # if not User.objects.filter(username=kakao_username).exists():
-#     #     user = User.objects.create_user(username=kakao_username)
-#     #     token = Token.objects.create(user=user)
-#     # else:
-#     #     user = User.objects.get(username=kakao_username)
-#     #     token, _ = Token.objects.get_or_create(user=user)
-#
-#     data = {
-#         'user': KakaoUserSerializer(user).data,
-#         'token': token.key
-#     }
-#     return Response(data)
+# 카카오톡 로그인
+class KaKaoLoginAPIView(APIView):
+    # iOS 부분
+    # def get(self, request):
+    #     app_key = SECRETS['KAKAO_APP_KEY']
+    #     kakao_access_code = request.GET.get('code', None)
+    #     url = SECRETS['KAKAO_URL']
+    #     headers = {
+    #         'Content-type': SECRETS['KAKAO_CONTENT_TYPE']
+    #     }
+    #
+    #     data = {
+    #         'grant_type': 'authorization_code',
+    #         'client_id': app_key,
+    #         'redirect_uri': SECRETS['KAKAO_REDIRECT_URI'],
+    #         'code': kakao_access_code,
+    #     }
+    #
+    #     kakao_response = requests.post(url, headers=headers, data=data)
+    #     return Response(f'{kakao_response.text}')
+
+    # 액세스 토큰 받아 가입 혹은 로그인 처리
+    def post(self, request):
+        access_token = request.data['accessToken']
+        gender = request.data['gender']
+        me_url = SECRETS['KAKAO_ME_URL']
+        me_headers = {
+            'Authorization': f'Bearer {access_token}',
+            'Content-type': SECRETS['KAKAO_CONTENT_TYPE'],
+        }
+        me_response = requests.get(me_url, headers=me_headers)
+        me_response_data = me_response.json()
+        print('me_response_data >> ', me_response_data)
+
+        # 카카오톡 계정의 이메일로 user의 email 생성
+        kakao_email = me_response_data['kakao_account']['email']
+
+        if not User.objects.filter(email=kakao_email).exists():
+            user = User.objects.create_user(email=kakao_email, gender=gender)
+            token = Token.objects.create(user=user)
+        else:
+            user = User.objects.get(email=kakao_email, gender=gender)
+            token, _ = Token.objects.get_or_create(user=user)
+
+        # 카카오톡 계정의 고유 id로 user의 username 생성
+        # kakao_id = me_response_data['id']
+        # kakao_username = f'n_{kakao_id}'
+        #
+        # if not User.objects.filter(username=kakao_username).exists():
+        #     user = User.objects.create_user(username=kakao_username)
+        #     token = Token.objects.create(user=user)
+        # else:
+        #     user = User.objects.get(username=kakao_username)
+        #     token, _ = Token.objects.get_or_create(user=user)
+
+        data = {
+            'user': KakaoUserSerializer(user).data,
+            'token': token.key
+        }
+        return Response(data)
