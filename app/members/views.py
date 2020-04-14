@@ -554,6 +554,7 @@ class UserIdealTypeAPIView(APIView):
         if not ideal_type:
             return Response('등록된 이상형 정보가 없습니다.')
 
+        # 현재는 기존 저장된 데이터는 수정되지 않으면 그대로 저장되도록 설정 (partial=True)
         serializer = IdealTypeSerializer(ideal_type.last(), data=request.data, partial=True)
 
         if serializer.is_valid():
