@@ -34,7 +34,9 @@ urlpatterns = [
     path('user/ideal/', UserIdealTypeAPIView.as_view()),
 
     # GET 테마별 맞춤 이성(남자) 소개
-    path('user/thema/', UserMenThemaAPIView.as_view()),
+    path('user/thema/men/', UserMenThemaAPIView.as_view()),
+    # GET 테마별 맞춤 이성(여자) 소개
+    path('user/thema/women/', UserWomenThemaAPIView.as_view()),
 
     # GET 유저의 태그 전체 조회
     # PATCH 추후 추가... (현재는 아래 4개 url 주소로 태그타입별 각각 PATCH 설정)

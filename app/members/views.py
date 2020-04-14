@@ -783,6 +783,36 @@ class UserMenThemaAPIView(APIView):
         return Response(data)
 
 
+# 테마 소개 (여자)
+class UserWomenThemaAPIView(APIView):
+    def get(self, request):
+        user = request.user
+        token = Token.objects.filter(user=user)
+
+        if not token:
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        partners = User.objects.filter(gender='여자')
+        print('partners >> ', partners)
+
+        first_thema = list()
+        second_thema = list()
+        third_thema = list()
+        fourth_thema = list()
+
+        # 테마별 알고리즘 추가
+        for partner in partners:
+            pass
+
+        data = {
+            'firstThema': first_thema,
+            'secondThema': second_thema,
+            'thirdThema': third_thema,
+            'fourthThema': fourth_thema,
+        }
+        return Response(data)
+
+
 # 카카오톡 로그인 페이지
 def KaKaoTemplate(request):
     return render(request, 'kakao.html')
