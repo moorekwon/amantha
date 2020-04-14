@@ -463,7 +463,8 @@ class UserIdealTypeAPIView(APIView):
                 ideal_partners.append(partner)
             print('ideal_partners region >> ', ideal_partners)
 
-            if user.useridealtype_set.last().tall_from and (
+            print('type(partner.userinfo.tall) >> ', type(partner.userinfo.tall))
+            if user.useridealtype_set.last().tall_from and partner.userinfo.tall and (
                     partner.userinfo.tall >= user.useridealtype_set.last().tall_from) and (
                     partner.userinfo.tall <= user.useridealtype_set.last().tall_to):
                 ideal_partners.append(partner)
@@ -510,12 +511,14 @@ class UserIdealTypeAPIView(APIView):
             print('best_partners >> ', best_partners)
 
             data = {
+                'user': UserAccountSerializer(user).data,
                 'idealType': IdealTypeSerializer(ideal_type.last(), partial=True).data,
                 'idealPartners': best_partners,
             }
             return Response(data)
         else:
             data = {
+                'user': UserAccountSerializer(user).data,
                 'idealType': IdealTypeSerializer(ideal_type.last(), partial=True).data,
                 'idealPartners': '없음',
             }
@@ -741,7 +744,7 @@ class UserTagRelationshipAPIView(APIView):
 
 
 # 테마 소개 (남자)
-class UserMenThemaAPIView(APIView):
+class UserThemaAPIView(APIView):
     def get(self, request):
         user = request.user
         token = Token.objects.filter(user=user)
@@ -749,68 +752,64 @@ class UserMenThemaAPIView(APIView):
         if not token:
             return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
-        partners = User.objects.filter(gender='남자')
-        print('partners >> ', partners)
+        # 해당 유저가 여자일 경우, 남자 테마별 이성 소개
+        if user.gender == '여자':
+            partners = User.objects.filter(gender='남자')
+            print('partners >> ', partners)
 
-        neither_drinks_nor_smokes = list()
-        four_years_older = list()
-        over_180_tall = list()
-        church_men = list()
+            neither_drinks_nor_smokes = list()
+            four_years_older = list()
+            over_180_tall = list()
+            church_men = list()
 
-        for partner in partners:
-            # 술담배를 멀리하는 남자
-            if (partner.userinfo.drinking == '마시지 않음') and (partner.userinfo.smoking == '비흡연'):
-                neither_drinks_nor_smokes.append(partner.email)
+            for partner in partners:
+                # 술담배를 멀리하는 남자
+                if (partner.userinfo.drinking == '마시지 않음') and (partner.userinfo.smoking == '비흡연'):
+                    neither_drinks_nor_smokes.append(partner.email)
 
-            # 성숙한 매력의 4살연상
-            if partner.age() == (user.age() + 4):
-                four_years_older.append(partner.email)
+                # 성숙한 매력의 4살연상
+                if partner.age() == (user.age() + 4):
+                    four_years_older.append(partner.email)
 
-            # 키 180cm 이상의 훈남
-            if partner.userinfo.tall >= 180:
-                over_180_tall.append(partner.email)
+                # 키 180cm 이상의 훈남
+                if partner.userinfo.tall >= 180:
+                    over_180_tall.append(partner.email)
 
-            # 다정다감한 교회오빠
-            if partner.userinfo.religion == '기독교':
-                church_men.append(partner.email)
+                # 다정다감한 교회오빠
+                if partner.userinfo.religion == '기독교':
+                    church_men.append(partner.email)
 
-        data = {
-            'neitherDrinksNorSmokes': neither_drinks_nor_smokes,
-            'fourYearsOlder': four_years_older,
-            'over180Tall': over_180_tall,
-            'churchMen': church_men,
-        }
-        return Response(data)
+            data = {
+                'user': UserAccountSerializer(user).data,
+                'neitherDrinksNorSmokes': neither_drinks_nor_smokes,
+                'fourYearsOlder': four_years_older,
+                'over180Tall': over_180_tall,
+                'churchMen': church_men,
+            }
+            return Response(data)
 
+        # 해당 유저가 남자일 경우, 여자 테마별 이성 소개
+        else:
+            partners = User.objects.filter(gender='여자')
+            print('partners >> ', partners)
 
-# 테마 소개 (여자)
-class UserWomenThemaAPIView(APIView):
-    def get(self, request):
-        user = request.user
-        token = Token.objects.filter(user=user)
+            first_thema = list()
+            second_thema = list()
+            third_thema = list()
+            fourth_thema = list()
 
-        if not token:
-            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+            # 테마별 알고리즘 추가
+            for partner in partners:
+                pass
 
-        partners = User.objects.filter(gender='여자')
-        print('partners >> ', partners)
-
-        first_thema = list()
-        second_thema = list()
-        third_thema = list()
-        fourth_thema = list()
-
-        # 테마별 알고리즘 추가
-        for partner in partners:
-            pass
-
-        data = {
-            'firstThema': first_thema,
-            'secondThema': second_thema,
-            'thirdThema': third_thema,
-            'fourthThema': fourth_thema,
-        }
-        return Response(data)
+            data = {
+                'user': UserAccountSerializer(user).data,
+                'firstThema': first_thema,
+                'secondThema': second_thema,
+                'thirdThema': third_thema,
+                'fourthThema': fourth_thema,
+            }
+            return Response(data)
 
 
 # 카카오톡 로그인 페이지

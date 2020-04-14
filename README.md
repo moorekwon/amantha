@@ -254,6 +254,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - **User별 Image, Info, Story, Tag 정보, 보유 ribbon, pick받은 이성, 등 전체 정보 표시**
 
+  - *어떤 정보까지 모두 넣어야 할지 의견 필요*
+
 - Request Sample
 
   - URL: http://13.209.3.115:88/api/user/profile/
@@ -278,10 +280,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  *tags 부분 추후 업데이트*
-
   ```json
-  {
+{
       "userProfile": {
           "email": "esb@esb.com",
           "gender": "여자",
@@ -1261,6 +1261,211 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
+### User Ideal Type Create
+
+- URL: `/user/ideal/`
+
+- Method: `POST`
+
+- 해당 유저의 이상형 정보 (첫) 설정 ***(이후 여기서 정보 수정 불가)***
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/ideal/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hbb@hbb.com
+       - Password: hbb
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    - 옵션 정보: `ageFrom`, `ageTo`, `region`, `tallFrom`, `tallTo`, `bodyShape`, `personality`, `religion`, `smoking`, `drinking`
+      - ***현재 선호 지역 1만 넣도록 설정 (추후 선호 지역 2 추가)***
+      - *나이와 키는 범위로 지정하기 때문에 'From', 'To' 붙여서 각각 두 개의 정보씩 필요 (추후 더 나은 방법 고려)*
+    - 고정된 value를 가진 정보 (User Info Create와 value 같음)
+      - 아래 정해진 값들만 넣을 수 있도록 **str** 형태의 값들로 이루어진 list로 고정됨
+      - `region`: `서울`, `경기`, `인천`, `대전`, `충북`, `충남`, `강원`, `부산`, `경북`, `경남`, `대구`, `울산`, `광주`, `전북`, `전남`, `제주`
+      - `bodyShape`: `보통체형`, `통통한`, `살짝볼륨`, `글래머`, `마른`, `슬림탄탄`
+      - `personality`: `지적인`, `차분한`, `유머있는`, `낙천적인`, `내향적인`, `외향적인`, `감성적인`, `상냥한`, `귀여운`, `섹시한`, `4차원인`, `발랄한`, `도도한`
+        - ***multi choice 정보(필드) 추후 업데이트 (현재는 복수 선택 불가능)***
+      - `drinking`: `가끔 마심`, `어느정도 즐기는편`, `술자리를 즐김`, `마시지 않음`
+      - `smoking`: `흡연`, `비흡연`
+      - `religion`: `종교 없음`, `기독교`, `천주교`, `불교`, `원불교`, `유교`, `이슬람교`
+
+    ```json
+    {
+        "tallFrom": 160,
+        "tallTo": 165,
+        "ageFrom": 23,
+        "ageTo": 27,
+        "religion": "기독교",
+        "drinking": "가끔 마심"
+    }
+    ```
+
+- Response Sample
+
+  ```json
+  {
+      "idealType": {
+          "ageFrom": 23,
+          "ageTo": 27,
+          "region": "",
+          "tallFrom": 160,
+          "tallTo": 165,
+          "bodyShape": "",
+          "personality": "",
+          "religion": "기독교",
+          "smoking": "",
+          "drinking": "가끔 마심"
+      }
+  }
+  ```
+
+
+
+### User Ideal Type Update
+
+- URL: `/user/ideal/`
+
+- Method: `PATCH`
+
+- 해당 유저의 등록되어 있는 이상형 정보 수정
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/ideal/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hbb@hbb.com
+       - Password: hbb
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+  - Body
+
+    기존에 저장되어 있는 데이터는 수정하지 않을 경우 그대로 보존 ***(아예 수정 정보들로 전체 정보를 업데이트 해야 하는지 협의 필요)***
+
+    ```json
+    {
+        "bodyShape": "보통체형",
+        "drinking": "마시지 않음"
+    }
+    ```
+
+- Response Sample
+
+  기존 저장되어 있는 데이터에 추가되거나 수정됨
+
+  ```json
+  {
+      "idealType": {
+          "ageFrom": 23,
+          "ageTo": 27,
+          "region": "",
+          "tallFrom": 160,
+          "tallTo": 165,
+          "bodyShape": "보통체형",
+          "personality": "",
+          "religion": "기독교",
+          "smoking": "",
+          "drinking": "마시지 않음"
+      }
+  }
+  ```
+
+
+
+### User Ideal Type View
+
+- URL: `/user/ideal/`
+
+- Method: `GET`
+
+- 해당 유저의 등록된 이상형 정보 설정 및 맞춤 이성 리스트 조회
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/ideal/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hbb@hbb.com
+       - Password: hbb
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+- Response Sample
+
+  User의 계정 정보와 현재 등록된 이상형 설정 정보 및 이상형과 가장 유사한 이성 리스트 표시
+
+  - *`idealPartners` 리스트는 email 외 다른 고유값으로 접근하도록 변경 가능*
+
+  ```json
+  {
+      "user": {
+          "pk": 4,
+          "email": "hbb@hbb.com",
+          "gender": "남자"
+      },
+      "idealType": {
+          "ageFrom": 23,
+          "ageTo": 27,
+          "region": "",
+          "tallFrom": 160,
+          "tallTo": 165,
+          "bodyShape": "",
+          "personality": "",
+          "religion": "기독교",
+          "smoking": "",
+          "drinking": ""
+      },
+      "idealPartners": [
+          "hjk@hjk.com",
+          "szj@szj.com"
+      ]
+  }
+  ```
+
+
+
 ### User Ribbon Add
 
 - URL: `/user/ribbon/`
@@ -1465,8 +1670,10 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  User의 계정 정보와 현재 pick한 이성의 email, pick받은 이성의 email 표시 ***(email이 아닌 다른 유저를 식별할 수 있는 고유값으로 표시 가능)***
+  User의 계정 정보와 현재 pick한 이성 및 pick받은 이성 표시
 
+  - *각 리스트는 email 외 다른 고유값으로 접근하도록 변경 가능*
+  
   ```json
   {
       "user": {
@@ -1575,8 +1782,10 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  User의 계정 정보, User가 가입심사한 이성의 email과 보낸 별점(StarTo), User를 가입심사한 이성의 email과 받은 별점(StarFrom) 표시 ***(다른 방식으로 접근하기 원하면 수정)***
+  User의 계정 정보, User가 가입심사한 이성과 보낸 별점(`StarTo`) 및 User를 가입심사한 이성과 받은 별점(`StarFrom`) 표시
 
+  - *각 리스트는 email 외 다른 고유값으로 접근하도록 변경 가능*
+  
   ```json
   {
       "user": {
@@ -1603,6 +1812,69 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
               "szj@szj.com",
               2
           ]
+      ]
+  }
+  ```
+
+
+
+### User Thema List
+
+- URL: `/user/thema/`
+
+- Method: `GET`
+
+- 해당 user에게 맞는 테마별 이성 리스트 조회 *(현재 남자 테마 4개 작업, 계속 추가하고 있음)*
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/thema/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+- Response Sample
+
+  User의 계정 정보와 테마별 맞춤 이성 소개 리스트
+
+  - *각 테마별 리스트는 email 외 다른 고유값으로 접근하도록 변경 가능*
+
+  ```json
+  {
+      "user": {
+          "pk": 1,
+          "email": "hjk@hjk.com",
+          "gender": "여자"
+      },
+      "neitherDrinksNorSmokes": [
+          "hgo@hgo.com",
+          "dhl@dhl.com",
+          "wyc@wyc.com"
+      ],
+      "fourYearsOlder": [
+          "hbb@hbb.com"
+      ],
+      "over180Tall": [
+          "sjb@sjb.com",
+          "shk@shk.com"
+      ],
+      "churchMen": [
+          "hgo@hgo.com"
       ]
   }
   ```
