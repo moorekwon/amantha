@@ -741,7 +741,7 @@ class UserTagRelationshipAPIView(APIView):
 
 
 # 테마 소개 (남자)
-class UserManThemaAPIView(APIView):
+class UserMenThemaAPIView(APIView):
     def get(self, request):
         user = request.user
         token = Token.objects.filter(user=user)
