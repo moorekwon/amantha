@@ -276,6 +276,33 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
+  ```json
+  {
+      "userProfile": {
+          "email": "esb@esb.com",
+          "gender": "여자",
+          "currentRibbon": 10,
+          "profilePercentage": 71.4,
+          "pickFrom": [
+              "hgo@hgo.com",
+              "hbb@hbb.com"
+          ],
+          "images": [
+              {
+                  "pk": 1,
+                  "image": "https://amantha.s3.amazonaws.com/profile_images/esb.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T094447Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=40b1898f937f7072814351384b272bfd2adb312641ffecd19f6c253b3f8ec152"
+              },
+              {
+                  "pk": 2,
+                  "image": ""
+              }
+          ]
+      }
+  }
+  ```
+
+  
+
 
 
 ### User Image Add
