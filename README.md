@@ -360,7 +360,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Image Add
+### User Image
+
+#### User Image Add
 
 - URL: `/user/image/`
 
@@ -420,7 +422,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Image Delete
+#### User Image Delete
 
 - URL: `/user/image/<int:pk>/`
 
@@ -460,7 +462,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Image List
+#### User Image List
 
 - URL: `/user/image/`
 
@@ -516,7 +518,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Info Create
+### User Info
+
+#### User Info Create
 
 - URL: `/user/info/`
 
@@ -609,7 +613,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Info Update
+#### User Info Update
 
 - URL: `/user/info/`
 
@@ -677,7 +681,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Info View
+#### User Info View
 
 - URL: `/user/info/`
 
@@ -742,7 +746,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Story Add
+### User Story
+
+#### User Story Add
 
 - URL: `/user/story/`
 
@@ -798,7 +804,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Story Update
+#### User Story Update
 
 - URL: `/user/story/`
 
@@ -851,7 +857,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Story Delete
+#### User Story Delete
 
 - URL: `/user/story/<int:pk>/`
 
@@ -889,7 +895,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   
 
-### User Story List
+#### User Story List
 
 - URL: `/user/story/`
 
@@ -940,7 +946,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User All Tag View
+### User Tag
+
+#### User All Tag View
 
 - URL: `/user/tag/`
 
@@ -1013,7 +1021,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Tag Date Style Update
+#### User Tag Date Style Update
 
 - URL: `/user/tag/date/`
 
@@ -1070,7 +1078,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Tag Life Style Update
+#### User Tag Life Style Update
 
 - URL: `/user/tag/life/`
 
@@ -1135,7 +1143,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Tag Relationship Style Update
+#### User Tag Relationship Style Update
 
 - URL: `/user/tag/relationship/`
 
@@ -1196,7 +1204,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Tag Charm Update
+#### User Tag Charm Update
 
 - URL: `/user/tag/charm/`
 
@@ -1253,7 +1261,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Ideal Type Create
+### User Ideal Type
+
+#### User Ideal Type Create
 
 - URL: `/user/ideal/`
 
@@ -1330,7 +1340,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Ideal Type Update
+#### User Ideal Type Update
 
 - URL: `/user/ideal/`
 
@@ -1394,7 +1404,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Ideal Type View
+#### User Ideal Type View
 
 - URL: `/user/ideal/`
 
@@ -1458,7 +1468,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Ribbon Add
+### User Ribbon
+
+#### User Ribbon Add
 
 - URL: `/user/ribbon/`
 
@@ -1513,7 +1525,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Ribbon History
+#### User Ribbon History
 
 - URL: `/user/ribbon/`
 
@@ -1574,7 +1586,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Pick Add
+### User Pick
+
+#### User Pick Add
 
 - URL: `/user/pick/`
 
@@ -1630,7 +1644,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Pick List
+#### User Pick List
 
 - URL: `/user/pick/`
 
@@ -1685,7 +1699,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Star Add
+### User Star
+
+#### User Star Add
 
 - URL: `/user/star/`
 
@@ -1742,7 +1758,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 
-### User Star List
+#### User Star List
 
 - URL: `/user/star/`
 
@@ -1809,6 +1825,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```
 
 
+
+## User Thema
 
 ### User Thema List
 
