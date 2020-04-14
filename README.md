@@ -203,10 +203,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `POST`
 
-- 카카오톡 로그인 링크 주소: https://kauth.kakao.com/oauth/authorize?client_id=76b2956e73b28279536c31c5fe24562a&redirect_uri=http://13.209.3.115:88/api/auth/kakao/&response_type=code
-
-  - ***아마 위 주소를 iOS팀에게 받아야 하는 것 같아요***
-
 - 카카오톡 연결 계정: email *(email 외 gender 등 연결정보 사이트에서 설정할 수 있음)*
 
 - Request Sample
