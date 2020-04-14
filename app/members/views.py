@@ -740,6 +740,49 @@ class UserTagRelationshipAPIView(APIView):
         return Response(serializer.errors)
 
 
+# 테마 소개 (남자)
+class UserManThemaAPIView(APIView):
+    def get(self, request):
+        user = request.user
+        token = Token.objects.filter(user=user)
+
+        if not token:
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        partners = User.objects.filter(gender='남자')
+        print('partners >> ', partners)
+
+        neither_drinks_nor_smokes = list()
+        four_years_older = list()
+        over_180_tall = list()
+        church_men = list()
+
+        for partner in partners:
+            # 술담배를 멀리하는 남자
+            if (partner.userinfo.drinking == '마시지 않음') and (partner.userinfo.smoking == '비흡연'):
+                neither_drinks_nor_smokes.append(partner.email)
+
+            # 성숙한 매력의 4살연상
+            if partner.age() == (user.age() + 4):
+                four_years_older.append(partner.email)
+
+            # 키 180cm 이상의 훈남
+            if partner.userinfo.tall >= 180:
+                over_180_tall.append(partner.email)
+
+            # 다정다감한 교회오빠
+            if partner.userinfo.religion == '기독교':
+                church_men.append(partner.email)
+
+        data = {
+            'neitherDrinksNorSmokes': neither_drinks_nor_smokes,
+            'fourYearsOlder': four_years_older,
+            'over180Tall': over_180_tall,
+            'churchMen': church_men,
+        }
+        return Response(data)
+
+
 # 카카오톡 로그인 페이지
 def KaKaoTemplate(request):
     return render(request, 'kakao.html')
@@ -777,6 +820,7 @@ class KaKaoLoginAPIView(APIView):
         }
         me_response = requests.get(me_url, headers=me_headers)
         me_response_data = me_response.json()
+        print('me_response_data >> ', me_response_data)
 
         # 카카오톡 계정의 이메일로 user의 email 생성
         kakao_email = me_response_data['kakao_account']['email']
