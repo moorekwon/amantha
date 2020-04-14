@@ -451,41 +451,40 @@ class UserIdealTypeAPIView(APIView):
         ideal_partners = list()
 
         for partner in partners:
-            if (user.useridealtype_set.last().age_from is not None) and (
+            if user.useridealtype_set.last().age_from and (
                     partner.age() >= user.useridealtype_set.last().age_from) and (
                     partner.age() <= user.useridealtype_set.last().age_to):
                 ideal_partners.append(partner)
             print('ideal_partners age >> ', ideal_partners)
 
-            if (user.useridealtype_set.last().region is not None) and (partner.userinfo.region is not None) and (
+            if user.useridealtype_set.last().region and (
                     partner.userinfo.region == user.useridealtype_set.last().region):
                 ideal_partners.append(partner)
             print('ideal_partners region >> ', ideal_partners)
 
-            if (user.useridealtype_set.last().tall_from is not None) and (partner.userinfo.tall is not None) and (
+            if user.useridealtype_set.last().tall_from and (
                     partner.userinfo.tall >= user.useridealtype_set.last().tall_from) and (
                     partner.userinfo.tall <= user.useridealtype_set.last().tall_to):
                 ideal_partners.append(partner)
             print('ideal_partners tall >> ', ideal_partners)
 
             # 성격 복수 가능 변경 필요!
-            if (user.useridealtype_set.last().body_shape is not None) and (
-                    partner.userinfo.body_shape is not None) and (
+            if user.useridealtype_set.last().body_shape and (
                     partner.userinfo.body_shape == user.useridealtype_set.last().body_shape):
                 ideal_partners.append(partner)
             print('ideal_partners body >> ', ideal_partners)
 
-            if (user.useridealtype_set.last().religion is not None) and (partner.userinfo.religion is not None) and (
+            if user.useridealtype_set.last().religion and (
                     partner.userinfo.religion == user.useridealtype_set.last().religion):
                 ideal_partners.append(partner)
             print('ideal_partners religion >> ', ideal_partners)
 
-            if (user.useridealtype_set.last().smoking is not None) and (partner.userinfo.smoking is not None) and (
+            if user.useridealtype_set.last().smoking and (
                     partner.userinfo.smoking == user.useridealtype_set.last().smoking):
                 ideal_partners.append(partner)
             print('ideal_partners smoking >> ', ideal_partners)
 
-            if (user.useridealtype_set.last().drinking is not None) and (partner.userinfo.drinking is not None) and (
+            if user.useridealtype_set.last().drinking and (
                     partner.userinfo.drinking == user.useridealtype_set.last().drinking):
                 ideal_partners.append(partner)
             print('ideal_partners drinking >> ', ideal_partners)
@@ -516,7 +515,8 @@ class UserIdealTypeAPIView(APIView):
             return Response(data)
         else:
             data = {
-                'idealType': IdealTypeSerializer(ideal_type.last(), partial=True),
+                'idealType': IdealTypeSerializer(ideal_type.last(), partial=True).data,
+                'idealPartners': '없음',
             }
             return Response(data)
 
@@ -575,7 +575,6 @@ class UserTagAPIView(APIView):
         if not Token.objects.filter(user=user):
             return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
-        # TagType.objects.get_or_create(user=user)
         if user.tag is None:
             user.tag = TagType.objects.create()
             user.save()
