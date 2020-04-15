@@ -408,6 +408,7 @@ class UserStarAPIView(APIView):
         partner = User.objects.get(email=request.data['partner'])
         star = request.data['star']
 
+        # 아래 코드보다, patch api로 재심사 할 수 있도록 해야할 것 같음..
         if user in partner.send_me_star_users.all():
             return Response('이미 가입심사한 이성 입니다.')
 
@@ -810,6 +811,37 @@ class UserThemaAPIView(APIView):
                 'fourthThema': fourth_thema,
             }
             return Response(data)
+
+
+# 유저에게 높은 점수를 준 이성(받은 표현)과 유저가 높은 점수를 준 이성(보낸 표현) 리스트 조회
+class UserExpressionAPIView(APIView):
+    def get(self, request):
+        user = request.user
+        token = Token.objects.filter(user=user)
+
+        if not token:
+            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        received_partners = user.partner_sendstar_set.all()
+        sent_partners = user.user_sendstar_set.all()
+
+        received_high_partners = list()
+        for partner in received_partners:
+            if partner.star >= 4:
+                received_high_partners.append(partner.user.email)
+        print('received_high_partners >> ', received_high_partners)
+
+        sent_high_partners = list()
+        for partner in sent_partners:
+            if partner.star >= 4:
+                sent_high_partners.append(partner.partner.email)
+        print('sent_high_partners >> ', sent_high_partners)
+
+        data = {
+            'ReceivedPartners': received_high_partners,
+            'SentPartners': sent_high_partners,
+        }
+        return Response(data)
 
 
 # 카카오톡 로그인 페이지
