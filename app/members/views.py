@@ -161,7 +161,7 @@ class UserInfoAPIView(APIView):
 
         data = {
             'user': UserAccountSerializer(user).data,
-            'info': UserInfoSerializer(info[0]).data,
+            'info': UserInfoSerializer(info.last()).data,
         }
         return Response(data)
 
@@ -743,7 +743,7 @@ class UserTagRelationshipAPIView(APIView):
         return Response(serializer.errors)
 
 
-# 테마 소개 (남자)
+# 테마 소개
 class UserThemaAPIView(APIView):
     def get(self, request):
         user = request.user

@@ -62,9 +62,27 @@ class UserImageSerializer(serializers.ModelSerializer):
 
 # UserInfo 필드정보
 class UserInfoSerializer(serializers.ModelSerializer):
+    PERSONALITIES = (
+        ('지적인', '지적인'),
+        ('차분한', '차분한'),
+        ('유머있는', '유머있는'),
+        ('낙천적인', '낙천적인'),
+        ('내향적인', '내향적인'),
+        ('외향적인', '외향적인'),
+        ('감성적인', '감성적인'),
+        ('상냥한', '상냥한'),
+        ('귀여운', '귀여운'),
+        ('섹시한', '섹시한'),
+        ('4차원인', '4차원인'),
+        ('발랄한', '발랄한'),
+        ('도도한', '도도한'),
+    )
+
     age = serializers.IntegerField(source='user.age', read_only=True)
     averageStar = serializers.FloatField(source='user.average_star', read_only=True)
     bodyShape = serializers.CharField(source='body_shape', required=False)
+    # personality 모델 필드와 차이가 없는데 구지 serializer에서 한번 더 써줘야 할지 의문
+    personalities = serializers.MultipleChoiceField(choices=PERSONALITIES, source='personality', required=False)
     bloodType = serializers.CharField(source='blood_type', required=False)
 
     class Meta:
@@ -81,7 +99,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
             'age',
             'tall',
             'bodyShape',
-            'personality',
+            'personalities',
             'bloodType',
             'smoking',
             'drinking',

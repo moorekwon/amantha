@@ -4,8 +4,8 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
-
 # Create your models here.
+from multiselectfield import MultiSelectField
 
 
 class UserManager(BaseUserManager):
@@ -97,22 +97,6 @@ class UserInfo(models.Model):
         ('마른', '마른'),
         ('슬림탄탄', '슬림탄탄'),
     )
-    # 여러 개 선택 가능하게 하도록 해야함
-    PERSONALITY = (
-        ('지적인', '지적인'),
-        ('차분한', '차분한'),
-        ('유머있는', '유머있는'),
-        ('낙천적인', '낙천적인'),
-        ('내향적인', '내향적인'),
-        ('외향적인', '외향적인'),
-        ('감성적인', '감성적인'),
-        ('상냥한', '상냥한'),
-        ('귀여운', '귀여운'),
-        ('섹시한', '섹시한'),
-        ('4차원인', '4차원인'),
-        ('발랄한', '발랄한'),
-        ('도도한', '도도한'),
-    )
     BLOOD_TYPE = (
         ('AB형', 'AB형'),
         ('A형', 'A형'),
@@ -138,6 +122,21 @@ class UserInfo(models.Model):
         ('유교', '유교'),
         ('이슬람교', '이슬람교'),
     )
+    PERSONALITY = (
+        ('지적인', '지적인'),
+        ('차분한', '차분한'),
+        ('유머있는', '유머있는'),
+        ('낙천적인', '낙천적인'),
+        ('내향적인', '내향적인'),
+        ('외향적인', '외향적인'),
+        ('감성적인', '감성적인'),
+        ('상냥한', '상냥한'),
+        ('귀여운', '귀여운'),
+        ('섹시한', '섹시한'),
+        ('4차원인', '4차원인'),
+        ('발랄한', '발랄한'),
+        ('도도한', '도도한'),
+    )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nickname = models.CharField(unique=True, max_length=60)
@@ -149,7 +148,7 @@ class UserInfo(models.Model):
     body_shape = models.CharField(choices=BODY_SHAPE, blank=True, max_length=50)
     major = models.CharField(max_length=50, blank=True)
     tall = models.PositiveIntegerField(blank=True, null=True)
-    personality = models.CharField(choices=PERSONALITY, blank=True, max_length=100)
+    personality = MultiSelectField(choices=PERSONALITY, max_length=60, blank=True)
     blood_type = models.CharField(choices=BLOOD_TYPE, max_length=30, blank=True)
     drinking = models.CharField(choices=DRINKING, max_length=60, blank=True)
     smoking = models.CharField(choices=SMOKING, max_length=60, blank=True)

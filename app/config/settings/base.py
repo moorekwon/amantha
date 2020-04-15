@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'phone_field',
     'django_extensions',
+    'multiselectfield',
 
     'members.apps.MembersConfig',
     'restaurants.apps.RestaurantsConfig',
