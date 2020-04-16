@@ -383,8 +383,8 @@ class UserStarAPIView(APIView):
 
         data = {
             'user': UserAccountSerializer(user).data,
-            'StarTo': stars_to_list,
-            'StarFrom': stars_from_list,
+            'starTo': stars_to_list,
+            'starFrom': stars_from_list,
         }
         return Response(data)
 
@@ -398,7 +398,6 @@ class UserStarAPIView(APIView):
         partner = User.objects.get(email=request.data['partner'])
         star = request.data['star']
 
-        # 아래 코드보다, patch api로 재심사 할 수 있도록 해야할 것 같음..
         if user in partner.send_me_star_users.all():
             return Response('이미 가입심사한 이성 입니다.')
 
@@ -415,11 +414,31 @@ class UserStarAPIView(APIView):
             return Response(UserStarSerializer(star).data)
         return Response(serializer.errors)
 
+    # 가입심사한 이성 재심사
     def patch(self, request):
         user = request.user
 
         if not Token.objects.filter(user=user):
             return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
+
+        partners = user.user_sendstar_set.all()
+        star = request.data['star']
+
+        for partner in partners:
+            if not partner.partner.email == request.data['partner']:
+                return Response('가입심사한 적 없는 이성입니다.')
+            else:
+                data = {
+                    'user': user.pk,
+                    'partner': partner.partner.pk,
+                    'star': star
+                }
+                serializer = UserStarSerializer(partner, data=data)
+
+                if serializer.is_valid():
+                    stars = serializer.save()
+                    return Response(UserStarSerializer(stars).data)
+                return Response(serializer.errors)
 
 
 class UserIdealTypeAPIView(APIView):
