@@ -361,7 +361,7 @@ class UserPickAPIView(APIView):
 
 
 class UserStarAPIView(APIView):
-    # 가입심사 보낸 이성과 받은 이성 리스트 조회
+    # 가입심사 보낸 이성과 받은 이성 리스트 및 해당 유저의 평균 별점 조회
     def get(self, request):
         user = request.user
         stars_from = user.send_me_star_users.all()
@@ -383,6 +383,7 @@ class UserStarAPIView(APIView):
 
         data = {
             'user': UserAccountSerializer(user).data,
+            'averageStar': user.average_star(),
             'starTo': stars_to_list,
             'starFrom': stars_from_list,
         }
