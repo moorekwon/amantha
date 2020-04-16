@@ -7,6 +7,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -19,6 +20,8 @@ User = get_user_model()
 
 # 회원가입 (토큰 생성)
 class CreateUserAPIView(APIView):
+    permission_classes = [AllowAny, ]
+
     def post(self, request):
         serializer = UserCreateSerializer(data=request.data)
 
@@ -38,6 +41,8 @@ class CreateUserAPIView(APIView):
 
 
 class AuthTokenAPIView(APIView):
+    permission_classes = [AllowAny, ]
+
     # (가입된) 유저 리스트
     def get(self, request):
         users = User.objects.all()
@@ -81,8 +86,7 @@ class AuthTokenAPIView(APIView):
 # 로그아웃 (토큰 삭제)
 class LogoutUserAPIView(APIView):
     def get(self, request):
-        user = request.user
-        token = Token.objects.filter(user=user)
+        token = Token.objects.filter(user=request.user)
 
         if not token:
             return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
