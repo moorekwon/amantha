@@ -282,13 +282,7 @@ class UserRibbonAPIView(APIView):
     # User별 보유리본 조회
     def get(self, request):
         user = request.user
-        token = Token.objects.filter(user=user)
-
-        if not token:
-            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
-
         ribbons = UserRibbon.objects.filter(user=user)
-
         serializer = UserRibbonSerializer(ribbons, many=True)
 
         data = {
@@ -370,10 +364,6 @@ class UserStarAPIView(APIView):
     # 가입심사 보낸 이성과 받은 이성 리스트 조회
     def get(self, request):
         user = request.user
-
-        if not Token.objects.filter(user=user):
-            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
-
         stars_from = user.send_me_star_users.all()
         stars_to = SendStar.objects.filter(user=user)
 
@@ -425,17 +415,18 @@ class UserStarAPIView(APIView):
             return Response(UserStarSerializer(star).data)
         return Response(serializer.errors)
 
-
-class UserIdealTypeAPIView(APIView):
-    # 해당 유저의 현재 이상형 설정 정보 조회와 맞춤 이성 소개
-    def get(self, request):
+    def patch(self, request):
         user = request.user
 
         if not Token.objects.filter(user=user):
             return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
+
+class UserIdealTypeAPIView(APIView):
+    # 해당 유저의 현재 이상형 설정 정보 조회와 맞춤 이성 소개
+    def get(self, request):
+        user = request.user
         ideal_type = UserIdealType.objects.filter(user=user)
-        print('ideal_type >> ', ideal_type)
 
         if not ideal_type:
             return Response('등록된 이상형 정보가 없습니다.')
@@ -464,7 +455,6 @@ class UserIdealTypeAPIView(APIView):
                 ideal_partners.append(partner)
             print('ideal_partners region >> ', ideal_partners)
 
-            print('type(partner.userinfo.tall) >> ', type(partner.userinfo.tall))
             if user.useridealtype_set.last().tall_from and partner.userinfo.tall and (
                     partner.userinfo.tall >= user.useridealtype_set.last().tall_from) and (
                     partner.userinfo.tall <= user.useridealtype_set.last().tall_to):
@@ -576,9 +566,6 @@ class UserTagAPIView(APIView):
     # 해당 유저의 모든 관심태그 조회
     def get(self, request):
         user = request.user
-
-        if not Token.objects.filter(user=user):
-            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
         if user.tag is None:
             user.tag = TagType.objects.create()
@@ -748,10 +735,6 @@ class UserTagRelationshipAPIView(APIView):
 class UserThemaAPIView(APIView):
     def get(self, request):
         user = request.user
-        token = Token.objects.filter(user=user)
-
-        if not token:
-            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
         # 해당 유저가 여자일 경우, 남자 테마별 이성 소개
         if user.gender == '여자':
@@ -817,11 +800,6 @@ class UserThemaAPIView(APIView):
 class UserExpressionAPIView(APIView):
     def get(self, request):
         user = request.user
-        token = Token.objects.filter(user=user)
-
-        if not token:
-            return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
-
         received_partners = user.partner_sendstar_set.all()
         sent_partners = user.user_sendstar_set.all()
 
