@@ -416,7 +416,7 @@ class UserStarAPIView(APIView):
             return Response(UserStarSerializer(star).data)
         return Response(serializer.errors)
 
-    # 가입심사한 이성 재심사
+    # 가입심사한 이성 재심사 (일단 재심사 안하기로 함)
     def patch(self, request):
         if not Token.objects.filter(user=request.user):
             return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
