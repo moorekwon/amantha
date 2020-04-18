@@ -180,10 +180,27 @@ class TagTypeSerializer(serializers.ModelSerializer):
 
 
 class IdealTypeSerializer(serializers.ModelSerializer):
+    PERSONALITIES = (
+        ('지적인', '지적인'),
+        ('차분한', '차분한'),
+        ('유머있는', '유머있는'),
+        ('낙천적인', '낙천적인'),
+        ('내향적인', '내향적인'),
+        ('외향적인', '외향적인'),
+        ('감성적인', '감성적인'),
+        ('상냥한', '상냥한'),
+        ('귀여운', '귀여운'),
+        ('섹시한', '섹시한'),
+        ('4차원인', '4차원인'),
+        ('발랄한', '발랄한'),
+        ('도도한', '도도한'),
+    )
+
     ageFrom = serializers.IntegerField(source='age_from', required=True)
     ageTo = serializers.IntegerField(source='age_to', required=True)
     tallFrom = serializers.IntegerField(source='tall_from', required=False)
     tallTo = serializers.IntegerField(source='tall_to', required=False)
+    personalities = serializers.MultipleChoiceField(choices=PERSONALITIES, source='personality', required=False)
     bodyShape = serializers.CharField(source='body_shape', required=False)
 
     class Meta:
@@ -195,7 +212,7 @@ class IdealTypeSerializer(serializers.ModelSerializer):
             'tallFrom',
             'tallTo',
             'bodyShape',
-            'personality',
+            'personalities',
             'religion',
             'smoking',
             'drinking',

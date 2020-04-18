@@ -322,7 +322,7 @@ class UserIdealType(models.Model):
     tall_from = models.PositiveIntegerField(blank=True)
     tall_to = models.PositiveIntegerField(blank=True)
     body_shape = models.CharField(choices=BODY_SHAPE, blank=True, max_length=60)
-    personality = models.CharField(choices=PERSONALITY, blank=True, max_length=60)
+    personality = MultiSelectField(choices=PERSONALITY, max_length=60, blank=True)
     religion = models.CharField(choices=RELIGION, blank=True, max_length=60)
     smoking = models.CharField(choices=SMOKING, blank=True, max_length=60)
     drinking = models.CharField(choices=DRINKING, blank=True, max_length=60)
