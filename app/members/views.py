@@ -765,7 +765,6 @@ class UserThemaAPIView(APIView):
         # 해당 유저가 여자일 경우, 남자 테마별 이성 소개
         if request.user.gender == '여자':
             partners = User.objects.filter(gender='남자')
-            print('partners >> ', partners)
 
             neither_drinks_nor_smokes = list()
             four_years_older = list()
@@ -801,23 +800,36 @@ class UserThemaAPIView(APIView):
         # 해당 유저가 남자일 경우, 여자 테마별 이성 소개
         else:
             partners = User.objects.filter(gender='여자')
-            print('partners >> ', partners)
 
-            first_thema = list()
-            second_thema = list()
-            third_thema = list()
-            fourth_thema = list()
+            over_167_tall = list()
+            four_years_younger = list()
+            neither_drinks_nor_smokes = list()
+            cute_women = list()
 
             # 테마별 알고리즘 추가
             for partner in partners:
-                pass
+                # 167cm 이상 큰 키의 그녀
+                if partner.userinfo.tall and (partner.userinfo.tall >= 167):
+                    over_167_tall.append(partner.email)
+
+                # 궁합도 안보는 4살연하
+                if partner.age() == (request.user.age() - 4):
+                    four_years_younger.append(partner.email)
+
+                # 술담배를 멀리하는 그녀
+                if (partner.userinfo.drinking == '마시지 않음') and (partner.userinfo.smoking == '비흡연'):
+                    neither_drinks_nor_smokes.append(partner.email)
+
+                # 귀여운 매력의 그녀
+                if '귀여운' in partner.userinfo.personality:
+                    cute_women.append(partner.email)
 
             data = {
                 'user': UserAccountSerializer(request.user).data,
-                'firstThema': first_thema,
-                'secondThema': second_thema,
-                'thirdThema': third_thema,
-                'fourthThema': fourth_thema,
+                'over167Tall': over_167_tall,
+                'fourYearsYounger': four_years_younger,
+                'neitherDrinksNorSmokes': neither_drinks_nor_smokes,
+                'cuteWomen': cute_women,
             }
             return Response(data)
 
