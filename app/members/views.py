@@ -29,7 +29,6 @@ class CreateUserAPIView(APIView):
             user = serializer.save()
             # 계정 생성 시 리본 기본 지급
             UserRibbon.objects.create(user=user, paid_ribbon=10, current_ribbon=10)
-
             token = Token.objects.create(user=user)
 
             data = {
@@ -291,7 +290,7 @@ class UserRibbonAPIView(APIView):
 
         data = {
             'user': UserAccountSerializer(request.user).data,
-            'ribbons': serializer.data,
+            'ribbonHistory': serializer.data,
         }
         return Response(data)
 
@@ -536,14 +535,14 @@ class UserIdealTypeAPIView(APIView):
 
             data = {
                 'user': UserAccountSerializer(user).data,
-                'idealType': IdealTypeSerializer(ideal_type.last(), partial=True).data,
+                'idealTypeInfo': IdealTypeSerializer(ideal_type.last(), partial=True).data,
                 'idealPartners': best_partners,
             }
             return Response(data)
         else:
             data = {
                 'user': UserAccountSerializer(user).data,
-                'idealType': IdealTypeSerializer(ideal_type.last(), partial=True).data,
+                'idealTypeInfo': IdealTypeSerializer(ideal_type.last(), partial=True).data,
                 'idealPartners': '없음',
             }
             return Response(data)
@@ -562,7 +561,7 @@ class UserIdealTypeAPIView(APIView):
         if serializer.is_valid():
             ideal_type = serializer.save(user=request.user)
             data = {
-                'idealType': IdealTypeSerializer(ideal_type).data,
+                'idealTypeInfo': IdealTypeSerializer(ideal_type).data,
             }
             return Response(data)
         return Response(serializer.errors)
@@ -584,7 +583,7 @@ class UserIdealTypeAPIView(APIView):
             ideal_type = serializer.save()
 
             data = {
-                'idealType': IdealTypeSerializer(ideal_type).data,
+                'idealTypeInfo': IdealTypeSerializer(ideal_type).data,
             }
             return Response(data)
         return Response(serializer.errors)

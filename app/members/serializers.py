@@ -222,13 +222,15 @@ class IdealTypeSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     currentRibbon = serializers.IntegerField(source='userribbon_set.last.current_ribbon')
     profilePercentage = serializers.FloatField(source='userinfo.profile_percentage')
-    pickFrom = serializers.ListField(
-        child=serializers.EmailField(), source='send_me_pick_users.all'
-    )
+    # pickFrom = serializers.ListField(
+    #     child=serializers.EmailField(), source='send_me_pick_users.all'
+    # )
     images = UserImageSerializer(many=True, source='userimage_set')
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
     tags = TagTypeSerializer(source='tag')
+    idealTypeInfo = IdealTypeSerializer(source='useridealtype_set', many=True)
+    ribbonHistory = UserRibbonSerializer(source='userribbon_set', many=True)
 
     class Meta:
         model = User
@@ -237,9 +239,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'gender',
             'currentRibbon',
             'profilePercentage',
-            'pickFrom',
+            # 'pickFrom',
             'images',
             'info',
             'stories',
             'tags',
+            'idealTypeInfo',
+            'ribbonHistory',
         )
