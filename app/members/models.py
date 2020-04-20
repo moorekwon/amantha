@@ -75,7 +75,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # 유저의 상태 저장 (가입심사중 / 가입심사 합격)
     def status(self):
-        if self.average_star() >= 3:
+        partners = self.partner_sendstar_set.all()
+
+        if (len(partners) >= 3) and (self.average_star()) >= 3:
             self.status = 'pass'
         else:
             self.status = 'on_screening'

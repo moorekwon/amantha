@@ -3,6 +3,9 @@ from django.urls import path
 from members.views import *
 
 urlpatterns = [
+    # 해당 유저의 이메일 정보로 상세프로필 조회 불러오기
+    path('user/', UserThroughEmailAPIView.as_view()),
+
     # POST 유저 회원가입
     path('auth/create/', CreateUserAPIView.as_view()),
     # POST 유저 로그인 / GET 전체 유저 조회
