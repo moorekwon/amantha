@@ -37,6 +37,7 @@ class UserAccountSerializer(serializers.ModelSerializer):
             'pk',
             'email',
             'gender',
+            'status',
         )
 
 
@@ -79,7 +80,6 @@ class UserInfoSerializer(serializers.ModelSerializer):
     )
 
     age = serializers.IntegerField(source='user.age', read_only=True)
-    averageStar = serializers.FloatField(source='user.average_star', read_only=True)
     bodyShape = serializers.CharField(source='body_shape', required=False)
     # personality 모델 필드와 차이가 없는데 구지 serializer에서 한번 더 써줘야 할지 의문
     personalities = serializers.MultipleChoiceField(choices=PERSONALITIES, source='personality', required=False)
@@ -88,15 +88,14 @@ class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserInfo
         fields = (
-            'averageStar',
             'nickname',
+            'birth',
+            'age',
             'school',
             'major',
             'job',
             'company',
             'region',
-            'birth',
-            'age',
             'tall',
             'bodyShape',
             'personalities',
@@ -220,11 +219,9 @@ class IdealTypeSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    averageStar = serializers.FloatField(source='average_star')
     currentRibbon = serializers.IntegerField(source='userribbon_set.last.current_ribbon')
     profilePercentage = serializers.FloatField(source='userinfo.profile_percentage')
-    # pickFrom = serializers.ListField(
-    #     child=serializers.EmailField(), source='send_me_pick_users.all'
-    # )
     images = UserImageSerializer(many=True, source='userimage_set')
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
@@ -238,9 +235,10 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'pk',
             'email',
             'gender',
+            'status',
+            'averageStar',
             'currentRibbon',
             'profilePercentage',
-            # 'pickFrom',
             'images',
             'info',
             'stories',

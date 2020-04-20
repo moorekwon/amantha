@@ -27,8 +27,9 @@ class CreateUserAPIView(APIView):
 
         if serializer.is_valid():
             user = serializer.save()
-            # 계정 생성 시 리본 기본 지급
+            # 계정 생성 시 리본 기본 지급 (맞는지 모르겠음.. 일단 보류)
             UserRibbon.objects.create(user=user, paid_ribbon=10, current_ribbon=10)
+            # user.save()
             token = Token.objects.create(user=user)
 
             data = {
@@ -47,16 +48,21 @@ class AuthTokenAPIView(APIView):
         users = User.objects.all()
         login = []
         logout = []
+        on_screening = []
 
         for user in users:
-            try:
-                login.append(user.auth_token.user)
-            except:
-                logout.append(user)
+            if user.status() == 'on_screening':
+                on_screening.append(user)
+            else:
+                try:
+                    login.append(user.auth_token.user)
+                except:
+                    logout.append(user)
 
         data = {
             'login': UserAccountSerializer(login, many=True).data,
             'logout': UserAccountSerializer(logout, many=True).data,
+            'onScreening': UserAccountSerializer(on_screening, many=True).data,
         }
         return Response(data)
 
@@ -66,14 +72,15 @@ class AuthTokenAPIView(APIView):
         password = request.data['password']
         user = authenticate(email=email, password=password)
 
-        if user:
+        # 유저 인증되고, 가입심사 합격한 유저의 경우
+        if user and user.status() == 'pass':
             # createsuperuser 경우, 로그인 시 리본 기본 지급 설정
             # superuser는 로그인 POST 하기 전까지 logout 상태 (자동 로그인 x)
             if not len(user.userribbon_set.all()):
                 UserRibbon.objects.create(user=user, paid_ribbon=10, current_ribbon=10)
             token, _ = Token.objects.get_or_create(user=user)
         else:
-            raise AuthenticationFailed('존재하지 않는 email 입니다.')
+            raise AuthenticationFailed('유저 인증에 성공하지 못하였거나, 가입심사에 합격한 유저가 아닙니다.')
 
         data = {
             'token': token.key,
@@ -106,6 +113,7 @@ class UserProfileAPIView(APIView):
                 'userProfile': UserProfileSerializer(request.user).data,
             }
             return Response(data)
+        # 로그아웃된 유저도 정보 볼 수 있도록 해야하는지 확인필요
         return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
 
@@ -124,6 +132,7 @@ class UserImageAPIView(APIView):
         return JsonResponse(data, safe=False)
 
     # user 프로필 이미지 추가하기
+    # 계정 생성 시 꼭 3개 추가해야 함
     def post(self, request):
         images = request.data.getlist('images')
 
@@ -161,6 +170,8 @@ class UserInfoAPIView(APIView):
     def get(self, request):
         info = UserInfo.objects.filter(user=request.user)
 
+        # 아래 response는 뜨면 안되는 response임..
+        # 계정 생성 직후 바로 프로필 정보를 등록해야 함
         if not info:
             return Response('등록된 프로필 정보가 없습니다.')
 
@@ -174,6 +185,8 @@ class UserInfoAPIView(APIView):
     def post(self, request):
         info = UserInfo.objects.filter(user=request.user)
 
+        # 이미 등록된 프로필 정보가 있으면 안됨..
+        # 계정 생성 직후 첫 프로필정보 등록하는 곳
         if info:
             return Response('이미 등록된 프로필 정보가 있습니다.')
 
@@ -228,7 +241,6 @@ class UserStoryAPIView(APIView):
     # 해당 유저의 스토리 추가
     def post(self, request):
         serializer = UserStorySerializer(data=request.data)
-
         user_stories = request.user.selectstory_set.all()
         user_story_numbers = set()
         # 현재 유저가 등록한 스토리 번호 불러와 저장

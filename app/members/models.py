@@ -53,11 +53,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         partners = self.partner_sendstar_set.all()
         star = [partner.star for partner in partners]
 
-        if len(star) > 0:
+        if len(star) == 0:
+            return 0
+        elif (len(star) > 0) and (len(star) <= 3):
             average_star = format(sum(star) / len(star), '.2f')
             return float(average_star)
+        # 별점을 받은 이성이 3명을 초과할 경우, 3명까지의 별점만 평균 계산
         else:
-            return 0
+            average_star = format(sum(star[:3]) / 3, '.2f')
+            return float(average_star)
 
     # 유저의 현재 나이
     def age(self):
@@ -68,6 +72,14 @@ class User(AbstractBaseUser, PermissionsMixin):
             birth_year = str(self.userinfo.birth).split('-')[0]
             return int(today_year) - int(birth_year) + 1
         return None
+
+    # 유저의 상태 저장 (가입심사중 / 가입심사 합격)
+    def status(self):
+        if self.average_star() >= 3:
+            self.status = 'pass'
+        else:
+            self.status = 'on_screening'
+        return self.status
 
 
 # 유저 생성 후 기입할 프로필 정보
@@ -279,7 +291,6 @@ class UserIdealType(models.Model):
         ('마른', '마른'),
         ('슬림탄탄', '슬림탄탄'),
     )
-    # 여러 개 선택 가능하게 하도록 해야함
     PERSONALITY = (
         ('지적인', '지적인'),
         ('차분한', '차분한'),
