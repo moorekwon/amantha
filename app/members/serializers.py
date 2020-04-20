@@ -37,6 +37,7 @@ class UserAccountSerializer(serializers.ModelSerializer):
             'pk',
             'email',
             'gender',
+            'status',
         )
 
 
@@ -79,7 +80,6 @@ class UserInfoSerializer(serializers.ModelSerializer):
     )
 
     age = serializers.IntegerField(source='user.age', read_only=True)
-    averageStar = serializers.FloatField(source='user.average_star', read_only=True)
     bodyShape = serializers.CharField(source='body_shape', required=False)
     # personality 모델 필드와 차이가 없는데 구지 serializer에서 한번 더 써줘야 할지 의문
     personalities = serializers.MultipleChoiceField(choices=PERSONALITIES, source='personality', required=False)
@@ -88,15 +88,14 @@ class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserInfo
         fields = (
-            'averageStar',
             'nickname',
+            'birth',
+            'age',
             'school',
             'major',
             'job',
             'company',
             'region',
-            'birth',
-            'age',
             'tall',
             'bodyShape',
             'personalities',
@@ -180,10 +179,27 @@ class TagTypeSerializer(serializers.ModelSerializer):
 
 
 class IdealTypeSerializer(serializers.ModelSerializer):
+    PERSONALITIES = (
+        ('지적인', '지적인'),
+        ('차분한', '차분한'),
+        ('유머있는', '유머있는'),
+        ('낙천적인', '낙천적인'),
+        ('내향적인', '내향적인'),
+        ('외향적인', '외향적인'),
+        ('감성적인', '감성적인'),
+        ('상냥한', '상냥한'),
+        ('귀여운', '귀여운'),
+        ('섹시한', '섹시한'),
+        ('4차원인', '4차원인'),
+        ('발랄한', '발랄한'),
+        ('도도한', '도도한'),
+    )
+
     ageFrom = serializers.IntegerField(source='age_from', required=True)
     ageTo = serializers.IntegerField(source='age_to', required=True)
     tallFrom = serializers.IntegerField(source='tall_from', required=False)
     tallTo = serializers.IntegerField(source='tall_to', required=False)
+    personalities = serializers.MultipleChoiceField(choices=PERSONALITIES, source='personality', required=False)
     bodyShape = serializers.CharField(source='body_shape', required=False)
 
     class Meta:
@@ -195,7 +211,7 @@ class IdealTypeSerializer(serializers.ModelSerializer):
             'tallFrom',
             'tallTo',
             'bodyShape',
-            'personality',
+            'personalities',
             'religion',
             'smoking',
             'drinking',
@@ -203,26 +219,30 @@ class IdealTypeSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    averageStar = serializers.FloatField(source='average_star')
     currentRibbon = serializers.IntegerField(source='userribbon_set.last.current_ribbon')
     profilePercentage = serializers.FloatField(source='userinfo.profile_percentage')
-    pickFrom = serializers.ListField(
-        child=serializers.EmailField(), source='send_me_pick_users.all'
-    )
     images = UserImageSerializer(many=True, source='userimage_set')
     info = UserInfoSerializer(source='userinfo')
     stories = UserStorySerializer(many=True, source='selectstory_set')
     tags = TagTypeSerializer(source='tag')
+    idealTypeInfo = IdealTypeSerializer(source='useridealtype_set', many=True)
+    ribbonHistory = UserRibbonSerializer(source='userribbon_set', many=True)
 
     class Meta:
         model = User
         fields = (
+            'pk',
             'email',
             'gender',
+            'status',
+            'averageStar',
             'currentRibbon',
             'profilePercentage',
-            'pickFrom',
             'images',
             'info',
             'stories',
             'tags',
+            'idealTypeInfo',
+            'ribbonHistory',
         )

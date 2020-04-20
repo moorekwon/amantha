@@ -103,6 +103,10 @@ TEMPLATES = [
 
 REST_FRAMEWORK = {
     'DATETIME_FORMAT': '%Y-%m-%d %H:%M',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAdminUser',
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # production 용
         'rest_framework.authentication.TokenAuthentication',
