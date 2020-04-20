@@ -68,7 +68,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         today = datetime.date.today()
         today_year = str(today).split('-')[0]
         if self.userinfo.birth:
-            print('self.userinfo.birth >> ', self.userinfo.birth)
             birth_year = str(self.userinfo.birth).split('-')[0]
             return int(today_year) - int(birth_year) + 1
         return None
