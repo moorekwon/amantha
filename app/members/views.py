@@ -61,10 +61,15 @@ class AuthTokenAPIView(APIView):
         login = []
         logout = []
         on_screening = []
+        fail = []
 
         for user in users:
-            if user.status() == 'on_screening':
+            print('user.status >> ', user.status)
+            print('user.status() >> ', user.status())
+            if user.status == 'on_screening':
                 on_screening.append(user)
+            elif user.status == 'fail':
+                fail.append(user)
             else:
                 try:
                     login.append(user.auth_token.user)
@@ -75,6 +80,7 @@ class AuthTokenAPIView(APIView):
             'login': UserAccountSerializer(login, many=True).data,
             'logout': UserAccountSerializer(logout, many=True).data,
             'onScreening': UserAccountSerializer(on_screening, many=True).data,
+            'fail': UserAccountSerializer(fail, many=True).data,
         }
         return Response(data)
 

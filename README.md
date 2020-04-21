@@ -56,6 +56,57 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 ## User Account
 
+### Refer Through Email
+
+- URL: `/auth/`
+
+- Method: `POST`
+
+- 해당 유저의 email 정보로 상세 프로필정보 접근하기
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/auth/
+
+  - Body
+
+    ```json
+    {
+        "email": "ebk@ebk.com"
+    }
+    ```
+
+- Response Sample
+
+  ```json
+  {
+      "userProfile": {
+          "pk": 7,
+          "email": "ebk@ebk.com",
+          "gender": "여자",
+          "status": "on_screening",
+          "averageStar": 0.0,
+          "currentRibbon": 10,
+          "profilePercentage": null,
+          "images": [],
+          "info": null,
+          "stories": [],
+          "tags": null,
+          "idealTypeInfo": [],
+          "ribbonHistory": [
+              {
+                  "pk": 6,
+                  "paidRibbon": 10,
+                  "currentRibbon": 10,
+                  "when": "2020-04-21 21:53"
+              }
+          ]
+      }
+  }
+  ```
+
+
+
 ### User Login
 
 - URL: `/auth/token/`
