@@ -56,11 +56,81 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 ## User Account
 
+### Refer Through Email
+
+- URL: `/auth/`
+
+- Method: `POST`
+
+- 해당 유저의 email 정보로 상세 프로필정보 접근하기
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/auth/
+
+  - Body
+
+    ```json
+    {
+        "email": "ebk@ebk.com"
+    }
+    ```
+
+- Response Sample
+
+  ```json
+  {
+      "userProfile": {
+          "pk": 2,
+          "email": "ebk@ebk.com",
+          "gender": "여자",
+          "status": "waiting",
+          "averageStar": 0.0,
+          "currentRibbon": 10,
+          "profilePercentage": 6.7,
+          "images": [],
+          "info": {
+              "nickname": "권은비",
+              "birth": "1991-04-03",
+              "age": 30,
+              "school": "",
+              "major": "",
+              "job": "",
+              "company": "",
+              "region": "",
+              "tall": 170,
+              "bodyShape": "",
+              "personalities": [],
+              "bloodType": "",
+              "smoking": "",
+              "drinking": "",
+              "religion": "",
+              "introduce": ""
+          },
+          "stories": [],
+          "tags": null,
+          "idealTypeInfo": [],
+          "ribbonHistory": [
+              {
+                  "pk": 2,
+                  "paidRibbon": 10,
+                  "currentRibbon": 10,
+                  "when": "2020-04-22 00:41"
+              }
+          ]
+      }
+  }
+  ```
+
+
+
 ### User Login
 
 - URL: `/auth/token/`
 
 - Method: `POST`
+
+- 가입심사를 합격한(`status`가 `pass`인) 유저 로그인
 
 - Request Sample
 
@@ -70,8 +140,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-        "email": "esb@esb.com",
-        "password": "esb"
+        "email": "hjk@hjk.com",
+        "password": "hjk"
     }
     ```
 
@@ -79,11 +149,12 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   ```json
   {
-      "token": "0e1e2a89b67b0ed80ed5b62d40794919959f3886",
+      "token": "f3bba546a7eb77117aeef9091461b961d742f571",
       "user": {
           "pk": 1,
-          "email": "esb@esb.com",
-          "gender": "여자"
+          "email": "hjk@hjk.com",
+          "gender": "여자",
+          "status": "pass"
       }
   }
   ```
@@ -96,26 +167,58 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `GET`
 
+- 전체 유저의 상세프로필 정보 (부분 혹은 전체)
+
 - Request Sample
 
   - URL: http://13.209.3.115:88/api/auth/token/
 
 - Response Sample
 
+  유저의 상태에 따라 분류
+  
+  - `waiting`(가입심사 전 대기중), `on_screening`(가입심사 중), `pass`(가입심사 합격), `fail`(가입심사 불합격)
+  - `pass` 상태의 유저는 `login`과 `logout`으로 분류
+  
   ```json
   {
       "login": [
           {
-              "pk": 2,
+              "pk": 1,
               "email": "hjk@hjk.com",
-              "gender": "여자"
+              "gender": "여자",
+              "status": "pass"
           }
       ],
       "logout": [
           {
-              "pk": 1,
-              "email": "esb@esb.com",
-              "gender": "여자"
+              "pk": 6,
+              "email": "hgo@hgo.com",
+              "gender": "남자",
+              "status": "pass"
+          }
+      ],
+      "waiting": [
+          {
+              "pk": 2,
+              "email": "ebk@ebk.com",
+              "gender": "여자",
+              "status": "waiting"
+          },
+          {
+              "pk": 4,
+              "email": "mjk@mjk.com",
+              "gender": "여자",
+              "status": "waiting"
+          }
+      ],
+      "onScreening": [],
+      "fail": [
+          {
+              "pk": 3,
+              "email": "szj@szj.com",
+              "gender": "여자",
+              "status": "fail"
           }
       ]
   }
@@ -129,6 +232,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `POST`
 
+- 가입심사를 시작하기 전(`status`가 `waiting`인) 상태로 계정 생성(회원가입)
+
 - Request Sample
 
   - URL: http://13.209.3.115:88/api/auth/create/
@@ -137,8 +242,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-        "email": "hjk@hjk.com",
-        "password": "hjk",
+        "email": "hyl@hyl.com",
+        "password": "hyl",
         "gender": "여자"
     }
     ```
@@ -147,11 +252,12 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   ```json
   {
-      "token": "6c870788d5afc2689728571ac7de03350842c1a8",
+      "token": "60e8d978e2007be19a75e61943c849987a750a42",
       "user": {
-          "pk": 2,
-          "email": "hjk@hjk.com",
-          "gender": "여자"
+          "pk": 9,
+          "email": "hyl@hyl.com",
+          "gender": "남자",
+          "status": "waiting"
       }
   }
   ```
@@ -279,14 +385,13 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "userProfile": {
+          "pk": 1,
           "email": "esb@esb.com",
           "gender": "여자",
+          "status": "pass",
+          "averageStar": 3.72,
           "currentRibbon": 10,
           "profilePercentage": 71.4,
-          "pickFrom": [
-              "hgo@hgo.com",
-              "hbb@hbb.com"
-          ],
           "images": [
               {
                   "pk": 1,
@@ -302,18 +407,17 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
               }
           ],
           "info": {
-              "averageStar": 3.72,
               "nickname": "은순이",
+              "birth": "1995-02-23",
+              "age": 26,
               "school": "",
               "major": "정치외교학",
               "job": "회사원",
               "company": "",
               "region": "서울",
-              "birth": "1995-02-23",
-              "age": 26,
               "tall": null,
               "bodyShape": "보통체형",
-              "personality": "외향적인",
+              "personalities": ["외향적인", "지적인", "4차원인"],
               "bloodType": "B형",
               "smoking": "비흡연",
               "drinking": "",
@@ -353,7 +457,16 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
                       "name": "카톡보단 전화"
                   }
               ]
-          }
+          },
+          "idealTypeInfo": [],
+          "ribbonHistory": [
+              {
+                  "pk": 1,
+                  "paidRibbon": 10,
+                  "currentRibbon": 10,
+                  "when": "2020-04-22 00:41"
+              }
+          ]
       }
   }
   ```
@@ -410,11 +523,15 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
       "images": [
           {
               "pk": 1,
-              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T074656Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8c1056ebf35e6ff001727ebc0842c961388c0a9b6e84a1ab2a842dfaddef6b31"
+              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200421%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200421T160903Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=54084ee615a19d70851cc42f319f4fd670a2d7f9bf634f1018d731a23881bc0e"
           },
           {
               "pk": 2,
-              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T074656Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=4351590aa924f5321bc742d4d4e2a45115ed23457ed62cab98325ee3877276c2"
+              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200421%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200421T160903Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=fd9fe1cdbe0a0e19214a66b42a349dbb4e52b29a8710438c5bf107fd76c158ab"
+          },
+          {
+              "pk": 3,
+              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk8.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200421%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200421T160903Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=f3fcb6ded829d19a518ef62245ab46c0de929398f7ddaec7008f08ae2a6ce6a5"
           }
       ]
   }
@@ -431,6 +548,8 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 - Method: `DELETE`
 
 - User별 image 객체 삭제
+
+- **현재 등록된 이미지가 3개 이하일 경우 삭제 불가능**
 
 - Request Sample
 
@@ -494,23 +613,22 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  User의 계정 정보와 이미지 정보 표시
+  User의 이미지 정보 표시
 
   ```json
   {
-      "user": {
-          "pk": 2,
-          "email": "hjk@hjk.com",
-          "gender": "여자"
-      },
       "images": [
           {
               "pk": 1,
-              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T080726Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=bd05ec18231f176e2f369c015db8f5e9dcf2b29847af2f5f425b137cb89865ad"
+              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200421%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200421T161146Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=62fc8f526a93047169e1610d21dbedfd39ce94f1bc16fb0171c858aa7744bad5"
           },
           {
               "pk": 2,
-              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200405%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200405T080726Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3c19e70d77cba404c1475887643a9c0a8a85c7956f8fd6eb69803fd5f4734d97"
+              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk8.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200421%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200421T161146Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=2bc8be2a4f7fbf1a70571fac55c11475ec49c19d0a151f1d4a8bcd3e6ef76c15"
+          },
+          {
+              "pk": 3,
+              "image": "https://amantha.s3.amazonaws.com/profile_images/hjk2.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200421%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200421T161146Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=f0df6047e31703260fac1e4cf7a2e58bff91cbc8fd08e9ee2a2b412ffda63db3"
           }
       ]
   }
@@ -527,8 +645,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 - Method: `POST`
 
 - User 계정 생성 후 상세프로필 정보 넣기 **(처음 한 번만 POST 가능)**
-
-- **User의 이미지, 스토리, 관심태그, 리본 정보 외 프로필 정보 접근**
 
 - Request Sample
 
@@ -556,18 +672,17 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     - 필수 정보: `nickname`, `birth`
 
-    - 옵션 정보: `school`, `major`, `job`, `company`, `region`, `tall`, `bodyShape`, `personality`, `bloodType`, `smoking`, `drinking`, `introduce`, `religion`
+    - 옵션 정보: `school`, `major`, `job`, `company`, `region`, `tall`, `bodyShape`, `personalities`, `bloodType`, `smoking`, `drinking`, `introduce`, `religion`
     - 고정된 value를 가진 정보
       - 아래 정해진 값들만 넣을 수 있도록 **str** 형태의 값들로 이루어진 list로 고정됨
       - `region`: `서울`, `경기`, `인천`, `대전`, `충북`, `충남`, `강원`, `부산`, `경북`, `경남`, `대구`, `울산`, `광주`, `전북`, `전남`, `제주`
       - `bodyShape`: `보통체형`, `통통한`, `살짝볼륨`, `글래머`, `마른`, `슬림탄탄`
-      - `personality`: `지적인`, `차분한`, `유머있는`, `낙천적인`, `내향적인`, `외향적인`, `감성적인`, `상냥한`, `귀여운`, `섹시한`, `4차원인`, `발랄한`, `도도한`
-        - ***multi choice 정보(필드) 추후 업데이트 (현재는 복수 선택 불가능)***
+      - `personalities`: `지적인`, `차분한`, `유머있는`, `낙천적인`, `내향적인`, `외향적인`, `감성적인`, `상냥한`, `귀여운`, `섹시한`, `4차원인`, `발랄한`, `도도한`
       - `bloodType`: `AB형`, `A형`, `B형`, `O형`
       - `drinking`: `가끔 마심`, `어느정도 즐기는편`, `술자리를 즐김`, `마시지 않음`
       - `smoking`: `흡연`, `비흡연`
       - `religion`: `종교 없음`, `기독교`, `천주교`, `불교`, `원불교`, `유교`, `이슬람교`
-    
+
     ```json
     {
         "nickname": "정수지",
@@ -576,7 +691,6 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
         "job": "프론트엔드 개발자",
         "company": "아마존",
         "bodyShape": "슬림탄탄",
-        "personality": "귀여운",
         "bloodType": "O형",
         "smoking": "비흡연",
         "introduce": "수줍음이 많아요 ^^"
@@ -590,18 +704,17 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "info": {
-          "averageStar": 4.02,
           "nickname": "정수지",
+          "birth": "1996-12-11",
+          "age": 25,
           "school": "",
           "major": "멀티미디어학과",
           "job": "프론트엔드 개발자",
           "company": "아마존",
-          "region": "",
-          "birth": "1996-12-11",
-          "age": 25,
+          "region": "",        
           "tall": "",
           "bodyShape": "슬림탄탄",
-          "personality": "귀여운",
+          "personalities": [],
           "bloodType": "O형",
           "smoking": "비흡연",
           "drinking": "",
@@ -619,7 +732,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `PATCH`
 
-- User별 상세프로필 정보 (부분 혹은 전체) 수정
+- 가입심사를 합격한(`status`가 `pass`인) 유저의 상세프로필 정보 (부분 혹은 전체) 수정
 
 - Request Sample
 
@@ -658,18 +771,17 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "info": {
-          "averageStar": 4.22,
           "nickname": "정수지",
+          "birth": "1996-12-11",
+          "age": 25,
           "school": "",
           "major": "멀티미디어학과",
           "job": "프론트엔드 개발자",
           "company": "아마존",
-          "region": "서울",
-          "birth": "1996-12-11",
-          "age": 25,
+          "region": "서울",        
           "tall": "",
           "bodyShape": "슬림탄탄",
-          "personality": "귀여운",
+          "personalities": [],
           "bloodType": "O형",
           "smoking": "비흡연",
           "drinking": "가끔 마심",
@@ -713,28 +825,22 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  User의 계정 정보와 상세프로필 정보 표시
+  User의 상세프로필 정보 표시
 
   ```json
   {
-      "user": {
-          "pk": 4,
-          "email": "szj@szj.com",
-          "gender": "여자"
-      },
       "info": {
-          "averageStar": 4.26,
           "nickname": "정수지",
+          "birth": "1996-12-11",
+          "age": 25,
           "school": "",
           "major": "멀티미디어학과",
           "job": "프론트엔드 개발자",
           "company": "아마존",
-          "region": "서울",
-          "birth": "1996-12-11",
-          "age": 25,
+          "region": "서울",        
           "tall": "",
           "bodyShape": "슬림탄탄",
-          "personality": "귀여운",
+          "personalities": [],
           "bloodType": "O형",
           "smoking": "비흡연",
           "drinking": "가끔 마심",
@@ -810,7 +916,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `PATCH`
 
-- 해당 유저의 등록되어 있는 스토리 객체에 접근하여 `content`(스토리 답변) 수정
+- 가입심사를 합격한(`status`가 `pass`인) 유저의 등록되어 있는 스토리 객체에 접근하여 `content`(스토리 답변) 수정
 
 - Request Sample
 
@@ -925,15 +1031,10 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  User의 계정 정보와 현재 등록된 스토리 정보 표시
+  User의 현재 등록된 스토리 정보 표시
 
   ```json
   {
-      "user": {
-          "pk": 1,
-          "email": "esb@esb.com",
-          "gender": "여자"
-      },
       "stories": [
           {
               "pk": 1,
@@ -980,15 +1081,10 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  User의 계정 정보와 등록한 전체 태그 정보 표시
+  User가 등록한 전체 태그 정보 표시
 
   ```json
   {
-      "user": {
-          "pk": 1,
-          "email": "hjk@hjk.com",
-          "gender": "여자"
-      },
       "tags": {
           "dateStyle": [
               {
@@ -1027,7 +1123,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `PATCH`
 
-- 해당 유저의 **데이트 스타일** 태그 수정(추가)
+- 해당 유저의 **데이트 스타일** 태그 수정**(추가)**
 
 - Request Sample
 
@@ -1269,7 +1365,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `POST`
 
-- 해당 유저의 이상형 정보 (첫) 설정 ***(이후 여기서 정보 수정 불가)***
+- 가입심사를 합격한(`status`가 `pass`인) 유저의 이상형 정보 **(첫) 설정** ***(이후 여기서 정보 수정 불가)***
 
 - Request Sample
 
@@ -1295,15 +1391,14 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - Body
 
-    - 옵션 정보: `ageFrom`, `ageTo`, `region`, `tallFrom`, `tallTo`, `bodyShape`, `personality`, `religion`, `smoking`, `drinking`
+    - 옵션 정보: `ageFrom`, `ageTo`, `region`, `tallFrom`, `tallTo`, `bodyShape`, `personalities`, `religion`, `smoking`, `drinking`
       - ***현재 선호 지역 1만 넣도록 설정 (추후 선호 지역 2 추가)***
       - *나이와 키는 범위로 지정하기 때문에 'From', 'To' 붙여서 각각 두 개의 정보씩 필요 (추후 더 나은 방법 고려)*
     - 고정된 value를 가진 정보 (User Info Create와 value 같음)
       - 아래 정해진 값들만 넣을 수 있도록 **str** 형태의 값들로 이루어진 list로 고정됨
       - `region`: `서울`, `경기`, `인천`, `대전`, `충북`, `충남`, `강원`, `부산`, `경북`, `경남`, `대구`, `울산`, `광주`, `전북`, `전남`, `제주`
       - `bodyShape`: `보통체형`, `통통한`, `살짝볼륨`, `글래머`, `마른`, `슬림탄탄`
-      - `personality`: `지적인`, `차분한`, `유머있는`, `낙천적인`, `내향적인`, `외향적인`, `감성적인`, `상냥한`, `귀여운`, `섹시한`, `4차원인`, `발랄한`, `도도한`
-        - ***multi choice 정보(필드) 추후 업데이트 (현재는 복수 선택 불가능)***
+      - `personalities`: `지적인`, `차분한`, `유머있는`, `낙천적인`, `내향적인`, `외향적인`, `감성적인`, `상냥한`, `귀여운`, `섹시한`, `4차원인`, `발랄한`, `도도한`
       - `drinking`: `가끔 마심`, `어느정도 즐기는편`, `술자리를 즐김`, `마시지 않음`
       - `smoking`: `흡연`, `비흡연`
       - `religion`: `종교 없음`, `기독교`, `천주교`, `불교`, `원불교`, `유교`, `이슬람교`
@@ -1330,7 +1425,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "tallFrom": 160,
           "tallTo": 165,
           "bodyShape": "",
-          "personality": "",
+          "personalities": [],
           "religion": "기독교",
           "smoking": "",
           "drinking": "가끔 마심"
@@ -1346,7 +1441,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `PATCH`
 
-- 해당 유저의 등록되어 있는 이상형 정보 수정
+- 가입심사를 합격한(`status`가 `pass`인) 유저의 등록되어 있는 이상형 정보 **수정**
 
 - Request Sample
 
@@ -1383,7 +1478,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  기존 저장되어 있는 데이터에 추가되거나 수정됨
+  **기존 저장되어 있는 데이터에 추가되거나 수정됨**
 
   ```json
   {
@@ -1394,7 +1489,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "tallFrom": 160,
           "tallTo": 165,
           "bodyShape": "보통체형",
-          "personality": "",
+          "personalities": [],
           "religion": "기독교",
           "smoking": "",
           "drinking": "마시지 않음"
@@ -1410,7 +1505,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `GET`
 
-- 해당 유저의 등록된 이상형 정보 설정 및 맞춤 이성 리스트 조회
+- 가입심사를 합격한(`status`가 `pass`인) 유저의 **맞춤 이성 리스트** 조회
 
 - Request Sample
 
@@ -1436,29 +1531,12 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  User의 계정 정보와 현재 등록된 이상형 설정 정보 및 이상형과 가장 유사한 이성 리스트 표시
+  User의 이상형과 가장 유사한 이성 리스트 표시
 
-  - *`idealPartners` 리스트는 email 외 다른 고유값으로 접근하도록 변경 가능*
+  - *email 외 다른 고유값으로 접근하도록 변경 가능*
 
   ```json
   {
-      "user": {
-          "pk": 4,
-          "email": "hbb@hbb.com",
-          "gender": "남자"
-      },
-      "idealType": {
-          "ageFrom": 23,
-          "ageTo": 27,
-          "region": "",
-          "tallFrom": 160,
-          "tallTo": 165,
-          "bodyShape": "",
-          "personality": "",
-          "religion": "기독교",
-          "smoking": "",
-          "drinking": ""
-      },
       "idealPartners": [
           "hjk@hjk.com",
           "szj@szj.com"
@@ -1476,7 +1554,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `POST`
 
-- 해당 유저의 리본사용내역 추가
+- 가입심사를 합격한(`status`가 `pass`인) 유저의 리본사용내역 추가
 
 - Request Sample
 
@@ -1510,8 +1588,10 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  currentRibbon(현재보유리본), when(날짜) 정보는 알아서 추가됨
+  - **추가된 내역 obj 표시**
 
+  - currentRibbon(현재보유리본), when(날짜) 정보는 알아서 추가됨
+  
   ```json
   {
       "ribbon": {
@@ -1531,7 +1611,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `GET`
 
-- 처음 토큰이 생성되면(계정 생성하면), 관리자 기본 지급으로 리본 10개 생성(obj)
+- 가입심사를 합격한(`status`가 `pass`인) 유저의 리본 지급 내역 조회
+
+- **처음 토큰이 생성되면(계정 생성하면), 관리자 기본 지급으로 리본 10개 생성(obj)**
 
 - Request Sample
 
@@ -1557,17 +1639,12 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  - User의 계정 정보와 현재까지 리본 사용내역 객체별로 정보 표시
+  - User의 현재까지 리본 사용내역 객체별로 정보 표시
   - User의 계정이 처음 생성되면 paidRibbon, currentRibbon 10개씩 기본 지급 설정
 
   ```json
   {
-      "user": {
-          "pk": 1,
-          "email": "hjk@hjk.com",
-          "gender": "여자"
-      },
-      "ribbons": [
+      "ribbonHistory": [
           {
               "pk": 1,
               "paidRibbon": 10,
@@ -1676,17 +1753,12 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  User의 계정 정보와 현재 pick한 이성 및 pick받은 이성 표시
+  User의 현재 pick한 이성 및 pick받은 이성 표시
 
   - *각 리스트는 email 외 다른 고유값으로 접근하도록 변경 가능*
   
   ```json
   {
-      "user": {
-          "pk": 1,
-          "email": "hjk@hjk.com",
-          "gender": "여자"
-      },
       "pickFrom": [
           "hbb@hbb.com"
       ],
@@ -1733,8 +1805,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - Body
 
-    가입심사하는 이성의 emall 정보와 별점 기입
-
+    - 가입심사하는 이성의 emall 정보와 별점 기입
+- **가입심사를 불합격한(`status`가 `fail`인) 이성에게는 별점을 보낼 수 없음**
+    
     ```json
     {
         "partner": "hjk@hjk.com",
@@ -1790,17 +1863,12 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  User의 계정 정보, User가 가입심사한 이성과 보낸 별점(`StarTo`) 및 User를 가입심사한 이성과 받은 별점(`StarFrom`) 표시
+  User가 가입심사한 이성과 보낸 별점(`StarTo`) 및 User를 가입심사한 이성과 받은 별점(`StarFrom`) 표시
 
   - *각 리스트는 email 외 다른 고유값으로 접근하도록 변경 가능*
   
   ```json
   {
-      "user": {
-          "pk": 2,
-          "email": "hgo@hgo.com",
-          "gender": "남자"
-      },
       "StarTo": [
           [
               "hjk@hjk.com",
@@ -1834,7 +1902,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `GET`
 
-- 해당 user에게 맞는 테마별 이성 리스트 조회 *(현재 남자 테마 4개 작업, 계속 추가하고 있음)*
+- 가입심사를 합격한(`status`가 `pass`인) 유저에게 맞는 테마별 이성 리스트 조회 *(현재 남자 테마 4개, 여자 테마 4개)*
 
 - Request Sample
 
@@ -1860,17 +1928,12 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Response Sample
 
-  User의 계정 정보와 테마별 맞춤 이성 소개 리스트
+  테마별 맞춤 이성 소개 리스트
 
   - *각 테마별 리스트는 email 외 다른 고유값으로 접근하도록 변경 가능*
 
   ```json
   {
-      "user": {
-          "pk": 1,
-          "email": "hjk@hjk.com",
-          "gender": "여자"
-      },
       "neitherDrinksNorSmokes": [
           "hgo@hgo.com",
           "dhl@dhl.com",
@@ -1884,6 +1947,56 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
           "shk@shk.com"
       ],
       "churchMen": [
+          "hgo@hgo.com"
+      ]
+  }
+  ```
+
+
+
+## User Expression
+
+### User Expression List
+
+- URL: `/user/expression/`
+
+- Method: `GET`
+
+- **가입심사를 합격한(`status`가 `pass`인) 유저가 보낸 표현과 받은 표현 조회 (별점 4점 이상 보낸 / 받은 이성)**
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/expression/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hjk@hjk.com
+       - Password: hjk
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+- Response Sample
+
+  별점 4점 이상 보낸 이성과 받은 이성 리스트
+
+  ```json
+  {
+      "ReceivedPartners": [
+          "hgo@hgo.com",
+          "dhl@dhl.com"
+      ],
+      "SentPartners": [
           "hgo@hgo.com"
       ]
   }

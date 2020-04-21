@@ -60,21 +60,35 @@ class AuthTokenAPIView(APIView):
         users = User.objects.all()
         login = []
         logout = []
+        waiting = []
         on_screening = []
+        fail = []
 
         for user in users:
-            if user.status() == 'on_screening':
+            # 아직 가입심사 전 상태 (가입심사한 이성 0명인 상태)
+            if user.status() == 'waiting':
+                waiting.append(user)
+            # 가입심사 중인 상태 (가입심사한 이성 1~2명인 상태)
+            elif user.status() == 'on_screening':
                 on_screening.append(user)
+            # 가입심사 불합격 (가입심사한 이성 3명 이상인 상태)
+            elif user.status() == 'fail':
+                fail.append(user)
+            # 가입심사 합격 (가입심사한 이성 3명 이상인 상태)
             else:
                 try:
+                    # 합격한 유저중 로그인 상태
                     login.append(user.auth_token.user)
                 except:
+                    # 합격한 유저중 로그아웃 상태
                     logout.append(user)
 
         data = {
             'login': UserAccountSerializer(login, many=True).data,
             'logout': UserAccountSerializer(logout, many=True).data,
+            'waiting': UserAccountSerializer(waiting, many=True).data,
             'onScreening': UserAccountSerializer(on_screening, many=True).data,
+            'fail': UserAccountSerializer(fail, many=True).data,
         }
         return Response(data)
 
@@ -99,6 +113,17 @@ class AuthTokenAPIView(APIView):
             'user': UserAccountSerializer(user).data
         }
         return Response(data)
+
+
+# 계정 탈퇴
+class UserDeleteAPIView(APIView):
+    def get(self, request):
+        if request.user.is_authenticated:
+            user = User.objects.get(email=request.user.email)
+            user.delete()
+            return Response('탈퇴가 완료되었습니다.')
+        else:
+            raise AuthenticationFailed('유저 인증에 성공하지 못하였습니다.')
 
 
 # 로그아웃 (토큰 삭제)
@@ -138,7 +163,6 @@ class UserImageAPIView(APIView):
         serializer = UserImageSerializer(images, many=True)
 
         data = {
-            'user': UserAccountSerializer(request.user).data,
             'images': serializer.data,
         }
         return JsonResponse(data, safe=False)
@@ -311,10 +335,12 @@ class UserRibbonAPIView(APIView):
 
     # User별 보유리본 조회
     def get(self, request):
-        if request.user.status() != 'pass':
-            return Response('가입심사를 합격한 유저가 아닙니다.')
-
         ribbons = UserRibbon.objects.filter(user=request.user)
+
+        # 사실 계정 생성과 동시에 유저의 상태와 상관없이 리본 10개 지급되지만, 내역 없다고 response 설정
+        if request.user.status() != 'pass':
+            return Response('리본 내역이 없습니다.')
+
         serializer = UserRibbonSerializer(ribbons, many=True)
 
         data = {
@@ -378,10 +404,14 @@ class UserPickAPIView(APIView):
         # partner의 email 정보를 통해 pk에 접근
         partner = User.objects.get(email=request.data['partner'])
 
+        if partner.status() != 'pass':
+            return Response('가입심사를 합격한 이성이 아닙니다.')
+
         if request.user in partner.send_me_pick_users.all():
             return Response('이미 pick한 이성 입니다.')
 
         data = {
+            'user': request.user.pk,
             'partner': partner.pk,
         }
 
@@ -430,6 +460,11 @@ class UserStarAPIView(APIView):
 
         # partner의 email 정보를 통해 pk에 접근
         partner = User.objects.get(email=request.data['partner'])
+
+        # 넣지 않아도 되는지 확인 필요!
+        if partner.status() == 'fail':
+            return Response('이미 가입심사를 불합격한 이성입니다.')
+
         star = request.data['star']
 
         if request.user in partner.send_me_star_users.all():
