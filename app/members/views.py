@@ -163,7 +163,6 @@ class UserImageAPIView(APIView):
         serializer = UserImageSerializer(images, many=True)
 
         data = {
-            'user': UserAccountSerializer(request.user).data,
             'images': serializer.data,
         }
         return JsonResponse(data, safe=False)
@@ -336,10 +335,12 @@ class UserRibbonAPIView(APIView):
 
     # User별 보유리본 조회
     def get(self, request):
-        if request.user.status() != 'pass':
-            return Response('가입심사를 합격한 유저가 아닙니다.')
-
         ribbons = UserRibbon.objects.filter(user=request.user)
+
+        # 사실 계정 생성과 동시에 유저의 상태와 상관없이 리본 10개 지급되지만, 내역 없다고 response 설정
+        if request.user.status() != 'pass':
+            return Response('리본 내역이 없습니다.')
+
         serializer = UserRibbonSerializer(ribbons, many=True)
 
         data = {
@@ -403,10 +404,14 @@ class UserPickAPIView(APIView):
         # partner의 email 정보를 통해 pk에 접근
         partner = User.objects.get(email=request.data['partner'])
 
+        if partner.status() != 'pass':
+            return Response('가입심사를 합격한 이성이 아닙니다.')
+
         if request.user in partner.send_me_pick_users.all():
             return Response('이미 pick한 이성 입니다.')
 
         data = {
+            'user': request.user.pk,
             'partner': partner.pk,
         }
 
@@ -455,6 +460,11 @@ class UserStarAPIView(APIView):
 
         # partner의 email 정보를 통해 pk에 접근
         partner = User.objects.get(email=request.data['partner'])
+
+        # 넣지 않아도 되는지 확인 필요!
+        if partner.status() == 'fail':
+            return Response('이미 가입심사를 불합격한 이성입니다.')
+
         star = request.data['star']
 
         if request.user in partner.send_me_star_users.all():
