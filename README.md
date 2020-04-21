@@ -1807,6 +1807,15 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     - 가입심사하는 이성의 emall 정보와 별점 기입
     - **가입심사를 불합격한(`status`가 `fail`인) 이성에게는 별점을 보낼 수 없음**
+    
+    ```json
+    {
+        "partner": "hjk@hjk.com",
+        "star": 4
+    }
+    ```
+    
+    
 - **가입심사를 불합격한(`status`가 `fail`인) 이성에게는 별점을 보낼 수 없음**
   
     ```json
