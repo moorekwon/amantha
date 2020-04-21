@@ -101,6 +101,17 @@ class AuthTokenAPIView(APIView):
         return Response(data)
 
 
+# 계정 탈퇴
+class UserDeleteAPIView(APIView):
+    def get(self, request):
+        if request.user.is_authenticated:
+            user = User.objects.get(email=request.user.email)
+            user.delete()
+            return Response('탈퇴가 완료되었습니다.')
+        else:
+            raise AuthenticationFailed('유저 인증에 성공하지 못하였습니다.')
+
+
 # 로그아웃 (토큰 삭제)
 class LogoutUserAPIView(APIView):
     permission_classes = [IsAuthenticated, ]

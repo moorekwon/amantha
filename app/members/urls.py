@@ -12,6 +12,8 @@ urlpatterns = [
     path('auth/token/', AuthTokenAPIView.as_view()),
     # POST 유저 로그아웃
     path('auth/logout/', LogoutUserAPIView.as_view()),
+    # DELETE 유저 계정 삭제 (탈퇴)
+    path('auth/delete/', UserDeleteAPIView.as_view()),
     # POST 유저 카카오톡 로그인
     path('auth/kakao/', KaKaoLoginAPIView.as_view()),
 
