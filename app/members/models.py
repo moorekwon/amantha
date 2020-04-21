@@ -76,7 +76,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     def status(self):
         partners = self.partner_sendstar_set.all()
 
-        if (len(partners) >= 3) and (self.average_star() >= 3):
+        if len(partners) == 0:
+            user_status = 'waiting'
+        elif (len(partners) >= 3) and (self.average_star() >= 3):
             user_status = 'pass'
         elif (len(partners) >= 3) and (self.average_star() < 3):
             user_status = 'fail'

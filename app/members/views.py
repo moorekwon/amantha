@@ -60,25 +60,33 @@ class AuthTokenAPIView(APIView):
         users = User.objects.all()
         login = []
         logout = []
+        waiting = []
         on_screening = []
         fail = []
 
         for user in users:
-            print('user.status >> ', user.status)
-            print('user.status() >> ', user.status())
-            if user.status() == 'on_screening':
+            # 아직 가입심사 전 상태 (가입심사한 이성 0명인 상태)
+            if user.status() == 'waiting':
+                waiting.append(user)
+            # 가입심사 중인 상태 (가입심사한 이성 1~2명인 상태)
+            elif user.status() == 'on_screening':
                 on_screening.append(user)
+            # 가입심사 불합격 (가입심사한 이성 3명 이상인 상태)
             elif user.status() == 'fail':
                 fail.append(user)
+            # 가입심사 합격 (가입심사한 이성 3명 이상인 상태)
             else:
                 try:
+                    # 합격한 유저중 로그인 상태
                     login.append(user.auth_token.user)
                 except:
+                    # 합격한 유저중 로그아웃 상태
                     logout.append(user)
 
         data = {
             'login': UserAccountSerializer(login, many=True).data,
             'logout': UserAccountSerializer(logout, many=True).data,
+            'waiting': UserAccountSerializer(waiting, many=True).data,
             'onScreening': UserAccountSerializer(on_screening, many=True).data,
             'fail': UserAccountSerializer(fail, many=True).data,
         }
