@@ -77,12 +77,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         partners = self.partner_sendstar_set.all()
 
         if (len(partners) >= 3) and (self.average_star() >= 3):
-            self.status = 'pass'
+            user_status = 'pass'
         elif (len(partners) >= 3) and (self.average_star() < 3):
-            self.status = 'fail'
+            user_status = 'fail'
         elif len(partners) < 3:
-            self.status = 'on_screening'
-        return self.status
+            user_status = 'on_screening'
+        return user_status
 
 
 # 유저 생성 후 기입할 프로필 정보

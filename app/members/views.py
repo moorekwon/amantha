@@ -66,9 +66,9 @@ class AuthTokenAPIView(APIView):
         for user in users:
             print('user.status >> ', user.status)
             print('user.status() >> ', user.status())
-            if user.status == 'on_screening':
+            if user.status() == 'on_screening':
                 on_screening.append(user)
-            elif user.status == 'fail':
+            elif user.status() == 'fail':
                 fail.append(user)
             else:
                 try:
