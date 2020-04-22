@@ -35,10 +35,20 @@ class PickAdmin(admin.ModelAdmin):
 
 
 @admin.register(Story)
-class SelectStoryAdmin(admin.ModelAdmin):
+class StoryAdmin(admin.ModelAdmin):
     pass
 
 
 @admin.register(Tag)
-class SelectTagAdmin(admin.ModelAdmin):
+class TagAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(TagType)
+class TagTypeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(UserIdealType)
+class UserIdealTypeAdmin(admin.ModelAdmin):
     pass

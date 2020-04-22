@@ -11,9 +11,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from config.settings.base import SECRETS
-from members.models import TagType, Story
-from members.permissions import IsUserOrReadOnly
+from members.models import *
 from members.serializers import *
+from members.permissions import IsUserOrReadOnly
 
 User = get_user_model()
 
@@ -41,7 +41,6 @@ class CreateUserAPIView(APIView):
             user = serializer.save()
             # 계정 생성 시 리본 기본 지급 (맞는지 모르겠음.. 일단 보류)
             UserRibbon.objects.create(user=user, paid_ribbon=10, current_ribbon=10)
-            # user.save()
             token = Token.objects.create(user=user)
 
             data = {
@@ -105,8 +104,6 @@ class AuthTokenAPIView(APIView):
 
         # 유저 인증되고, 가입심사 합격한 유저의 경우
         if user and user.status() == 'pass':
-            # createsuperuser 경우, 로그인 시 리본 기본 지급 설정
-            # superuser는 로그인 POST 하기 전까지 logout 상태 (자동 로그인 x)
             if not len(user.userribbon_set.all()):
                 UserRibbon.objects.create(user=user, paid_ribbon=10, current_ribbon=10)
             token, _ = Token.objects.get_or_create(user=user)
@@ -532,7 +529,6 @@ class UserIdealTypeAPIView(APIView):
             partner_gender = '여자'
 
         # 해당 유저와 성별이 다른 이성들 필터링
-        # UserInfo 정보가 없는 partner의 경우 걸러내는 작업 추가 필요!
         partners = User.objects.filter(gender=partner_gender)
 
         # ideal_partners에 이상형 조건이 (하나라도) 포함된 이성 저장

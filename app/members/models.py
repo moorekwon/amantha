@@ -329,6 +329,7 @@ class UserIdealType(models.Model):
         ('마시지 않음', '마시지 않음'),
     )
 
+    # OneToOne 관계일수도 있겠다는 생각
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     age_from = models.PositiveIntegerField(blank=True, null=True)
     age_to = models.PositiveIntegerField(blank=True, null=True)
