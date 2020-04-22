@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -13,6 +13,7 @@ from rest_framework.views import APIView
 
 from config.settings.base import SECRETS
 from members.models import TagType
+from members.permissions import IsUserOrReadOnly
 from members.serializers import *
 
 User = get_user_model()
@@ -20,7 +21,7 @@ User = get_user_model()
 
 # 해당 유저의 이메일 정보로 상세프로필 정보 불러오기
 class UserThroughEmailAPIView(APIView):
-    permission_classes = [AllowAny, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def post(self, request):
         user = User.objects.get(email=request.data['email'])
@@ -32,7 +33,7 @@ class UserThroughEmailAPIView(APIView):
 
 # 회원가입 (토큰 생성)
 class CreateUserAPIView(APIView):
-    permission_classes = [AllowAny, ]
+    permission_classes = [permissions.AllowAny, IsUserOrReadOnly]
 
     def post(self, request):
         serializer = UserCreateSerializer(data=request.data)
@@ -53,7 +54,7 @@ class CreateUserAPIView(APIView):
 
 
 class AuthTokenAPIView(APIView):
-    permission_classes = [AllowAny, ]
+    permission_classes = [permissions.AllowAny, IsUserOrReadOnly]
 
     # (가입된) 유저 리스트
     def get(self, request):
@@ -128,7 +129,7 @@ class UserDeleteAPIView(APIView):
 
 # 로그아웃 (토큰 삭제)
 class LogoutUserAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def get(self, request):
         token = Token.objects.filter(user=request.user)
@@ -142,7 +143,7 @@ class LogoutUserAPIView(APIView):
 
 # 유저의 상세프로필 전체 정보 가져오기
 class UserProfileAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def get(self, request):
         if Token.objects.filter(user=request.user):
@@ -155,7 +156,10 @@ class UserProfileAPIView(APIView):
 
 
 class UserImageAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
     # user 프로필 이미지 갖고오기
     def get(self, request):
@@ -204,7 +208,7 @@ class UserImageAPIView(APIView):
 
 
 class UserInfoAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 해당 유저의 상세프로필 정보 가져오기
     def get(self, request):
@@ -260,7 +264,7 @@ class UserInfoAPIView(APIView):
 
 
 class UserStoryAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 해당 유저의 스토리 불러오기
     def get(self, request):
@@ -331,7 +335,7 @@ class UserStoryAPIView(APIView):
 
 
 class UserRibbonAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # User별 보유리본 조회
     def get(self, request):
@@ -372,7 +376,7 @@ class UserRibbonAPIView(APIView):
 
 
 class UserPickAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 해당 유저에 해 pick한 이성과 pick받은 이성 조회
     def get(self, request):
@@ -424,7 +428,7 @@ class UserPickAPIView(APIView):
 
 
 class UserStarAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 가입심사 보낸 이성과 받은 이성 리스트 및 해당 유저의 평균 별점 조회
     def get(self, request):
@@ -508,7 +512,7 @@ class UserStarAPIView(APIView):
 
 
 class UserIdealTypeAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 해당 유저의 현재 이상형 설정 정보 조회와 맞춤 이성 소개
     def get(self, request):
@@ -664,7 +668,7 @@ class UserIdealTypeAPIView(APIView):
 
 
 class UserTagAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 해당 유저의 모든 관심태그 조회
     def get(self, request):
@@ -727,7 +731,7 @@ class UserTagAPIView(APIView):
 
 
 class UserTagDateStyleAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 데이트 스타일 관심태그 추가
     def patch(self, request):
@@ -753,7 +757,7 @@ class UserTagDateStyleAPIView(APIView):
 
 
 class UserTagLifeStyleAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 라이프 스타일 관심태그 수정
     # 기존 등록된 관심태그에서 추가되고 삭제되는 것이 아니라, request.data로 타입별 태그 전체 수정
@@ -780,7 +784,7 @@ class UserTagLifeStyleAPIView(APIView):
 
 
 class UserTagCharmAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def patch(self, request):
         if not Token.objects.filter(user=request.user):
@@ -805,7 +809,7 @@ class UserTagCharmAPIView(APIView):
 
 
 class UserTagRelationshipAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def patch(self, request):
         if not Token.objects.filter(user=request.user):
@@ -831,7 +835,7 @@ class UserTagRelationshipAPIView(APIView):
 
 # 테마 소개
 class UserThemaAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def get(self, request):
         if request.user.status() != 'pass':
@@ -909,7 +913,7 @@ class UserThemaAPIView(APIView):
 
 # 유저에게 높은 점수를 준 이성(받은 표현)과 유저가 높은 점수를 준 이성(보낸 표현) 리스트 조회
 class UserExpressionAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def get(self, request):
         if request.user.status() != 'pass':

@@ -53,9 +53,12 @@ class KakaoUserSerializer(serializers.ModelSerializer):
 
 # UserImage 필드정보
 class UserImageSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='userimage_set')
+
     class Meta:
         model = UserImage
         fields = (
+            'user',
             'pk',
             'image',
         )
