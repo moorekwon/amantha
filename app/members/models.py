@@ -335,6 +335,7 @@ class UserIdealType(models.Model):
     age_from = models.PositiveIntegerField(blank=True, null=True)
     age_to = models.PositiveIntegerField(blank=True, null=True)
     region = models.CharField(choices=REGION, blank=True, max_length=60)
+    region2 = models.CharField(choices=REGION, blank=True, max_length=60)
     tall_from = models.PositiveIntegerField(blank=True)
     tall_to = models.PositiveIntegerField(blank=True)
     body_shape = models.CharField(choices=BODY_SHAPE, blank=True, max_length=60)

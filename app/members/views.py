@@ -512,10 +512,6 @@ class UserIdealTypeAPIView(APIView):
 
     # 해당 유저의 현재 이상형 설정 정보 조회와 맞춤 이성 소개
     def get(self, request):
-        # 맞는 방법인지도 모르겠고, 이런 일이 발생할 일도 없어야 함!
-        # if len(users) != len(user_infos):
-        #     return Response('프로필 정보를 등록하지 않은 유저가 있습니다.')
-
         user = request.user
         ideal_type = UserIdealType.objects.filter(user=user)
 
@@ -534,21 +530,29 @@ class UserIdealTypeAPIView(APIView):
         # ideal_partners에 이상형 조건이 (하나라도) 포함된 이성 저장
         ideal_partners = list()
 
+        # 선호지역2가 있어서 나머지 정보는 2번 넣고, 선호지역2만 1번 넣는걸로 일단 설정..
         for partner in partners:
             if user.useridealtype_set.last().age_from and (
                     partner.age() >= user.useridealtype_set.last().age_from) and (
                     partner.age() <= user.useridealtype_set.last().age_to):
+                ideal_partners.append(partner)
                 ideal_partners.append(partner)
             print('ideal_partners age >> ', ideal_partners)
 
             if user.useridealtype_set.last().region and (
                     partner.userinfo.region == user.useridealtype_set.last().region):
                 ideal_partners.append(partner)
+                ideal_partners.append(partner)
             print('ideal_partners region >> ', ideal_partners)
+
+            if user.useridealtype_set.last().region and (
+                    partner.userinfo.region == user.useridealtype_set.last().region2):
+                ideal_partners.append(partner)
 
             if user.useridealtype_set.last().tall_from and partner.userinfo.tall and (
                     partner.userinfo.tall >= user.useridealtype_set.last().tall_from) and (
                     partner.userinfo.tall <= user.useridealtype_set.last().tall_to):
+                ideal_partners.append(partner)
                 ideal_partners.append(partner)
             print('ideal_partners tall >> ', ideal_partners)
 
@@ -561,20 +565,24 @@ class UserIdealTypeAPIView(APIView):
                 for personality in user.useridealtype_set.last().personality:
                     if personality in partner.userinfo.personality:
                         ideal_partners.append(partner)
+                        ideal_partners.append(partner)
             print('ideal_partners personality >> ', ideal_partners)
 
             if user.useridealtype_set.last().religion and (
                     partner.userinfo.religion == user.useridealtype_set.last().religion):
+                ideal_partners.append(partner)
                 ideal_partners.append(partner)
             print('ideal_partners religion >> ', ideal_partners)
 
             if user.useridealtype_set.last().smoking and (
                     partner.userinfo.smoking == user.useridealtype_set.last().smoking):
                 ideal_partners.append(partner)
+                ideal_partners.append(partner)
             print('ideal_partners smoking >> ', ideal_partners)
 
             if user.useridealtype_set.last().drinking and (
                     partner.userinfo.drinking == user.useridealtype_set.last().drinking):
+                ideal_partners.append(partner)
                 ideal_partners.append(partner)
             print('ideal_partners drinking >> ', ideal_partners)
 

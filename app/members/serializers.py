@@ -208,6 +208,7 @@ class IdealTypeSerializer(serializers.ModelSerializer):
             'ageFrom',
             'ageTo',
             'region',
+            'region2',
             'tallFrom',
             'tallTo',
             'bodyShape',
