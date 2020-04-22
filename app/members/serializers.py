@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag, SendStar, SendPick, UserIdealType
+from members.models import UserImage, UserInfo, UserRibbon, Tag, UserIdealType, Pick, Star, Story
 
 User = get_user_model()
 
@@ -110,10 +110,10 @@ class UserInfoSerializer(serializers.ModelSerializer):
         )
 
 
-# SelectStory 필드정보
+# Story 필드정보
 class UserStorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = SelectStory
+        model = Story
         fields = (
             'pk',
             'story',
@@ -138,7 +138,7 @@ class UserRibbonSerializer(serializers.ModelSerializer):
 
 class UserPickSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SendPick
+        model = Pick
         fields = (
             'user',
             'partner',
@@ -148,7 +148,7 @@ class UserPickSerializer(serializers.ModelSerializer):
 
 class UserStarSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SendStar
+        model = Star
         fields = (
             'user',
             'partner',

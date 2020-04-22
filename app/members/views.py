@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from config.settings.base import SECRETS
-from members.models import TagType
+from members.models import TagType, Story
 from members.permissions import IsUserOrReadOnly
 from members.serializers import *
 
@@ -272,7 +272,7 @@ class UserStoryAPIView(APIView):
 
     # 해당 유저의 스토리 불러오기
     def get(self, request):
-        stories = SelectStory.objects.filter(user=request.user)
+        stories = Story.objects.filter(user=request.user)
 
         if not stories:
             return Response('등록된 스토리가 없습니다.')
@@ -287,7 +287,7 @@ class UserStoryAPIView(APIView):
     # 해당 유저의 스토리 추가
     def post(self, request):
         serializer = UserStorySerializer(data=request.data)
-        user_stories = request.user.selectstory_set.all()
+        user_stories = request.user.story_set.all()
         user_story_numbers = set()
         # 현재 유저가 등록한 스토리 번호 불러와 저장
         for user_story in user_stories:
@@ -310,7 +310,7 @@ class UserStoryAPIView(APIView):
     def patch(self, request):
         story = request.data['story']
 
-        user_stories = SelectStory.objects.filter(user=request.user, story=story)
+        user_stories = Story.objects.filter(user=request.user, story=story)
 
         if not user_stories:
             return Response('등록되어있지 않은 스토리 입니다.')
@@ -330,7 +330,7 @@ class UserStoryAPIView(APIView):
 
     # 스토리 삭제하기
     def delete(self, request, pk):
-        story = SelectStory.objects.filter(user=request.user, pk=pk)
+        story = Story.objects.filter(user=request.user, pk=pk)
 
         if story:
             story.delete()
@@ -385,7 +385,7 @@ class UserPickAPIView(APIView):
     # 해당 유저에 해 pick한 이성과 pick받은 이성 조회
     def get(self, request):
         pick_from_users = request.user.send_me_pick_users.all()
-        pick_to_users = SendPick.objects.filter(user=request.user)
+        pick_to_users = Pick.objects.filter(user=request.user)
 
         # 해당 유저가 pick받은 이성들
         pick_from_list = list()
@@ -404,7 +404,7 @@ class UserPickAPIView(APIView):
         }
         return Response(data)
 
-    # partner에게 like 주기
+    # partner에게 pick 주기
     def post(self, request):
         if request.user.status() != 'pass':
             return Response('가입심사를 합격한 유저가 아닙니다.')
@@ -437,20 +437,20 @@ class UserStarAPIView(APIView):
     # 가입심사 보낸 이성과 받은 이성 리스트 및 해당 유저의 평균 별점 조회
     def get(self, request):
         stars_from = request.user.send_me_star_users.all()
-        stars_to = SendStar.objects.filter(user=request.user)
+        stars_to = Star.objects.filter(user=request.user)
 
         stars_from_list = list()
         for star_from in stars_from:
             # 가입심사 한 이성의 email 값과 이성이 준 별점을 tuple 형태로 추가
             stars_from_list.append(
-                (star_from.email, SendStar.objects.filter(user=star_from, partner=request.user)[0].star)
+                (star_from.email, Star.objects.filter(user=star_from, partner=request.user)[0].star)
             )
 
         stars_to_list = list()
         for star_to in stars_to:
             # 가입심사 받은 이성의 email 값과 이성에게 준 별점을 tuple 형태로 추가
             stars_to_list.append(
-                (star_to.partner.email, SendStar.objects.filter(user=request.user, partner=star_to.partner)[0].star)
+                (star_to.partner.email, Star.objects.filter(user=request.user, partner=star_to.partner)[0].star)
             )
 
         data = {
@@ -495,7 +495,7 @@ class UserStarAPIView(APIView):
     #     if not Token.objects.filter(user=request.user):
     #         return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
     #
-    #     partners = request.user.user_sendstar_set.all()
+    #     partners = request.user.user_star_set.all()
     #     star = request.data['star']
     #
     #     for partner in partners:
@@ -923,8 +923,8 @@ class UserExpressionAPIView(APIView):
         if request.user.status() != 'pass':
             return Response('가입심사를 합격한 유저가 아닙니다.')
 
-        received_partners = request.user.partner_sendstar_set.all()
-        sent_partners = request.user.user_sendstar_set.all()
+        received_partners = request.user.partner_star_set.all()
+        sent_partners = request.user.user_star_set.all()
 
         received_high_partners = list()
         for partner in received_partners:

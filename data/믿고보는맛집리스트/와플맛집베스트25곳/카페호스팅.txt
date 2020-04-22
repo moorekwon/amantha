@@ -1756,7 +1756,7 @@
 	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
 	ga('create', 'UA-39170270-2', 'auto');
-	ga('send', 'pageview');
+	ga('', 'pageview');
 
 </script>
 <script src="/assets/dist/vendor_no_jquery.all.min-a6fc22ffd044f09d4c52ea35335c9847739636418f0d73d7cf7bb6f3db47cac6.js"></script>

@@ -42,15 +42,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['gender', ]
 
-    star_users = models.ManyToManyField('self', through='SendStar', related_name='send_me_star_users',
+    star_users = models.ManyToManyField('self', through='Star', related_name='send_me_star_users',
                                         symmetrical=False)
-    pick_users = models.ManyToManyField('self', through='SendPick', related_name='send_me_pick_users',
+    pick_users = models.ManyToManyField('self', through='Pick', related_name='send_me_pick_users',
                                         symmetrical=False)
     tag = models.OneToOneField('TagType', on_delete=models.CASCADE, blank=True, null=True)
 
     # 유저의 현재 평균 별점
     def average_star(self):
-        partners = self.partner_sendstar_set.all()
+        partners = self.partner_star_set.all()
         star = [partner.star for partner in partners]
 
         if len(star) == 0:
@@ -74,7 +74,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # 유저의 상태 저장 (가입심사중 / 가입심사 합격)
     def status(self):
-        partners = self.partner_sendstar_set.all()
+        partners = self.partner_star_set.all()
 
         if len(partners) == 0:
             user_status = 'waiting'
@@ -84,7 +84,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             user_status = 'fail'
         elif len(partners) < 3:
             user_status = 'on_screening'
-        return user_status
+        return str(user_status)
 
 
 # 유저 생성 후 기입할 프로필 정보
@@ -175,7 +175,7 @@ class UserInfo(models.Model):
 
     # 유저의 현재 프로필 완성도
     def profile_percentage(self):
-        stories = self.user.selectstory_set.all()
+        stories = self.user.story_set.all()
         tags = self.user.tag
 
         info_list = [self.job, self.company, self.school, self.region, self.body_shape, self.major, self.tall,
@@ -189,20 +189,18 @@ class UserInfo(models.Model):
             else:
                 return_list.append(1)
 
-        print('return_list >> ', return_list)
-
         if sum(return_list) == 0:
             profile_percentage = 0
         else:
             profile_percentage = format(sum(return_list) / len(return_list) * 100, '.1f')
-        return profile_percentage
+        return float(profile_percentage)
 
 
 # 좋아요 주기
-class SendPick(models.Model):
-    user = models.ForeignKey(User, related_name='user_sendpick_set', on_delete=models.CASCADE)
-    partner = models.ForeignKey(User, related_name='partner_sendpick_set', on_delete=models.CASCADE)
-    like = models.BooleanField(default=True)
+class Pick(models.Model):
+    user = models.ForeignKey(User, related_name='user_pick_set', on_delete=models.CASCADE)
+    partner = models.ForeignKey(User, related_name='partner_pick_set', on_delete=models.CASCADE)
+    pick = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now=True)
 
 
@@ -218,9 +216,9 @@ class Tag(models.Model):
 
 
 # 별점 주기
-class SendStar(models.Model):
-    user = models.ForeignKey(User, related_name='user_sendstar_set', on_delete=models.CASCADE)
-    partner = models.ForeignKey(User, related_name='partner_sendstar_set', on_delete=models.CASCADE)
+class Star(models.Model):
+    user = models.ForeignKey(User, related_name='user_star_set', on_delete=models.CASCADE)
+    partner = models.ForeignKey(User, related_name='partner_star_set', on_delete=models.CASCADE)
     star = models.PositiveIntegerField()
     created = models.DateTimeField(auto_now=True)
 
@@ -233,7 +231,7 @@ class UserImage(models.Model):
 
 
 # 스토리 등록
-class SelectStory(models.Model):
+class Story(models.Model):
     STORY = (
         (1, '이상적인 첫 소개팅 장소'),
         (2, '내 외모중 가장 마음에 드는 곳은'),

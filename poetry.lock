@@ -595,7 +595,7 @@ version = "8.12.1"
 
 [[package]]
 category = "main"
-description = "Tiny 'shelve'-like database with concurrency support"
+description = "Tiny 'shelve'- database with concurrency support"
 name = "pickleshare"
 optional = false
 python-versions = "*"
