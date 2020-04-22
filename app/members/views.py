@@ -7,7 +7,6 @@ from django.shortcuts import render
 from rest_framework import status, permissions
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -64,10 +63,14 @@ class AuthTokenAPIView(APIView):
         waiting = []
         on_screening = []
         fail = []
+        superusers = []
 
         for user in users:
+            # 테스트를 위해 임의 6명 관리자 생성
+            if user.is_superuser:
+                superusers.append(user.email)
             # 아직 가입심사 전 상태 (가입심사한 이성 0명인 상태)
-            if user.status() == 'waiting':
+            elif user.status() == 'waiting':
                 waiting.append(user)
             # 가입심사 중인 상태 (가입심사한 이성 1~2명인 상태)
             elif user.status() == 'on_screening':
@@ -85,6 +88,7 @@ class AuthTokenAPIView(APIView):
                     logout.append(user)
 
         data = {
+            'superusers': superusers,
             'login': UserAccountSerializer(login, many=True).data,
             'logout': UserAccountSerializer(logout, many=True).data,
             'waiting': UserAccountSerializer(waiting, many=True).data,
