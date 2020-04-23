@@ -24,21 +24,31 @@ class UserRibbonAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(SendStar)
-class SendStarAdmin(admin.ModelAdmin):
+@admin.register(Star)
+class StarAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(SendPick)
-class SendLikeAdmin(admin.ModelAdmin):
+@admin.register(Pick)
+class PickAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(SelectStory)
-class SelectStoryAdmin(admin.ModelAdmin):
+@admin.register(Story)
+class StoryAdmin(admin.ModelAdmin):
     pass
 
 
 @admin.register(Tag)
-class SelectTagAdmin(admin.ModelAdmin):
+class TagAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(TagType)
+class TagTypeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(UserIdealType)
+class UserIdealTypeAdmin(admin.ModelAdmin):
     pass

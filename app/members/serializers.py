@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from members.models import UserImage, SelectStory, UserInfo, UserRibbon, Tag, SendStar, SendPick, UserIdealType
+from members.models import UserImage, UserInfo, UserRibbon, Tag, UserIdealType, Pick, Star, Story
 
 User = get_user_model()
 
@@ -53,9 +53,12 @@ class KakaoUserSerializer(serializers.ModelSerializer):
 
 # UserImage 필드정보
 class UserImageSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='userimage_set')
+
     class Meta:
         model = UserImage
         fields = (
+            'user',
             'pk',
             'image',
         )
@@ -107,10 +110,10 @@ class UserInfoSerializer(serializers.ModelSerializer):
         )
 
 
-# SelectStory 필드정보
+# Story 필드정보
 class UserStorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = SelectStory
+        model = Story
         fields = (
             'pk',
             'story',
@@ -135,7 +138,7 @@ class UserRibbonSerializer(serializers.ModelSerializer):
 
 class UserPickSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SendPick
+        model = Pick
         fields = (
             'user',
             'partner',
@@ -145,7 +148,7 @@ class UserPickSerializer(serializers.ModelSerializer):
 
 class UserStarSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SendStar
+        model = Star
         fields = (
             'user',
             'partner',
@@ -208,6 +211,7 @@ class IdealTypeSerializer(serializers.ModelSerializer):
             'ageFrom',
             'ageTo',
             'region',
+            'region2',
             'tallFrom',
             'tallTo',
             'bodyShape',
@@ -224,7 +228,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     profilePercentage = serializers.FloatField(source='userinfo.profile_percentage')
     images = UserImageSerializer(many=True, source='userimage_set')
     info = UserInfoSerializer(source='userinfo')
-    stories = UserStorySerializer(many=True, source='selectstory_set')
+    stories = UserStorySerializer(many=True, source='story_set')
     tags = TagTypeSerializer(source='tag')
     idealTypeInfo = IdealTypeSerializer(source='useridealtype_set', many=True)
     ribbonHistory = UserRibbonSerializer(source='userribbon_set', many=True)

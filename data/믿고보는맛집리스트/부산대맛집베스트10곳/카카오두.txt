@@ -762,7 +762,7 @@
             </section>
 
             <!-- 관련 스토리 -->
-            <section class="module related-story RelatedStory">
+            <section class="module related- RelatedStory">
               <h2 class="title RelatedStory__Title">관련 스토리</h2>
 
               <ul class="RelatedStory__List">

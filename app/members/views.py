@@ -4,23 +4,24 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from config.settings.base import SECRETS
-from members.models import TagType
+from members.models import *
 from members.serializers import *
+from members.permissions import IsUserOrReadOnly
 
 User = get_user_model()
 
 
 # 해당 유저의 이메일 정보로 상세프로필 정보 불러오기
 class UserThroughEmailAPIView(APIView):
-    permission_classes = [AllowAny, ]
+    # superuser만 read/write 할 수 있도록 설정 필요!
+    permission_classes = [permissions.IsAdminUser, ]
 
     def post(self, request):
         user = User.objects.get(email=request.data['email'])
@@ -32,7 +33,7 @@ class UserThroughEmailAPIView(APIView):
 
 # 회원가입 (토큰 생성)
 class CreateUserAPIView(APIView):
-    permission_classes = [AllowAny, ]
+    permission_classes = [permissions.AllowAny, IsUserOrReadOnly]
 
     def post(self, request):
         serializer = UserCreateSerializer(data=request.data)
@@ -40,8 +41,7 @@ class CreateUserAPIView(APIView):
         if serializer.is_valid():
             user = serializer.save()
             # 계정 생성 시 리본 기본 지급 (맞는지 모르겠음.. 일단 보류)
-            UserRibbon.objects.create(user=user, paid_ribbon=10, current_ribbon=10)
-            # user.save()
+            UserRibbon.objects.create(user=user, paid_ribbon=0, current_ribbon=50)
             token = Token.objects.create(user=user)
 
             data = {
@@ -53,7 +53,7 @@ class CreateUserAPIView(APIView):
 
 
 class AuthTokenAPIView(APIView):
-    permission_classes = [AllowAny, ]
+    permission_classes = [permissions.AllowAny, IsUserOrReadOnly]
 
     # (가입된) 유저 리스트
     def get(self, request):
@@ -63,10 +63,14 @@ class AuthTokenAPIView(APIView):
         waiting = []
         on_screening = []
         fail = []
+        superusers = []
 
         for user in users:
+            # 테스트를 위해 임의 6명 관리자 생성
+            if user.is_superuser:
+                superusers.append(user.email)
             # 아직 가입심사 전 상태 (가입심사한 이성 0명인 상태)
-            if user.status() == 'waiting':
+            elif user.status() == 'waiting':
                 waiting.append(user)
             # 가입심사 중인 상태 (가입심사한 이성 1~2명인 상태)
             elif user.status() == 'on_screening':
@@ -84,6 +88,7 @@ class AuthTokenAPIView(APIView):
                     logout.append(user)
 
         data = {
+            'superusers': superusers,
             'login': UserAccountSerializer(login, many=True).data,
             'logout': UserAccountSerializer(logout, many=True).data,
             'waiting': UserAccountSerializer(waiting, many=True).data,
@@ -100,8 +105,6 @@ class AuthTokenAPIView(APIView):
 
         # 유저 인증되고, 가입심사 합격한 유저의 경우
         if user and user.status() == 'pass':
-            # createsuperuser 경우, 로그인 시 리본 기본 지급 설정
-            # superuser는 로그인 POST 하기 전까지 logout 상태 (자동 로그인 x)
             if not len(user.userribbon_set.all()):
                 UserRibbon.objects.create(user=user, paid_ribbon=10, current_ribbon=10)
             token, _ = Token.objects.get_or_create(user=user)
@@ -128,10 +131,10 @@ class UserDeleteAPIView(APIView):
 
 # 로그아웃 (토큰 삭제)
 class LogoutUserAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def get(self, request):
-        token = Token.objects.filter(user=request.user)
+        token = Token.objects.get(user=request.user)
 
         if not token:
             return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
@@ -142,7 +145,7 @@ class LogoutUserAPIView(APIView):
 
 # 유저의 상세프로필 전체 정보 가져오기
 class UserProfileAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def get(self, request):
         if Token.objects.filter(user=request.user):
@@ -155,7 +158,10 @@ class UserProfileAPIView(APIView):
 
 
 class UserImageAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
     # user 프로필 이미지 갖고오기
     def get(self, request):
@@ -204,11 +210,11 @@ class UserImageAPIView(APIView):
 
 
 class UserInfoAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticated, IsUserOrReadOnly]
 
     # 해당 유저의 상세프로필 정보 가져오기
     def get(self, request):
-        info = UserInfo.objects.filter(user=request.user)
+        info = UserInfo.objects.get(user=request.user)
 
         # 아래 response는 뜨면 안되는 response임..
         # 계정 생성 직후 바로 프로필 정보를 등록해야 함
@@ -216,13 +222,13 @@ class UserInfoAPIView(APIView):
             return Response('등록된 프로필 정보가 없습니다.')
 
         data = {
-            'info': UserInfoSerializer(info.last()).data,
+            'info': UserInfoSerializer(info).data,
         }
         return Response(data)
 
     # (회원가입 직후 첫) 상세프로필 작성 (처음 생성 시 딱 한번 사용)
     def post(self, request):
-        info = UserInfo.objects.filter(user=request.user)
+        info = UserInfo.objects.get(user=request.user)
 
         # 이미 등록된 프로필 정보가 있으면 안됨..
         # 계정 생성 직후 첫 프로필정보 등록하는 곳
@@ -242,12 +248,12 @@ class UserInfoAPIView(APIView):
 
     # 상세프로필 수정
     def patch(self, request):
-        info = UserInfo.objects.filter(user=request.user)
+        info = UserInfo.objects.get(user=request.user)
 
         if not info or request.user.status() != 'pass':
             return Response('등록된 프로필 정보가 없거나 가입심사를 합격한 유저가 아닙니다.')
 
-        serializer = UserInfoSerializer(info[0], data=request.data, partial=True)
+        serializer = UserInfoSerializer(info, data=request.data, partial=True)
 
         if serializer.is_valid():
             info = serializer.save()
@@ -260,11 +266,11 @@ class UserInfoAPIView(APIView):
 
 
 class UserStoryAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 해당 유저의 스토리 불러오기
     def get(self, request):
-        stories = SelectStory.objects.filter(user=request.user)
+        stories = Story.objects.filter(user=request.user)
 
         if not stories:
             return Response('등록된 스토리가 없습니다.')
@@ -279,7 +285,7 @@ class UserStoryAPIView(APIView):
     # 해당 유저의 스토리 추가
     def post(self, request):
         serializer = UserStorySerializer(data=request.data)
-        user_stories = request.user.selectstory_set.all()
+        user_stories = request.user.story_set.all()
         user_story_numbers = set()
         # 현재 유저가 등록한 스토리 번호 불러와 저장
         for user_story in user_stories:
@@ -302,7 +308,7 @@ class UserStoryAPIView(APIView):
     def patch(self, request):
         story = request.data['story']
 
-        user_stories = SelectStory.objects.filter(user=request.user, story=story)
+        user_stories = Story.objects.filter(user=request.user, story=story)
 
         if not user_stories:
             return Response('등록되어있지 않은 스토리 입니다.')
@@ -322,7 +328,7 @@ class UserStoryAPIView(APIView):
 
     # 스토리 삭제하기
     def delete(self, request, pk):
-        story = SelectStory.objects.filter(user=request.user, pk=pk)
+        story = Story.objects.filter(user=request.user, pk=pk)
 
         if story:
             story.delete()
@@ -331,7 +337,7 @@ class UserStoryAPIView(APIView):
 
 
 class UserRibbonAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # User별 보유리본 조회
     def get(self, request):
@@ -372,12 +378,12 @@ class UserRibbonAPIView(APIView):
 
 
 class UserPickAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 해당 유저에 해 pick한 이성과 pick받은 이성 조회
     def get(self, request):
         pick_from_users = request.user.send_me_pick_users.all()
-        pick_to_users = SendPick.objects.filter(user=request.user)
+        pick_to_users = Pick.objects.filter(user=request.user)
 
         # 해당 유저가 pick받은 이성들
         pick_from_list = list()
@@ -396,7 +402,7 @@ class UserPickAPIView(APIView):
         }
         return Response(data)
 
-    # partner에게 like 주기
+    # partner에게 pick 주기
     def post(self, request):
         if request.user.status() != 'pass':
             return Response('가입심사를 합격한 유저가 아닙니다.')
@@ -424,25 +430,25 @@ class UserPickAPIView(APIView):
 
 
 class UserStarAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 가입심사 보낸 이성과 받은 이성 리스트 및 해당 유저의 평균 별점 조회
     def get(self, request):
         stars_from = request.user.send_me_star_users.all()
-        stars_to = SendStar.objects.filter(user=request.user)
+        stars_to = Star.objects.filter(user=request.user)
 
         stars_from_list = list()
         for star_from in stars_from:
             # 가입심사 한 이성의 email 값과 이성이 준 별점을 tuple 형태로 추가
             stars_from_list.append(
-                (star_from.email, SendStar.objects.filter(user=star_from, partner=request.user)[0].star)
+                (star_from.email, Star.objects.filter(user=star_from, partner=request.user)[0].star)
             )
 
         stars_to_list = list()
         for star_to in stars_to:
             # 가입심사 받은 이성의 email 값과 이성에게 준 별점을 tuple 형태로 추가
             stars_to_list.append(
-                (star_to.partner.email, SendStar.objects.filter(user=request.user, partner=star_to.partner)[0].star)
+                (star_to.partner.email, Star.objects.filter(user=request.user, partner=star_to.partner)[0].star)
             )
 
         data = {
@@ -487,7 +493,7 @@ class UserStarAPIView(APIView):
     #     if not Token.objects.filter(user=request.user):
     #         return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
     #
-    #     partners = request.user.user_sendstar_set.all()
+    #     partners = request.user.user_star_set.all()
     #     star = request.data['star']
     #
     #     for partner in partners:
@@ -508,14 +514,10 @@ class UserStarAPIView(APIView):
 
 
 class UserIdealTypeAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 해당 유저의 현재 이상형 설정 정보 조회와 맞춤 이성 소개
     def get(self, request):
-        # 맞는 방법인지도 모르겠고, 이런 일이 발생할 일도 없어야 함!
-        # if len(users) != len(user_infos):
-        #     return Response('프로필 정보를 등록하지 않은 유저가 있습니다.')
-
         user = request.user
         ideal_type = UserIdealType.objects.filter(user=user)
 
@@ -528,27 +530,34 @@ class UserIdealTypeAPIView(APIView):
             partner_gender = '여자'
 
         # 해당 유저와 성별이 다른 이성들 필터링
-        # UserInfo 정보가 없는 partner의 경우 걸러내는 작업 추가 필요!
         partners = User.objects.filter(gender=partner_gender)
 
         # ideal_partners에 이상형 조건이 (하나라도) 포함된 이성 저장
         ideal_partners = list()
 
+        # 선호지역2가 있어서 나머지 정보는 2번 넣고, 선호지역2만 1번 넣는걸로 일단 설정..
         for partner in partners:
             if user.useridealtype_set.last().age_from and (
                     partner.age() >= user.useridealtype_set.last().age_from) and (
                     partner.age() <= user.useridealtype_set.last().age_to):
+                ideal_partners.append(partner)
                 ideal_partners.append(partner)
             print('ideal_partners age >> ', ideal_partners)
 
             if user.useridealtype_set.last().region and (
                     partner.userinfo.region == user.useridealtype_set.last().region):
                 ideal_partners.append(partner)
+                ideal_partners.append(partner)
             print('ideal_partners region >> ', ideal_partners)
+
+            if user.useridealtype_set.last().region and (
+                    partner.userinfo.region == user.useridealtype_set.last().region2):
+                ideal_partners.append(partner)
 
             if user.useridealtype_set.last().tall_from and partner.userinfo.tall and (
                     partner.userinfo.tall >= user.useridealtype_set.last().tall_from) and (
                     partner.userinfo.tall <= user.useridealtype_set.last().tall_to):
+                ideal_partners.append(partner)
                 ideal_partners.append(partner)
             print('ideal_partners tall >> ', ideal_partners)
 
@@ -561,20 +570,24 @@ class UserIdealTypeAPIView(APIView):
                 for personality in user.useridealtype_set.last().personality:
                     if personality in partner.userinfo.personality:
                         ideal_partners.append(partner)
+                        ideal_partners.append(partner)
             print('ideal_partners personality >> ', ideal_partners)
 
             if user.useridealtype_set.last().religion and (
                     partner.userinfo.religion == user.useridealtype_set.last().religion):
+                ideal_partners.append(partner)
                 ideal_partners.append(partner)
             print('ideal_partners religion >> ', ideal_partners)
 
             if user.useridealtype_set.last().smoking and (
                     partner.userinfo.smoking == user.useridealtype_set.last().smoking):
                 ideal_partners.append(partner)
+                ideal_partners.append(partner)
             print('ideal_partners smoking >> ', ideal_partners)
 
             if user.useridealtype_set.last().drinking and (
                     partner.userinfo.drinking == user.useridealtype_set.last().drinking):
+                ideal_partners.append(partner)
                 ideal_partners.append(partner)
             print('ideal_partners drinking >> ', ideal_partners)
 
@@ -656,7 +669,7 @@ class UserIdealTypeAPIView(APIView):
 
 
 class UserTagAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 해당 유저의 모든 관심태그 조회
     def get(self, request):
@@ -719,7 +732,7 @@ class UserTagAPIView(APIView):
 
 
 class UserTagDateStyleAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 데이트 스타일 관심태그 추가
     def patch(self, request):
@@ -745,7 +758,7 @@ class UserTagDateStyleAPIView(APIView):
 
 
 class UserTagLifeStyleAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     # 라이프 스타일 관심태그 수정
     # 기존 등록된 관심태그에서 추가되고 삭제되는 것이 아니라, request.data로 타입별 태그 전체 수정
@@ -772,7 +785,7 @@ class UserTagLifeStyleAPIView(APIView):
 
 
 class UserTagCharmAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def patch(self, request):
         if not Token.objects.filter(user=request.user):
@@ -797,7 +810,7 @@ class UserTagCharmAPIView(APIView):
 
 
 class UserTagRelationshipAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def patch(self, request):
         if not Token.objects.filter(user=request.user):
@@ -823,7 +836,7 @@ class UserTagRelationshipAPIView(APIView):
 
 # 테마 소개
 class UserThemaAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def get(self, request):
         if request.user.status() != 'pass':
@@ -901,14 +914,14 @@ class UserThemaAPIView(APIView):
 
 # 유저에게 높은 점수를 준 이성(받은 표현)과 유저가 높은 점수를 준 이성(보낸 표현) 리스트 조회
 class UserExpressionAPIView(APIView):
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def get(self, request):
         if request.user.status() != 'pass':
             return Response('가입심사를 합격한 유저가 아닙니다.')
 
-        received_partners = request.user.partner_sendstar_set.all()
-        sent_partners = request.user.user_sendstar_set.all()
+        received_partners = request.user.partner_star_set.all()
+        sent_partners = request.user.user_star_set.all()
 
         received_high_partners = list()
         for partner in received_partners:

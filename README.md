@@ -1391,12 +1391,11 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   - Body
 
-    - 옵션 정보: `ageFrom`, `ageTo`, `region`, `tallFrom`, `tallTo`, `bodyShape`, `personalities`, `religion`, `smoking`, `drinking`
-      - ***현재 선호 지역 1만 넣도록 설정 (추후 선호 지역 2 추가)***
+    - 옵션 정보: `ageFrom`, `ageTo`, `region`, `tallFrom`, `tallTo`, `bodyShape`, `personalities`, `religion`, `region2`, `smoking`, `drinking`
       - *나이와 키는 범위로 지정하기 때문에 'From', 'To' 붙여서 각각 두 개의 정보씩 필요 (추후 더 나은 방법 고려)*
     - 고정된 value를 가진 정보 (User Info Create와 value 같음)
       - 아래 정해진 값들만 넣을 수 있도록 **str** 형태의 값들로 이루어진 list로 고정됨
-      - `region`: `서울`, `경기`, `인천`, `대전`, `충북`, `충남`, `강원`, `부산`, `경북`, `경남`, `대구`, `울산`, `광주`, `전북`, `전남`, `제주`
+      - `region`, `region2`: `서울`, `경기`, `인천`, `대전`, `충북`, `충남`, `강원`, `부산`, `경북`, `경남`, `대구`, `울산`, `광주`, `전북`, `전남`, `제주`
       - `bodyShape`: `보통체형`, `통통한`, `살짝볼륨`, `글래머`, `마른`, `슬림탄탄`
       - `personalities`: `지적인`, `차분한`, `유머있는`, `낙천적인`, `내향적인`, `외향적인`, `감성적인`, `상냥한`, `귀여운`, `섹시한`, `4차원인`, `발랄한`, `도도한`
       - `drinking`: `가끔 마심`, `어느정도 즐기는편`, `술자리를 즐김`, `마시지 않음`
@@ -1418,10 +1417,11 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   ```json
   {
-      "idealType": {
+      "idealTypeInfo": {
           "ageFrom": 23,
           "ageTo": 27,
           "region": "",
+          "region2": "",
           "tallFrom": 160,
           "tallTo": 165,
           "bodyShape": "",
@@ -1482,10 +1482,11 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   ```json
   {
-      "idealType": {
+      "idealTypeInfo": {
           "ageFrom": 23,
           "ageTo": 27,
           "region": "",
+          "region2": "",
           "tallFrom": 160,
           "tallTo": 165,
           "bodyShape": "보통체형",
