@@ -41,7 +41,8 @@ class Command(BaseCommand):
         User.objects.create_user(email='hbb@hbb.com', password='hbb', gender='남자')
         User.objects.create_user(email='hgo@hgo.com', password='hgo', gender='남자')
         User.objects.create_user(email='dhl@dhl.com', password='dhl', gender='남자')
-        print('User 테이블에 6명의 user가 생성되었습니다.')
+        User.objects.create_user(email='dok@dok.com', password='dok', gender='남자')
+        print('User 테이블에 7명의 user가 생성되었습니다.')
 
         hjk = User.objects.get(email='hjk@hjk.com')
         ebk = User.objects.get(email='ebk@ebk.com')
@@ -49,7 +50,8 @@ class Command(BaseCommand):
         hbb = User.objects.get(email='hbb@hbb.com')
         hgo = User.objects.get(email='hgo@hgo.com')
         dhl = User.objects.get(email='dhl@dhl.com')
-        print('6명의 user들을 변수로 저장하여 불러왔습니다.')
+        dok = User.objects.get(email='dok@dok.com')
+        print('7명의 user들을 변수로 저장하여 불러왔습니다.')
 
         Token.objects.create(user=hjk)
         Token.objects.create(user=ebk)
@@ -57,7 +59,8 @@ class Command(BaseCommand):
         Token.objects.create(user=hbb)
         Token.objects.create(user=hgo)
         Token.objects.create(user=dhl)
-        print('6명의 user의 인증 토큰이 발급되었습니다.')
+        Token.objects.create(user=dok)
+        print('7명의 user의 인증 토큰이 발급되었습니다.')
 
         # UserInfo.objects.create(user=hjk, nickname='권효진', birth='1995-02-11', tall=156)
         UserInfo.objects.create(user=hjk, nickname='권효진', birth='1995-02-11', region='서울', body_shape='보통체형',
@@ -67,8 +70,9 @@ class Command(BaseCommand):
         UserInfo.objects.create(user=szj, nickname='정수지', birth='1996-12-22', tall=158)
         UserInfo.objects.create(user=hbb, nickname='박홍빈', birth='1992-03-10', tall=170)
         UserInfo.objects.create(user=hgo, nickname='오형근', birth='1997-02-23', tall=173)
-        UserInfo.objects.create(user=dhl, nickname='이도현', birth='1995-03-13', tall=184)
-        print('UserInfo 테이블에 6명의 user 프로필정보가 생성되었습니다.')
+        UserInfo.objects.create(user=dhl, nickname='이도현', birth='1995-03-13', tall=184, region='서울')
+        UserInfo.objects.create(user=dok, nickname='김도오', birth='1989-08-20', tall=181)
+        print('UserInfo 테이블에 7명의 user 프로필정보가 생성되었습니다.')
 
         UserRibbon.objects.create(user=hjk, paid_ribbon=0, current_ribbon=50)
         UserRibbon.objects.create(user=ebk, paid_ribbon=0, current_ribbon=50)
@@ -76,7 +80,8 @@ class Command(BaseCommand):
         UserRibbon.objects.create(user=hbb, paid_ribbon=0, current_ribbon=50)
         UserRibbon.objects.create(user=hgo, paid_ribbon=0, current_ribbon=50)
         UserRibbon.objects.create(user=dhl, paid_ribbon=0, current_ribbon=50)
-        print('계정을 생성한 6명의 user에게 기본 리본 50개가 지급되었습니다.')
+        UserRibbon.objects.create(user=dok, paid_ribbon=0, current_ribbon=50)
+        print('계정을 생성한 7명의 user에게 기본 리본 50개가 지급되었습니다.')
 
         # 합격 여자
         Star.objects.create(user=man4, partner=hjk, star=5)
@@ -89,6 +94,11 @@ class Command(BaseCommand):
         Star.objects.create(user=man1, partner=dhl, star=5)
         Star.objects.create(user=man2, partner=dhl, star=3)
         Star.objects.create(user=man3, partner=dhl, star=2)
+        Star.objects.create(user=hjk, partner=dhl, star=5)
+        # 합격 남자
+        Star.objects.create(user=man1, partner=dok, star=4)
+        Star.objects.create(user=man2, partner=dok, star=4)
+        Star.objects.create(user=man3, partner=dok, star=3)
         # 불합격 남자
         Star.objects.create(user=man1, partner=hbb, star=2)
         Star.objects.create(user=man2, partner=hbb, star=4)
@@ -106,5 +116,11 @@ class Command(BaseCommand):
 
         UserRibbon.objects.create(user=hjk, paid_ribbon=-5)
         print('리본 내역이 추가되었습니다.')
+
+        Pick.objects.create(user=hjk, partner=dok)
+        Pick.objects.create(user=dhl, partner=hjk)
+        print('pick 이성을 추가하였습니다.')
+
+
 
 
