@@ -20,7 +20,8 @@ User = get_user_model()
 
 # 해당 유저의 이메일 정보로 상세프로필 정보 불러오기
 class UserThroughEmailAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    # superuser만 read/write 할 수 있도록 설정 필요!
+    permission_classes = [permissions.IsAdminUser, ]
 
     def post(self, request):
         user = User.objects.get(email=request.data['email'])
@@ -40,7 +41,7 @@ class CreateUserAPIView(APIView):
         if serializer.is_valid():
             user = serializer.save()
             # 계정 생성 시 리본 기본 지급 (맞는지 모르겠음.. 일단 보류)
-            UserRibbon.objects.create(user=user, paid_ribbon=10, current_ribbon=10)
+            UserRibbon.objects.create(user=user, paid_ribbon=0, current_ribbon=50)
             token = Token.objects.create(user=user)
 
             data = {
@@ -133,7 +134,7 @@ class LogoutUserAPIView(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
 
     def get(self, request):
-        token = Token.objects.filter(user=request.user)
+        token = Token.objects.get(user=request.user)
 
         if not token:
             return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
@@ -209,11 +210,11 @@ class UserImageAPIView(APIView):
 
 
 class UserInfoAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, IsUserOrReadOnly]
 
     # 해당 유저의 상세프로필 정보 가져오기
     def get(self, request):
-        info = UserInfo.objects.filter(user=request.user)
+        info = UserInfo.objects.get(user=request.user)
 
         # 아래 response는 뜨면 안되는 response임..
         # 계정 생성 직후 바로 프로필 정보를 등록해야 함
@@ -221,13 +222,13 @@ class UserInfoAPIView(APIView):
             return Response('등록된 프로필 정보가 없습니다.')
 
         data = {
-            'info': UserInfoSerializer(info.last()).data,
+            'info': UserInfoSerializer(info).data,
         }
         return Response(data)
 
     # (회원가입 직후 첫) 상세프로필 작성 (처음 생성 시 딱 한번 사용)
     def post(self, request):
-        info = UserInfo.objects.filter(user=request.user)
+        info = UserInfo.objects.get(user=request.user)
 
         # 이미 등록된 프로필 정보가 있으면 안됨..
         # 계정 생성 직후 첫 프로필정보 등록하는 곳
@@ -247,12 +248,12 @@ class UserInfoAPIView(APIView):
 
     # 상세프로필 수정
     def patch(self, request):
-        info = UserInfo.objects.filter(user=request.user)
+        info = UserInfo.objects.get(user=request.user)
 
         if not info or request.user.status() != 'pass':
             return Response('등록된 프로필 정보가 없거나 가입심사를 합격한 유저가 아닙니다.')
 
-        serializer = UserInfoSerializer(info[0], data=request.data, partial=True)
+        serializer = UserInfoSerializer(info, data=request.data, partial=True)
 
         if serializer.is_valid():
             info = serializer.save()

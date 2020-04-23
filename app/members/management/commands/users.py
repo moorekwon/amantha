@@ -59,7 +59,10 @@ class Command(BaseCommand):
         Token.objects.create(user=dhl)
         print('6명의 user의 인증 토큰이 발급되었습니다.')
 
-        UserInfo.objects.create(user=hjk, nickname='권효진', birth='1995-02-11', tall=156)
+        # UserInfo.objects.create(user=hjk, nickname='권효진', birth='1995-02-11', tall=156)
+        UserInfo.objects.create(user=hjk, nickname='권효진', birth='1995-02-11', region='서울', body_shape='보통체형',
+                                personality=['유머있는', '차분한', '귀여운'], blood_type='AB형', smoking='비흡연',
+                                introduce='안녕하세요 ^^')
         UserInfo.objects.create(user=ebk, nickname='권은비', birth='1991-04-03', tall=170)
         UserInfo.objects.create(user=szj, nickname='정수지', birth='1996-12-22', tall=158)
         UserInfo.objects.create(user=hbb, nickname='박홍빈', birth='1992-03-10', tall=170)
@@ -67,29 +70,41 @@ class Command(BaseCommand):
         UserInfo.objects.create(user=dhl, nickname='이도현', birth='1995-03-13', tall=184)
         print('UserInfo 테이블에 6명의 user 프로필정보가 생성되었습니다.')
 
-        UserRibbon.objects.create(user=hjk, paid_ribbon=10, current_ribbon=10)
-        UserRibbon.objects.create(user=ebk, paid_ribbon=10, current_ribbon=10)
-        UserRibbon.objects.create(user=szj, paid_ribbon=10, current_ribbon=10)
-        UserRibbon.objects.create(user=hbb, paid_ribbon=10, current_ribbon=10)
-        UserRibbon.objects.create(user=hgo, paid_ribbon=10, current_ribbon=10)
-        UserRibbon.objects.create(user=dhl, paid_ribbon=10, current_ribbon=10)
-        print('계정을 생성한 6명의 user에게 기본 리본 10개가 지급되었습니다.')
+        UserRibbon.objects.create(user=hjk, paid_ribbon=0, current_ribbon=50)
+        UserRibbon.objects.create(user=ebk, paid_ribbon=0, current_ribbon=50)
+        UserRibbon.objects.create(user=szj, paid_ribbon=0, current_ribbon=50)
+        UserRibbon.objects.create(user=hbb, paid_ribbon=0, current_ribbon=50)
+        UserRibbon.objects.create(user=hgo, paid_ribbon=0, current_ribbon=50)
+        UserRibbon.objects.create(user=dhl, paid_ribbon=0, current_ribbon=50)
+        print('계정을 생성한 6명의 user에게 기본 리본 50개가 지급되었습니다.')
 
         # 합격 여자
         Star.objects.create(user=man4, partner=hjk, star=5)
-        Star.objects.create(user=man5, partner=hjk, star=3)
+        Star.objects.create(user=man5, partner=hjk, star=2)
         Star.objects.create(user=man6, partner=hjk, star=4)
         # 심사중 여자
         Star.objects.create(user=man4, partner=szj, star=2)
         Star.objects.create(user=man5, partner=szj, star=3)
         # 합격 남자
-        Star.objects.create(user=man1, partner=hgo, star=5)
-        Star.objects.create(user=man2, partner=hgo, star=3)
-        Star.objects.create(user=man3, partner=hgo, star=2)
+        Star.objects.create(user=man1, partner=dhl, star=5)
+        Star.objects.create(user=man2, partner=dhl, star=3)
+        Star.objects.create(user=man3, partner=dhl, star=2)
         # 불합격 남자
         Star.objects.create(user=man1, partner=hbb, star=2)
         Star.objects.create(user=man2, partner=hbb, star=4)
         Star.objects.create(user=man3, partner=hbb, star=1)
         # 심사중 남자
-        Star.objects.create(user=man2, partner=dhl, star=3)
+        Star.objects.create(user=man2, partner=hgo, star=3)
         print('가입심사가 이루어졌습니다.')
+
+        Story.objects.create(user=hjk, story=1, content='조용한 까페')
+        Story.objects.create(user=hjk, story=3, content='네모네모 로직')
+        print('스토리가 등록되었습니다.')
+
+        UserIdealType.objects.create(user=hjk, tall_from=174, tall_to=180, age_from=25, age_to=35, region='서울', region2='경기')
+        print('이상형정보가 등록되었습니다.')
+
+        UserRibbon.objects.create(user=hjk, paid_ribbon=-5)
+        print('리본 내역이 추가되었습니다.')
+
+

@@ -228,7 +228,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     profilePercentage = serializers.FloatField(source='userinfo.profile_percentage')
     images = UserImageSerializer(many=True, source='userimage_set')
     info = UserInfoSerializer(source='userinfo')
-    stories = UserStorySerializer(many=True, source='selectstory_set')
+    stories = UserStorySerializer(many=True, source='story_set')
     tags = TagTypeSerializer(source='tag')
     idealTypeInfo = IdealTypeSerializer(source='useridealtype_set', many=True)
     ribbonHistory = UserRibbonSerializer(source='userribbon_set', many=True)
