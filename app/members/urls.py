@@ -3,7 +3,6 @@ from django.urls import path
 from members.views import *
 
 urlpatterns = [
-    path('user/stat/', UserStatAPIView.as_view()),
     # 해당 유저의 이메일 정보로 상세프로필 조회 불러오기
     path('user/', UserThroughEmailAPIView.as_view()),
 

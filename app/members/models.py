@@ -222,20 +222,6 @@ class Star(models.Model):
     star = models.PositiveIntegerField()
     created = models.DateTimeField(auto_now=True)
 
-    def save(self, *args, **kwargs):
-        partners = self.user.send_me_star_users.all()
-
-        if len(partners) == 0:
-            self.user.stat = 'waiting'
-
-        elif (len(partners) >= 3) and (self.user.average_star() >= 3):
-            self.user.stat = 'pass'
-        elif (len(partners) >= 3) and (self.user.average_star() < 3):
-            self.user.stat = 'fail'
-        elif len(partners) < 3:
-            self.user.stat = 'on_screening'
-        self.user.save()
-
 
 # many-to-one 관계
 # 한 번에 여러 개 post 가능하도록 해야 함

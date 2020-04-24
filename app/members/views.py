@@ -13,18 +13,8 @@ from rest_framework.views import APIView
 from config.settings.base import SECRETS
 from members.models import *
 from members.serializers import *
-from members.permissions import IsUserOrReadOnly
 
 User = get_user_model()
-
-
-class UserStatAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticated, ]
-
-    def get(self, request):
-        star = Star.objects.filter(user=request.user)
-        print('star >> ', star)
-        return Response(f'stat은 {star[0].user.stat}입니다.')
 
 
 # 해당 유저의 이메일 정보로 상세프로필 정보 불러오기
