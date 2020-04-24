@@ -41,6 +41,15 @@ class UserAccountSerializer(serializers.ModelSerializer):
         )
 
 
+class UserStatSerializer(serializers.ModelSerializer):
+    stat = serializers.CharField(source='user.stat')
+    class Meta:
+        model = Star
+        fields = (
+            'stat',
+        )
+
+
 # 카카오톡 계정 유저 정보
 class KakaoUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -53,7 +62,6 @@ class KakaoUserSerializer(serializers.ModelSerializer):
 
 # UserImage 필드정보
 class UserImageSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = UserImage
         fields = (

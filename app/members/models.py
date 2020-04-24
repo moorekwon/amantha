@@ -72,7 +72,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             return int(today_year) - int(birth_year) + 1
         return None
 
-    # 유저의 상태 저장 (가입심사중 / 가입심사 합격)
+    # 유저의 상태 저장
     def status(self):
         partners = self.partner_star_set.all()
 
@@ -221,6 +221,20 @@ class Star(models.Model):
     partner = models.ForeignKey(User, related_name='partner_star_set', on_delete=models.CASCADE)
     star = models.PositiveIntegerField()
     created = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        partners = self.user.send_me_star_users.all()
+
+        if len(partners) == 0:
+            self.user.stat = 'waiting'
+
+        elif (len(partners) >= 3) and (self.user.average_star() >= 3):
+            self.user.stat = 'pass'
+        elif (len(partners) >= 3) and (self.user.average_star() < 3):
+            self.user.stat = 'fail'
+        elif len(partners) < 3:
+            self.user.stat = 'on_screening'
+        self.user.save()
 
 
 # many-to-one 관계
