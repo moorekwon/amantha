@@ -42,7 +42,10 @@ class Command(BaseCommand):
         User.objects.create_user(email='hgo@hgo.com', password='hgo', gender='남자')
         User.objects.create_user(email='dhl@dhl.com', password='dhl', gender='남자')
         User.objects.create_user(email='dok@dok.com', password='dok', gender='남자')
-        print('User 테이블에 7명의 user가 생성되었습니다.')
+        User.objects.create_user(email='esb@esb.com', password='esb', gender='여자')
+        User.objects.create_user(email='mas@mas.com', password='mas', gender='여자')
+        User.objects.create_user(email='kmh@kmh.com', password='kmh', gender='남자')
+        print('User 테이블에 10명의 user가 생성되었습니다.')
 
         hjk = User.objects.get(email='hjk@hjk.com')
         ebk = User.objects.get(email='ebk@ebk.com')
@@ -51,7 +54,10 @@ class Command(BaseCommand):
         hgo = User.objects.get(email='hgo@hgo.com')
         dhl = User.objects.get(email='dhl@dhl.com')
         dok = User.objects.get(email='dok@dok.com')
-        print('7명의 user들을 변수로 저장하여 불러왔습니다.')
+        esb = User.objects.get(email='esb@esb.com')
+        mas = User.objects.get(email='mas@mas.com')
+        kmh = User.objects.get(email='kmh@kmh.com')
+        print('10명의 user들을 변수로 저장하여 불러왔습니다.')
 
         Token.objects.create(user=hjk)
         Token.objects.create(user=ebk)
@@ -60,9 +66,11 @@ class Command(BaseCommand):
         Token.objects.create(user=hgo)
         Token.objects.create(user=dhl)
         Token.objects.create(user=dok)
-        print('7명의 user의 인증 토큰이 발급되었습니다.')
+        Token.objects.create(user=esb)
+        Token.objects.create(user=mas)
+        Token.objects.create(user=kmh)
+        print('10명의 user의 인증 토큰이 발급되었습니다.')
 
-        # UserInfo.objects.create(user=hjk, nickname='권효진', birth='1995-02-11', tall=156)
         UserInfo.objects.create(user=hjk, nickname='권효진', birth='1995-02-11', region='서울', body_shape='보통체형',
                                 personality=['유머있는', '차분한', '귀여운'], blood_type='AB형', smoking='비흡연',
                                 introduce='안녕하세요 ^^')
@@ -72,7 +80,18 @@ class Command(BaseCommand):
         UserInfo.objects.create(user=hgo, nickname='오형근', birth='1997-02-23', tall=173)
         UserInfo.objects.create(user=dhl, nickname='이도현', birth='1995-03-13', tall=184, region='서울')
         UserInfo.objects.create(user=dok, nickname='김도오', birth='1989-08-20', tall=181)
-        print('UserInfo 테이블에 7명의 user 프로필정보가 생성되었습니다.')
+        UserInfo.objects.create(user=esb, nickname='박은서', birth='1995-02-21', tall=164)
+        UserInfo.objects.create(user=mas, nickname='신민아', birth='1984-04-05', tall=168)
+        UserInfo.objects.create(user=kmh, nickname='홍기민', birth='1994-03-20', tall=177)
+        print('UserInfo 테이블에 10명의 user 프로필정보가 생성되었습니다.')
+
+        UserRibbon.objects.create(user=man1, paid_ribbon=0, current_ribbon=500)
+        UserRibbon.objects.create(user=man2, paid_ribbon=0, current_ribbon=500)
+        UserRibbon.objects.create(user=man3, paid_ribbon=0, current_ribbon=500)
+        UserRibbon.objects.create(user=man4, paid_ribbon=0, current_ribbon=500)
+        UserRibbon.objects.create(user=man5, paid_ribbon=0, current_ribbon=500)
+        UserRibbon.objects.create(user=man6, paid_ribbon=0, current_ribbon=500)
+        print('6명의 superuser에게 기본 리본 500개가 지급되었습니다.')
 
         UserRibbon.objects.create(user=hjk, paid_ribbon=0, current_ribbon=50)
         UserRibbon.objects.create(user=ebk, paid_ribbon=0, current_ribbon=50)
@@ -81,12 +100,21 @@ class Command(BaseCommand):
         UserRibbon.objects.create(user=hgo, paid_ribbon=0, current_ribbon=50)
         UserRibbon.objects.create(user=dhl, paid_ribbon=0, current_ribbon=50)
         UserRibbon.objects.create(user=dok, paid_ribbon=0, current_ribbon=50)
-        print('계정을 생성한 7명의 user에게 기본 리본 50개가 지급되었습니다.')
+        UserRibbon.objects.create(user=esb, paid_ribbon=0, current_ribbon=50)
+        UserRibbon.objects.create(user=mas, paid_ribbon=0, current_ribbon=50)
+        UserRibbon.objects.create(user=kmh, paid_ribbon=0, current_ribbon=50)
+        print('계정을 생성한 10명의 user에게 기본 리본 50개가 지급되었습니다.')
 
         # 합격 여자
         Star.objects.create(user=man4, partner=hjk, star=5)
         Star.objects.create(user=man5, partner=hjk, star=2)
         Star.objects.create(user=man6, partner=hjk, star=4)
+        Star.objects.create(user=man4, partner=esb, star=5)
+        Star.objects.create(user=man5, partner=esb, star=5)
+        Star.objects.create(user=man6, partner=esb, star=5)
+        Star.objects.create(user=man4, partner=mas, star=4)
+        Star.objects.create(user=man5, partner=mas, star=3)
+        Star.objects.create(user=man6, partner=mas, star=4)
         # 심사중 여자
         Star.objects.create(user=man4, partner=szj, star=2)
         Star.objects.create(user=man5, partner=szj, star=3)
@@ -95,7 +123,9 @@ class Command(BaseCommand):
         Star.objects.create(user=man2, partner=dhl, star=3)
         Star.objects.create(user=man3, partner=dhl, star=2)
         Star.objects.create(user=hjk, partner=dhl, star=5)
-        # 합격 남자
+        Star.objects.create(user=esb, partner=kmh, star=5)
+        Star.objects.create(user=man2, partner=kmh, star=3)
+        Star.objects.create(user=mas, partner=kmh, star=4)
         Star.objects.create(user=man1, partner=dok, star=4)
         Star.objects.create(user=man2, partner=dok, star=4)
         Star.objects.create(user=man3, partner=dok, star=3)
@@ -111,7 +141,8 @@ class Command(BaseCommand):
         Story.objects.create(user=hjk, story=3, content='네모네모 로직')
         print('스토리가 등록되었습니다.')
 
-        UserIdealType.objects.create(user=hjk, tall_from=174, tall_to=180, age_from=25, age_to=35, region='서울', region2='경기')
+        UserIdealType.objects.create(user=hjk, tall_from=174, tall_to=180, age_from=25, age_to=35, region='서울',
+                                     region2='경기')
         print('이상형정보가 등록되었습니다.')
 
         UserRibbon.objects.create(user=hjk, paid_ribbon=-5)
@@ -119,8 +150,6 @@ class Command(BaseCommand):
 
         Pick.objects.create(user=hjk, partner=dok)
         Pick.objects.create(user=dhl, partner=hjk)
+        Pick.objects.create(user=kmh, partner=mas)
+        Pick.objects.create(user=esb, partner=kmh)
         print('pick 이성을 추가하였습니다.')
-
-
-
-

@@ -17,10 +17,20 @@ from members.serializers import *
 User = get_user_model()
 
 
+# superuser 제외
+def get_queryset_not_superuser(self, request):
+    if request.user.gender == '여자':
+        partner_gender = '남자'
+    else:
+        partner_gender = '여자'
+    return User.objects.filter(is_superuser=False).filter(gender=partner_gender)
+
+
 # 해당 유저의 이메일 정보로 상세프로필 정보 불러오기
 class UserThroughEmailAPIView(APIView):
     # superuser만 read/write 할 수 있도록 설정 필요!
-    permission_classes = [permissions.IsAdminUser, ]
+    # permission_classes = [permissions.IsAdminUser, ]
+    permission_classes = [permissions.AllowAny, ]
 
     def post(self, request):
         user = User.objects.get(email=request.data['email'])
@@ -52,14 +62,14 @@ class CreateUserAPIView(APIView):
 
 
 class AuthTokenAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticated, ]
+    # 내 생각엔 GET은 IsAuthenticated 여야함
+    permission_classes = [permissions.AllowAny, ]
 
     # (가입된) 유저 리스트
     def get(self, request):
         users = User.objects.all()
         login = []
         logout = []
-        waiting = []
         on_screening = []
         fail = []
         superusers = []
@@ -68,9 +78,6 @@ class AuthTokenAPIView(APIView):
             # 테스트를 위해 임의 6명 관리자 생성
             if user.is_superuser:
                 superusers.append(user.email)
-            # 아직 가입심사 전 상태 (가입심사한 이성 0명인 상태)
-            elif user.status() == 'waiting':
-                waiting.append(user)
             # 가입심사 중인 상태 (가입심사한 이성 1~2명인 상태)
             elif user.status() == 'on_screening':
                 on_screening.append(user)
@@ -90,7 +97,6 @@ class AuthTokenAPIView(APIView):
             'superusers': superusers,
             'login': UserAccountSerializer(login, many=True).data,
             'logout': UserAccountSerializer(logout, many=True).data,
-            'waiting': UserAccountSerializer(waiting, many=True).data,
             'onScreening': UserAccountSerializer(on_screening, many=True).data,
             'fail': UserAccountSerializer(fail, many=True).data,
         }
@@ -119,6 +125,8 @@ class AuthTokenAPIView(APIView):
 
 # 계정 탈퇴
 class UserDeleteAPIView(APIView):
+    permission_classes = [permissions.IsAuthenticated, ]
+
     def get(self, request):
         if request.user.is_authenticated:
             user = User.objects.get(email=request.user.email)
@@ -152,15 +160,12 @@ class UserProfileAPIView(APIView):
                 'userProfile': UserProfileSerializer(request.user).data,
             }
             return Response(data)
-        # 로그아웃된 유저도 정보 볼 수 있도록 해야하는지 확인필요
+            # 로그아웃된 유저도 정보 볼 수 있도록 해야하는지 확인필요
         return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
 
 class UserImageAPIView(APIView):
     permission_classes = [permissions.IsAuthenticated, ]
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
 
     # user 프로필 이미지 갖고오기
     def get(self, request):
@@ -172,40 +177,42 @@ class UserImageAPIView(APIView):
         }
         return JsonResponse(data, safe=False)
 
-    # user 프로필 이미지 추가하기
-    # 계정 생성 시 꼭 3개 추가해야 함
-    def post(self, request):
-        images = request.data.getlist('images')
 
-        arr = []
-        for image in images:
-            data = {
-                'image': image,
-            }
-            serializer = UserImageSerializer(data=data)
+# user 프로필 이미지 추가하기
+# 계정 생성 시 꼭 3개 추가해야 함
+def post(self, request):
+    images = request.data.getlist('images')
 
-            if serializer.is_valid():
-                serializer.save(user=request.user)
-                arr.append(serializer.data)
-            else:
-                return Response(serializer.errors)
-
+    arr = []
+    for image in images:
         data = {
-            'images': arr,
+            'image': image,
         }
-        return Response(data, status=status.HTTP_201_CREATED)
+        serializer = UserImageSerializer(data=data)
 
-    # user 프로필 이미지 삭제하기
-    def delete(self, request, pk):
-        images = UserImage.objects.filter(user=request.user)
-        if len(images) <= 3:
-            return Response('최소 3장 이상 업로드돼있어야 합니다.')
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            arr.append(serializer.data)
+        else:
+            return Response(serializer.errors)
 
-        image = UserImage.objects.filter(user=request.user, pk=pk)
-        if image:
-            image.delete()
-            return Response('해당 이미지가 삭제되었습니다.')
-        return Response('해당 이미지의 pk가 존재하지 않습니다.')
+    data = {
+        'images': arr,
+    }
+    return Response(data, status=status.HTTP_201_CREATED)
+
+
+# user 프로필 이미지 삭제하기
+def delete(self, request, pk):
+    images = UserImage.objects.filter(user=request.user)
+    if len(images) <= 3:
+        return Response('최소 3장 이상 업로드돼있어야 합니다.')
+
+    image = UserImage.objects.filter(user=request.user, pk=pk)
+    if image:
+        image.delete()
+        return Response('해당 이미지가 삭제되었습니다.')
+    return Response('해당 이미지의 pk가 존재하지 않습니다.')
 
 
 class UserInfoAPIView(APIView):
@@ -428,6 +435,20 @@ class UserPickAPIView(APIView):
         return Response(serializer.errors)
 
 
+# 가입심사 중인 이성 리스트
+class UserScreeningAPIView(APIView):
+    permission_classes = [permissions.IsAuthenticated, ]
+
+    def get(self, request):
+        partners = get_queryset_not_superuser(self, request)
+
+        screening_users = list()
+        for partner in partners:
+            if (partner.status() == 'on_screening') or (partner.status() == 'waiting'):
+                screening_users.append(partner.email)
+        return Response(screening_users)
+
+
 class UserStarAPIView(APIView):
     permission_classes = [permissions.IsAuthenticated, ]
 
@@ -476,6 +497,7 @@ class UserStarAPIView(APIView):
             return Response('이미 가입심사한 이성 입니다.')
 
         data = {
+            'user': request.user.pk,
             'partner': partner.pk,
             'star': star,
         }
@@ -523,17 +545,10 @@ class UserIdealTypeAPIView(APIView):
         if not ideal_type:
             return Response('등록된 이상형 정보가 없습니다.')
 
-        if user.gender == '여자':
-            partner_gender = '남자'
-        else:
-            partner_gender = '여자'
-
-        # 해당 유저와 성별이 다른 이성들 필터링
-        partners = User.objects.filter(gender=partner_gender)
+        partners = get_queryset_not_superuser(self, request)
 
         # ideal_partners에 이상형 조건이 (하나라도) 포함된 이성 저장
         ideal_partners = list()
-
         # 선호지역2가 있어서 나머지 정보는 2번 넣고, 선호지역2만 1번 넣는걸로 일단 설정..
         for partner in partners:
             if user.useridealtype_set.last().age_from and (
@@ -841,10 +856,10 @@ class UserThemaAPIView(APIView):
         if request.user.status() != 'pass':
             return Response('가입심사를 합격한 유저가 아닙니다.')
 
+        partners = get_queryset_not_superuser(self, request)
+
         # 해당 유저가 여자일 경우, 남자 테마별 이성 소개
         if request.user.gender == '여자':
-            partners = User.objects.filter(gender='남자')
-
             neither_drinks_nor_smokes = list()
             four_years_older = list()
             over_180_tall = list()
@@ -877,14 +892,11 @@ class UserThemaAPIView(APIView):
 
         # 해당 유저가 남자일 경우, 여자 테마별 이성 소개
         else:
-            partners = User.objects.filter(gender='여자')
-
             over_167_tall = list()
             four_years_younger = list()
             neither_drinks_nor_smokes = list()
             cute_women = list()
 
-            # 테마별 알고리즘 추가
             for partner in partners:
                 # 167cm 이상 큰 키의 그녀
                 if partner.userinfo.tall and (partner.userinfo.tall >= 167):
