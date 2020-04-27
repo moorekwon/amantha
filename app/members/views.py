@@ -13,15 +13,24 @@ from rest_framework.views import APIView
 from config.settings.base import SECRETS
 from members.models import *
 from members.serializers import *
-from members.permissions import IsUserOrReadOnly
 
 User = get_user_model()
+
+
+# superuser 제외
+def get_queryset_not_superuser(self, request):
+    if request.user.gender == '여자':
+        partner_gender = '남자'
+    else:
+        partner_gender = '여자'
+    return User.objects.filter(is_superuser=False).filter(gender=partner_gender)
 
 
 # 해당 유저의 이메일 정보로 상세프로필 정보 불러오기
 class UserThroughEmailAPIView(APIView):
     # superuser만 read/write 할 수 있도록 설정 필요!
-    permission_classes = [permissions.IsAdminUser, ]
+    # permission_classes = [permissions.IsAdminUser, ]
+    permission_classes = [permissions.AllowAny, ]
 
     def post(self, request):
         user = User.objects.get(email=request.data['email'])
@@ -33,7 +42,7 @@ class UserThroughEmailAPIView(APIView):
 
 # 회원가입 (토큰 생성)
 class CreateUserAPIView(APIView):
-    permission_classes = [permissions.AllowAny, IsUserOrReadOnly]
+    permission_classes = [permissions.AllowAny, ]
 
     def post(self, request):
         serializer = UserCreateSerializer(data=request.data)
@@ -53,14 +62,14 @@ class CreateUserAPIView(APIView):
 
 
 class AuthTokenAPIView(APIView):
-    permission_classes = [permissions.AllowAny, IsUserOrReadOnly]
+    # 내 생각엔 GET은 IsAuthenticated 여야함
+    permission_classes = [permissions.AllowAny, ]
 
     # (가입된) 유저 리스트
     def get(self, request):
         users = User.objects.all()
         login = []
         logout = []
-        waiting = []
         on_screening = []
         fail = []
         superusers = []
@@ -69,9 +78,6 @@ class AuthTokenAPIView(APIView):
             # 테스트를 위해 임의 6명 관리자 생성
             if user.is_superuser:
                 superusers.append(user.email)
-            # 아직 가입심사 전 상태 (가입심사한 이성 0명인 상태)
-            elif user.status() == 'waiting':
-                waiting.append(user)
             # 가입심사 중인 상태 (가입심사한 이성 1~2명인 상태)
             elif user.status() == 'on_screening':
                 on_screening.append(user)
@@ -91,7 +97,6 @@ class AuthTokenAPIView(APIView):
             'superusers': superusers,
             'login': UserAccountSerializer(login, many=True).data,
             'logout': UserAccountSerializer(logout, many=True).data,
-            'waiting': UserAccountSerializer(waiting, many=True).data,
             'onScreening': UserAccountSerializer(on_screening, many=True).data,
             'fail': UserAccountSerializer(fail, many=True).data,
         }
@@ -120,6 +125,8 @@ class AuthTokenAPIView(APIView):
 
 # 계정 탈퇴
 class UserDeleteAPIView(APIView):
+    permission_classes = [permissions.IsAuthenticated, ]
+
     def get(self, request):
         if request.user.is_authenticated:
             user = User.objects.get(email=request.user.email)
@@ -131,7 +138,7 @@ class UserDeleteAPIView(APIView):
 
 # 로그아웃 (토큰 삭제)
 class LogoutUserAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     def get(self, request):
         token = Token.objects.get(user=request.user)
@@ -145,7 +152,7 @@ class LogoutUserAPIView(APIView):
 
 # 유저의 상세프로필 전체 정보 가져오기
 class UserProfileAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     def get(self, request):
         if Token.objects.filter(user=request.user):
@@ -153,15 +160,12 @@ class UserProfileAPIView(APIView):
                 'userProfile': UserProfileSerializer(request.user).data,
             }
             return Response(data)
-        # 로그아웃된 유저도 정보 볼 수 있도록 해야하는지 확인필요
+            # 로그아웃된 유저도 정보 볼 수 있도록 해야하는지 확인필요
         return Response('인증 토큰이 없는 유저입니다. 로그인이 되어있습니까?')
 
 
 class UserImageAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    permission_classes = [permissions.IsAuthenticated, ]
 
     # user 프로필 이미지 갖고오기
     def get(self, request):
@@ -210,7 +214,7 @@ class UserImageAPIView(APIView):
 
 
 class UserInfoAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticated, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     # 해당 유저의 상세프로필 정보 가져오기
     def get(self, request):
@@ -266,7 +270,7 @@ class UserInfoAPIView(APIView):
 
 
 class UserStoryAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     # 해당 유저의 스토리 불러오기
     def get(self, request):
@@ -337,7 +341,7 @@ class UserStoryAPIView(APIView):
 
 
 class UserRibbonAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     # User별 보유리본 조회
     def get(self, request):
@@ -378,7 +382,7 @@ class UserRibbonAPIView(APIView):
 
 
 class UserPickAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     # 해당 유저에 해 pick한 이성과 pick받은 이성 조회
     def get(self, request):
@@ -429,8 +433,22 @@ class UserPickAPIView(APIView):
         return Response(serializer.errors)
 
 
+# 가입심사 중인 이성 리스트
+class UserScreeningAPIView(APIView):
+    permission_classes = [permissions.IsAuthenticated, ]
+
+    def get(self, request):
+        partners = get_queryset_not_superuser(self, request)
+
+        screening_users = list()
+        for partner in partners:
+            if (partner.status() == 'on_screening') or (partner.status() == 'waiting'):
+                screening_users.append(partner.email)
+        return Response(screening_users)
+
+
 class UserStarAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     # 가입심사 보낸 이성과 받은 이성 리스트 및 해당 유저의 평균 별점 조회
     def get(self, request):
@@ -477,6 +495,7 @@ class UserStarAPIView(APIView):
             return Response('이미 가입심사한 이성 입니다.')
 
         data = {
+            'user': request.user.pk,
             'partner': partner.pk,
             'star': star,
         }
@@ -514,7 +533,7 @@ class UserStarAPIView(APIView):
 
 
 class UserIdealTypeAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     # 해당 유저의 현재 이상형 설정 정보 조회와 맞춤 이성 소개
     def get(self, request):
@@ -524,17 +543,10 @@ class UserIdealTypeAPIView(APIView):
         if not ideal_type:
             return Response('등록된 이상형 정보가 없습니다.')
 
-        if user.gender == '여자':
-            partner_gender = '남자'
-        else:
-            partner_gender = '여자'
-
-        # 해당 유저와 성별이 다른 이성들 필터링
-        partners = User.objects.filter(gender=partner_gender)
+        partners = get_queryset_not_superuser(self, request)
 
         # ideal_partners에 이상형 조건이 (하나라도) 포함된 이성 저장
         ideal_partners = list()
-
         # 선호지역2가 있어서 나머지 정보는 2번 넣고, 선호지역2만 1번 넣는걸로 일단 설정..
         for partner in partners:
             if user.useridealtype_set.last().age_from and (
@@ -669,7 +681,7 @@ class UserIdealTypeAPIView(APIView):
 
 
 class UserTagAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     # 해당 유저의 모든 관심태그 조회
     def get(self, request):
@@ -732,7 +744,7 @@ class UserTagAPIView(APIView):
 
 
 class UserTagDateStyleAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     # 데이트 스타일 관심태그 추가
     def patch(self, request):
@@ -758,7 +770,7 @@ class UserTagDateStyleAPIView(APIView):
 
 
 class UserTagLifeStyleAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     # 라이프 스타일 관심태그 수정
     # 기존 등록된 관심태그에서 추가되고 삭제되는 것이 아니라, request.data로 타입별 태그 전체 수정
@@ -785,7 +797,7 @@ class UserTagLifeStyleAPIView(APIView):
 
 
 class UserTagCharmAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     def patch(self, request):
         if not Token.objects.filter(user=request.user):
@@ -810,7 +822,7 @@ class UserTagCharmAPIView(APIView):
 
 
 class UserTagRelationshipAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     def patch(self, request):
         if not Token.objects.filter(user=request.user):
@@ -836,16 +848,16 @@ class UserTagRelationshipAPIView(APIView):
 
 # 테마 소개
 class UserThemaAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     def get(self, request):
         if request.user.status() != 'pass':
             return Response('가입심사를 합격한 유저가 아닙니다.')
 
+        partners = get_queryset_not_superuser(self, request)
+
         # 해당 유저가 여자일 경우, 남자 테마별 이성 소개
         if request.user.gender == '여자':
-            partners = User.objects.filter(gender='남자')
-
             neither_drinks_nor_smokes = list()
             four_years_older = list()
             over_180_tall = list()
@@ -878,14 +890,11 @@ class UserThemaAPIView(APIView):
 
         # 해당 유저가 남자일 경우, 여자 테마별 이성 소개
         else:
-            partners = User.objects.filter(gender='여자')
-
             over_167_tall = list()
             four_years_younger = list()
             neither_drinks_nor_smokes = list()
             cute_women = list()
 
-            # 테마별 알고리즘 추가
             for partner in partners:
                 # 167cm 이상 큰 키의 그녀
                 if partner.userinfo.tall and (partner.userinfo.tall >= 167):
@@ -914,7 +923,7 @@ class UserThemaAPIView(APIView):
 
 # 유저에게 높은 점수를 준 이성(받은 표현)과 유저가 높은 점수를 준 이성(보낸 표현) 리스트 조회
 class UserExpressionAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     def get(self, request):
         if request.user.status() != 'pass':

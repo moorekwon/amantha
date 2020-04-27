@@ -72,18 +72,16 @@ class User(AbstractBaseUser, PermissionsMixin):
             return int(today_year) - int(birth_year) + 1
         return None
 
-    # 유저의 상태 저장 (가입심사중 / 가입심사 합격)
+    # 유저의 상태 저장
     def status(self):
         partners = self.partner_star_set.all()
 
-        if len(partners) == 0:
-            user_status = 'waiting'
+        if len(partners) < 3:
+            user_status = 'on_screening'
         elif (len(partners) >= 3) and (self.average_star() >= 3):
             user_status = 'pass'
         elif (len(partners) >= 3) and (self.average_star() < 3):
             user_status = 'fail'
-        elif len(partners) < 3:
-            user_status = 'on_screening'
         return str(user_status)
 
 

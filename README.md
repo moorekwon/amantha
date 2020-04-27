@@ -72,7 +72,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-        "email": "ebk@ebk.com"
+        "email": "hjk@hjk.com"
     }
     ```
 
@@ -81,41 +81,109 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
   ```json
   {
       "userProfile": {
-          "pk": 2,
-          "email": "ebk@ebk.com",
+          "pk": 7,
+          "email": "hjk@hjk.com",
           "gender": "여자",
-          "status": "waiting",
-          "averageStar": 0.0,
-          "currentRibbon": 10,
-          "profilePercentage": 6.7,
-          "images": [],
+          "status": "pass",
+          "averageStar": 3.67,
+          "currentRibbon": 45,
+          "profilePercentage": 53.3,
+          "images": [
+              {
+                  "pk": 1,
+                  "image": "https://amantha.s3.amazonaws.com/profile_images/casey-horner-4rDCa5hBlCs-unsplash.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200427%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200427T052545Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=0f566f0289a9ef6174cb018607a2946a103c9de93a37fa811a547db5df44fc80"
+              },
+              {
+                  "pk": 2,
+                  "image": "https://amantha.s3.amazonaws.com/profile_images/hjk.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200427%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200427T052545Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=391a1b03ad3c7f04244dbc8e8c36793345d2dd33b03532d6a9cd7050b6b11c1c"
+              },
+              {
+                  "pk": 3,
+                  "image": "https://amantha.s3.amazonaws.com/profile_images/hjk8.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6RUVUGEFQJYBPC4O%2F20200427%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20200427T052545Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=5fe078e9df18f225648cadb932f94def2b01bcd28280498b0b3b1990e6fddfa1"
+              }
+          ],
           "info": {
-              "nickname": "권은비",
-              "birth": "1991-04-03",
-              "age": 30,
+              "nickname": "권효진",
+              "birth": "1995-02-11",
+              "age": 26,
               "school": "",
               "major": "",
               "job": "",
               "company": "",
-              "region": "",
-              "tall": 170,
-              "bodyShape": "",
-              "personalities": [],
-              "bloodType": "",
-              "smoking": "",
+              "region": "서울",
+              "tall": null,
+              "bodyShape": "보통체형",
+              "personalities": [
+                  "차분한",
+                  "귀여운",
+                  "유머있는"
+              ],
+              "bloodType": "AB형",
+              "smoking": "비흡연",
               "drinking": "",
               "religion": "",
-              "introduce": ""
+              "introduce": "안녕하세요 ^^"
           },
-          "stories": [],
-          "tags": null,
-          "idealTypeInfo": [],
-          "ribbonHistory": [
+          "stories": [
+              {
+                  "pk": 1,
+                  "story": 1,
+                  "content": "조용한 까페"
+              },
               {
                   "pk": 2,
-                  "paidRibbon": 10,
-                  "currentRibbon": 10,
-                  "when": "2020-04-22 00:41"
+                  "story": 3,
+                  "content": "네모네모 로직"
+              }
+          ],
+          "tags": {
+              "dateStyle": [
+                  {
+                      "name": "광란의 댄스 배틀"
+                  }
+              ],
+              "lifeStyle": [
+                  {
+                      "name": "여유를 즐겨요"
+                  },
+                  {
+                      "name": "욜로라이프를 즐겨요"
+                  }
+              ],
+              "charm": [
+                  {
+                      "name": "화를 잘 안 내요"
+                  }
+              ],
+              "relationshipStyle": []
+          },
+          "idealTypeInfo": [
+              {
+                  "ageFrom": 25,
+                  "ageTo": 35,
+                  "region": "서울",
+                  "region2": "경기",
+                  "tallFrom": 174,
+                  "tallTo": 180,
+                  "bodyShape": "",
+                  "personalities": [],
+                  "religion": "",
+                  "smoking": "",
+                  "drinking": ""
+              }
+          ],
+          "ribbonHistory": [
+              {
+                  "pk": 1,
+                  "paidRibbon": 0,
+                  "currentRibbon": 50,
+                  "when": "2020-04-27 11:52"
+              },
+              {
+                  "pk": 11,
+                  "paidRibbon": -5,
+                  "currentRibbon": 45,
+                  "when": "2020-04-27 11:52"
               }
           ]
       }
@@ -177,47 +245,59 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   유저의 상태에 따라 분류
   
-  - `waiting`(가입심사 전 대기중), `on_screening`(가입심사 중), `pass`(가입심사 합격), `fail`(가입심사 불합격)
+  - `on_screening`(가입심사 중), `pass`(가입심사 합격), `fail`(가입심사 불합격)
   - `pass` 상태의 유저는 `login`과 `logout`으로 분류
   
   ```json
   {
+      "superusers": [
+          "man1@man.com",
+          "man2@man.com",
+          "man3@man.com",
+          "man4@man.com",
+          "man5@man.com",
+          "man6@man.com"
+      ],
       "login": [
           {
-              "pk": 1,
+              "pk": 7,
               "email": "hjk@hjk.com",
               "gender": "여자",
               "status": "pass"
-          }
-      ],
-      "logout": [
+          },
           {
-              "pk": 6,
-              "email": "hgo@hgo.com",
+              "pk": 12,
+              "email": "dhl@dhl.com",
+              "gender": "남자",
+              "status": "pass"
+          },
+          {
+              "pk": 13,
+              "email": "dok@dok.com",
               "gender": "남자",
               "status": "pass"
           }
       ],
-      "waiting": [
+      "logout": [],
+      "onScreening": [
           {
-              "pk": 2,
+              "pk": 8,
               "email": "ebk@ebk.com",
               "gender": "여자",
-              "status": "waiting"
+              "status": "on_screening"
           },
           {
-              "pk": 4,
-              "email": "mjk@mjk.com",
-              "gender": "여자",
-              "status": "waiting"
-          }
-      ],
-      "onScreening": [],
-      "fail": [
-          {
-              "pk": 3,
+              "pk": 9,
               "email": "szj@szj.com",
               "gender": "여자",
+              "status": "on_screening"
+          }
+      ],
+      "fail": [
+          {
+              "pk": 10,
+              "email": "hbb@hbb.com",
+              "gender": "남자",
               "status": "fail"
           }
       ]
@@ -232,7 +312,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Method: `POST`
 
-- 가입심사를 시작하기 전(`status`가 `waiting`인) 상태로 계정 생성(회원가입)
+- 가입심사 중(`status`가 `on_screening`)인 상태로 계정 생성(회원가입)
 
 - Request Sample
 
@@ -242,9 +322,9 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
     ```json
     {
-        "email": "hyl@hyl.com",
-        "password": "hyl",
-        "gender": "여자"
+        "email": "ksk@ksk.com",
+        "password": "ksk",
+        "gender": "남자"
     }
     ```
 
@@ -252,12 +332,12 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
   ```json
   {
-      "token": "60e8d978e2007be19a75e61943c849987a750a42",
+      "token": "d632fa674825c92ffced89302a46f8f1bd98a284",
       "user": {
-          "pk": 9,
-          "email": "hyl@hyl.com",
+          "pk": 17,
+          "email": "ksk@ksk.com",
           "gender": "남자",
-          "status": "waiting"
+          "status": "on_screening"
       }
   }
   ```
@@ -1773,6 +1853,49 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 
 ### User Star
+
+#### User Screening List
+
+- URL: `/user/screening/`
+
+- Method: `GET`
+
+- 가입심사 중(`status`가 `on_screening`)인  이성 리스트 불러오기
+
+- Request Sample
+
+  - URL: http://13.209.3.115:88/api/user/screening/
+
+  - 자격 증명(유저 인증) **(아래 두 가지 방법 중 하나만 사용)**
+
+    1. Basic Auth <u>**(test 할 때 사용)**</u>
+
+       Login 되어있는 user의 email과 password를 **Authorization** 정보에 넣음
+
+       - TYPE: Basic Auth
+       - Username: hgo@hgo.com
+       - Password: hgo
+
+    2. Token Auth **<u>(production 때 사용)</u>**
+
+       Login 되어있는 user의 token 값을 `Token <token 값>` 형태로 **Headers** 정보에 넣음
+
+       | KEY           | VALUE                                          |
+       | ------------- | ---------------------------------------------- |
+       | Authorization | Token 8c6d86245a1a886a65253c4ac1e6920518b6bb94 |
+
+
+
+- Response Sample
+
+  ```
+  [
+      "ebk@ebk.com",
+      "szj@szj.com"
+  ]
+  ```
+
+
 
 #### User Star Add
 
