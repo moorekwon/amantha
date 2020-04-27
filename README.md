@@ -58,7 +58,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 ### Refer Through Email
 
-- URL: `/auth/`
+- URL: `/user/`
 
 - Method: `POST`
 
@@ -66,7 +66,7 @@ curl -X GET http://13.209.3.115:88/api/example/ -H 'Authorization: Token 9944b09
 
 - Request Sample
 
-  - URL: http://13.209.3.115:88/api/auth/
+  - URL: http://13.209.3.115:88/api/user/
 
   - Body
 
