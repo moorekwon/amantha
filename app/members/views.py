@@ -177,42 +177,40 @@ class UserImageAPIView(APIView):
         }
         return JsonResponse(data, safe=False)
 
+    # user 프로필 이미지 추가하기
+    # 계정 생성 시 꼭 3개 추가해야 함
+    def post(self, request):
+        images = request.data.getlist('images')
 
-# user 프로필 이미지 추가하기
-# 계정 생성 시 꼭 3개 추가해야 함
-def post(self, request):
-    images = request.data.getlist('images')
+        arr = []
+        for image in images:
+            data = {
+                'image': image,
+            }
+            serializer = UserImageSerializer(data=data)
 
-    arr = []
-    for image in images:
+            if serializer.is_valid():
+                serializer.save(user=request.user)
+                arr.append(serializer.data)
+            else:
+                return Response(serializer.errors)
+
         data = {
-            'image': image,
+            'images': arr,
         }
-        serializer = UserImageSerializer(data=data)
+        return Response(data, status=status.HTTP_201_CREATED)
 
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            arr.append(serializer.data)
-        else:
-            return Response(serializer.errors)
+    # user 프로필 이미지 삭제하기
+    def delete(self, request, pk):
+        images = UserImage.objects.filter(user=request.user)
+        if len(images) <= 3:
+            return Response('최소 3장 이상 업로드돼있어야 합니다.')
 
-    data = {
-        'images': arr,
-    }
-    return Response(data, status=status.HTTP_201_CREATED)
-
-
-# user 프로필 이미지 삭제하기
-def delete(self, request, pk):
-    images = UserImage.objects.filter(user=request.user)
-    if len(images) <= 3:
-        return Response('최소 3장 이상 업로드돼있어야 합니다.')
-
-    image = UserImage.objects.filter(user=request.user, pk=pk)
-    if image:
-        image.delete()
-        return Response('해당 이미지가 삭제되었습니다.')
-    return Response('해당 이미지의 pk가 존재하지 않습니다.')
+        image = UserImage.objects.filter(user=request.user, pk=pk)
+        if image:
+            image.delete()
+            return Response('해당 이미지가 삭제되었습니다.')
+        return Response('해당 이미지의 pk가 존재하지 않습니다.')
 
 
 class UserInfoAPIView(APIView):
