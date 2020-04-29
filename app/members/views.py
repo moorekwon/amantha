@@ -29,8 +29,7 @@ def get_queryset_not_superuser(self, request):
 # 해당 유저의 이메일 정보로 상세프로필 정보 불러오기
 class UserThroughEmailAPIView(APIView):
     # superuser만 read/write 할 수 있도록 설정 필요!
-    # permission_classes = [permissions.IsAdminUser, ]
-    permission_classes = [permissions.AllowAny, ]
+    permission_classes = [permissions.IsAdminUser, ]
 
     def post(self, request):
         user = User.objects.get(email=request.data['email'])

@@ -8,7 +8,7 @@ User = get_user_model()
 
 
 class Command(BaseCommand):
-    help = '깨끗한 상태의 DB에서 default로 유저 8명을 생성합니다.'
+    help = '깨끗한 상태의 DB에서 dummy user을 생성합니다.'
 
     def handle(self, *args, **kwargs):
         User.objects.create_superuser(email='man1@man.com', password='man1', gender='여자')
@@ -153,3 +153,17 @@ class Command(BaseCommand):
         Pick.objects.create(user=kmh, partner=mas)
         Pick.objects.create(user=esb, partner=kmh)
         print('pick 이성을 추가하였습니다.')
+
+        life_tags = [Tag.objects.create(name=life) for life in ['여유를 즐겨요', '욜로라이프를 즐겨요']]
+        date_tags = [Tag.objects.create(name=date) for date in ['광란의 댄스 배틀', '카페에서 열공커플', '평일은 각자의 삶']]
+        charm_tags = [Tag.objects.create(name=charm) for charm in ['화를 잘 안 내요']]
+
+        tag_type = TagType.objects.create()
+
+        tag_type.charm_tag.set(charm_tags)
+        tag_type.date_style_tag.set(date_tags)
+        tag_type.life_style_tag.set(life_tags)
+
+        hjk.tag = tag_type
+        hjk.save()
+        print('charm_tag가 추가되었습니다.')
