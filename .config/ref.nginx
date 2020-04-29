@@ -1,6 +1,5 @@
 server {
-    listen                  8000 default_server;
-    return                  444;
+    listen                  8000;
 
     server_name             localhost;
 
